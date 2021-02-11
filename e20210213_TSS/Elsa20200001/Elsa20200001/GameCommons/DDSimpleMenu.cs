@@ -19,7 +19,7 @@ namespace Charlotte.GameCommons
 		public int Y = 32;
 		public int YStep = 64;
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		private bool MouseUsable;
 

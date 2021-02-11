@@ -62,7 +62,7 @@ namespace Charlotte.Games
 				public double RMin;
 				public double RMax;
 
-				// <---- prm // HACK: abolished !!!
+				// <---- prm
 
 				private DDTaskList Snows = new DDTaskList();
 				private double PutRate = 0.0;
@@ -103,7 +103,7 @@ namespace Charlotte.Games
 					public double XAdd;
 					public double YAdd;
 
-					// <---- prm // HACK: abolished !!!
+					// <---- prm
 
 					public override IEnumerable<bool> E_Task()
 					{
@@ -161,7 +161,7 @@ namespace Charlotte.Games
 					public int X;
 					public int Y;
 
-					// <---- prm // HACK: abolished !!!
+					// <---- prm
 
 					public override IEnumerable<bool> E_Task()
 					{
@@ -209,7 +209,7 @@ namespace Charlotte.Games
 					public int X;
 					public int Y;
 
-					// <---- prm // HACK: abolished !!!
+					// <---- prm
 
 					public override IEnumerable<bool> E_Task()
 					{
@@ -257,7 +257,7 @@ namespace Charlotte.Games
 					public int X;
 					public int Y;
 
-					// <---- prm // HACK: abolished !!!
+					// <---- prm
 
 					public override IEnumerable<bool> E_Task()
 					{

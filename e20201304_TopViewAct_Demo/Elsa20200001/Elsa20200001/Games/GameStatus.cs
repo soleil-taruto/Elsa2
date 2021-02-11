@@ -65,7 +65,7 @@ namespace Charlotte.Games
 
 		// ----
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		public string Serialize()
 		{

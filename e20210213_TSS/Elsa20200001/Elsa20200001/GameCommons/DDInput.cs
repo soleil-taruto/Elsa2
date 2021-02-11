@@ -12,7 +12,7 @@ namespace Charlotte.GameCommons
 			public int[] BtnIds = new int[0]; // { } == 未割り当て
 			public int[] KeyIds = new int[0]; // { } == 未割り当て
 
-			// <---- prm // HACK: abolished !!!
+			// <---- prm
 
 			public bool FreezeInputUntilRelease = false;
 			public int Status = 0;

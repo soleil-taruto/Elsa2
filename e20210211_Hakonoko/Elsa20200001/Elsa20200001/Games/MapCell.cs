@@ -179,7 +179,7 @@ namespace Charlotte.Games
 		/// </summary>
 		public double ColorPhase;
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		/// <summary>
 		/// このマップセルは「デフォルトのマップセル」か

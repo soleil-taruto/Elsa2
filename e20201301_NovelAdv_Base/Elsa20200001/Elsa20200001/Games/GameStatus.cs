@@ -18,7 +18,7 @@ namespace Charlotte.Games
 		public int CurrPageIndex = 0;
 		public List<Surface> Surfaces = new List<Surface>(); // 軽量な仮設オブジェクト
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		// 特別なサーフェス >
 

@@ -8,7 +8,7 @@ namespace Charlotte.Games
 {
 	public class Logo : IDisposable
 	{
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		public static Logo I;
 

@@ -17,7 +17,7 @@ namespace Charlotte.Games
 		public Tile Tile;
 		public string EnemyName;
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		/// <summary>
 		/// このマップセルは「デフォルトのマップセル」か

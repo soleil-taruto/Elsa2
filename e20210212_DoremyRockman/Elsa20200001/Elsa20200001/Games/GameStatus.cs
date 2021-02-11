@@ -62,6 +62,6 @@ namespace Charlotte.Games
 		/// </summary>
 		public int ExitDirection = 5;
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 	}
 }

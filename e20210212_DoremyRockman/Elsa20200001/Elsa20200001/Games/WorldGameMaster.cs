@@ -10,7 +10,7 @@ namespace Charlotte.Games
 		public World World;
 		public GameStatus Status;
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		public static WorldGameMaster I;
 

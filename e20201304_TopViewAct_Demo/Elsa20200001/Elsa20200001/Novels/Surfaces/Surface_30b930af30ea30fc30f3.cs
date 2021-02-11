@@ -25,7 +25,7 @@ namespace Charlotte.Novels.Surfaces
 			public double SlideRate = 0.5;
 			public double DestSlideRate = 0.5;
 
-			// <---- prm // HACK: abolished !!!
+			// <---- prm
 
 			public void Draw()
 			{

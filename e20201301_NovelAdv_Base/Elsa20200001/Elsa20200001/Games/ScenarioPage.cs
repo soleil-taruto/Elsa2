@@ -11,7 +11,7 @@ namespace Charlotte.Games
 		public List<string> Lines = new List<string>();
 		public List<ScenarioCommand> Commands = new List<ScenarioCommand>();
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		public string Text
 		{

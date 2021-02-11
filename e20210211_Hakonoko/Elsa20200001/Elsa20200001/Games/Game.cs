@@ -18,7 +18,7 @@ namespace Charlotte.Games
 	{
 		public Map Map;
 
-		// <---- prm // HACK: abolished !!!
+		// <---- prm
 
 		public enum EndStatus_e
 		{
@@ -31,7 +31,7 @@ namespace Charlotte.Games
 
 		public EndStatus_e EndStatus = EndStatus_e.NextStage;
 
-		// <---- ret // HACK: abolished !!!
+		// <---- ret
 
 		public static Game I;
 
