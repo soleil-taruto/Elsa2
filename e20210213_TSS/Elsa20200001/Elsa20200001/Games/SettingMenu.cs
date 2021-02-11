@@ -61,27 +61,27 @@ namespace Charlotte.Games
 
 		private void 基本設定()
 		{
-			throw new NotImplementedException();
+			throw null; // TODO
 		}
 
 		private void 拡張設定()
 		{
-			throw new NotImplementedException();
+			throw null; // TODO
 		}
 
 		private void 画面サイズ設定()
 		{
-			throw new NotImplementedException();
+			throw null; // TODO
 		}
 
 		private void ボタン設定()
 		{
-			throw new NotImplementedException();
+			throw null; // TODO
 		}
 
 		private void キー設定()
 		{
-			throw new NotImplementedException();
+			throw null; // TODO
 		}
 	}
 }
