@@ -14,4 +14,4 @@ C:\Factory\Tools\xcp.exe doc out
 C:\Factory\Elsa\EditConfig.exe out\Config.conf ;[LOG_ENABLED_MARK] 1
 COPY /B AUTHORS out
 
-C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out e20200004_TopViewAct
+C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out TopViewAct_Demo
