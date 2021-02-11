@@ -20,7 +20,7 @@ namespace Charlotte.Games
 		public Script Script = new Script_Bダミー0001(); // 軽量なダミー初期オブジェクト
 		public GameStatus Status = new GameStatus();   // 軽量なダミー初期オブジェクト
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 
 		public static Game I;
 

@@ -27,7 +27,7 @@ namespace Charlotte.Games.Surfaces
 			public string Title = "ここに選択肢に表示する文字列を設定します。";
 			public string ScenarioName = GameConsts.DUMMY_SCENARIO_NAME;
 
-			// <---- prm
+			// <---- prm // HACK: abolished !!!
 
 			public bool MouseFocused = false;
 		}

@@ -13,7 +13,7 @@ namespace Charlotte.Novels
 	{
 		public NovelStatus Status = new NovelStatus(); // 軽量な仮設オブジェクト
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 
 		public static Novel I;
 

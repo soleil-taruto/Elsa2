@@ -13,7 +13,7 @@ namespace Charlotte.Games
 	{
 		public GameStatus Status = new GameStatus(); // 軽量な仮設オブジェクト
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 
 		public static Game I;
 

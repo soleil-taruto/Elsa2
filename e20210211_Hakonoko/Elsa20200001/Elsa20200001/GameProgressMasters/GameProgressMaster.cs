@@ -20,7 +20,7 @@ namespace Charlotte.GameProgressMasters
 		/// </summary>
 		public int StartStageIndex;
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 
 		public static GameProgressMaster I;
 

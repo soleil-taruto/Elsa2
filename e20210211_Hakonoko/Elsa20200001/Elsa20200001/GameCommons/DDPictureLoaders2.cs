@@ -17,7 +17,7 @@ namespace Charlotte.GameCommons
 			public Func<int> Func_GetHandle;
 			public DDPicture.PictureInfo Info;
 
-			// <---- prm
+			// <---- prm // HACK: abolished !!!
 
 			public PictureWrapper()
 				: base(() => null, v => { }, v => { })

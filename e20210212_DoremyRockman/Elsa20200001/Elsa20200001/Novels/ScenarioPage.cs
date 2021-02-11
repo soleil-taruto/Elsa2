@@ -11,7 +11,7 @@ namespace Charlotte.Novels
 		public List<string> Lines = new List<string>();
 		public List<ScenarioCommand> Commands = new List<ScenarioCommand>();
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 
 		public const int LINE_LEN_MAX = 59; // 要調整
 

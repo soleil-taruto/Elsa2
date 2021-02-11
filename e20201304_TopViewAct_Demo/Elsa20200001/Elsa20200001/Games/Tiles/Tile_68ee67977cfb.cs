@@ -58,7 +58,7 @@ namespace Charlotte.Games.Tiles
 			public DDPicture 単独セルPicture;
 			public Predicate<MapCell> F_IsFriend;
 
-			// <---- prm
+			// <---- prm // HACK: abolished !!!
 
 			public D2Point DrawPoint;
 			public I2Point MapTablePoint;

@@ -17,6 +17,6 @@ namespace Charlotte.Games
 
 		public int Zanki = GameConsts.DEFAULT_ZANKI;
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 	}
 }

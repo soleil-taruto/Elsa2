@@ -52,7 +52,7 @@ namespace Charlotte.Games.Tiles
 			public int AnimeKomaCycle;
 			public Predicate<MapCell> F_IsFriend;
 
-			// <---- prm
+			// <---- prm // HACK: abolished !!!
 
 			public D2Point DrawPoint;
 			public I2Point MapTablePoint;

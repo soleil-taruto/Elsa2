@@ -20,7 +20,7 @@ namespace Charlotte.Games
 		public World World;
 		public GameStatus Status;
 
-		// <---- prm
+		// <---- prm // HACK: abolished !!!
 
 		public static Game I;
 
