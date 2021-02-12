@@ -84,7 +84,7 @@ namespace Charlotte
 				};
 			}
 
-			if (ProcMain.ArgsReader.ArgIs("//D")) // 引数は適当な文字列
+			if (ProcMain.DEBUG)
 			{
 				Main4_Debug();
 			}
