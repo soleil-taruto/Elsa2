@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Charlotte.Commons;
 using Charlotte.GameCommons;
 
 namespace Charlotte.Games
@@ -61,7 +62,42 @@ namespace Charlotte.Games
 
 		private void 基本設定()
 		{
-			throw null; // TODO
+			DDEngine.FreezeInput();
+
+			for (; ; )
+			{
+				// ====
+				// 入力判定ここから
+				// ====
+
+				if (
+					DDInput.A.GetInput() == 1 ||
+					DDInput.B.GetInput() == 1
+					)
+					break;
+
+				// ====
+				// 入力判定ここまで
+				// ====
+
+				// ====
+				// 描画ここから
+				// ====
+
+				_drawWall();
+
+				DDDraw.DrawSimple(Ground.I.Picture.基本設定枠, 0, 0);
+
+				DDFontUtils.DrawString(155, 70, "基本設定", DDFontUtils.GetFont("Kゴシック", 70), false, new I3Color(100, 255, 255), new I3Color(50, 100, 100));
+				DDFontUtils.DrawString(665, 70, "拡張設定", DDFontUtils.GetFont("Kゴシック", 70), false, new I3Color(150, 150, 150), new I3Color(100, 100, 100));
+
+				// ====
+				// 描画ここまで
+				// ====
+
+				DDEngine.EachFrame();
+			}
+			DDEngine.FreezeInput();
 		}
 
 		private void 拡張設定()

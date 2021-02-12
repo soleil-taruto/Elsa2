@@ -47,12 +47,19 @@ namespace Charlotte
 		public DDPicture SettingButton_1920x1080 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\1920 x 1080.png");
 		public DDPicture SettingButton_2040x1147 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\2040 x 1147.png");
 		public DDPicture SettingButton_2160x1215 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\2160 x 1215.png");
+		public DDPicture SettingButton_2280x1282 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\2280 x 1282.png");
 		public DDPicture SettingButton_ウィンドウ = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\ウィンドウ.png");
 		public DDPicture SettingButton_フルスクリーン = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\フルスクリーン.png");
 		public DDPicture SettingButton_フルスクリーン画面に合わせる = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\フルスクリーン 画面に合わせる (非推奨).png");
 		public DDPicture SettingButton_フルスクリーン縦横比を維持する = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\フルスクリーン 縦横比を維持する (推奨).png");
 
+		public DDPicture SettingButton_ウィンドウサイズ設定 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\ウィンドウサイズ設定.png");
+		public DDPicture SettingButton_キーボードのキー設定 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\キーボードのキー設定.png");
+		public DDPicture SettingButton_ゲームパッドのボタン設定 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\ゲームパッドのボタン設定.png");
+
 		public DDPicture SettingButton_デフォルトに戻す = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\デフォルトに戻す.png");
+		public DDPicture SettingButton_キャンセル = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\キャンセル.png");
+		public DDPicture SettingButton_変更 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\変更.png");
 		public DDPicture SettingButton_戻る = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\戻る.png");
 
 		public DDPicture 基本設定枠 = DDPictureLoaders.Standard(@"dat\タイトル設定枠\基本設定.png");

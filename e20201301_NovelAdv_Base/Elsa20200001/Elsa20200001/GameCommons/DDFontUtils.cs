@@ -46,12 +46,21 @@ namespace Charlotte.GameCommons
 
 		public static void DrawString(int x, int y, string str, DDFont font, bool tategakiFlag, I3Color color)
 		{
-			DrawString(x, y, str, font, tategakiFlag, color, new I3Color(0, 0, 0));
+			DrawString(x, y, str, font, tategakiFlag, color, new I3Color(-1, 0, 0));
 		}
 
 		public static void DrawString(int x, int y, string str, DDFont font, bool tategakiFlag, I3Color color, I3Color edgeColor)
 		{
-			DX.DrawStringToHandle(x, y, str, DDUtils.GetColor(color), font.GetHandle(), DDUtils.GetColor(edgeColor), tategakiFlag ? 1 : 0);
+			if (edgeColor.R != -1)
+			{
+				const int EDGE_WIDTH = 2;
+				const int EDGE_STEP = EDGE_WIDTH;
+
+				for (int xc = -EDGE_WIDTH; xc <= EDGE_WIDTH; xc += EDGE_STEP)
+					for (int yc = -EDGE_WIDTH; yc <= EDGE_WIDTH; yc += EDGE_STEP)
+						DX.DrawStringToHandle(x + xc, y + yc, str, DDUtils.GetColor(edgeColor), font.GetHandle(), DDUtils.GetColor(new I3Color(0, 0, 0)), tategakiFlag ? 1 : 0);
+			}
+			DX.DrawStringToHandle(x, y, str, DDUtils.GetColor(color), font.GetHandle(), DDUtils.GetColor(new I3Color(0, 0, 0)), tategakiFlag ? 1 : 0);
 		}
 
 		public static void DrawString_XCenter(int x, int y, string str, DDFont font, bool tategakiFlag = false)

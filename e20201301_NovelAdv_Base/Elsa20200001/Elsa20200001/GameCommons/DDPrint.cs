@@ -88,10 +88,14 @@ namespace Charlotte.GameCommons
 		private static void Print_Main(string line, int x, int y, double centeringRate)
 		{
 			if (Extra.BorderWidth != 0)
-				for (int xc = -Extra.BorderWidth; xc <= Extra.BorderWidth; xc++)
-					for (int yc = -Extra.BorderWidth; yc <= Extra.BorderWidth; yc++)
-						Print_Main2(line, x + xc, y + yc, Extra.BorderColor, centeringRate);
+			{
+				int BORDER_WIDTH = Extra.BorderWidth;
+				int BORDER_STEP = Extra.BorderWidth;
 
+				for (int xc = -BORDER_WIDTH; xc <= BORDER_WIDTH; xc += BORDER_STEP)
+					for (int yc = -BORDER_WIDTH; yc <= BORDER_WIDTH; yc += BORDER_STEP)
+						Print_Main2(line, x + xc, y + yc, Extra.BorderColor, centeringRate);
+			}
 			Print_Main2(line, x, y, Extra.Color, centeringRate);
 		}
 

@@ -72,7 +72,9 @@ namespace Charlotte
 
 					DDPrint.Print(string.Join(" ",
 						DDEngine.FrameProcessingMillis,
-						DDEngine.FrameProcessingMillis_Worst
+						DDEngine.FrameProcessingMillis_Worst,
+						DDMouse.X,
+						DDMouse.Y
 
 						// デバッグ表示する情報をここへ追加..
 						));
