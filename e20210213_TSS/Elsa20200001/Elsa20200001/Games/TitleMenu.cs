@@ -59,7 +59,7 @@ namespace Charlotte.Games
 					if (0.01 < leaveRate)
 					{
 						ぼかし効果.Perform(leaveRate);
-						DDCurtain.DrawCurtain(-0.3 * leaveRate);
+						DDCurtain.DrawCurtain(-0.6 * leaveRate);
 					}
 					yield return true;
 				}
@@ -263,9 +263,19 @@ namespace Charlotte.Games
 							break;
 
 						case 2:
+#if true
+							this.DrawWall.TopMenuLeaved = true;
+
+							using (new SettingMenu())
+							{
+								SettingMenu.I.Perform(this.DrawWall.Execute);
+							}
+							this.DrawWall.TopMenuLeaved = false;
+#else // old
 							this.DrawWall.TopMenuLeaved = true;
 							this.Setting();
 							this.DrawWall.TopMenuLeaved = false;
+#endif
 							break;
 
 						case 3:

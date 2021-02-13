@@ -292,6 +292,16 @@ namespace Charlotte.GameCommons
 			new KeyInfo(DX.KEY_INPUT_Z, "Z"),
 		};
 
+		public static IEnumerable<int> GetAllKeyId()
+		{
+			return KeyInfos.Select(keyInfo => keyInfo.KeyId);
+		}
+
+		public static string GetKeyName(int keyId)
+		{
+			return KeyInfos.First(keyInfo => keyInfo.KeyId == keyId).Name;
+		}
+
 		#endregion
 
 		public void PadConfig(bool keyMode = false)
