@@ -195,7 +195,7 @@ namespace Charlotte.Games
 						_mode = Mode_e.画面サイズ設定;
 						break;
 					}
-					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_ゲームパッドのボタン設定)
+					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_ゲームパッドのボタン設定 && 1 <= DDPad.GetPadCount())
 					{
 						_mode = Mode_e.ボタン設定;
 						break;
@@ -231,7 +231,7 @@ namespace Charlotte.Games
 				this.DrawTabTitles(true);
 
 				this.DrawButton(960, 330, Ground.I.Picture.SettingButton_ウィンドウサイズ設定, true);
-				this.DrawButton(960, 530, Ground.I.Picture.SettingButton_ゲームパッドのボタン設定, true);
+				this.DrawButton(960, 530, Ground.I.Picture.SettingButton_ゲームパッドのボタン設定, 1 <= DDPad.GetPadCount());
 				this.DrawButton(960, 730, Ground.I.Picture.SettingButton_キーボードのキー設定, true);
 
 				this.DrawUnderButtons();
@@ -585,9 +585,9 @@ namespace Charlotte.Games
 			string setting;
 
 			if (キー設定Flag)
-				setting = string.Join(" + ", button.KeyIds.Select(keyId => DDSimpleMenu.GetKeyName(keyId)));
+				setting = string.Join(" , ", button.KeyIds.Select(keyId => DDSimpleMenu.GetKeyName(keyId)));
 			else
-				setting = string.Join(" + ", button.BtnIds.Select(btnId => "" + btnId));
+				setting = string.Join(" , ", button.BtnIds.Select(btnId => DDSimpleMenu.GetPadButtonName(btnId)));
 
 			this.DrawButton(300, y + 25, Ground.I.Picture.SettingButton_変更, true);
 

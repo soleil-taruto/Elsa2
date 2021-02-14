@@ -272,7 +272,7 @@ namespace Charlotte.GameCommons
 			new KeyInfo(DX.KEY_INPUT_RALT, "RALT"),
 			new KeyInfo(DX.KEY_INPUT_RBRACKET, "RBRACKET"),
 			new KeyInfo(DX.KEY_INPUT_RCONTROL, "RCONTROL"),
-			new KeyInfo(DX.KEY_INPUT_RETURN, "RETURN"),
+			new KeyInfo(DX.KEY_INPUT_RETURN, "ENTER(RETURN)"),
 			new KeyInfo(DX.KEY_INPUT_RIGHT, "RIGHT"),
 			new KeyInfo(DX.KEY_INPUT_RSHIFT, "RSHIFT"),
 			new KeyInfo(DX.KEY_INPUT_RWIN, "RWIN"),

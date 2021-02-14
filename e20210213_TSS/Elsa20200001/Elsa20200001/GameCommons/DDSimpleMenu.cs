@@ -165,6 +165,45 @@ namespace Charlotte.GameCommons
 			}
 		}
 
+		#region PadButtonInfos
+
+		private class PadButtonInfo
+		{
+			public int BtnId;
+			public string Name;
+
+			public PadButtonInfo(int btnId, string name)
+			{
+				this.BtnId = btnId;
+				this.Name = name;
+			}
+		}
+
+		private static PadButtonInfo[] PadButtonInfos = new PadButtonInfo[]
+		{
+			new PadButtonInfo(0, "DOWN"),
+			new PadButtonInfo(1, "LEFT"),
+			new PadButtonInfo(2, "RIGHT"),
+			new PadButtonInfo(3, "UP"),
+			new PadButtonInfo(4, "A"),
+			new PadButtonInfo(5, "B"),
+			new PadButtonInfo(6, "C"),
+			new PadButtonInfo(7, "D"),
+			new PadButtonInfo(8, "E"),
+			new PadButtonInfo(9, "F"),
+			new PadButtonInfo(10, "L"),
+			new PadButtonInfo(11, "R"),
+		};
+
+		public static string GetPadButtonName(int btnId)
+		{
+			PadButtonInfo pbInfo = PadButtonInfos.FirstOrDefault(v => v.BtnId == btnId);
+			string name = pbInfo == null ? "BUTTON" : pbInfo.Name;
+			return name + "(" + btnId + ")";
+		}
+
+		#endregion
+
 		#region KeyInfos
 
 		private class KeyInfo
@@ -269,7 +308,7 @@ namespace Charlotte.GameCommons
 			new KeyInfo(DX.KEY_INPUT_RALT, "RALT"),
 			new KeyInfo(DX.KEY_INPUT_RBRACKET, "RBRACKET"),
 			new KeyInfo(DX.KEY_INPUT_RCONTROL, "RCONTROL"),
-			new KeyInfo(DX.KEY_INPUT_RETURN, "RETURN"),
+			new KeyInfo(DX.KEY_INPUT_RETURN, "ENTER(RETURN)"),
 			new KeyInfo(DX.KEY_INPUT_RIGHT, "RIGHT"),
 			new KeyInfo(DX.KEY_INPUT_RSHIFT, "RSHIFT"),
 			new KeyInfo(DX.KEY_INPUT_RWIN, "RWIN"),
