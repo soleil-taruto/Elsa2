@@ -311,10 +311,7 @@ namespace Charlotte.Games
 						this.Respawn();
 						goto endDead;
 					}
-					if (this.FinalZone)
-						this.Player.DeadFrame += this.Player.DeadFrame < GameConsts.PLAYER_DEAD_FRAME_MAX / 2 || DDEngine.ProcFrame % 5 == 0 ? 1 : 0;
-					else
-						this.Player.DeadFrame++;
+					this.Player.DeadFrame++;
 
 					// この時点でとりうる this.Player.DeadFrame の最大値は Consts.PLAYER_DEAD_FRAME_MAX + 2
 
