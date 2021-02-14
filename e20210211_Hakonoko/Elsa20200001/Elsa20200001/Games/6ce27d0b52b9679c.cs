@@ -138,7 +138,7 @@ namespace Charlotte.Games
 
 			public override IEnumerable<bool> E_Task()
 			{
-				foreach (DDScene scene in DDSceneUtils.Create(400))
+				foreach (DDScene scene in DDSceneUtils.Create(800))
 				{
 					for (int x = 0; x <= PIECES_W; x++)
 						for (int y = 0; y <= PIECES_H; y++)
@@ -156,7 +156,7 @@ namespace Charlotte.Games
 				double mapY = DDGround.Camera.Y + pt.Y;
 
 				// 波の頂点Y座標
-				double waveY = Game.I.Map.H * GameConsts.TILE_H + WAVE_SPAN - rate * 700.0;
+				double waveY = Game.I.Map.H * GameConsts.TILE_H + WAVE_SPAN - rate * 1400.0;
 
 				double waveYDiff = mapY - waveY;
 				waveYDiff /= WAVE_SPAN;
