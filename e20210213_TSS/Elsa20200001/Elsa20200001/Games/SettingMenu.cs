@@ -64,6 +64,12 @@ namespace Charlotte.Games
 
 		private void 基本設定()
 		{
+			DDSE[] seSamples = new DDSE[]
+			{
+				Ground.I.SE.Poka01,
+				Ground.I.SE.Poka02,
+			};
+
 			DDEngine.FreezeInput();
 
 			for (; ; )
@@ -145,11 +151,14 @@ namespace Charlotte.Games
 				this.DrawTrackBar(1325, 540, "小", "大", DDGround.SEVolume, volume =>
 				{
 					DDGround.SEVolume = volume;
-					DDSEUtils.UpdateVolume();
+					//DDSEUtils.UpdateVolume(); // v_20210215 -- メソッド終了時に全て更新する。
+
+					foreach (DDSE se in seSamples)
+						se.UpdateVolume();
 				},
 				() =>
 				{
-					DDUtils.Random.ChooseOne(new DDSE[] { Ground.I.SE.Poka01, Ground.I.SE.Poka02 }).Play();
+					DDUtils.Random.ChooseOne(seSamples).Play();
 				});
 				this.DrawTrackBar(1325, 670, "遅い", "速い",
 					DDUtils.RateAToB(GameConsts.MESSAGE_SPEED_MIN, GameConsts.MESSAGE_SPEED_MAX, Ground.I.MessageSpeed),
@@ -173,6 +182,8 @@ namespace Charlotte.Games
 				DDEngine.EachFrame();
 			}
 			DDEngine.FreezeInput();
+
+			DDSEUtils.UpdateVolume(); // v_20210215
 		}
 
 		private void 拡張設定()

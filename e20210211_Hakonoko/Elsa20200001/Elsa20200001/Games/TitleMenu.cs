@@ -388,6 +388,11 @@ namespace Charlotte.Games
 				"戻る",
 			};
 
+			DDSE[] seSamples = new DDSE[]
+			{
+				Ground.I.SE.Dummy, // TODO
+			};
+
 			int selectIndex = 0;
 
 			for (; ; )
@@ -422,13 +427,17 @@ namespace Charlotte.Games
 						this.SimpleMenu.VolumeConfig("ＳＥ音量", DDGround.SEVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.SEVolume = volume;
-							DDSEUtils.UpdateVolume();
+							//DDSEUtils.UpdateVolume(); // old
+
+							foreach (DDSE se in seSamples) // サンプルのみ音量更新
+								se.UpdateVolume();
 						},
 						() =>
 						{
-							//Ground.I.SE.Poka01.Play();
+							DDUtils.Random.ChooseOne(seSamples).Play();
 						}
 						);
+						DDSEUtils.UpdateVolume(); // 全音量更新
 						break;
 
 					case 5:

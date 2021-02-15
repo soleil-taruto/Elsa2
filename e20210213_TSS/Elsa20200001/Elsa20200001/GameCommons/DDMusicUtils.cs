@@ -171,11 +171,5 @@ namespace Charlotte.GameCommons
 		{
 			Fade(0, 1.0);
 		}
-
-		public static void UnloadAllIfPossible()
-		{
-			foreach (DDMusic music in Musics)
-				music.UnloadIfPossible();
-		}
 	}
 }

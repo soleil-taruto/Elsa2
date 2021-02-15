@@ -100,11 +100,5 @@ namespace Charlotte.GameCommons
 
 			return false;
 		}
-
-		public void UnloadIfPossible()
-		{
-			if (!this.IsPlaying())
-				this.Unload();
-		}
 	}
 }

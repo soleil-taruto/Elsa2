@@ -55,9 +55,9 @@ namespace Charlotte
 			//DDTouch.Add(Ground.I.SE.XXX);
 
 			// 全部設定
-			DDTouch.AddAllPicture();
-			DDTouch.AddAllMusic();
-			DDTouch.AddAllSE();
+			//DDTouch.AddAllPicture();
+			//DDTouch.AddAllMusic();
+			//DDTouch.AddAllSE();
 
 			#endregion
 
@@ -74,10 +74,7 @@ namespace Charlotte
 						DDEngine.FrameProcessingMillis,
 						DDEngine.FrameProcessingMillis_Worst,
 						DDMouse.X,
-						DDMouse.Y,
-
-						DDMusicUtils.Musics.Where(music => music.Sound.IsLoaded()).Count(), // test
-						DDSEUtils.SEList.Where(se => se.Sound.IsLoaded()).Count() // test
+						DDMouse.Y
 
 						// デバッグ表示する情報をここへ追加..
 						));
