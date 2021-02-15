@@ -81,5 +81,10 @@ namespace Charlotte.GameCommons
 			for (int index = arr.Length; 2 <= index; index--)
 				SCommon.Swap(arr, this.GetInt(index), index - 1);
 		}
+
+		public T ChooseOne<T>(T[] arr)
+		{
+			return arr[this.GetInt(arr.Length)];
+		}
 	}
 }

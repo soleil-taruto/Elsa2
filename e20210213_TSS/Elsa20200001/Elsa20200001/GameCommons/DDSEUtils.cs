@@ -99,5 +99,11 @@ namespace Charlotte.GameCommons
 			foreach (DDSE se in SEList)
 				se.UpdateVolume();
 		}
+
+		public static void UnloadAllIfPossible()
+		{
+			foreach (DDSE se in SEList)
+				se.UnloadIfPossible();
+		}
 	}
 }

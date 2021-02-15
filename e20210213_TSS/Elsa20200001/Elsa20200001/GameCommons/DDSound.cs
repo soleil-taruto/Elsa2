@@ -30,7 +30,7 @@ namespace Charlotte.GameCommons
 		{
 			if (this.Handles != null)
 			{
-				foreach (int handle in this.Handles)
+				foreach (int handle in this.Handles.Reverse()) // DuplicateSoundMem したハンドルから削除する。
 					if (DX.DeleteSoundMem(handle) != 0) // ? 失敗
 						throw new DDError();
 
@@ -74,6 +74,37 @@ namespace Charlotte.GameCommons
 				this.PostLoaded();
 			}
 			return this.Handles[handleIndex];
+		}
+
+		private static bool IsPlaying(int handle)
+		{
+			switch (DX.CheckSoundMem(handle))
+			{
+				case 1: // ? 再生中
+					return true;
+
+				case 0: // ? 停止
+					return false;
+
+				default:
+					throw new DDError();
+			}
+		}
+
+		public bool IsPlaying()
+		{
+			if (this.Handles != null)
+				for (int index = 0; index < this.HandleCount; index++)
+					if (IsPlaying(this.Handles[index]))
+						return true;
+
+			return false;
+		}
+
+		public void UnloadIfPossible()
+		{
+			if (!this.IsPlaying())
+				this.Unload();
 		}
 	}
 }

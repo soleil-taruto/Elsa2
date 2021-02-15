@@ -137,8 +137,20 @@ namespace Charlotte.Games
 
 				this.DrawButton(1100, 280, Ground.I.Picture.SettingButton_フルスクリーン, fullScreenFlag);
 				this.DrawButton(1550, 280, Ground.I.Picture.SettingButton_ウィンドウ, !fullScreenFlag);
-				this.DrawTrackBar(1325, 410, "小", "大", DDGround.MusicVolume, volume => DDGround.MusicVolume = volume);
-				this.DrawTrackBar(1325, 540, "小", "大", DDGround.SEVolume, volume => DDGround.SEVolume = volume);
+				this.DrawTrackBar(1325, 410, "小", "大", DDGround.MusicVolume, volume =>
+				{
+					DDGround.MusicVolume = volume;
+					DDMusicUtils.UpdateVolume();
+				});
+				this.DrawTrackBar(1325, 540, "小", "大", DDGround.SEVolume, volume =>
+				{
+					DDGround.SEVolume = volume;
+					DDSEUtils.UpdateVolume();
+				},
+				() =>
+				{
+					DDUtils.Random.ChooseOne(new DDSE[] { Ground.I.SE.Poka01, Ground.I.SE.Poka02 }).Play();
+				});
 				this.DrawTrackBar(1325, 670, "遅い", "速い",
 					DDUtils.RateAToB(GameConsts.MESSAGE_SPEED_MIN, GameConsts.MESSAGE_SPEED_MAX, Ground.I.MessageSpeed),
 					value => Ground.I.MessageSpeed = SCommon.ToInt(
@@ -428,7 +440,7 @@ namespace Charlotte.Games
 			if (DDMouse.L.GetInput() == 1) // ? 左ボタン押下開始
 				this.LastActiveTrackBar = this.LastHoveringTrackBar;
 
-			if (DDMouse.L.GetInput() <= 0) // ? 左ボタン押下終了
+			if (DDMouse.L.GetInput() == 0) // ? 左ボタン押下終了
 				this.LastActiveTrackBar = null;
 
 			this.LastHoveringButton = null;
@@ -504,7 +516,7 @@ namespace Charlotte.Games
 				this.LastButtonHoveringFlag = false;
 		}
 
-		private void DrawTrackBar(int x, int y, string lwLabel, string hiLabel, double rate, Action<double> changed)
+		private void DrawTrackBar(int x, int y, string lwLabel, string hiLabel, double rate, Action<double> changed, Action pulse = null)
 		{
 			DDDraw.DrawBegin(Ground.I.Picture.TrackBar, x, y);
 			DDCrash drawedCrash = DDDraw.DrawGetCrash();
@@ -537,7 +549,16 @@ namespace Charlotte.Games
 				double rateNew = DDUtils.RateAToB(xMin, xMax, DDMouse.X);
 				DDUtils.ToRange(ref rateNew, 0.0, 1.0);
 
-				changed(rateNew);
+				if (SCommon.MICRO < Math.Abs(rate - rateNew))
+					changed(rateNew);
+
+				if (pulse != null)
+				{
+					const int PULSE_FRM = 60;
+
+					if (DDEngine.ProcFrame % PULSE_FRM == 0)
+						pulse();
+				}
 			}
 		}
 
@@ -554,6 +575,10 @@ namespace Charlotte.Games
 			DDGround.SEVolume = 0.45;
 			Ground.I.MessageSpeed = GameConsts.MESSAGE_SPEED_DEF;
 			Ground.I.MessageWindow_A_Pct = GameConsts.MESSAGE_WINDOW_A_PCT_DEF;
+
+			// 設定値変更を反映
+			DDMusicUtils.UpdateVolume();
+			DDSEUtils.UpdateVolume();
 
 			// ボタン設定
 			{

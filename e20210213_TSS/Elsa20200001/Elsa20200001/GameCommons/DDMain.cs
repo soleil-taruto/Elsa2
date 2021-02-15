@@ -227,6 +227,8 @@ namespace Charlotte.GameCommons
 			DDPictureUtils.UnloadAll();
 			DDSubScreenUtils.UnloadAll();
 			DDFontUtils.UnloadAll();
+			DDMusicUtils.UnloadAllIfPossible(); // 不要だが念のため
+			DDSEUtils.UnloadAllIfPossible(); // 不要だが念のため
 
 			if (DX.SetGraphMode(w, h, 32) != DX.DX_CHANGESCREEN_OK)
 				throw new DDError();

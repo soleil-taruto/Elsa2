@@ -35,5 +35,10 @@ namespace Charlotte.GameCommons
 		{
 			this.Sound.GetHandle(0);
 		}
+
+		public void UnloadIfPossible()
+		{
+			this.Sound.UnloadIfPossible();
+		}
 	}
 }
