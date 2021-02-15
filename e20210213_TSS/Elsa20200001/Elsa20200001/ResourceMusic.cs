@@ -10,7 +10,7 @@ namespace Charlotte
 	{
 		public DDMusic Dummy = new DDMusic(@"dat\General\muon.wav");
 
-		public DDMusic Title = new DDMusic(@"dat\フリー素材\魔王魂\bgm_maoudamashii_piano\bgm_maoudamashii_piano41.mp3");
+		public DDMusic Title = new DDMusic(@"dat\フリー素材\ajapa\TheLabyrinth.mp3");
 
 		public ResourceMusic()
 		{

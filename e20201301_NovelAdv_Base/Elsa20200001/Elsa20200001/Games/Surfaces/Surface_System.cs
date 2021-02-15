@@ -22,21 +22,6 @@ namespace Charlotte.Games.Surfaces
 			{
 				// noop
 
-				// ----
-
-				if (DDConfig.LOG_ENABLED) // デバッグ表示
-				{
-					DDGround.EL.Add(() =>
-					{
-						DDPrint.SetPrint();
-						DDPrint.SetBorder(new I3Color(0, 0, 0));
-						DDPrint.Print(string.Join(" ", DDEngine.FrameProcessingMillis, DDEngine.FrameProcessingMillis_Worst));
-						DDPrint.Reset();
-
-						return false;
-					});
-				}
-
 				yield return true;
 			}
 		}

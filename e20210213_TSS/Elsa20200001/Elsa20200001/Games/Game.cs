@@ -28,7 +28,7 @@ namespace Charlotte.Games
 		}
 
 		public ScenarioPage CurrPage;
-		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択
+		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択, 0～ == システムボタン選択中(値とボタンの対応は実装で確認してね)
 		public bool SkipMode;
 		public bool AutoMode;
 		public bool BacklogMode;
@@ -231,8 +231,6 @@ namespace Charlotte.Games
 
 				this.DrawSurfaces();
 
-				// デバッグ表示 -> moved to Surface_System
-
 				// ====
 				// 描画ここまで
 				// ====
@@ -432,7 +430,7 @@ namespace Charlotte.Games
 		/// </summary>
 		private void SaveMenu()
 		{
-			this.SaveLoadMenu(true);
+			this.P_SaveOrLoadMenu(true);
 		}
 
 		/// <summary>
@@ -440,14 +438,14 @@ namespace Charlotte.Games
 		/// </summary>
 		private void LoadMenu()
 		{
-			this.SaveLoadMenu(false);
+			this.P_SaveOrLoadMenu(false);
 		}
 
 		/// <summary>
 		/// ゲーム中のセーブ・ロード画面
 		/// </summary>
 		/// <param name="saveMode">セーブモードであるか</param>
-		private void SaveLoadMenu(bool saveMode)
+		private void P_SaveOrLoadMenu(bool saveMode)
 		{
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{

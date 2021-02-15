@@ -17,24 +17,18 @@ namespace Charlotte.Games
 
 		public static Game I;
 
-		//public DDTaskList SurfaceEL; // 廃止
-
 		public Game()
 		{
 			I = this;
-
-			//this.SurfaceEL = new DDTaskList(); // 廃止
 		}
 
 		public void Dispose()
 		{
-			//this.SurfaceEL = null; // 廃止
-
 			I = null;
 		}
 
 		public ScenarioPage CurrPage;
-		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択
+		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択, 0～ == システムボタン選択中(値とボタンの対応は実装で確認してね)
 		public bool SkipMode;
 		public bool AutoMode;
 		public bool BacklogMode;
@@ -236,8 +230,6 @@ namespace Charlotte.Games
 				// ====
 
 				this.DrawSurfaces();
-
-				// デバッグ表示 -> moved to Surface_System
 
 				// ====
 				// 描画ここまで

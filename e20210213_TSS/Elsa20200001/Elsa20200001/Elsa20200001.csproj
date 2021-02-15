@@ -151,6 +151,7 @@
     <Compile Include="Games\Game.cs" />
     <Compile Include="Games\GameConsts.cs" />
     <Compile Include="Games\GameStatus.cs" />
+    <Compile Include="Games\SaveOrLoadMenu.cs" />
     <Compile Include="Games\Logo.cs" />
     <Compile Include="Games\Scenario.cs" />
     <Compile Include="Games\ScenarioCommand.cs" />
