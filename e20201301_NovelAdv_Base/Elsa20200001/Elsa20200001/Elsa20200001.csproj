@@ -181,6 +181,7 @@
     <Compile Include="ResourcePicture.cs" />
     <Compile Include="ResourcePicture2.cs" />
     <Compile Include="ResourceSE.cs" />
+    <Compile Include="SaveDataSlot.cs" />
     <Compile Include="Tests\Games\GameTest.cs" />
     <Compile Include="Tests\Games\TitleMenuTest.cs" />
     <Compile Include="Tests\Test0001.cs" />

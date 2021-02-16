@@ -1475,20 +1475,29 @@ namespace Charlotte.Commons
 
 		#endregion
 
-		#region SimpleTimeStamp
+		#region SimpleDateTime
 
-		public struct SimpleTimeStamp
+		/// <summary>
+		/// 日時の範囲：1/1/1 00:00:00 ～ 999999/12/31 23:59:59
+		/// </summary>
+		public struct SimpleDateTime
 		{
-			public int Year;
-			public int Month;
-			public int Day;
-			public int Hour;
-			public int Minute;
-			public int Second;
-			public string Weekday;
+			public readonly int Year;
+			public readonly int Month;
+			public readonly int Day;
+			public readonly int Hour;
+			public readonly int Minute;
+			public readonly int Second;
+			public readonly string Weekday;
 
-			public SimpleTimeStamp(long timeStamp)
+			public static SimpleDateTime FromTimeStamp(long timeStamp)
 			{
+				return new SimpleDateTime(TimeStampToSec.ToSec(timeStamp));
+			}
+
+			public SimpleDateTime(long sec)
+			{
+				long timeStamp = TimeStampToSec.ToTimeStamp(sec);
 				long t = timeStamp;
 
 				this.Second = (int)(t % 100L);
@@ -1526,19 +1535,24 @@ namespace Charlotte.Commons
 					this.Second;
 			}
 
-			public static SimpleTimeStamp operator +(SimpleTimeStamp instance, long sec)
+			public long ToSec()
 			{
-				return new SimpleTimeStamp(TimeStampToSec.ToTimeStamp(TimeStampToSec.ToSec(instance.ToTimeStamp()) + sec));
+				return TimeStampToSec.ToSec(this.ToTimeStamp());
 			}
 
-			public static SimpleTimeStamp operator -(SimpleTimeStamp instance, long sec)
+			public static SimpleDateTime operator +(SimpleDateTime instance, long sec)
 			{
-				return new SimpleTimeStamp(TimeStampToSec.ToTimeStamp(TimeStampToSec.ToSec(instance.ToTimeStamp()) - sec));
+				return new SimpleDateTime(instance.ToSec() + sec);
 			}
 
-			public static long operator -(SimpleTimeStamp a, SimpleTimeStamp b)
+			public static SimpleDateTime operator -(SimpleDateTime instance, long sec)
 			{
-				return TimeStampToSec.ToSec(a.ToTimeStamp()) - TimeStampToSec.ToSec(b.ToTimeStamp());
+				return new SimpleDateTime(instance.ToSec() - sec);
+			}
+
+			public static long operator -(SimpleDateTime a, SimpleDateTime b)
+			{
+				return a.ToSec() - b.ToSec();
 			}
 		}
 

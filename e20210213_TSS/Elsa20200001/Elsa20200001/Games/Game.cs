@@ -465,19 +465,19 @@ namespace Charlotte.Games
 					selectIndex
 					);
 
-				if (selectIndex < Consts.GAME_SAVE_DATA_SLOT_NUM)
+				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
 					if (saveMode) // ? セーブモード
 					{
-						Ground.I.SaveDataSlots[selectIndex].SavedData = this.Status.Serialize();
-						Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleTimeStamp(SCommon.TimeStampToSec.ToTimeStamp(DateTime.Now));
+						Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
+						Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
 						//Ground.I.SaveDataSlots[selectIndex].Thumbnail = xxx;
 					}
 					else // ? ロードモード
 					{
 						if (Ground.I.SaveDataSlots[selectIndex] != null) // ロードする。
 						{
-							this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SavedData);
+							this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
 							this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
 							break;
 						}

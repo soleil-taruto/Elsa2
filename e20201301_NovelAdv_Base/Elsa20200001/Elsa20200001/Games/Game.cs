@@ -461,21 +461,22 @@ namespace Charlotte.Games
 			{
 				selectIndex = simpleMenu.Perform(
 					saveMode ? "セーブメニュー" : "ロードメニュー",
-					Ground.I.GameSaveDataSlots.Select(v => v == null ? "[no-data]" : SCommon.Hex.ToString(SCommon.GetSHA512(Encoding.UTF8.GetBytes(v))).Substring(0, 20)).Concat(new string[] { "戻る" }).ToArray(),
+					Ground.I.SaveDataSlots.Select(saveDataSlot => saveDataSlot.SavedTime.ToString()).Concat(new string[] { "戻る" }).ToArray(),
 					selectIndex
 					);
 
-				if (selectIndex < Consts.GAME_SAVE_DATA_SLOT_NUM)
+				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
 					if (saveMode) // ? セーブモード
 					{
-						Ground.I.GameSaveDataSlots[selectIndex] = this.Status.Serialize();
+						Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
+						Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
 					}
 					else // ? ロードモード
 					{
-						if (Ground.I.GameSaveDataSlots[selectIndex] != null) // ロードする。
+						if (Ground.I.SaveDataSlots[selectIndex] != null) // ロードする。
 						{
-							this.Status = GameStatus.Deserialize(Ground.I.GameSaveDataSlots[selectIndex]);
+							this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
 							this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
 							break;
 						}

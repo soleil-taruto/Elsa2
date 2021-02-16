@@ -19,6 +19,6 @@ namespace Charlotte
 
 		public int MessageSpeed = GameConsts.MESSAGE_SPEED_DEF;
 		public int MessageWindow_A_Pct = GameConsts.MESSAGE_WINDOW_A_PCT_DEF;
-		public SaveDataSlot[] SaveDataSlots = Enumerable.Range(0, Consts.GAME_SAVE_DATA_SLOT_NUM).Select(v => new SaveDataSlot()).ToArray();
+		public SaveDataSlot[] SaveDataSlots = Enumerable.Range(0, Consts.SAVE_DATA_SLOT_NUM).Select(v => new SaveDataSlot()).ToArray();
 	}
 }

@@ -22,18 +22,12 @@ namespace Charlotte
 		/// </summary>
 		public SCommon.SimpleDateTime SavedTime = new SCommon.SimpleDateTime(0L);
 
-		/// <summary>
-		/// サムネイル画像
-		/// </summary>
-		public byte[] Thumbnail = GetDefaultThumbnail();
-
 		public string Serialize()
 		{
 			return AttachString.I.Untokenize(new string[]
 			{
 				Common.WrapNullOrString(this.SerializedGameStatus),
 				"" + this.SavedTime.ToTimeStamp(),
-				SCommon.Base64.I.Encode(this.Thumbnail),
 			});
 		}
 
@@ -44,17 +38,6 @@ namespace Charlotte
 
 			this.SerializedGameStatus = Common.UnwrapNullOrString(lines[c++]);
 			this.SavedTime = SCommon.SimpleDateTime.FromTimeStamp(long.Parse(lines[c++]));
-			this.Thumbnail = SCommon.Base64.I.Decode(lines[c++]);
-		}
-
-		private static byte[] _defaultThumbnail = null;
-
-		private static byte[] GetDefaultThumbnail()
-		{
-			if (_defaultThumbnail == null)
-				_defaultThumbnail = DDResource.Load(@"dat\SaveData_DefaultThumbnail.png");
-
-			return _defaultThumbnail;
 		}
 	}
 }

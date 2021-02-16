@@ -185,7 +185,7 @@ namespace Charlotte.GameCommons
 					Ground.I.MessageSpeed = int.Parse(lines[c++]);
 					Ground.I.MessageWindow_A_Pct = int.Parse(lines[c++]);
 
-					for (int index = 0; index < Consts.GAME_SAVE_DATA_SLOT_NUM; index++)
+					for (int index = 0; index < Consts.SAVE_DATA_SLOT_NUM; index++)
 					{
 						Ground.I.SaveDataSlots[index].Deserialize(lines[c++]);
 					}

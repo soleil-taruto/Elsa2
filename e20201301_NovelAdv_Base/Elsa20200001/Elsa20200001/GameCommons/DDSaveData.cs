@@ -82,9 +82,9 @@ namespace Charlotte.GameCommons
 				lines.Add("" + Ground.I.MessageSpeed);
 				lines.Add("" + Ground.I.MessageWindow_A_Pct);
 
-				foreach (string savedData in Ground.I.GameSaveDataSlots)
+				foreach (SaveDataSlot saveDataSlot in Ground.I.SaveDataSlots)
 				{
-					lines.Add(Common.WrapNullOrString(savedData));
+					lines.Add(saveDataSlot.Serialize());
 				}
 
 				// 新しい項目をここへ追加...
@@ -185,9 +185,9 @@ namespace Charlotte.GameCommons
 					Ground.I.MessageSpeed = int.Parse(lines[c++]);
 					Ground.I.MessageWindow_A_Pct = int.Parse(lines[c++]);
 
-					for (int index = 0; index < Consts.GAME_SAVE_DATA_SLOT_NUM; index++)
+					for (int index = 0; index < Consts.SAVE_DATA_SLOT_NUM; index++)
 					{
-						Ground.I.GameSaveDataSlots[index] = Common.UnwrapNullOrString(lines[c++]);
+						Ground.I.SaveDataSlots[index].Deserialize(lines[c++]);
 					}
 
 					// 新しい項目をここへ追加...

@@ -245,16 +245,16 @@ namespace Charlotte.Games
 						case 1:
 							{
 								this.DrawWall.TopMenuLeaved = true;
-								string savedData = this.LoadGame();
+								SaveDataSlot saveDataSlot = this.LoadGame();
 								this.DrawWall.TopMenuLeaved = false;
 
-								if (savedData != null)
+								if (saveDataSlot != null)
 								{
 									this.LeaveTitleMenu();
 
 									using (new Game())
 									{
-										Game.I.Status = GameStatus.Deserialize(savedData);
+										Game.I.Status = GameStatus.Deserialize(saveDataSlot.SerializedGameStatus);
 										Game.I.Perform(true);
 									}
 									this.ReturnTitleMenu();
@@ -309,14 +309,14 @@ namespace Charlotte.Games
 			DDEngine.FreezeInput();
 		}
 
-		private string LoadGame()
+		private SaveDataSlot LoadGame()
 		{
-			string savedData = null;
+			SaveDataSlot saveDataSlot = null;
 
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			string[] items = Ground.I.SaveDataSlots.Select(saveDataSlot => saveDataSlot.SavedTime.ToString()).Concat(new string[] { "戻る" }).ToArray();
+			string[] items = Ground.I.SaveDataSlots.Select(v => v.SavedTime.ToString()).Concat(new string[] { "戻る" }).ToArray();
 
 			int selectIndex = 0;
 
@@ -324,11 +324,11 @@ namespace Charlotte.Games
 			{
 				selectIndex = this.SimpleMenu.Perform("コンテニュー", items, selectIndex);
 
-				if (selectIndex < Consts.GAME_SAVE_DATA_SLOT_NUM)
+				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
-					if (Ground.I.SaveDataSlots[selectIndex].SavedData != null)
+					if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null)
 					{
-						savedData = Ground.I.SaveDataSlots[selectIndex].SavedData;
+						saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
 						break;
 					}
 				}
@@ -339,7 +339,7 @@ namespace Charlotte.Games
 			}
 			DDEngine.FreezeInput();
 
-			return savedData;
+			return saveDataSlot;
 		}
 
 		private void Setting()
