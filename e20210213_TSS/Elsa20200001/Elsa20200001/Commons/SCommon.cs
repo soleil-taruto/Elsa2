@@ -1477,7 +1477,7 @@ namespace Charlotte.Commons
 
 		#region SimpleTimeStamp
 
-		public class SimpleTimeStamp
+		public struct SimpleTimeStamp
 		{
 			public int Year;
 			public int Month;
@@ -1524,6 +1524,21 @@ namespace Charlotte.Commons
 					10000L * this.Hour +
 					100L * this.Minute +
 					this.Second;
+			}
+
+			public static SimpleTimeStamp operator +(SimpleTimeStamp instance, long sec)
+			{
+				return new SimpleTimeStamp(TimeStampToSec.ToTimeStamp(TimeStampToSec.ToSec(instance.ToTimeStamp()) + sec));
+			}
+
+			public static SimpleTimeStamp operator -(SimpleTimeStamp instance, long sec)
+			{
+				return new SimpleTimeStamp(TimeStampToSec.ToTimeStamp(TimeStampToSec.ToSec(instance.ToTimeStamp()) - sec));
+			}
+
+			public static long operator -(SimpleTimeStamp a, SimpleTimeStamp b)
+			{
+				return TimeStampToSec.ToSec(a.ToTimeStamp()) - TimeStampToSec.ToSec(b.ToTimeStamp());
 			}
 		}
 
