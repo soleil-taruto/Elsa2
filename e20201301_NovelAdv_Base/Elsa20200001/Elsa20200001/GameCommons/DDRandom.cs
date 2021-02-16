@@ -32,7 +32,7 @@ namespace Charlotte.GameCommons
 		}
 
 		/// <summary>
-		/// [0,2^32)
+		/// 0以上2^32未満の乱数を返す。
 		/// </summary>
 		/// <returns>乱数</returns>
 		public uint Next()
