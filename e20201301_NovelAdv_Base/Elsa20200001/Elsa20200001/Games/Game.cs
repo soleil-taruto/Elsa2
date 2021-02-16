@@ -430,7 +430,7 @@ namespace Charlotte.Games
 		/// </summary>
 		private void SaveMenu()
 		{
-			this.SaveLoadMenu(true);
+			this.SaveOrLoadMenu(true);
 		}
 
 		/// <summary>
@@ -438,14 +438,14 @@ namespace Charlotte.Games
 		/// </summary>
 		private void LoadMenu()
 		{
-			this.SaveLoadMenu(false);
+			this.SaveOrLoadMenu(false);
 		}
 
 		/// <summary>
 		/// ゲーム中のセーブ・ロード画面
 		/// </summary>
 		/// <param name="saveMode">セーブモードであるか</param>
-		private void SaveLoadMenu(bool saveMode)
+		private void SaveOrLoadMenu(bool saveMode)
 		{
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{

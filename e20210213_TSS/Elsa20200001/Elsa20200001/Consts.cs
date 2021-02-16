@@ -10,6 +10,6 @@ namespace Charlotte
 		public const string SERIALIZED_NULL = "<SZ-NULL>";
 		public const string SERIALIZED_NOT_NULL_PREFIX = "<SZ-NOT-NULL>:";
 
-		public const int GAME_SAVE_DATA_SLOT_NUM = 10;
+		public const int GAME_SAVE_DATA_SLOT_NUM = 100;
 	}
 }

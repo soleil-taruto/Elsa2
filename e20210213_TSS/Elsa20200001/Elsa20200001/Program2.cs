@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.Games;
 using Charlotte.Tests;
 using Charlotte.Tests.Games;
-using System.IO;
 
 namespace Charlotte
 {

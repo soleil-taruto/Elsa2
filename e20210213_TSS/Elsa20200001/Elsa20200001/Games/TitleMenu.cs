@@ -316,7 +316,7 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			string[] items = Ground.I.GameSaveDataSlots.Select(v => v == null ? "[no-data]" : SCommon.Hex.ToString(SCommon.GetSHA512(Encoding.UTF8.GetBytes(v))).Substring(0, 20)).Concat(new string[] { "戻る" }).ToArray();
+			string[] items = Ground.I.SaveDataSlots.Select(saveDataSlot => saveDataSlot.SavedTime.ToString()).Concat(new string[] { "戻る" }).ToArray();
 
 			int selectIndex = 0;
 
@@ -326,9 +326,9 @@ namespace Charlotte.Games
 
 				if (selectIndex < Consts.GAME_SAVE_DATA_SLOT_NUM)
 				{
-					if (Ground.I.GameSaveDataSlots[selectIndex] != null)
+					if (Ground.I.SaveDataSlots[selectIndex].SavedData != null)
 					{
-						savedData = Ground.I.GameSaveDataSlots[selectIndex];
+						savedData = Ground.I.SaveDataSlots[selectIndex].SavedData;
 						break;
 					}
 				}
