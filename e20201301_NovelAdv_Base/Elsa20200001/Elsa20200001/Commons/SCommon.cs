@@ -1213,9 +1213,11 @@ namespace Charlotte.Commons
 			private char[] Chars;
 			private byte[] CharMap;
 
+			private const char CHAR_PADDING = '=';
+
 			private Base64()
 			{
-				this.Chars = (SCommon.ALPHA + SCommon.alpha + SCommon.DECIMAL + "+/=").ToArray();
+				this.Chars = (SCommon.ALPHA + SCommon.alpha + SCommon.DECIMAL + "+/").ToArray();
 				this.CharMap = new byte[(int)char.MaxValue + 1];
 
 				for (int index = 0; index < 64; index++)
@@ -1246,15 +1248,15 @@ namespace Charlotte.Commons
 					dest[writer++] = this.Chars[chr >> 10];
 					dest[writer++] = this.Chars[(chr >> 4) & 0x3f];
 					dest[writer++] = this.Chars[(chr << 2) & 0x3c];
-					dest[writer++] = this.Chars[64];
+					dest[writer++] = CHAR_PADDING;
 				}
 				else if (index + 1 == src.Length)
 				{
 					chr = src[index++] & 0xff;
 					dest[writer++] = this.Chars[chr >> 2];
 					dest[writer++] = this.Chars[(chr << 4) & 0x30];
-					dest[writer++] = this.Chars[64];
-					dest[writer++] = this.Chars[64];
+					dest[writer++] = CHAR_PADDING;
+					dest[writer++] = CHAR_PADDING;
 				}
 				return new string(dest);
 			}
@@ -1265,11 +1267,11 @@ namespace Charlotte.Commons
 
 				if (destSize != 0)
 				{
-					if (src[src.Length - 2] == this.Chars[64])
+					if (src[src.Length - 2] == CHAR_PADDING)
 					{
 						destSize -= 2;
 					}
-					else if (src[src.Length - 1] == this.Chars[64])
+					else if (src[src.Length - 1] == CHAR_PADDING)
 					{
 						destSize--;
 					}
@@ -1320,16 +1322,25 @@ namespace Charlotte.Commons
 		/// -- YYYYMMDDhhmmss
 		/// -- YYYYYMMDDhhmmss
 		/// -- YYYYYYMMDDhhmmss
-		/// ---- 年の桁数は 1 ～ 6 桁
+		/// -- YYYYYYYMMDDhhmmss
+		/// -- YYYYYYYYMMDDhhmmss
+		/// -- YYYYYYYYYMMDDhhmmss -- 但し YYYYYYYYY == 100000000 ～ 922337203
+		/// ---- 年の桁数は 1 ～ 9 桁
 		/// 日時の範囲
 		/// -- 最小 1/1/1 00:00:00
-		/// -- 最大 999999/12/31 23:59:59
+		/// -- 最大 922337203/12/31 23:59:59
 		/// </summary>
 		public static class TimeStampToSec
 		{
+			private const int YEAR_MIN = 1;
+			private const int YEAR_MAX = 922337203;
+
+			private const long TIME_STAMP_MIN = 10101000000L;
+			private const long TIME_STAMP_MAX = 9223372031231235959L;
+
 			public static long ToSec(long timeStamp)
 			{
-				if (timeStamp < 10101000000L || 9999991231235959L < timeStamp)
+				if (timeStamp < TIME_STAMP_MIN || TIME_STAMP_MAX < timeStamp)
 					return 0L;
 
 				int s = (int)(timeStamp % 100L);
@@ -1344,7 +1355,7 @@ namespace Charlotte.Commons
 				int y = (int)(timeStamp / 100L);
 
 				if (
-					y < 1 || 999999 < y ||
+					//y < YEAR_MIN || YEAR_MAX < y ||
 					m < 1 || 12 < m ||
 					d < 1 || 31 < d ||
 					h < 0 || 23 < h ||
@@ -1392,7 +1403,7 @@ namespace Charlotte.Commons
 			public static long ToTimeStamp(long sec)
 			{
 				if (sec < 0L)
-					return 10101000000L;
+					return TIME_STAMP_MIN;
 
 				int s = (int)(sec % 60L);
 				sec /= 60L;
@@ -1401,14 +1412,17 @@ namespace Charlotte.Commons
 				int h = (int)(sec % 24L);
 				sec /= 24L;
 
-				if ((long)int.MaxValue < sec)
-					return 9999991231235959L;
+				int day = (int)(sec % 146097);
+				sec /= 146097;
+				sec *= 400;
+				sec++;
 
-				int day = (int)sec;
-				int y = (day / 146097) * 400 + 1;
+				if (YEAR_MAX < sec)
+					return TIME_STAMP_MAX;
+
+				int y = (int)sec;
 				int m = 1;
 				int d;
-				day %= 146097;
 
 				day += Math.Min((day + 306) / 36524, 3);
 				y += (day / 1461) * 4;
@@ -1431,14 +1445,14 @@ namespace Charlotte.Commons
 				day %= 31;
 				d = day + 1;
 
-				if (y < 1)
-					return 10101000000L;
+				if (y < YEAR_MIN)
+					return TIME_STAMP_MIN;
 
-				if (999999 < y)
-					return 9999991231235959L;
+				if (YEAR_MAX < y)
+					return TIME_STAMP_MAX;
 
 				if (
-					//y < 1 || 999999 < y ||
+					//y < YEAR_MIN || YEAR_MAX < y ||
 					m < 1 || 12 < m ||
 					d < 1 || 31 < d ||
 					h < 0 || 23 < h ||
@@ -1478,7 +1492,7 @@ namespace Charlotte.Commons
 		#region SimpleDateTime
 
 		/// <summary>
-		/// 日時の範囲：1/1/1 00:00:00 ～ 999999/12/31 23:59:59
+		/// 日時の範囲：1/1/1 00:00:00 ～ 922337203/12/31 23:59:59
 		/// </summary>
 		public struct SimpleDateTime
 		{
