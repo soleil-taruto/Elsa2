@@ -461,7 +461,10 @@ namespace Charlotte.Games
 			{
 				selectIndex = simpleMenu.Perform(
 					saveMode ? "セーブメニュー" : "ロードメニュー",
-					Ground.I.SaveDataSlots.Select(saveDataSlot => saveDataSlot.SavedTime.ToString()).Concat(new string[] { "戻る" }).ToArray(),
+					Ground.I.SaveDataSlots.Select(saveDataSlot =>
+						saveDataSlot.SavedTime.Year == 1 ?
+						"----" :
+						"[" + saveDataSlot.SavedTime.ToString() + "]　" + saveDataSlot.AboutSavedPoint).Concat(new string[] { "戻る" }).ToArray(),
 					selectIndex
 					);
 
@@ -469,16 +472,32 @@ namespace Charlotte.Games
 				{
 					if (saveMode) // ? セーブモード
 					{
-						Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
-						Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
+						if (new Confirm().Perform(
+							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
+							"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
+							"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
+						{
+							string aboutSavedPoint = "シナリオ：" + this.Status.Scenario.Name + "　の　" + (this.Status.CurrPageIndex + 1) + "　頁";
+
+							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
+							Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
+							Ground.I.SaveDataSlots[selectIndex].AboutSavedPoint = aboutSavedPoint;
+						}
 					}
 					else // ? ロードモード
 					{
-						if (Ground.I.SaveDataSlots[selectIndex] != null) // ロードする。
+						if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
 						{
-							this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
-							this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
-							break;
+							if (new Confirm().Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+							{
+								this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
+								this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
+								this.DispSubtitleCharCount = 0;
+								this.DispCharCount = 0;
+								this.DispPageEndedCount = 0;
+								this.DispFastMode = false;
+								break;
+							}
 						}
 					}
 				}

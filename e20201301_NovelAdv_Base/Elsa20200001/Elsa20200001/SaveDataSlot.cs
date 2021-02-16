@@ -22,12 +22,18 @@ namespace Charlotte
 		/// </summary>
 		public SCommon.SimpleDateTime SavedTime = new SCommon.SimpleDateTime(0L);
 
+		/// <summary>
+		/// セーブした地点についての情報
+		/// </summary>
+		public string AboutSavedPoint = "none";
+
 		public string Serialize()
 		{
 			return AttachString.I.Untokenize(new string[]
 			{
 				Common.WrapNullOrString(this.SerializedGameStatus),
 				"" + this.SavedTime.ToTimeStamp(),
+				this.AboutSavedPoint,
 			});
 		}
 
@@ -38,6 +44,7 @@ namespace Charlotte
 
 			this.SerializedGameStatus = Common.UnwrapNullOrString(lines[c++]);
 			this.SavedTime = SCommon.SimpleDateTime.FromTimeStamp(long.Parse(lines[c++]));
+			this.AboutSavedPoint = lines[c++];
 		}
 	}
 }

@@ -73,16 +73,12 @@ namespace Charlotte.GameCommons
 				if (this.MouseUsable)
 				{
 					int musSelIdxY = DDMouse.Y - (this.Y + this.YStep);
+					int musSelIdx = musSelIdxY / this.YStep;
 
-					if (0 <= musSelIdxY)
-					{
-						int musSelIdx = musSelIdxY / this.YStep;
+					DDUtils.ToRange(ref musSelIdx, 0, items.Length - 1);
 
-						if (musSelIdx < items.Length)
-						{
-							selectIndex = musSelIdx;
-						}
-					}
+					selectIndex = musSelIdx;
+
 					if (DDMouse.L.GetInput() == -1)
 					{
 						break;

@@ -119,7 +119,10 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			string[] items = Ground.I.SaveDataSlots.Select(v => v.SavedTime.ToString()).Concat(new string[] { "戻る" }).ToArray();
+			string[] items = Ground.I.SaveDataSlots.Select(v =>
+				v.SavedTime.Year == 1 ?
+				"----" :
+				"[" + v.SavedTime.ToString() + "]　" + v.AboutSavedPoint).Concat(new string[] { "戻る" }).ToArray();
 
 			int selectIndex = 0;
 
@@ -129,10 +132,13 @@ namespace Charlotte.Games
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
-					if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null)
+					if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
 					{
-						saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
-						break;
+						if (new Confirm().Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+						{
+							saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
+							break;
+						}
 					}
 				}
 				else // [戻る]
