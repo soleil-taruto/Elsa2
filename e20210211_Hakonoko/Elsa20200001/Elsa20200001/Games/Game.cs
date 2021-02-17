@@ -6,7 +6,6 @@ using System.IO;
 using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using Charlotte.GameCommons.Options;
 using Charlotte.Games.Designs;
 using Charlotte.Games.Enemies;
 using Charlotte.Games.Enemies.Events;

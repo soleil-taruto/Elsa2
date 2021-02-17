@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Charlotte.Commons;
-using Charlotte.GameCommons.Options;
 
 namespace Charlotte.GameCommons
 {

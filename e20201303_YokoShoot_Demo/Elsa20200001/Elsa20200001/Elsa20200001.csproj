@@ -142,12 +142,10 @@
     <Compile Include="GameCommons\DDUtils.cs" />
     <Compile Include="GameCommons\DDWin32.cs" />
     <Compile Include="GameCommons\MaskGZDataUtils\MaskGZDataEng.cs" />
-    <Compile Include="GameCommons\Options\DDCCResource.cs" />
-    <Compile Include="GameCommons\Options\DDCrash.cs" />
-    <Compile Include="GameCommons\Options\DDCrashUtils.cs" />
-    <Compile Include="GameCommons\Options\DDCrashView.cs" />
-    <Compile Include="GameCommons\Options\DDSceneKeeper.cs" />
-    <Compile Include="GameCommons\Options\DDSlideUtils.cs" />
+    <Compile Include="GameCommons\DDCCResource.cs" />
+    <Compile Include="GameCommons\DDCrash.cs" />
+    <Compile Include="GameCommons\DDCrashUtils.cs" />
+    <Compile Include="GameCommons\DDCrashView.cs" />
     <Compile Include="Games\Effects.cs" />
     <Compile Include="Games\Enemies\Enemy.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_B0001.cs" />

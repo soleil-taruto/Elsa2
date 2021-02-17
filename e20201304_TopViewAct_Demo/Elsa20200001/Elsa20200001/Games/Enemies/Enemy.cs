@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using Charlotte.GameCommons.Options;
 using Charlotte.Games.Shots;
 
 namespace Charlotte.Games.Enemies

@@ -5,7 +5,6 @@ using System.Text;
 using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using Charlotte.GameCommons.Options;
 
 namespace Charlotte.Games.Surfaces
 {

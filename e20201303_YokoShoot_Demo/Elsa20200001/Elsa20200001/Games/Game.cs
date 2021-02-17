@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using Charlotte.GameCommons.Options;
 using Charlotte.Games.Enemies;
 using Charlotte.Games.Enemies.Tests;
 using Charlotte.Games.Scripts;
 using Charlotte.Games.Scripts.Tests;
 using Charlotte.Games.Shots;
 using Charlotte.Games.Walls;
-using DxLibDLL;
 
 namespace Charlotte.Games
 {

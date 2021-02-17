@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using Charlotte.GameCommons.Options;
-using DxLibDLL;
 
 namespace Charlotte.Tests
 {
