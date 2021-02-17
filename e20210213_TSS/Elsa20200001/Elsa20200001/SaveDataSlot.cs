@@ -25,7 +25,7 @@ namespace Charlotte
 		/// <summary>
 		/// サムネイル画像
 		/// </summary>
-		public byte[] Thumbnail = GetDefaultThumbnail();
+		public DDHashedData Thumbnail = GetDefaultThumbnail();
 
 		public string Serialize()
 		{
@@ -33,7 +33,7 @@ namespace Charlotte
 			{
 				Common.WrapNullOrString(this.SerializedGameStatus),
 				"" + this.SavedTime.ToTimeStamp(),
-				SCommon.Base64.I.Encode(this.Thumbnail),
+				SCommon.Base64.I.Encode(this.Thumbnail.Entity),
 			});
 		}
 
@@ -44,15 +44,15 @@ namespace Charlotte
 
 			this.SerializedGameStatus = Common.UnwrapNullOrString(lines[c++]);
 			this.SavedTime = SCommon.SimpleDateTime.FromTimeStamp(long.Parse(lines[c++]));
-			this.Thumbnail = SCommon.Base64.I.Decode(lines[c++]);
+			this.Thumbnail = new DDHashedData(SCommon.Base64.I.Decode(lines[c++]));
 		}
 
-		private static byte[] _defaultThumbnail = null;
+		private static DDHashedData _defaultThumbnail = null;
 
-		private static byte[] GetDefaultThumbnail()
+		private static DDHashedData GetDefaultThumbnail()
 		{
 			if (_defaultThumbnail == null)
-				_defaultThumbnail = DDResource.Load(@"dat\SaveData_DefaultThumbnail.png");
+				_defaultThumbnail = new DDHashedData(DDResource.Load(@"dat\SaveData_DefaultThumbnail.png"));
 
 			return _defaultThumbnail;
 		}

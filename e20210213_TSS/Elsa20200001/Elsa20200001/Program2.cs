@@ -119,6 +119,7 @@ namespace Charlotte
 			//new Test0001().Test02();
 			new TitleMenuTest().Test01();
 			//new SettingMenuTest().Test01();
+			//new SaveOrLoadMenuTest().Test01();
 			//new GameTest().Test01();
 			//new GameTest().Test02();
 			//new GameTest().Test03(); // シナリオ

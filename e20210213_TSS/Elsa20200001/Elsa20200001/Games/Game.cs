@@ -430,7 +430,25 @@ namespace Charlotte.Games
 		/// </summary>
 		private void SaveMenu()
 		{
+#if true
+			using (new SaveOrLoadMenu())
+			{
+				SaveOrLoadMenu.I.Save(() =>
+				{
+					DDPicture picture = Ground.I.Picture.Title;
+
+					DDDraw.DrawRect(
+						picture,
+						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+						);
+
+					DDCurtain.DrawCurtain(-0.5);
+				});
+			}
+			DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP);
+#else // old
 			this.P_SaveOrLoadMenu(true);
+#endif
 		}
 
 		/// <summary>
@@ -438,7 +456,35 @@ namespace Charlotte.Games
 		/// </summary>
 		private void LoadMenu()
 		{
+#if true
+			using (new SaveOrLoadMenu())
+			{
+				SaveDataSlot sdSlot = SaveOrLoadMenu.I.Load(() =>
+				{
+					DDPicture picture = Ground.I.Picture.Title;
+
+					DDDraw.DrawRect(
+						picture,
+						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+						);
+
+					DDCurtain.DrawCurtain(-0.5);
+				});
+
+				if (sdSlot != null)
+				{
+					this.Status = GameStatus.Deserialize(sdSlot.SerializedGameStatus);
+					this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
+					this.DispSubtitleCharCount = 0;
+					this.DispCharCount = 0;
+					this.DispPageEndedCount = 0;
+					this.DispFastMode = false;
+				}
+			}
+			DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP);
+#else // old
 			this.P_SaveOrLoadMenu(false);
+#endif
 		}
 
 		/// <summary>

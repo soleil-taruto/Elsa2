@@ -33,19 +33,19 @@ namespace Charlotte.Games
 			END,
 		}
 
-		private Action _drawWall;
-		private Mode_e _mode;
+		private Action DrawWall;
+		private Mode_e Mode;
 
-		public void Perform(Action drawWall)
+		public void Perform(Action a_drawWall)
 		{
-			_drawWall = drawWall;
-			_mode = Mode_e.基本設定;
+			this.DrawWall = a_drawWall;
+			this.Mode = Mode_e.基本設定;
 
 			DDEngine.FreezeInput();
 
 			do
 			{
-				switch (_mode)
+				switch (this.Mode)
 				{
 					case Mode_e.基本設定: this.基本設定(); break;
 					case Mode_e.拡張設定: this.拡張設定(); break;
@@ -57,7 +57,7 @@ namespace Charlotte.Games
 						throw null; // never
 				}
 			}
-			while (_mode != Mode_e.END);
+			while (this.Mode != Mode_e.END);
 
 			DDEngine.FreezeInput();
 		}
@@ -84,7 +84,7 @@ namespace Charlotte.Games
 					DDMouse.R.GetInput() == -1
 					)
 				{
-					_mode = Mode_e.END;
+					this.Mode = Mode_e.END;
 					break;
 				}
 
@@ -92,7 +92,7 @@ namespace Charlotte.Games
 				{
 					if (this.GetTabTitleCrash_拡張設定().IsCrashed(DDCrashUtils.Point(new D2Point(DDMouse.X, DDMouse.Y))))
 					{
-						_mode = Mode_e.拡張設定;
+						this.Mode = Mode_e.拡張設定;
 						break;
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_フルスクリーン)
@@ -112,7 +112,7 @@ namespace Charlotte.Games
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_戻る)
 					{
-						_mode = Mode_e.END;
+						this.Mode = Mode_e.END;
 						break;
 					}
 				}
@@ -202,7 +202,7 @@ namespace Charlotte.Games
 					DDMouse.R.GetInput() == -1
 					)
 				{
-					_mode = Mode_e.END;
+					this.Mode = Mode_e.END;
 					break;
 				}
 
@@ -210,22 +210,22 @@ namespace Charlotte.Games
 				{
 					if (this.GetTabTitleCrash_基本設定().IsCrashed(DDCrashUtils.Point(new D2Point(DDMouse.X, DDMouse.Y))))
 					{
-						_mode = Mode_e.基本設定;
+						this.Mode = Mode_e.基本設定;
 						break;
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_ウィンドウサイズ設定)
 					{
-						_mode = Mode_e.画面サイズ設定;
+						this.Mode = Mode_e.画面サイズ設定;
 						break;
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_ゲームパッドのボタン設定 && 1 <= DDPad.GetPadCount())
 					{
-						_mode = Mode_e.ボタン設定;
+						this.Mode = Mode_e.ボタン設定;
 						break;
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_キーボードのキー設定)
 					{
-						_mode = Mode_e.キー設定;
+						this.Mode = Mode_e.キー設定;
 						break;
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_デフォルトに戻す)
@@ -234,7 +234,7 @@ namespace Charlotte.Games
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_戻る)
 					{
-						_mode = Mode_e.END;
+						this.Mode = Mode_e.END;
 						break;
 					}
 				}
@@ -284,7 +284,7 @@ namespace Charlotte.Games
 					DDMouse.R.GetInput() == -1
 					)
 				{
-					_mode = Mode_e.拡張設定;
+					this.Mode = Mode_e.拡張設定;
 					break;
 				}
 
@@ -317,7 +317,7 @@ namespace Charlotte.Games
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_戻る)
 					{
-						_mode = Mode_e.拡張設定;
+						this.Mode = Mode_e.拡張設定;
 						break;
 					}
 				}
@@ -381,7 +381,7 @@ namespace Charlotte.Games
 					DDMouse.R.GetInput() == -1
 					)
 				{
-					_mode = Mode_e.拡張設定;
+					this.Mode = Mode_e.拡張設定;
 					break;
 				}
 
@@ -393,7 +393,7 @@ namespace Charlotte.Games
 					}
 					if (this.LastHoveringButton == Ground.I.Picture.SettingButton_戻る)
 					{
-						_mode = Mode_e.拡張設定;
+						this.Mode = Mode_e.拡張設定;
 						break;
 					}
 				}
@@ -457,7 +457,7 @@ namespace Charlotte.Games
 			this.LastHoveringButton = null;
 			this.LastHoveringTrackBar = null;
 
-			_drawWall();
+			this.DrawWall();
 		}
 
 		private void DrawTabTitles(bool 拡張設定Flag)
@@ -661,7 +661,7 @@ namespace Charlotte.Games
 					DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP); // 決定・キャンセルを変更した場合を考慮して、長めにフリーズしておく
 					break;
 				}
-				_drawWall();
+				this.DrawWall();
 
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
 

@@ -62,11 +62,15 @@ namespace Charlotte
 		public DDPicture SettingButton_変更 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\変更.png");
 		public DDPicture SettingButton_戻る = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\戻る.png");
 
+		public DDPicture SettingButton_前へ = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\前へ.png");
+		public DDPicture SettingButton_次へ = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\次へ.png");
+
 		public DDPicture 基本設定枠 = DDPictureLoaders.Standard(@"dat\タイトル設定枠\基本設定.png");
 		public DDPicture 拡張設定枠 = DDPictureLoaders.Standard(@"dat\タイトル設定枠\拡張設定.png");
 		public DDPicture 詳細設定枠 = DDPictureLoaders.Standard(@"dat\タイトル設定枠\詳細設定.png");
 		public DDPicture TrackBar = DDPictureLoaders.Standard(@"dat\タイトル設定枠\TrackBar.png");
 		public DDPicture TrackBar_つまみ = DDPictureLoaders.Standard(@"dat\タイトル設定枠\TrackBar_つまみ.png");
+		public DDPicture SaveDataSlot = DDPictureLoaders.Standard(@"dat\タイトル設定枠\SaveDataSlot.png");
 
 		public DDPicture Title = DDPictureLoaders.Standard(@"dat\フリー素材\かんなにらせ\nc78901.jpg");
 	}

@@ -171,5 +171,15 @@ namespace Charlotte.GameCommons
 		{
 			Fade(0, 1.0);
 		}
+
+		/// <summary>
+		/// クリア対象の音楽は停止していること。
+		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
+		/// </summary>
+		public static void UnloadAll()
+		{
+			foreach (DDMusic music in Musics)
+				music.Sound.Unload();
+		}
 	}
 }

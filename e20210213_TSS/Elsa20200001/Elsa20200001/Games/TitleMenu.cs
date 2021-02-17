@@ -244,9 +244,20 @@ namespace Charlotte.Games
 
 						case 1:
 							{
+#if true
+								this.DrawWall.TopMenuLeaved = true;
+								SaveDataSlot saveDataSlot;
+
+								using (new SaveOrLoadMenu())
+								{
+									saveDataSlot = SaveOrLoadMenu.I.Load(this.DrawWall.Execute);
+								}
+								this.DrawWall.TopMenuLeaved = false;
+#else // old
 								this.DrawWall.TopMenuLeaved = true;
 								SaveDataSlot saveDataSlot = this.LoadGame();
 								this.DrawWall.TopMenuLeaved = false;
+#endif
 
 								if (saveDataSlot != null)
 								{
