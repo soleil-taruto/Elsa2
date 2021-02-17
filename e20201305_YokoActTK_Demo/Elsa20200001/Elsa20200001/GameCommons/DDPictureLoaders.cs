@@ -14,8 +14,13 @@ namespace Charlotte.GameCommons
 	{
 		public static DDPicture Standard(string file)
 		{
+			return Standard(() => DDPictureLoaderUtils.File2FileData(file));
+		}
+
+		public static DDPicture Standard(Func<byte[]> getFileData)
+		{
 			return new DDPicture(
-				() => DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(DDPictureLoaderUtils.FileData2SoftImage(DDPictureLoaderUtils.File2FileData(file)))),
+				() => DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(DDPictureLoaderUtils.FileData2SoftImage(getFileData()))),
 				DDPictureLoaderUtils.ReleaseInfo,
 				DDPictureUtils.Add
 				);

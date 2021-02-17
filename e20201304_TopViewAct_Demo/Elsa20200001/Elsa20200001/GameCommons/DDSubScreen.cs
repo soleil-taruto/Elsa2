@@ -86,14 +86,9 @@ namespace Charlotte.GameCommons
 
 		public IDisposable Section()
 		{
-#if true // ネスト対応
 			DDSubScreen parentSubScreen = DDSubScreenUtils.CurrDrawScreen;
 			this.ChangeDrawScreen();
 			return SCommon.GetAnonyDisposable(() => DDSubScreenUtils.ChangeDrawScreen(parentSubScreen));
-#else // old -- ネスト未対応
-			this.ChangeDrawScreen();
-			return SCommon.GetAnonyDisposable(() => DDSubScreenUtils.RestoreDrawScreen());
-#endif
 		}
 	}
 }

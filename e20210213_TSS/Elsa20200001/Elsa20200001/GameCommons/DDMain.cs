@@ -237,15 +237,6 @@ namespace Charlotte.GameCommons
 			DDUtils.SetMouseDispMode(mdm);
 
 			DDTouch.Touch();
-
-			// test test test test test
-			foreach (DDSubScreen subScreen in DDSubScreenUtils.SubScreens)
-			{
-				using (subScreen.Section())
-				{
-					DDDraw.DrawRect(Ground.I.Picture.SettingButton_フルスクリーン, 0, 0, subScreen.GetSize().W, subScreen.GetSize().H);
-				}
-			}
 		}
 
 		public static void PostSetScreenSize(int w, int h)

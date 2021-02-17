@@ -67,7 +67,9 @@ namespace Charlotte.GameCommons.Options
 
 		public static void Clear<K, T>(Dictionary<K, T> cache, List<T> store, Action<T> a_unload)
 		{
-			HashSet<T> handles = new HashSet<T>(cache.Values);
+			HashSet<T> handles = new HashSet<T>(cache
+				.Values // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				);
 
 			foreach (T handle in handles)
 				a_unload(handle);
