@@ -194,6 +194,59 @@ namespace Charlotte.GameCommons
 
 		public static void SetFullScreen()
 		{
+			BeforeSetScreenSize();
+			P_SetFullScreen();
+		}
+
+		public static void SetScreenSize(int w, int h)
+		{
+			BeforeSetScreenSize();
+			P_SetScreenSize(w, h);
+		}
+
+		private static void BeforeSetScreenSize()
+		{
+			if (DDConfig.DisplayIndex == -2)
+			{
+				UpdateActiveScreen();
+			}
+		}
+
+		private static void UpdateActiveScreen()
+		{
+			I2Point screenCenter;
+
+			{
+				DDWin32.POINT p;
+
+				p.X = 0;
+				p.Y = 0;
+
+				DDWin32.ClientToScreen(DDWin32.GetMainWindowHandle(), out p);
+
+				int l = p.X;
+				int t = p.Y;
+				int w = DDGround.RealScreen_W;
+				int h = DDGround.RealScreen_H;
+
+				screenCenter = new I2Point(l + w / 2, t + h / 2);
+			}
+
+			foreach (I4Rect monitor in DDWin32.GetAllMonitor())
+			{
+				if (
+					monitor.L <= screenCenter.X && screenCenter.X < monitor.R &&
+					monitor.T <= screenCenter.Y && screenCenter.Y < monitor.B
+					)
+				{
+					DDGround.MonitorRect = monitor;
+					break;
+				}
+			}
+		}
+
+		private static void P_SetFullScreen()
+		{
 			int w = DDGround.MonitorRect.W;
 			int h = (DDConsts.Screen_H * DDGround.MonitorRect.W) / DDConsts.Screen_W;
 
@@ -205,7 +258,7 @@ namespace Charlotte.GameCommons
 				if (DDGround.MonitorRect.W < w)
 					throw new DDError();
 			}
-			DDMain.SetScreenSize(DDGround.MonitorRect.W, DDGround.MonitorRect.H);
+			P_SetScreenSize(DDGround.MonitorRect.W, DDGround.MonitorRect.H);
 
 			DDGround.RealScreenDraw_L = (DDGround.MonitorRect.W - w) / 2;
 			DDGround.RealScreenDraw_T = (DDGround.MonitorRect.H - h) / 2;
@@ -213,7 +266,7 @@ namespace Charlotte.GameCommons
 			DDGround.RealScreenDraw_H = h;
 		}
 
-		public static void SetScreenSize(int w, int h)
+		private static void P_SetScreenSize(int w, int h)
 		{
 			if (
 				w < DDConsts.Screen_W_Min || DDConsts.Screen_W_Max < w ||
@@ -228,18 +281,12 @@ namespace Charlotte.GameCommons
 				DDGround.RealScreen_W = w;
 				DDGround.RealScreen_H = h;
 
-				ApplyScreenSize();
-
+				P2_SetScreenSize(w, h);
 				PostSetScreenSize(w, h);
 			}
 		}
 
-		public static void ApplyScreenSize()
-		{
-			ApplyScreenSize(DDGround.RealScreen_W, DDGround.RealScreen_H);
-		}
-
-		public static void ApplyScreenSize(int w, int h)
+		private static void P2_SetScreenSize(int w, int h)
 		{
 			bool mdm = DDUtils.GetMouseDispMode();
 
@@ -260,15 +307,15 @@ namespace Charlotte.GameCommons
 			DDSubScreenUtils.DrawDummyScreenAll();
 		}
 
-		public static void PostSetScreenSize(int w, int h)
+		private static void PostSetScreenSize(int w, int h)
 		{
 			if (DDConfig.DisplayIndex == -2)
 			{
 				int l = (DDGround.MonitorRect.W - w) / 2;
 				int t = (DDGround.MonitorRect.H - h) / 2;
 
-				l = Math.Max(0, l);
-				t = Math.Max(0, t);
+				//l = Math.Max(0, l);
+				//t = Math.Max(0, t);
 
 				SetScreenPosition(DDGround.MonitorRect.L + l, DDGround.MonitorRect.T + t);
 			}
@@ -281,7 +328,7 @@ namespace Charlotte.GameCommons
 			}
 		}
 
-		public static void SetScreenPosition(int l, int t)
+		private static void SetScreenPosition(int l, int t)
 		{
 			DX.SetWindowPosition(l, t);
 

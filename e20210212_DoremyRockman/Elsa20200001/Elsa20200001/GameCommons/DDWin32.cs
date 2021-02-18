@@ -94,21 +94,26 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		private static I4Rect[] Monitors = null;
+
 		public static I4Rect[] GetAllMonitor()
 		{
-			return
-				Screen.AllScreens.Select( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-					screen => new I4Rect(
-						screen
-							.Bounds.Left, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-						screen
-							.Bounds.Top, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-						screen
-							.Bounds.Width, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-						screen
-							.Bounds.Height // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-						))
-						.ToArray();
+			if (Monitors == null)
+				Monitors =
+					Screen.AllScreens.Select( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+						screen => new I4Rect(
+							screen
+								.Bounds.Left, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+							screen
+								.Bounds.Top, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+							screen
+								.Bounds.Width, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+							screen
+								.Bounds.Height // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+							))
+							.ToArray();
+
+			return Monitors;
 		}
 	}
 }
