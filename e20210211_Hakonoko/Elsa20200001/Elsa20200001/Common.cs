@@ -245,5 +245,18 @@ namespace Charlotte
 				}
 			}
 		}
+
+		public static void DebugPrint(object message)
+		{
+#if DEBUG
+			string line = "_" + message;
+
+			DDGround.EL.Add(() =>
+			{
+				DDPrint.Print(line);
+				return false;
+			});
+#endif
+		}
 	}
 }

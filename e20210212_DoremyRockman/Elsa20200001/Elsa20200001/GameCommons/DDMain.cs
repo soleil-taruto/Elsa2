@@ -235,6 +235,9 @@ namespace Charlotte.GameCommons
 			DX.SetDrawMode(DDConsts.DEFAULT_DX_DRAWMODE);
 
 			DDUtils.SetMouseDispMode(mdm);
+
+			DDTouch.Touch();
+			DDSubScreenUtils.DrawDummyScreenAll();
 		}
 
 		public static void PostSetScreenSize(int w, int h)

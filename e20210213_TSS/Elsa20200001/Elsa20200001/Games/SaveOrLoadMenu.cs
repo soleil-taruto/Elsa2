@@ -124,7 +124,7 @@ namespace Charlotte.Games
 
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
 
-				DrawTabTitle(850, 70, saveMode ? "セーブ" : "ロード", true);
+				DrawTabTitle(855, 70, saveMode ? "セーブ" : "ロード", true);
 
 				int selSDSlotIndex = -1;
 				int sdSlotIndex = this.PageIndex * 10;

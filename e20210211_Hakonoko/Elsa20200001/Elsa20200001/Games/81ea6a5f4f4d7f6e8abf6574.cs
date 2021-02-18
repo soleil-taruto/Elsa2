@@ -127,6 +127,8 @@ namespace Charlotte.Games
 
 							bool 強制落下 = 1 <= DDInput.DIR_2.GetInput() && DDInput.L.GetInput() <= 0; // ? 下ボタン押下 && 画面スライド中ではない。
 
+							//Common.DebugPrint(A2.RelativePoint.X); // test
+
 							if (強制落下)
 							{
 								if (A2.RelativePoint.X < -8)
@@ -135,7 +137,9 @@ namespace Charlotte.Games
 								}
 								else
 								{
-									A2.RelativePoint.X--;
+									if (A2.RelativePoint.X < 16)
+										A2.RelativePoint.X--;
+
 									A2.RelativePoint.Y = -16;
 									Touch = Touch_e.GROUND;
 								}

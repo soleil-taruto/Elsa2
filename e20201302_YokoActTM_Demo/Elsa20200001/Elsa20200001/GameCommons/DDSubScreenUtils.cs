@@ -52,24 +52,20 @@ namespace Charlotte.GameCommons
 			ChangeDrawScreen(DDGround.MainScreen);
 		}
 
-#if false // 廃止
-		public static Size GetDrawScreenSize() // ret: 描画領域のサイズ？
+		public static void DrawDummyScreenAll()
 		{
-			int w;
-			int h;
-			int cbd;
+			DDPicture picture = Ground.I.Picture.DummyScreen;
 
-			if (DX.GetScreenState(out w, out h, out cbd) != 0)
-				throw new DDError();
-
-			if (w < 1 || SCommon.IMAX < w)
-				throw new DDError("w: " + w);
-
-			if (h < 1 || SCommon.IMAX < h)
-				throw new DDError("h: " + h);
-
-			return new Size(w, h);
+			foreach (DDSubScreen subScreen in SubScreens)
+			{
+				using (subScreen.Section())
+				{
+					DDDraw.DrawRect(
+						picture,
+						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(new D2Point(0, 0), subScreen.GetSize().ToD2Size()))
+						);
+				}
+			}
 		}
-#endif
 	}
 }
