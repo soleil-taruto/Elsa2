@@ -12,9 +12,9 @@ namespace Charlotte.GameCommons
 		// 設定項目 >
 
 		/// <summary>
-		/// -1 == デフォルト, { 0, 1, 2, ... } == { 最初のモニタ, 2番目のモニタ, 3番目のモニタ, ... }
+		/// -2 == アプリ側で制御, -1 == デフォルト, { 0, 1, 2, ... } == { 最初のモニタ, 2番目のモニタ, 3番目のモニタ, ... }
 		/// </summary>
-		public static int DisplayIndex = 1;
+		public static int DisplayIndex = -2;
 
 		public static string LogFile = @"C:\tmp\Game.log";
 		public static int LogCountMax = SCommon.IMAX;

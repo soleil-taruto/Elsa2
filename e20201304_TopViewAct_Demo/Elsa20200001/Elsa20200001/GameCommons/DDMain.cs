@@ -74,7 +74,7 @@ namespace Charlotte.GameCommons
 
 			DX.SetWindowIconHandle(GetAppIcon()); // ウィンドウ左上のアイコン
 
-			if (DDConfig.DisplayIndex != -1)
+			if (0 <= DDConfig.DisplayIndex)
 				DX.SetUseDirectDrawDeviceIndex(DDConfig.DisplayIndex);
 
 			if (DX.DxLib_Init() != 0) // ? 失敗
@@ -99,6 +99,26 @@ namespace Charlotte.GameCommons
 			DDGround.LastMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 			DDGround.KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 
+			if (DDConfig.DisplayIndex == -2)
+			{
+				I2Point mousePt = DDWin32.GetMousePosition();
+				I4Rect[] monitors = DDWin32.GetAllMonitor();
+				I4Rect activeMonitor = monitors[0]; // マウス位置のモニタを特定出来ない場合のモニタ
+
+				foreach (I4Rect monitor in monitors)
+				{
+					if (
+						monitor.L <= mousePt.X && mousePt.X < monitor.R &&
+						monitor.T <= mousePt.Y && mousePt.Y < monitor.B
+						)
+					{
+						activeMonitor = monitor;
+						break;
+					}
+				}
+				DDGround.MonitorRect = activeMonitor;
+			}
+			else
 			{
 				int l;
 				int t;
@@ -242,9 +262,22 @@ namespace Charlotte.GameCommons
 
 		public static void PostSetScreenSize(int w, int h)
 		{
-			if (DDGround.MonitorRect.W == w && DDGround.MonitorRect.H == h)
+			if (DDConfig.DisplayIndex == -2)
 			{
-				SetScreenPosition(DDGround.MonitorRect.L, DDGround.MonitorRect.T);
+				int l = (DDGround.MonitorRect.W - w) / 2;
+				int t = (DDGround.MonitorRect.H - h) / 2;
+
+				l = Math.Max(0, l);
+				t = Math.Max(0, t);
+
+				SetScreenPosition(DDGround.MonitorRect.L + l, DDGround.MonitorRect.T + t);
+			}
+			else
+			{
+				if (DDGround.MonitorRect.W == w && DDGround.MonitorRect.H == h)
+				{
+					SetScreenPosition(DDGround.MonitorRect.L, DDGround.MonitorRect.T);
+				}
 			}
 		}
 
