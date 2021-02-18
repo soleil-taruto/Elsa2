@@ -156,7 +156,10 @@ namespace Charlotte.Games
 
 						DDPrint.SetBorder(new I3Color(0, 0, 150));
 						DDPrint.SetPrint(slotX - 150, slotY + 120);
-						DDPrint.Print("" + sdSlot.SavedTime.ToString(
+						DDPrint.Print(sdSlot.SavedTime.Year == 1 ?
+							"----/--/--(--)--:--"
+							//"----/--/-- --:--:--"
+							: sdSlot.SavedTime.ToString(
 							"{0:D4}/{1:D2}/{2:D2}({3}){4:D2}:{5:D2}"
 							//"{0:D4}/{1:D2}/{2:D2} {4:D2}:{5:D2}:{6:D2}"
 							));
