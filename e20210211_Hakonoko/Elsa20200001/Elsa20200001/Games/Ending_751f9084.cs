@@ -6,7 +6,7 @@ using Charlotte.GameCommons;
 
 namespace Charlotte.Games
 {
-	public static class Ending_生き還り
+	public static class Ending_生還
 	{
 		public static void Perform()
 		{
@@ -19,7 +19,7 @@ namespace Charlotte.Games
 				DDCurtain.DrawCurtain();
 
 				DDPrint.SetPrint();
-				DDPrint.Print("Ending_生き還り");
+				DDPrint.Print("Ending_生還");
 
 				DDEngine.EachFrame();
 			}

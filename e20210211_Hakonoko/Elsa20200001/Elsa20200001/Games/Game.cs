@@ -24,7 +24,7 @@ namespace Charlotte.Games
 			NextStage = 1,
 			ReturnToTitleMenu,
 			死亡エンド,
-			生き返りエンド,
+			生還エンド,
 			復讐エンド,
 		}
 
@@ -618,7 +618,7 @@ namespace Charlotte.Games
 				}
 
 				if (this.FinalZone)
-					this.EndStatus = EndStatus_e.生き返りエンド;
+					this.EndStatus = EndStatus_e.生還エンド;
 			}
 			else // ? タイトルへ戻るを選択した。など
 			{

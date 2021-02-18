@@ -272,9 +272,9 @@ namespace Charlotte.GameProgressMasters
 						Ending_死亡.Perform();
 						break;
 					}
-					else if (endStatus == Game.EndStatus_e.生き返りエンド)
+					else if (endStatus == Game.EndStatus_e.生還エンド)
 					{
-						Ending_生き還り.Perform();
+						Ending_生還.Perform();
 						break;
 					}
 					else if (endStatus == Game.EndStatus_e.復讐エンド)

@@ -96,7 +96,7 @@
     <Compile Include="Games\Designs\Design_0003.cs" />
     <Compile Include="Games\Ending_復讐.cs" />
     <Compile Include="Games\Ending_死亡.cs" />
-    <Compile Include="Games\Ending_生き還り.cs" />
+    <Compile Include="Games\Ending_生還.cs" />
     <Compile Include="Games\Enemies\EnemyCommon.cs" />
     <Compile Include="Games\Enemies\EnemyConsts.cs" />
     <Compile Include="Games\Enemies\Enemy_Meteor.cs" />
