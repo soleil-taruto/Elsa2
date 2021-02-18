@@ -25,7 +25,7 @@ namespace Charlotte.Novels.Surfaces
 		/// <para>アクションのリスト</para>
 		/// <para>Act.Draw が false を返したとき this.Draw を実行しなければならない。</para>
 		/// <para>セーブ・ロード時にこのフィールドは保存・再現されない。</para>
-		/// <para>-- セーブ前に Flush しなければならない。(但し、ノベル中にセーブしない方針)</para>
+		/// <para>-- セーブ前に Flush しなければならない。</para>
 		/// </summary>
 		public NovelAct Act = new NovelAct();
 
@@ -84,7 +84,7 @@ namespace Charlotte.Novels.Surfaces
 			}
 			else if (command == "End")
 			{
-				this.Act.AddOnce(() => Novel.I.Status.Surfaces.RemoveAll(v => v == this)); // Remove Me
+				this.Act.AddOnce(() => this.DeadFlag = true);
 			}
 			else if (command == "Flush") // 即時
 			{
@@ -123,6 +123,7 @@ namespace Charlotte.Novels.Surfaces
 		}
 
 		private Func<bool> _draw = null;
+		public bool DeadFlag = false;
 
 		public void Draw()
 		{
@@ -130,7 +131,7 @@ namespace Charlotte.Novels.Surfaces
 				_draw = SCommon.Supplier(this.E_Draw());
 
 			if (!_draw())
-				Novel.I.Status.Surfaces.RemoveAll(v => v == this); // Remove Me
+				this.DeadFlag = true;
 		}
 
 		/// <summary>

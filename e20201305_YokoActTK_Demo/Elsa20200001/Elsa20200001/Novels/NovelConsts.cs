@@ -39,8 +39,6 @@ namespace Charlotte.Novels
 		public const int MESSAGE_SPEED_DEF = 3;
 		public const int MESSAGE_SPEED_MAX = 5; // 速い
 
-		public const int SAVE_DATA_SLOT_NUM = 10;
-
 		public const double SYSTEM_BUTTON_X = 680.0;
 		public const double SYSTEM_BUTTON_Y = 410.0;
 		public const double SYSTEM_BUTTON_X_STEP = 80.0;

@@ -121,9 +121,7 @@ namespace Charlotte.Novels.Surfaces
 			}
 			else if (command == "待ち")
 			{
-				int frame = int.Parse(arguments[c++]);
-
-				this.Act.Add(SCommon.Supplier(this.待ち(frame)));
+				this.Act.Add(SCommon.Supplier(this.待ち(int.Parse(arguments[c++]))));
 			}
 			else if (command == "フェードイン")
 			{
@@ -135,9 +133,7 @@ namespace Charlotte.Novels.Surfaces
 			}
 			else if (command == "モード変更")
 			{
-				string modeName = arguments[c++];
-
-				this.Act.Add(SCommon.Supplier(this.モード変更(modeName)));
+				this.Act.Add(SCommon.Supplier(this.モード変更(arguments[c++])));
 			}
 			else if (command == "モード変更_Mirror")
 			{
@@ -165,7 +161,7 @@ namespace Charlotte.Novels.Surfaces
 			foreach (DDScene scene in DDSceneUtils.Create(frame))
 			{
 				if (NovelAct.IsFlush)
-					break;
+					yield break;
 
 				this.P_Draw();
 				yield return true;
@@ -179,7 +175,7 @@ namespace Charlotte.Novels.Surfaces
 				if (NovelAct.IsFlush)
 				{
 					this.A = 1.0;
-					break;
+					yield break;
 				}
 				this.A = scene.Rate;
 				this.P_Draw();
@@ -195,7 +191,7 @@ namespace Charlotte.Novels.Surfaces
 				if (NovelAct.IsFlush)
 				{
 					this.A = 0.0;
-					break;
+					yield break;
 				}
 				this.A = 1.0 - scene.Rate;
 				this.P_Draw();
@@ -216,13 +212,10 @@ namespace Charlotte.Novels.Surfaces
 			if (mode == -1)
 				throw new DDError("Bad mode: " + mode);
 
-			return this.モード変更(mode, mirrored);
-		}
-
-		private IEnumerable<bool> モード変更(int destMode, bool destMirrored)
-		{
 			int currMode = this.Mode;
+			int destMode = mode;
 			bool currMirrored = this.Mirrored;
+			bool destMirrored = mirrored;
 
 			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
@@ -231,7 +224,8 @@ namespace Charlotte.Novels.Surfaces
 					this.A = 1.0;
 					this.Mode = destMode;
 					this.Mirrored = destMirrored;
-					break;
+
+					yield break;
 				}
 				this.A = DDUtils.Parabola(scene.Rate * 0.5 + 0.5);
 				this.Mode = currMode;
@@ -247,10 +241,12 @@ namespace Charlotte.Novels.Surfaces
 			}
 		}
 
-		private IEnumerable<bool> スライド(double destX, double destY)
+		private IEnumerable<bool> スライド(double x, double y)
 		{
 			double currX = this.X;
+			double destX = x;
 			double currY = this.Y;
+			double destY = y;
 
 			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
@@ -258,7 +254,8 @@ namespace Charlotte.Novels.Surfaces
 				{
 					this.X = destX;
 					this.Y = destY;
-					break;
+
+					yield break;
 				}
 				this.X = DDUtils.AToBRate(currX, destX, DDUtils.SCurve(scene.Rate));
 				this.Y = DDUtils.AToBRate(currY, destY, DDUtils.SCurve(scene.Rate));

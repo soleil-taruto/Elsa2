@@ -238,6 +238,7 @@
     <Compile Include="Novels\Surfaces\Surface_Select.cs" />
     <Compile Include="Novels\Surfaces\Surface_System.cs" />
     <Compile Include="Novels\Surfaces\Surface_SystemButtons.cs" />
+    <Compile Include="Novels\Surfaces\Surface_エフェクト.cs" />
     <Compile Include="Novels\Surfaces\Surface_キャラクタ.cs" />
     <Compile Include="Novels\Surfaces\Surface_スクリーン.cs" />
     <Compile Include="Novels\Surfaces\Surface_効果音.cs" />

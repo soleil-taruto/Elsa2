@@ -31,6 +31,7 @@ namespace Charlotte.Novels
 		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択
 		public bool SkipMode;
 		public bool AutoMode;
+		public bool BacklogMode;
 
 		public int DispSubtitleCharCount;
 		public int DispCharCount;
@@ -47,6 +48,7 @@ namespace Charlotte.Novels
 			{
 				this.SkipMode = false;
 				this.AutoMode = false;
+				this.BacklogMode = false;
 
 				Surface_MessageWindow.Hide = false;
 				Surface_SystemButtons.Hide = false;
@@ -93,8 +95,6 @@ namespace Charlotte.Novels
 
 				// 入力：シナリオを進める。(マウスホイール_以外)
 				if (
-					//DDKey.GetInput(DX.KEY_INPUT_SPACE) == 1 ||
-					//DDKey.GetInput(DX.KEY_INPUT_RETURN) == 1 ||
 					DDMouse.L.GetInput() == -1 && this.SelectedSystemButtonIndex == -1 || // システムボタン以外を左クリック
 					DDInput.A.GetInput() == 1
 					)
@@ -156,17 +156,15 @@ namespace Charlotte.Novels
 
 				// 入力：過去ログ
 				if (
-					//DDKey.GetInput(DX.KEY_INPUT_LEFT) == 1 ||
 					DDInput.DIR_4.GetInput() == 1 ||
 					0 < DDMouse.Rot
 					)
 				{
-					this.BackLog();
+					this.Backlog();
 				}
 
 				// 入力：鑑賞モード
 				if (
-					//DDKey.GetInput(DX.KEY_INPUT_BACK) == 1 ||
 					DDMouse.R.GetInput() == -1 ||
 					DDInput.B.GetInput() == 1
 					)
@@ -181,7 +179,7 @@ namespace Charlotte.Novels
 					{
 						case 0: this.SkipMode = !this.SkipMode; break;
 						case 1: this.AutoMode = !this.AutoMode; break;
-						case 2: this.BackLog(); break;
+						case 2: this.Backlog(); break;
 						case 3: this.SystemMenu(); break;
 
 						default:
@@ -204,15 +202,17 @@ namespace Charlotte.Novels
 				}
 				else if (this.DispFastMode)
 				{
-					this.DispSubtitleCharCount += 2;
-					this.DispCharCount += 2;
+					this.DispSubtitleCharCount += Ground.I.NovelMessageSpeed;
+					this.DispCharCount += Ground.I.NovelMessageSpeed;
 				}
 				else
 				{
-					if (DDEngine.ProcFrame % 2 == 0)
+					int speed = (NovelConsts.MESSAGE_SPEED_MAX + NovelConsts.MESSAGE_SPEED_MIN) - Ground.I.NovelMessageSpeed;
+
+					if (DDEngine.ProcFrame % speed == 0)
 						this.DispSubtitleCharCount++;
 
-					if (DDEngine.ProcFrame % 3 == 0)
+					if (DDEngine.ProcFrame % (speed + 1) == 0)
 						this.DispCharCount++;
 				}
 				DDUtils.ToRange(ref this.DispSubtitleCharCount, 0, SCommon.IMAX);
@@ -261,6 +261,8 @@ namespace Charlotte.Novels
 			this.AutoMode = false;
 		}
 
+		private Func<bool> SortSurfaces = null;
+
 		/// <summary>
 		/// <para>主たる画面描画</para>
 		/// <para>色々な場所(モード)から呼び出されるだろう。</para>
@@ -269,30 +271,63 @@ namespace Charlotte.Novels
 		{
 			DDCurtain.DrawCurtain(); // 画面クリア
 
-			// Z-オーダー順
-			Novel.I.Status.Surfaces.Sort((a, b) =>
-			{
-				int ret = a.Z - b.Z;
-				if (ret != 0)
-					return ret;
+			if (this.SortSurfaces == null)
+				this.SortSurfaces = SCommon.Supplier(this.E_SortSurfaces());
 
-				ret = SCommon.Comp(a.X, b.X);
-				if (ret != 0)
-					return ret;
-
-				ret = SCommon.Comp(a.Y, b.Y);
-				return ret;
-			});
+			for (int c = 0; c < 10; c++)
+				this.SortSurfaces();
 
 			foreach (Surface surface in Novel.I.Status.Surfaces) // キャラクタ・オブジェクト・壁紙
 				if (!surface.Act.Draw())
 					surface.Draw();
+
+			this.Status.Surfaces.RemoveAll(surface => surface.DeadFlag);
+		}
+
+		private IEnumerable<bool> E_SortSurfaces()
+		{
+			for (; ; )
+			{
+				for (int index = 1; index < this.Status.Surfaces.Count; index++)
+				{
+					if (0 < SS_Comp(this.Status.Surfaces[index - 1], this.Status.Surfaces[index]))
+					{
+						SCommon.Swap(this.Status.Surfaces, index - 1, index);
+
+						if (1 < index)
+							index--;
+					}
+					yield return true;
+				}
+				yield return true; // ループ内で実行されない場合を想定
+			}
+		}
+
+		/// <summary>
+		/// サーフェスの比較
+		/// Z-オーダー順
+		/// </summary>
+		/// <param name="a">左のサーフェス</param>
+		/// <param name="b">右のサーフェス</param>
+		/// <returns>比較結果</returns>
+		private static int SS_Comp(Surface a, Surface b)
+		{
+			int ret = a.Z - b.Z;
+			if (ret != 0)
+				return ret;
+
+			ret = SCommon.Comp(a.X, b.X);
+			if (ret != 0)
+				return ret;
+
+			ret = SCommon.Comp(a.Y, b.Y);
+			return ret;
 		}
 
 		/// <summary>
 		/// 過去ログ
 		/// </summary>
-		private void BackLog()
+		private void Backlog()
 		{
 			List<string> logLines = new List<string>();
 
@@ -302,34 +337,30 @@ namespace Charlotte.Novels
 
 			DDEngine.FreezeInput(NovelConsts.SHORT_INPUT_SLEEP);
 
+			this.BacklogMode = true;
 			int backIndex = 0;
 
 			for (; ; )
 			{
 				if (
-					//DDKey.GetInput(DX.KEY_INPUT_SPACE) == 1 ||
-					//DDKey.GetInput(DX.KEY_INPUT_RETURN) == 1 ||
 					DDMouse.L.GetInput() == -1 ||
 					DDInput.A.GetInput() == 1
 					)
 					break;
 
 				if (
-					//DDKey.IsPound(DX.KEY_INPUT_UP) ||
 					DDInput.DIR_8.IsPound() ||
 					0 < DDMouse.Rot
 					)
 					backIndex++;
 
 				if (
-					//DDKey.IsPound(DX.KEY_INPUT_DOWN) ||
 					DDInput.DIR_2.IsPound() ||
 					DDMouse.Rot < 0
 					)
 					backIndex--;
 
 				if (
-					//DDKey.IsPound(DX.KEY_INPUT_RIGHT) ||
 					DDInput.DIR_6.GetInput() == 1
 					)
 					backIndex = -1;
@@ -354,6 +385,8 @@ namespace Charlotte.Novels
 				DDEngine.EachFrame();
 			}
 			DDEngine.FreezeInput(NovelConsts.SHORT_INPUT_SLEEP);
+
+			this.BacklogMode = false;
 		}
 
 		/// <summary>
@@ -363,14 +396,13 @@ namespace Charlotte.Novels
 		{
 			Surface_MessageWindow.Hide = true;
 			Surface_SystemButtons.Hide = true;
+			Surface_Select.Hide = true;
 
 			DDEngine.FreezeInput(NovelConsts.SHORT_INPUT_SLEEP);
 
 			for (; ; )
 			{
 				if (
-					//DDKey.GetInput(DX.KEY_INPUT_SPACE) == 1 ||
-					//DDKey.GetInput(DX.KEY_INPUT_RETURN) == 1 ||
 					DDMouse.L.GetInput() == -1 ||
 					DDMouse.R.GetInput() == -1 ||
 					DDInput.A.GetInput() == 1 ||
@@ -385,6 +417,7 @@ namespace Charlotte.Novels
 
 			Surface_MessageWindow.Hide = false; // restore
 			Surface_SystemButtons.Hide = false; // restore
+			Surface_Select.Hide = false; // restore
 		}
 
 		private bool SystemMenu_ReturnToTitleMenu = false;
@@ -408,7 +441,7 @@ namespace Charlotte.Novels
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"システムメニュー(仮)",
+					"システムメニュー",
 					new string[]
 					{
 						"タイトルに戻る",

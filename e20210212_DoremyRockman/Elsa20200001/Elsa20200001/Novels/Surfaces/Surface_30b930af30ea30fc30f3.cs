@@ -9,16 +9,71 @@ namespace Charlotte.Novels.Surfaces
 {
 	public class Surface_スクリーン : Surface
 	{
-		private string ImageFile = null; // null == 画像無し
-		private double A = 1.0;
-		private double SlideRate = 0.5;
-		private double DestSlideRate = 0.5;
-
 		public Surface_スクリーン(string typeName, string instanceName)
 			: base(typeName, instanceName)
 		{
 			this.Z = 10000;
 		}
+
+		#region Layer
+
+		private class LayerInfo
+		{
+			public string ImageFile;
+			public double A = 1.0;
+			public double SlideRate = 0.5;
+			public double DestSlideRate = 0.5;
+
+			// <---- prm
+
+			public void Draw()
+			{
+				DDUtils.Approach(ref this.SlideRate, this.DestSlideRate, 0.9999);
+
+				DDPicture picture = DDCCResource.GetPicture(this.ImageFile);
+				D2Size size = DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H)).Size;
+
+				DDDraw.SetAlpha(this.A);
+				DDDraw.DrawRect(
+					picture,
+					(DDConsts.Screen_W - size.W) * this.SlideRate,
+					(DDConsts.Screen_H - size.H) * this.SlideRate,
+					size.W,
+					size.H
+					);
+				DDDraw.Reset();
+			}
+		}
+
+		/// <summary>
+		/// レイヤー配列
+		/// 後の方を前面に表示する。
+		/// 並びは以下の何れかしか無い：
+		/// -- { }
+		/// -- { 前面 }
+		/// -- { 背面, 前面 }
+		/// </summary>
+		private List<LayerInfo> Layers = new List<LayerInfo>();
+
+		private LayerInfo 前面
+		{
+			get
+			{
+				return this.Layers[this.Layers.Count - 1];
+			}
+		}
+
+		private void Remove背面()
+		{
+			this.Layers = new List<LayerInfo>(new LayerInfo[] { this.前面 });
+		}
+
+		private void Remove前面()
+		{
+			this.Layers = new List<LayerInfo>(new LayerInfo[] { this.Layers[0] });
+		}
+
+		#endregion
 
 		public override IEnumerable<bool> E_Draw()
 		{
@@ -32,23 +87,10 @@ namespace Charlotte.Novels.Surfaces
 
 		private void P_Draw()
 		{
-			if (this.ImageFile == null) // ? 画像無し
-				return;
-
-			DDUtils.Approach(ref this.SlideRate, this.DestSlideRate, 0.9999);
-
-			DDPicture picture = DDCCResource.GetPicture(this.ImageFile);
-			D2Size size = DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H)).Size;
-
-			DDDraw.SetAlpha(this.A);
-			DDDraw.DrawRect(
-				picture,
-				(DDConsts.Screen_W - size.W) * this.SlideRate,
-				(DDConsts.Screen_H - size.H) * this.SlideRate,
-				size.W,
-				size.H
-				);
-			DDDraw.Reset();
+			foreach (LayerInfo layer in this.Layers)
+			{
+				layer.Draw();
+			}
 		}
 
 		protected override void Invoke_02(string command, params string[] arguments)
@@ -57,24 +99,20 @@ namespace Charlotte.Novels.Surfaces
 
 			if (command == "画像")
 			{
-				this.Act.AddOnce(() => this.ImageFile = arguments[c++]);
-			}
-			else if (command == "A")
-			{
-				this.Act.AddOnce(() => this.A = double.Parse(arguments[c++]));
+				this.Act.AddOnce(() => this.Layers.Add(new LayerInfo() { ImageFile = arguments[c++] }));
 			}
 			else if (command == "スライド")
 			{
 				if (arguments.Length == 1)
 				{
-					this.Act.AddOnce(() => this.DestSlideRate = double.Parse(arguments[c++]));
+					this.Act.AddOnce(() => this.前面.DestSlideRate = double.Parse(arguments[c++]));
 				}
 				else if (arguments.Length == 2)
 				{
 					this.Act.AddOnce(() =>
 					{
-						this.SlideRate = double.Parse(arguments[c++]);
-						this.DestSlideRate = double.Parse(arguments[c++]);
+						this.前面.SlideRate = double.Parse(arguments[c++]);
+						this.前面.DestSlideRate = double.Parse(arguments[c++]);
 					});
 				}
 				else
@@ -82,9 +120,30 @@ namespace Charlotte.Novels.Surfaces
 					throw new DDError();
 				}
 			}
-			else if (command == "フェードイン")
+			else if (command == "画像フェードイン")
 			{
-				this.Act.Add(SCommon.Supplier(this.フェードイン()));
+				if (arguments.Length == 1)
+				{
+					this.Act.Add(SCommon.Supplier(this.画像フェードイン(() => new LayerInfo() { ImageFile = arguments[c++] })));
+				}
+				else if (arguments.Length == 3)
+				{
+					this.Act.Add(SCommon.Supplier(this.画像フェードイン(() =>
+					{
+						LayerInfo layer = new LayerInfo();
+
+						layer.ImageFile = arguments[c++];
+						layer.SlideRate = double.Parse(arguments[c++]);
+						layer.DestSlideRate = double.Parse(arguments[c++]);
+
+						return layer;
+					}
+					)));
+				}
+				else
+				{
+					throw new DDError();
+				}
 			}
 			else if (command == "フェードアウト")
 			{
@@ -96,20 +155,24 @@ namespace Charlotte.Novels.Surfaces
 			}
 		}
 
-		private IEnumerable<bool> フェードイン()
+		private IEnumerable<bool> 画像フェードイン(Func<LayerInfo> createLayer)
 		{
+			this.Layers.Add(createLayer());
+
 			foreach (DDScene scene in DDSceneUtils.Create(60))
 			{
 				if (NovelAct.IsFlush)
 				{
-					this.A = 1.0;
-					break;
+					this.前面.A = 1.0;
+					this.Remove背面(); // 見えなくなった背面を除去
+					yield break;
 				}
-				this.A = scene.Rate;
+				this.前面.A = scene.Rate;
 				this.P_Draw();
 
 				yield return true;
 			}
+			this.Remove背面(); // 見えなくなった背面を除去
 		}
 
 		private IEnumerable<bool> フェードアウト()
@@ -118,14 +181,16 @@ namespace Charlotte.Novels.Surfaces
 			{
 				if (NovelAct.IsFlush)
 				{
-					this.A = 0.0;
-					break;
+					//this.FrontEndImage.A = 0.0; // 不要
+					this.Remove前面(); // フェードアウトした前面を除去
+					yield break;
 				}
-				this.A = 1.0 - scene.Rate;
+				this.前面.A = 1.0 - scene.Rate;
 				this.P_Draw();
 
 				yield return true;
 			}
+			this.Remove前面(); // フェードアウトした前面を除去
 		}
 	}
 }

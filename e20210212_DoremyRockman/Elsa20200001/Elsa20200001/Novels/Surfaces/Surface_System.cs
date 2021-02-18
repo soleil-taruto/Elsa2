@@ -50,7 +50,7 @@ namespace Charlotte.Novels.Surfaces
 					Novel.I.DrawSurfaces();
 					DDEngine.EachFrame();
 				}
-				DDEngine.FreezeInput(NovelConsts.SHORT_INPUT_SLEEP);
+				DDEngine.FreezeInput(NovelConsts.NEXT_PAGE_INPUT_INTERVAL);
 			}
 			else if (command == "WhileActOrInput") // 即時
 			{
@@ -67,7 +67,7 @@ namespace Charlotte.Novels.Surfaces
 					Novel.I.DrawSurfaces();
 					DDEngine.EachFrame();
 				}
-				DDEngine.FreezeInput(NovelConsts.SHORT_INPUT_SLEEP);
+				DDEngine.FreezeInput(NovelConsts.NEXT_PAGE_INPUT_INTERVAL);
 			}
 			else
 			{
