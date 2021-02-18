@@ -48,7 +48,7 @@ namespace Charlotte.Games.Surfaces
 
 			for (; ; )
 			{
-				//Game.I.SkipMode = false; // moved -- 選択肢表示中ずっとやる必要は無いんじゃないかと
+				//Game.I.CancelSkipAutoMode();
 
 				if (
 					this.Options.Count < GameConsts.SELECT_OPTION_MIN ||

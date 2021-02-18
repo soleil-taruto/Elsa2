@@ -101,7 +101,7 @@ namespace Charlotte
 			//Main4_Release();
 			//new Test0001().Test01();
 			//new DDRandomTest().Test01();
-			new TitleMenuTest().Test01();
+			//new TitleMenuTest().Test01();
 			//new GameTest().Test01();
 			//new GameTest().Test02();
 			//new GameTest().Test03(); // 開始マップ名を選択
@@ -109,7 +109,7 @@ namespace Charlotte
 			//new WorldGameMasterTest().Test02();
 			//new WorldGameMasterTest().Test03(); // 開始マップ名を選択
 			//new NovelTest().Test01();
-			//new NovelTest().Test02(); // テスト0001
+			new NovelTest().Test02(); // テスト0001
 
 			// ----
 		}

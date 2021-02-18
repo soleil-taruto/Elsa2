@@ -13,8 +13,6 @@ namespace Charlotte.Novels
 
 		// <---- prm
 
-		public const int LINE_LEN_MAX = 59; // 要調整
-
 		public string Text
 		{
 			get

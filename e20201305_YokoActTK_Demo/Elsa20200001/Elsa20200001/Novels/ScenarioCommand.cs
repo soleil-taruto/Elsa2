@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Charlotte.Commons;
+using Charlotte.GameCommons;
 using Charlotte.Novels.Surfaces;
 
 namespace Charlotte.Novels
@@ -42,14 +43,17 @@ namespace Charlotte.Novels
 					surface.Invoke(command, arguments);
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
 				ProcMain.WriteLog("コマンドの実行中にエラーが発生しました。エラーになったトークン列は以下のとおりです。");
 
 				foreach (string token in this.Tokens)
 					ProcMain.WriteLog(token);
 
-				throw;
+				if (DDConfig.LOG_ENABLED)
+					throw;
+
+				ProcMain.WriteLog("ゲームを続行します。" + ex);
 			}
 		}
 	}

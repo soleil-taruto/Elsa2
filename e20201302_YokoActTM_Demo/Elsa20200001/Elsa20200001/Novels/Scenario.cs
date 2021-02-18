@@ -85,6 +85,8 @@ namespace Charlotte.Novels
 				}
 			}
 
+			bool 読み込み抑止中 = false;
+
 			foreach (string f_line in lines)
 			{
 				string line = f_line.Trim();
@@ -112,14 +114,30 @@ namespace Charlotte.Novels
 				{
 					string[] tokens = line.Substring(1).Split(' ').Where(v => v != "").ToArray();
 
-					page.Commands.Add(new ScenarioCommand(tokens));
+					if (tokens[0] == "_ifndef")
+					{
+						読み込み抑止中 =
+							Novel.I != null &&
+							Novel.I.Status.Surfaces.Any(surface => surface.InstanceName == tokens[1]);
+					}
+					else if (tokens[0] == "_endif")
+					{
+						読み込み抑止中 = false;
+					}
+					else if (読み込み抑止中)
+					{ }
+					else
+					{
+						page.Commands.Add(new ScenarioCommand(tokens));
+					}
 				}
+				else if (読み込み抑止中)
+				{ }
 				else
 				{
 					page.Lines.Add(line);
 				}
 			}
-			this.各ページの各行の長さ調整();
 		}
 
 		private static string[] ReadScenarioLines(string name)
@@ -178,21 +196,6 @@ namespace Charlotte.Novels
 				text = text.Replace(pair.Key, pair.Value);
 
 			return SCommon.TextToLines(text);
-		}
-
-		private void 各ページの各行の長さ調整()
-		{
-			foreach (ScenarioPage page in this.Pages)
-			{
-				for (int index = 0; index < page.Lines.Count; index++)
-				{
-					if (ScenarioPage.LINE_LEN_MAX < page.Lines[index].Length)
-					{
-						page.Lines.Insert(index + 1, page.Lines[index].Substring(ScenarioPage.LINE_LEN_MAX));
-						page.Lines[index] = page.Lines[index].Substring(0, ScenarioPage.LINE_LEN_MAX);
-					}
-				}
-			}
 		}
 	}
 }

@@ -48,6 +48,8 @@ namespace Charlotte.Novels.Surfaces
 
 			for (; ; )
 			{
+				//Novel.I.CancelSkipAutoMode();
+
 				if (
 					this.Options.Count < NovelConsts.SELECT_OPTION_MIN ||
 					this.Options.Count > NovelConsts.SELECT_OPTION_MAX

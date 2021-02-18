@@ -44,7 +44,7 @@ namespace Charlotte.Games.Surfaces
 				{
 					if (this.ControlSkipMode)
 					{
-						Game.I.CancelSkipAutoMode();
+						Game.I.SkipMode = true;
 						this.ControlSkipMode = false;
 					}
 				}

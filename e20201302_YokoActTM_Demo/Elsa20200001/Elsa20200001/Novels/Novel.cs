@@ -28,7 +28,7 @@ namespace Charlotte.Novels
 		}
 
 		public ScenarioPage CurrPage;
-		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択
+		public int SelectedSystemButtonIndex = -1; // -1 == システムボタン未選択, 0～ == システムボタン選択中(値とボタンの対応は実装で確認してね)
 		public bool SkipMode;
 		public bool AutoMode;
 		public bool BacklogMode;
@@ -37,8 +37,6 @@ namespace Charlotte.Novels
 		public int DispCharCount;
 		public int DispPageEndedCount;
 		public bool DispFastMode;
-
-		public bool ForceNextPage = false; // ? 強制的に次のページへ進む
 
 		public void Perform()
 		{
@@ -137,10 +135,8 @@ namespace Charlotte.Novels
 						if (NovelConsts.AUTO_NEXT_PAGE_INTERVAL <= this.DispPageEndedCount)
 							nextPageFlag = true;
 
-				if (nextPageFlag || this.ForceNextPage) // 次ページ
+				if (nextPageFlag) // 次ページ
 				{
-					this.ForceNextPage = false;
-
 					// スキップモード時はページを進める毎にエフェクトを強制終了する。
 					if (this.SkipMode)
 						foreach (Surface surface in this.Status.Surfaces)
