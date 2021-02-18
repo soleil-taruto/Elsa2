@@ -408,6 +408,11 @@ namespace Charlotte.Commons
 			}
 		}
 
+		public static string EraseExt(string path)
+		{
+			return Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path));
+		}
+
 		public static string ChangeRoot(string path, string oldRoot)
 		{
 			oldRoot = PutYen(oldRoot);
