@@ -518,21 +518,28 @@ namespace Charlotte.Games
 				{
 					if (saveMode) // ? セーブモード
 					{
-						if (new Confirm().Perform(
+						if (new Confirm()
+						{
+							BorderColor =
+								Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
+								new I3Color(255, 0, 0) :
+								new I3Color(200, 100, 50)
+						}
+						.Perform(
 							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
 							"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
 							"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
 						{
 							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
 							Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
-							//Ground.I.SaveDataSlots[selectIndex].Thumbnail = xxx;
 						}
 					}
 					else // ? ロードモード
 					{
 						if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
 						{
-							if (new Confirm().Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+							if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
+								.Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
 							{
 								this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
 								this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
@@ -567,8 +574,24 @@ namespace Charlotte.Games
 			{
 				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 0),
-				WallPicture = Ground.I.Picture.Title, // 仮
-				WallCurtain = -0.5,
+				//WallPicture = Ground.I.Picture.Title,
+				//WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDPicture picture = Ground.I.Picture.Title;
+
+					DDDraw.DrawRect(
+						picture,
+						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+						);
+
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 4, DDConsts.Screen_W, DDConsts.Screen_H / 2);
+					DDDraw.Reset();
+				},
+				X = 150,
+				Y = DDConsts.Screen_H / 4 + 150,
 			};
 
 			int selectIndex = 0;
@@ -579,6 +602,7 @@ namespace Charlotte.Games
 					"システムメニュー",
 					new string[]
 					{
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -588,10 +612,31 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						this.SystemMenu_ReturnToTitleMenu = true;
-						goto endLoop;
+						using (new SettingMenu())
+						{
+							SettingMenu.I.Perform(() =>
+							{
+								DDPicture picture = Ground.I.Picture.Title;
+
+								DDDraw.DrawRect(
+									picture,
+									DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+									);
+
+								DDCurtain.DrawCurtain(-0.5);
+							});
+						}
+						break;
 
 					case 1:
+						if (new Confirm().Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.SystemMenu_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
+
+					case 2:
 						goto endLoop;
 
 					default:

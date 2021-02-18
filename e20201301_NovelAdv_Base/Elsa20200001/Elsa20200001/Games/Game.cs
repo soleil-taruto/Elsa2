@@ -472,7 +472,14 @@ namespace Charlotte.Games
 				{
 					if (saveMode) // ? セーブモード
 					{
-						if (new Confirm().Perform(
+						if (new Confirm()
+						{
+							BorderColor =
+								Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
+								new I3Color(255, 0, 0) :
+								new I3Color(150, 150, 0)
+						}
+						.Perform(
 							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
 							"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
 							"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
@@ -488,7 +495,8 @@ namespace Charlotte.Games
 					{
 						if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
 						{
-							if (new Confirm().Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+							if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
+								.Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
 							{
 								this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
 								this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
@@ -535,6 +543,7 @@ namespace Charlotte.Games
 					"システムメニュー",
 					new string[]
 					{
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -544,10 +553,18 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						this.SystemMenu_ReturnToTitleMenu = true;
-						goto endLoop;
+						TitleMenu.I.PublicSetting();
+						break;
 
 					case 1:
+						if (new Confirm().Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.SystemMenu_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
+
+					case 2:
 						goto endLoop;
 
 					default:

@@ -280,5 +280,13 @@ namespace Charlotte.Games
 
 			GC.Collect();
 		}
+
+		/// <summary>
+		/// 外部から設定画面を実行する。
+		/// </summary>
+		public void PublicSetting()
+		{
+			this.Setting();
+		}
 	}
 }

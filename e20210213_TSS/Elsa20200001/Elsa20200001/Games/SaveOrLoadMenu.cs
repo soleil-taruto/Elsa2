@@ -87,7 +87,14 @@ namespace Charlotte.Games
 
 						if (saveMode) // ? セーブモード
 						{
-							if (new Confirm().Perform(
+							if (new Confirm()
+							{
+								BorderColor =
+									sdSlot.SerializedGameStatus != null ?
+									new I3Color(255, 0, 0) :
+									new I3Color(150, 150, 50)
+							}
+							.Perform(
 								sdSlot.SerializedGameStatus != null ?
 								"スロット " + (this.SelectedSaveDataSlotIndex + 1) + " のデータを上書きします。" :
 								"スロット " + (this.SelectedSaveDataSlotIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
@@ -101,7 +108,8 @@ namespace Charlotte.Games
 						{
 							if (sdSlot.SerializedGameStatus != null) // ロードする。
 							{
-								if (new Confirm().Perform("スロット " + (this.SelectedSaveDataSlotIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+								if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
+									.Perform("スロット " + (this.SelectedSaveDataSlotIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
 								{
 									ret = sdSlot;
 									break;

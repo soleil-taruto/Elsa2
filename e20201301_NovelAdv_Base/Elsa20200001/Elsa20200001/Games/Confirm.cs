@@ -9,6 +9,7 @@ namespace Charlotte.Games
 {
 	public class Confirm
 	{
+		public I3Color BorderColor = new I3Color(100, 0, 200);
 		public I4Rect BackBoardRect = new I4Rect(0, DDConsts.Screen_H / 3, DDConsts.Screen_W, DDConsts.Screen_H / 3);
 		public int Text_L = 100;
 		public int Text_T = DDConsts.Screen_H / 3 + 100;
@@ -21,7 +22,7 @@ namespace Charlotte.Games
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				BorderColor = new I3Color(100, 0, 200),
+				BorderColor = this.BorderColor,
 				WallDrawer = () =>
 				{
 					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);

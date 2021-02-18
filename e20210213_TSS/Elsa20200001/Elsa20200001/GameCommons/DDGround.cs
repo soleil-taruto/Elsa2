@@ -102,6 +102,9 @@ namespace Charlotte.GameCommons
 			RealScreen_W /= 2;
 			RealScreen_H /= 2;
 
+			UnfullScreen_W /= 2;
+			UnfullScreen_H /= 2;
+
 			RO_MouseDispMode = true;
 		}
 	}
