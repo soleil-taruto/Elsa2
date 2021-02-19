@@ -1232,9 +1232,6 @@ namespace Charlotte.Games
 					"PAUSE",
 					new string[]
 					{
-						"キャラクタ切り替え [ 現在のキャラクタ：" + Player.GetName(this.Player.Chara) + " ]",
-						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
-						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 +" ]",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -1246,27 +1243,10 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						this.Player.Chara = (Player.Chara_e)(((int)this.Player.Chara + 1) % Enum.GetValues(typeof(Player.Chara_e)).Length);
-						break;
-
-					case 1:
-						if (DDEngine.SlowdownLevel == 0)
-							DDEngine.SlowdownLevel++;
-						else
-							DDEngine.SlowdownLevel *= 2;
-
-						DDEngine.SlowdownLevel %= 16;
-						break;
-
-					case 2:
-						this.当たり判定表示 = !this.当たり判定表示;
-						break;
-
-					case 3:
 						this.Pause_ReturnToTitleMenu = true;
 						goto endLoop;
 
-					case 4:
+					case 1:
 						goto endLoop;
 
 					default:
@@ -1306,9 +1286,9 @@ namespace Charlotte.Games
 					"デバッグ用メニュー",
 					new string[]
 					{
-						"----",
-						"----",
-						"----",
+						"キャラクタ切り替え [ 現在のキャラクタ：" + Player.GetName(this.Player.Chara) + " ]",
+						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
+						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 +" ]",
 						"ゲームに戻る",
 					},
 					selectIndex,
@@ -1319,15 +1299,20 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						// none
+						this.Player.Chara = (Player.Chara_e)(((int)this.Player.Chara + 1) % Enum.GetValues(typeof(Player.Chara_e)).Length);
 						break;
 
 					case 1:
-						// none
+						if (DDEngine.SlowdownLevel == 0)
+							DDEngine.SlowdownLevel++;
+						else
+							DDEngine.SlowdownLevel *= 2;
+
+						DDEngine.SlowdownLevel %= 16;
 						break;
 
 					case 2:
-						// none
+						this.当たり判定表示 = !this.当たり判定表示;
 						break;
 
 					case 3:
