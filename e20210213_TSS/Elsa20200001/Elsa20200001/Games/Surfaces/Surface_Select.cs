@@ -84,11 +84,11 @@ namespace Charlotte.Games.Surfaces
 
 						DDMouse.X =
 							GameConsts.SELECT_FRAME_L +
-							Ground.I.Picture.MessageFrame29_Button2.Get_W() -
+							Ground.I.Picture.MessageFrame29_Button2.Get_W() * 2 -
 							10;
 						DDMouse.Y =
 							GameConsts.SELECT_FRAME_T + GameConsts.SELECT_FRAME_T_STEP * optIndex +
-							Ground.I.Picture.MessageFrame29_Button2.Get_H() -
+							Ground.I.Picture.MessageFrame29_Button2.Get_H() * 2 -
 							10;
 
 						DDMouse.PosChanged();
