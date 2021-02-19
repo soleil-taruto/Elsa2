@@ -24,6 +24,21 @@ namespace Charlotte.Games
 
 		public void Perform()
 		{
+			// 開発中_暫定
+			{
+				int endFrame = DDEngine.ProcFrame + 300;
+
+				DDGround.EL.Add(() =>
+				{
+					int sec = endFrame - DDEngine.ProcFrame;
+
+					DDPrint.SetPrint(180, DDConsts.Screen_H - 32);
+					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (sec / 60.0).ToString("F1") + " 秒で消えます)");
+
+					return 0 < sec;
+				});
+			}
+
 			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
 				DDCurtain.DrawCurtain();
