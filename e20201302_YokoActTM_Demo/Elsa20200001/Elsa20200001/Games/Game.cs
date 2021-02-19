@@ -1212,7 +1212,7 @@ namespace Charlotte.Games
 					{
 						"装備している武器の切り替え [ 現在装備している武器：" + Player.武器_e_Names[(int)this.Player.武器] + " ]",
 						"強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
-						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 +" ]",
+						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
 						"ゲームに戻る",
 					},
 					selectIndex,

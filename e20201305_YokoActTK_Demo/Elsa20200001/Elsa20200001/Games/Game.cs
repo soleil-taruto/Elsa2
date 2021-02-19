@@ -1288,7 +1288,7 @@ namespace Charlotte.Games
 					{
 						"キャラクタ切り替え [ 現在のキャラクタ：" + Player.GetName(this.Player.Chara) + " ]",
 						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
-						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 +" ]",
+						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
 						"ゲームに戻る",
 					},
 					selectIndex,
