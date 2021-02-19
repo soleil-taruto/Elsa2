@@ -114,7 +114,7 @@ namespace Charlotte.Games
 			DDEngine.FreezeInput();
 		}
 
-		private static Ground.P_SaveDataSlot LoadGame()
+		private static Ground.P_SaveDataSlot LoadGame() // ret: null == キャンセル, ret.GameStatus を使用する際は GetClone を忘れずに！
 		{
 			Ground.P_SaveDataSlot saveDataSlot = null;
 

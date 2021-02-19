@@ -67,6 +67,8 @@ namespace Charlotte.Games
 
 		// <---- prm
 
+		#region Serialize / Deserialize
+
 		public string Serialize()
 		{
 			List<string> dest = new List<string>();
@@ -110,6 +112,8 @@ namespace Charlotte.Games
 			gameStatus.S_Deserialize(value);
 			return gameStatus;
 		}
+
+		#endregion
 
 		public GameStatus GetClone()
 		{

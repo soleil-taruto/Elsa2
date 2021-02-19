@@ -120,17 +120,10 @@ namespace Charlotte.Games
 				gameStatus.StartFacingLeft = Game.I.Player.FacingLeft;
 			}
 
-			Ground.GameSaveDataInfo gameSaveData = new Ground.GameSaveDataInfo()
-			{
-				TimeStamp = "" + DateTime.Now,
-				MapName = GameCommon.GetMapName(Game.I.Map.MapFile, "t0001"),
-				GameStatus = gameStatus,
-			};
-
-			SaveGame(gameSaveData);
+			SaveGame(gameStatus);
 		}
 
-		public static void SaveGame(Ground.GameSaveDataInfo gameSaveData)
+		public static void SaveGame(GameStatus gameStatus)
 		{
 			SaveGame_幕間();
 
@@ -144,18 +137,38 @@ namespace Charlotte.Games
 			simpleMenu.BorderColor = new I3Color(0, 128, 0);
 			simpleMenu.WallColor = new I3Color(128, 64, 0);
 
-			string[] items = Ground.I.GameSaveDataSlots.Select(v => v == null ? "[データ無し]" : v.TimeStamp).Concat(new string[] { "戻る" }).ToArray();
-
 			int selectIndex = 0;
 
 			for (; ; )
 			{
+				// セーブしたら戻ってくるので、毎回更新する。
+				string[] items = Ground.I.SaveDataSlots.Select(v => v.GameStatus == null ?
+					"----" :
+					"[" + v.TimeStamp + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
+
 				selectIndex = simpleMenu.Perform("セーブ画面", items, selectIndex);
 
-				if (selectIndex < Consts.GAME_SAVE_DATA_SLOT_NUM)
+				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
-					Ground.I.GameSaveDataSlots[selectIndex] = gameSaveData;
-					break;
+					if (new Confirm()
+					{
+						BorderColor =
+							Ground.I.SaveDataSlots[selectIndex].GameStatus != null ?
+							new I3Color(200, 0, 0) :
+							new I3Color(100, 100, 0)
+					}
+					.Perform(
+						Ground.I.SaveDataSlots[selectIndex].GameStatus != null ?
+						"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
+						"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
+					{
+						Ground.P_SaveDataSlot saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
+
+						saveDataSlot.TimeStamp = DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss");
+						saveDataSlot.Description = "＠＠＠～～～＠＠＠～～～＠＠＠～～～＠＠＠～～～＠＠＠";
+						saveDataSlot.MapName = GameCommon.GetMapName(Game.I.Map.MapFile, "t0001");
+						saveDataSlot.GameStatus = gameStatus;
+					}
 				}
 				else // [戻る]
 				{

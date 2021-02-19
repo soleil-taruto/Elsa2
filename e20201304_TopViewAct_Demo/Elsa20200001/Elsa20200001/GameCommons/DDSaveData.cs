@@ -83,14 +83,9 @@ namespace Charlotte.GameCommons
 				lines.Add("" + (Ground.I.FastReverseMode ? 1 : 0));
 				lines.Add("" + Ground.I.NovelMessageSpeed);
 
-				foreach (Ground.GameSaveDataInfo gameSaveData in Ground.I.GameSaveDataSlots)
+				foreach (Ground.P_SaveDataSlot saveDataSlot in Ground.I.SaveDataSlots)
 				{
-					lines.Add("" + (gameSaveData != null ? 1 : 0));
-
-					if (gameSaveData != null)
-					{
-						lines.Add(gameSaveData.Serialize());
-					}
+					lines.Add(saveDataSlot.Serialize());
 				}
 
 				// 新しい項目をここへ追加...
@@ -191,16 +186,9 @@ namespace Charlotte.GameCommons
 					Ground.I.FastReverseMode = int.Parse(lines[c++]) != 0;
 					Ground.I.NovelMessageSpeed = int.Parse(lines[c++]);
 
-					for (int index = 0; index < Consts.GAME_SAVE_DATA_SLOT_NUM; index++)
+					foreach (Ground.P_SaveDataSlot saveDataSlot in Ground.I.SaveDataSlots)
 					{
-						Ground.GameSaveDataInfo gameSaveData;
-
-						if (int.Parse(lines[c++]) != 0)
-							gameSaveData = Ground.GameSaveDataInfo.Deserialize(lines[c++]);
-						else
-							gameSaveData = null;
-
-						Ground.I.GameSaveDataSlots[index] = gameSaveData;
+						saveDataSlot.Deserialize(lines[c++]);
 					}
 
 					// 新しい項目をここへ追加...

@@ -90,16 +90,16 @@ namespace Charlotte.Games
 
 					case 2:
 						{
-							Ground.GameSaveDataInfo gameSaveData = LoadGame();
+							Ground.P_SaveDataSlot saveDataSlot = LoadGame();
 
-							if (gameSaveData != null)
+							if (saveDataSlot != null)
 							{
 								this.LeaveTitleMenu();
 
 								using (new WorldGameMaster())
 								{
-									WorldGameMaster.I.World = new World(gameSaveData.MapName);
-									WorldGameMaster.I.Status = gameSaveData.GameStatus.GetClone();
+									WorldGameMaster.I.World = new World(saveDataSlot.MapName);
+									WorldGameMaster.I.Status = saveDataSlot.GameStatus.GetClone();
 									WorldGameMaster.I.Status.StartPointDirection = 101; // スタート地点を「ロード地点」にする。
 									WorldGameMaster.I.Perform();
 								}
@@ -132,9 +132,9 @@ namespace Charlotte.Games
 			DDEngine.FreezeInput();
 		}
 
-		private static Ground.GameSaveDataInfo LoadGame()
+		private static Ground.P_SaveDataSlot LoadGame() // ret: null == キャンセル, ret.GameStatus を使用する際は GetClone を忘れずに！
 		{
-			Ground.GameSaveDataInfo gameSaveData = null;
+			Ground.P_SaveDataSlot saveDataSlot = null;
 
 			DDEngine.FreezeInput();
 
@@ -146,7 +146,9 @@ namespace Charlotte.Games
 			simpleMenu.BorderColor = new I3Color(0, 128, 0);
 			simpleMenu.WallColor = new I3Color(64, 64, 128);
 
-			string[] items = Ground.I.GameSaveDataSlots.Select(v => v == null ? "[データ無し]" : v.TimeStamp).Concat(new string[] { "戻る" }).ToArray();
+			string[] items = Ground.I.SaveDataSlots.Select(v => v.GameStatus == null ?
+				"----" :
+				"[" + v.TimeStamp + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
 
 			int selectIndex = 0;
 
@@ -154,12 +156,16 @@ namespace Charlotte.Games
 			{
 				selectIndex = simpleMenu.Perform("ロード画面", items, selectIndex);
 
-				if (selectIndex < Consts.GAME_SAVE_DATA_SLOT_NUM)
+				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
-					if (Ground.I.GameSaveDataSlots[selectIndex] != null)
+					if (Ground.I.SaveDataSlots[selectIndex].GameStatus != null)
 					{
-						gameSaveData = Ground.I.GameSaveDataSlots[selectIndex];
-						break;
+						if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
+							.Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+						{
+							saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
+							break;
+						}
 					}
 				}
 				else // [戻る]
@@ -170,7 +176,7 @@ namespace Charlotte.Games
 			}
 			DDEngine.FreezeInput();
 
-			return gameSaveData;
+			return saveDataSlot;
 		}
 
 		private void Setting()
