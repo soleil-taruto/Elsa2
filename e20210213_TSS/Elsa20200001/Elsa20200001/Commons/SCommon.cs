@@ -1197,7 +1197,7 @@ namespace Charlotte.Commons
 
 		public class Base64
 		{
-			public static Base64 _i = null;
+			private static Base64 _i = null;
 
 			public static Base64 I
 			{

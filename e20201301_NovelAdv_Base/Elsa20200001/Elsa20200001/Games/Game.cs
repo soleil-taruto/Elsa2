@@ -464,7 +464,7 @@ namespace Charlotte.Games
 					Ground.I.SaveDataSlots.Select(saveDataSlot =>
 						saveDataSlot.SavedTime.Year == 1 ?
 						"----" :
-						"[" + saveDataSlot.SavedTime.ToString() + "]　" + saveDataSlot.AboutSavedPoint).Concat(new string[] { "戻る" }).ToArray(),
+						"[" + saveDataSlot.SavedTime.ToString() + "]　" + saveDataSlot.Description).Concat(new string[] { "戻る" }).ToArray(),
 					selectIndex
 					);
 
@@ -484,11 +484,11 @@ namespace Charlotte.Games
 							"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
 							"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
 						{
-							string aboutSavedPoint = "シナリオ：" + this.Status.Scenario.Name + "　の　" + (this.Status.CurrPageIndex + 1) + "　頁";
+							string description = "シナリオ：" + this.Status.Scenario.Name + "　の　" + (this.Status.CurrPageIndex + 1) + "　頁";
 
 							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
 							Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
-							Ground.I.SaveDataSlots[selectIndex].AboutSavedPoint = aboutSavedPoint;
+							Ground.I.SaveDataSlots[selectIndex].Description = description;
 						}
 					}
 					else // ? ロードモード

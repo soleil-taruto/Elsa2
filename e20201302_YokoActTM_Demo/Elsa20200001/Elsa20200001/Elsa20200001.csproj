@@ -73,6 +73,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="GameCommons\DDTouch.cs" />
+    <Compile Include="Games\Confirm.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bイベント0001.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bセーブ地点.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bハック0001.cs" />

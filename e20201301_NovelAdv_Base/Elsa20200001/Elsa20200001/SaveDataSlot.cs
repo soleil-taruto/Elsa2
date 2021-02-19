@@ -23,9 +23,9 @@ namespace Charlotte
 		public SCommon.SimpleDateTime SavedTime = new SCommon.SimpleDateTime(0L);
 
 		/// <summary>
-		/// セーブした地点についての情報
+		/// このセーブデータの概要・短い説明文
 		/// </summary>
-		public string AboutSavedPoint = "none";
+		public string Description = "none";
 
 		public string Serialize()
 		{
@@ -33,7 +33,7 @@ namespace Charlotte
 			{
 				Common.WrapNullOrString(this.SerializedGameStatus),
 				"" + this.SavedTime.ToTimeStamp(),
-				this.AboutSavedPoint,
+				this.Description,
 			});
 		}
 
@@ -44,7 +44,7 @@ namespace Charlotte
 
 			this.SerializedGameStatus = Common.UnwrapNullOrString(lines[c++]);
 			this.SavedTime = SCommon.SimpleDateTime.FromTimeStamp(long.Parse(lines[c++]));
-			this.AboutSavedPoint = lines[c++];
+			this.Description = lines[c++];
 		}
 	}
 }

@@ -21,11 +21,12 @@ namespace Charlotte
 
 		public int NovelMessageSpeed = NovelConsts.MESSAGE_SPEED_DEF;
 
-		public class GameSaveDataInfo
+		public class P_SaveDataSlot
 		{
-			public string TimeStamp;
-			public string MapName;
-			public GameStatus GameStatus;
+			public string TimeStamp = "0001/01/01 Mon 00:00:00";
+			public string Description = "none";
+			public string MapName = "t0001";
+			public GameStatus GameStatus = null; // null == セーブデータ無し
 
 			#region Serialize / Deserialize
 
@@ -36,15 +37,19 @@ namespace Charlotte
 				// ★★★ シリアライズ_ここから ★★★
 
 				dest.Add(this.TimeStamp);
+				dest.Add(this.Description);
 				dest.Add(this.MapName);
-				dest.Add(this.GameStatus.Serialize());
+				dest.Add("" + (this.GameStatus != null ? 1 : 0));
+
+				if (GameStatus != null)
+					dest.Add(this.GameStatus.Serialize());
 
 				// ★★★ シリアライズ_ここまで ★★★
 
 				return AttachString.I.Untokenize(dest);
 			}
 
-			private void S_Deserialize(string value)
+			public void Deserialize(string value)
 			{
 				string[] lines = AttachString.I.Tokenize(value);
 				int c = 0;
@@ -52,22 +57,20 @@ namespace Charlotte
 				// ★★★ デシリアライズ_ここから ★★★
 
 				this.TimeStamp = lines[c++];
+				this.Description = lines[c++];
 				this.MapName = lines[c++];
-				this.GameStatus = GameStatus.Deserialize(lines[c++]);
+
+				if (int.Parse(lines[c++]) != 0)
+					this.GameStatus = GameStatus.Deserialize(lines[c++]);
+				else
+					this.GameStatus = null;
 
 				// ★★★ デシリアライズ_ここまで ★★★
-			}
-
-			public static GameSaveDataInfo Deserialize(string value)
-			{
-				GameSaveDataInfo gameSaveData = new GameSaveDataInfo();
-				gameSaveData.S_Deserialize(value);
-				return gameSaveData;
 			}
 
 			#endregion
 		}
 
-		public GameSaveDataInfo[] GameSaveDataSlots = new GameSaveDataInfo[Consts.GAME_SAVE_DATA_SLOT_NUM]; // null 要素 == セーブデータ無し
+		public P_SaveDataSlot[] SaveDataSlots = Enumerable.Range(0, Consts.SAVE_DATA_SLOT_NUM).Select(v => new P_SaveDataSlot()).ToArray();
 	}
 }

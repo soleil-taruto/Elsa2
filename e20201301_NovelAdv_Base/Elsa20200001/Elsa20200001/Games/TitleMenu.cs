@@ -121,7 +121,7 @@ namespace Charlotte.Games
 			string[] items = Ground.I.SaveDataSlots.Select(v =>
 				v.SavedTime.Year == 1 ?
 				"----" :
-				"[" + v.SavedTime.ToString() + "]　" + v.AboutSavedPoint).Concat(new string[] { "戻る" }).ToArray();
+				"[" + v.SavedTime.ToString() + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
 
 			int selectIndex = 0;
 
