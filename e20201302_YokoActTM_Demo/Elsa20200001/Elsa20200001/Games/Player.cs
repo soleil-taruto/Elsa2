@@ -147,14 +147,6 @@ namespace Charlotte.Games
 			DDDraw.DrawZoom_X(xZoom);
 			DDDraw.DrawEnd();
 			DDDraw.Reset();
-
-			// debug 当たり判定表示
-			{
-				DDDraw.DrawBegin(Ground.I.Picture.Dummy, this.X - DDGround.ICamera.X, this.Y - DDGround.ICamera.Y);
-				DDDraw.DrawZoom(0.1);
-				DDDraw.DrawRotate(DDEngine.ProcFrame * 0.01);
-				DDDraw.DrawEnd();
-			}
 		}
 
 		public void Attack()

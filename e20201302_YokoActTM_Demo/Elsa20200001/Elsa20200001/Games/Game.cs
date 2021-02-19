@@ -498,7 +498,7 @@ namespace Charlotte.Games
 					this.Player.Attack();
 				}
 
-				DDCrash plCrash = DDCrashUtils.Point(new D2Point(this.Player.X, this.Player.Y));
+				DDCrash plCrash = DDCrashUtils.Point(new D2Point(this.Player.X, this.Player.Y + (1 <= this.Player.ShagamiFrame ? 16 : 0)));
 
 				// ====
 				// 描画ここから

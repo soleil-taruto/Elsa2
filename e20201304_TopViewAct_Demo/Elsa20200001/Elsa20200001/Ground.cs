@@ -25,7 +25,7 @@ namespace Charlotte
 
 		public class P_SaveDataSlot
 		{
-			public string TimeStamp = "0001/01/01 Mon 00:00:00";
+			public string TimeStamp = "0001/01/01 (月) 00:00:00";
 			public string Description = "none";
 			public string MapName = "t0001";
 			public GameStatus GameStatus = null; // null == セーブデータ無し
