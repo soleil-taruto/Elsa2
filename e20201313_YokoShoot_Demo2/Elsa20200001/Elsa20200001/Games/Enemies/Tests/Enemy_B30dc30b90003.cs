@@ -13,7 +13,7 @@ namespace Charlotte.Games.Enemies.Tests
 	public class Enemy_Bボス0003 : Enemy
 	{
 		public Enemy_Bボス0003()
-			: base(DDConsts.Screen_W + 96.0, DDConsts.Screen_H / 2.0, 1500)
+			: base(GameConsts.FIELD_W + 96.0, GameConsts.FIELD_H / 2.0, 1500, Kind_e.ボス)
 		{ }
 
 		protected override IEnumerable<bool> E_Draw()
