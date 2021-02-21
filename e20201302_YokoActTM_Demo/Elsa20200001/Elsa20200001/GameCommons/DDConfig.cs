@@ -20,6 +20,7 @@ namespace Charlotte.GameCommons
 		public static int LogCountMax = SCommon.IMAX;
 		public static bool LOG_ENABLED = true;
 		public static string ApplicationLogSaveDirectory = @"C:\tmp";
+		public static bool DrawScreen_MosaicFlag;
 
 		// 新しい項目をここへ追加...
 
@@ -48,6 +49,7 @@ namespace Charlotte.GameCommons
 			LogCountMax = int.Parse(lines[c++]);
 			LOG_ENABLED = int.Parse(lines[c++]) != 0;
 			ApplicationLogSaveDirectory = lines[c++];
+			DrawScreen_MosaicFlag = int.Parse(lines[c++]) != 0;
 
 			// 新しい項目をここへ追加...
 
