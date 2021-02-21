@@ -73,12 +73,23 @@ namespace Charlotte.GameCommons
 				if (DX.DrawBox(0, 0, DDGround.RealScreen_W, DDGround.RealScreen_H, DX.GetColor(0, 0, 0), 1) != 0) // ? 失敗
 					throw new DDError();
 
+				bool mosaicFlag =
+					DDConfig.DrawScreen_MosaicFlag &&
+					DDGround.RealScreenDraw_W == DDConsts.Screen_W * 2 &&
+					DDGround.RealScreenDraw_H == DDConsts.Screen_H * 2;
+
+				if (mosaicFlag)
+					DX.SetDrawMode(DX.DX_DRAWMODE_NEAREST);
+
 				if (DX.DrawExtendGraph(
 					DDGround.RealScreenDraw_L,
 					DDGround.RealScreenDraw_T,
 					DDGround.RealScreenDraw_L + DDGround.RealScreenDraw_W,
 					DDGround.RealScreenDraw_T + DDGround.RealScreenDraw_H, DDGround.MainScreen.GetHandle(), 0) != 0) // ? 失敗
 					throw new DDError();
+
+				if (mosaicFlag)
+					DX.SetDrawMode(DDConsts.DEFAULT_DX_DRAWMODE); // restore
 			}
 
 			GC.Collect(0);
