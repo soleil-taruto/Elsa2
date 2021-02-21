@@ -1,10 +1,7 @@
 C:\Factory\Tools\RDMD.exe /RC out
 C:\Factory\Tools\RDMD.exe /RM tmp
 
-C:\Factory\SubTools\makeDDResourceFile.exe ^
-	dat ^
-	out\Resource.dat ^
-	Tools\MaskGZData.exe
+ROBOCOPY dat out\Data /MIR
 
 CALL Confuse.bat
 CALL Copy_rt.bat
@@ -14,6 +11,7 @@ COPY /B Elsa20200001\Elsa20200001\bin\Release\DxLib_x64.dll out
 COPY /B Elsa20200001\Elsa20200001\bin\Release\DxLibDotNet.dll out
 
 C:\Factory\Tools\xcp.exe doc out
+C:\Factory\Petra\EditConfig.exe out\Config.conf ;[LOG_ENABLED_MARK] 1
 COPY /B AUTHORS out
 
-C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out YokoGame
+C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out SSGame
