@@ -14,7 +14,6 @@ namespace Charlotte
 		public DDPicture WhiteCircle = DDPictureLoaders.Standard(@"dat\General\WhiteCircle.png");
 		public DDPicture DummyScreen = DDPictureLoaders.Standard(@"dat\DummyScreen.png");
 
-		//public DDPicture Copyright = DDPictureLoaders.Standard(@"dat\Claris_Resource\Logo.png");
 		public DDPicture Copyright = DDPictureLoaders.Standard(@"dat\Logo\Copyright.png");
 
 		public DDPicture TitleWall = DDPictureLoaders.Standard(@"dat\Claris_Resource\k-after\BG23a_80.jpg");
@@ -42,8 +41,7 @@ namespace Charlotte
 
 		public DDPicture IconSet = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\IconSet.png");
 
-		//public DDPicture Enemy_神奈子 = DDPictureLoaders.Reduct(@"dat\きつね仮\yukkuri-kanako.png", 4); // 4000x4000 -> 1000x1000
-		public DDPicture Enemy_神奈子 = DDPictureLoaders.Standard(@"dat\きつね仮\yukkuri-kanako.png"); // 1000x1000 resized png
+		public DDPicture Enemy_神奈子 = DDPictureLoaders.Standard(@"dat\フリー素材\きつね仮\yukkuri-kanako.png");
 
 		// ノベルパート用システム画像
 		public DDPicture MessageFrame_Message = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\空想曲線\Messageframe_29\material\01 message\message.png");
@@ -62,11 +60,5 @@ namespace Charlotte
 		public DDPicture MessageFrame_Save2 = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\空想曲線\Messageframe_29\material\03 system_button\save2.png");
 		public DDPicture MessageFrame_Skip = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\空想曲線\Messageframe_29\material\03 system_button\skip.png");
 		public DDPicture MessageFrame_Skip2 = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\空想曲線\Messageframe_29\material\03 system_button\skip2.png");
-
-		public DDPicture 結月ゆかり02 = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\からい\ゆかマキ制服\yukari02.png"); // 仮
-		public DDPicture 結月ゆかり03 = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\からい\ゆかマキ制服\yukari03.png"); // 仮
-
-		public DDPicture 弦巻マキ01 = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\からい\ゆかマキ制服\maki01.png"); // 仮
-		public DDPicture 弦巻マキ02 = DDPictureLoaders.Standard(@"dat\Novel\フリー素材\からい\ゆかマキ制服\maki02.png"); // 仮
 	}
 }
