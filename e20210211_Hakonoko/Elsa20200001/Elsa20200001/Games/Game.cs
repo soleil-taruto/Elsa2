@@ -889,6 +889,8 @@ namespace Charlotte.Games
 		{
 			this.RespawnCommon();
 
+			this.OH_最終ノベルパート.Entered = false;
+
 			// デフォルトの「プレイヤーのスタート地点」
 			// -- マップの中央
 			this.Player.X = this.Map.W * GameConsts.TILE_W / 2.0;
@@ -965,6 +967,12 @@ namespace Charlotte.Games
 						}
 					}
 				}
+			}
+
+			if (this.Map.DesignOrig != null)
+			{
+				this.Map.Design = this.Map.DesignOrig;
+				this.Map.DesignOrig = null;
 			}
 
 			if (this.FinalZone != null) // ? 最終ゾーンからのリスポーン

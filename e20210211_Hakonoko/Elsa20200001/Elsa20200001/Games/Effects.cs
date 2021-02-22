@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Charlotte.GameCommons;
+using Charlotte.Commons;
 
 namespace Charlotte.Games
 {
@@ -58,6 +59,18 @@ namespace Charlotte.Games
 			foreach (DDScene scene in DDSceneUtils.Create(60))
 			{
 				DDCurtain.DrawCurtain((1.0 - scene.Rate) * 0.5);
+				yield return true;
+			}
+		}
+
+		public static IEnumerable<bool> Liteフラッシュ(I3Color color)
+		{
+			foreach (DDScene scene in DDSceneUtils.Create(60))
+			{
+				DDDraw.SetAlpha((1.0 - scene.Rate) * 0.5);
+				DDDraw.SetBright(color);
+				DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+				DDDraw.Reset();
 				yield return true;
 			}
 		}

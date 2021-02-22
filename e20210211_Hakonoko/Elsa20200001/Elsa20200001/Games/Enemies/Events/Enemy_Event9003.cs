@@ -42,6 +42,7 @@ namespace Charlotte.Games.Enemies.Events
 						enemy is Enemy_Event9005
 						));
 
+					Game.I.Map.DesignOrig = Game.I.Map.Design;
 					Game.I.Map.Design = new Design_0002();
 
 					DDGround.EL.Add(SCommon.Supplier(this.E_フラッシュ()));
