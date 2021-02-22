@@ -21,11 +21,10 @@ namespace Charlotte.Games.Enemies.Events
 			{
 				if (Game.I.FinalZone == null) // ? 最終ゾーン未侵入
 				{
-					if (Game.I.OH_最終ノベルパート.Once())
-						this.最終ノベルパート();
-
+					this.最終ノベルパート();
 					Game.I.FinalZone = new Game.FinalZoneInfo();
 					Game.I.Enemies.Add(new Enemy_MeteorLoader(new D2Point(0, 0))); // メテオローダー設置
+					Game.I.TakeSnapshot();
 				}
 			}
 		}

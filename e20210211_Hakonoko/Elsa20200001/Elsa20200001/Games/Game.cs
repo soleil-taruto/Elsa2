@@ -10,6 +10,7 @@ using Charlotte.Games.Designs;
 using Charlotte.Games.Enemies;
 using Charlotte.Games.Enemies.Events;
 using Charlotte.LevelEditors;
+using Charlotte.GameProgressMasters;
 
 namespace Charlotte.Games
 {
@@ -95,8 +96,6 @@ namespace Charlotte.Games
 		/// null == 最終ゾーン未侵入
 		/// </summary>
 		public FinalZoneInfo FinalZone = null;
-
-		public Common.OnceHandler OH_最終ノベルパート = new Common.OnceHandler();
 
 		public void Perform()
 		{
@@ -193,9 +192,7 @@ namespace Charlotte.Games
 						(DDUtils.CountDown(ref this.SnapshotCount) || DDConfig.LOG_ENABLED) // デバッグ中は無制限
 						)
 					{
-						this.Snapshot = new Snapshot();
-						this.Snapshot.PlayerPosition = new D2Point(this.Player.X, this.Player.Y);
-						this.Snapshot.Enemies = this.Enemies.Iterate().Select(enemy => enemy.GetClone()).ToList();
+						this.TakeSnapshot();
 
 						//波紋効果.Add(this.Player.X, this.Player.Y); // 仮
 						SnapshotEffects.Perform();
@@ -646,6 +643,13 @@ namespace Charlotte.Games
 			// ★★★ end of Perform() ★★★
 		}
 
+		public void TakeSnapshot()
+		{
+			this.Snapshot = new Snapshot();
+			this.Snapshot.PlayerPosition = new D2Point(this.Player.X, this.Player.Y);
+			this.Snapshot.Enemies = this.Enemies.Iterate().Select(enemy => enemy.GetClone()).ToList();
+		}
+
 		#region 開発デバッグ用
 
 		private void 色調整()
@@ -889,8 +893,6 @@ namespace Charlotte.Games
 		{
 			this.RespawnCommon();
 
-			this.OH_最終ノベルパート.Entered = false;
-
 			// デフォルトの「プレイヤーのスタート地点」
 			// -- マップの中央
 			this.Player.X = this.Map.W * GameConsts.TILE_W / 2.0;
@@ -969,16 +971,12 @@ namespace Charlotte.Games
 				}
 			}
 
-			if (this.Map.DesignOrig != null)
-			{
-				this.Map.Design = this.Map.DesignOrig;
-				this.Map.DesignOrig = null;
-			}
-
 			if (this.FinalZone != null) // ? 最終ゾーンからのリスポーン
 			{
+				this.FinalZone = new FinalZoneInfo(); // reset
+				//this.Map.Design = GameProgressMaster.I.GetFinalMap().Design; // デザイン変更後はリスポーンできないので、不要なはず
+
 				DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
-				this.FinalZone = null; // 最終ゾーン_解除
 			}
 		}
 
@@ -1392,7 +1390,9 @@ namespace Charlotte.Games
 					"PAUSE",
 					new string[]
 					{
-						"このステージの最初からやり直す",
+						Game.I.FinalZone == null ?
+							"このステージの最初からやり直す" :
+							"－－－－－－－－－－－－－－－",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -1403,8 +1403,12 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						this.Pause_Respawn = true;
-						goto endLoop;
+						if (Game.I.FinalZone == null)
+						{
+							this.Pause_Respawn = true;
+							goto endLoop;
+						}
+						break;
 
 					case 1:
 						this.Pause_ReturnToTitleMenu = true;

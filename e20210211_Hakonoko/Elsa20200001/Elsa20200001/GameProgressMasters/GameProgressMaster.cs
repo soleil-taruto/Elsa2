@@ -296,11 +296,16 @@ namespace Charlotte.GameProgressMasters
 			}
 		}
 
+		private const int FINAL_STAGE_INDEX = 9;
+
 		public Scenario GetFinalScenario()
 		{
-			const int FINAL_STAGE_INDEX = 9;
-
 			return this.ScenarioLoaders[FINAL_STAGE_INDEX]();
+		}
+
+		public Map GetFinalMap()
+		{
+			return this.MapLoaders[FINAL_STAGE_INDEX]();
 		}
 	}
 }

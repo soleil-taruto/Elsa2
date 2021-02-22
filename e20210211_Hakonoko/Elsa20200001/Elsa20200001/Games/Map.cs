@@ -12,7 +12,6 @@ namespace Charlotte.Games
 	{
 		public string MapFile;
 		public Design Design;
-		public Design DesignOrig = null;
 
 		public Map(string mapFile, Design design)
 		{
