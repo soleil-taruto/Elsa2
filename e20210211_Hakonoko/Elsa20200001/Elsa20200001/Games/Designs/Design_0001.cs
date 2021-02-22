@@ -70,10 +70,9 @@ namespace Charlotte.Games.Designs
 			this.DrawWall(this.WallPicture_02, this.Color_02, cam_xRate, cam_yRate);
 			this.DrawWall(this.WallPicture_03, this.Color_03, cam_xRate, cam_yRate);
 
-			if (Game.I.FinalZone)
+			if (Game.I.FinalZone != null)
 			{
-				DDCurtain.DrawCurtain(Game.I.FZRate * -0.5);
-				//DDCurtain.DrawCurtain(Game.I.FZRate * -0.4);
+				DDCurtain.DrawCurtain(Game.I.FinalZone.Rate * -0.5);
 			}
 		}
 

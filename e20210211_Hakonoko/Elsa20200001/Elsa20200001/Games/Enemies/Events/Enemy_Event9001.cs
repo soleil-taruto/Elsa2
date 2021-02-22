@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using Charlotte.Novels;
 using Charlotte.GameProgressMasters;
+using Charlotte.Novels;
 
 namespace Charlotte.Games.Enemies.Events
 {
@@ -19,10 +19,12 @@ namespace Charlotte.Games.Enemies.Events
 		{
 			if (DDUtils.GetDistance(new D2Point(this.X, this.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) < 50.0)
 			{
-				if (!Game.I.FinalZone) // ? 最終ゾーン未侵入
+				if (Game.I.FinalZone == null) // ? 最終ゾーン未侵入
 				{
-					this.最終ノベルパート();
-					Game.I.FinalZone = true;
+					if (Game.I.OH_最終ノベルパート.Once())
+						this.最終ノベルパート();
+
+					Game.I.FinalZone = new Game.FinalZoneInfo();
 					Game.I.Enemies.Add(new Enemy_MeteorLoader(new D2Point(0, 0))); // メテオローダー設置
 				}
 			}

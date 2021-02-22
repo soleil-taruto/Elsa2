@@ -79,15 +79,24 @@ namespace Charlotte.Games
 		public DDList<D2Point> タイル接近_敵描画_Points = new DDList<D2Point>();
 
 		/// <summary>
-		/// 最終ゾーン侵入
+		/// 最終ゾーン情報
 		/// </summary>
-		public bool FinalZone = false;
+		public class FinalZoneInfo
+		{
+			public double Rate = 0.0;
+			public Common.OnceHandler OH_Event9003 = new Common.OnceHandler();
+			public Common.OnceHandler OH_Event9003B = new Common.OnceHandler();
+			public Common.OnceHandler OH_Event9004 = new Common.OnceHandler();
+			public bool Ending_復讐_突入 = false;
+		}
 
-		public double FZRate = 0.0;
-		public bool FZEvent9003_Actived = false;
-		public bool FZEvent9003B_Actived = false;
-		public bool FZEvent9004_Actived = false;
-		public bool FZEnding_復讐_突入 = false;
+		/// <summary>
+		/// 最終ゾーン情報
+		/// null == 最終ゾーン未侵入
+		/// </summary>
+		public FinalZoneInfo FinalZone = null;
+
+		public Common.OnceHandler OH_最終ノベルパート = new Common.OnceHandler();
 
 		public void Perform()
 		{
@@ -141,14 +150,15 @@ namespace Charlotte.Games
 				if (this.Player.DeadFrame == 0)
 					this.カメラ位置調整(false);
 
-				if (this.FinalZone)
-					//DDUtils.Approach(ref this.FZRate, 1.0, 0.99);
-					DDUtils.Approach(ref this.FZRate, 1.0, 0.997);
-
-				if (this.FZEnding_復讐_突入)
+				if (this.FinalZone != null)
 				{
-					this.EndStatus = EndStatus_e.復讐エンド;
-					break;
+					DDUtils.Approach(ref this.FinalZone.Rate, 1.0, 0.997);
+
+					if (this.FinalZone.Ending_復讐_突入)
+					{
+						this.EndStatus = EndStatus_e.復讐エンド;
+						break;
+					}
 				}
 
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_E) == 1) // エディットモード(デバッグ用)
@@ -169,15 +179,15 @@ namespace Charlotte.Games
 
 				if (DDInput.R.GetInput() == 1) // リスポーン
 				{
-					if (!this.FinalZone)
-					{
+					if (this.IsRespawnable())
 						this.Respawn();
-					}
+					else
+						this.リスポーンを阻止した();
 				}
 				if (DDInput.C.GetInput() == 1) // リスポーン地点_設置
 				{
 					if (
-						!this.FinalZone &&
+						this.FinalZone == null &&
 						this.Player.DeadFrame == 0 && // ? プレイヤー死亡中ではない。
 						this.Player.RebornFrame == 0 && // ? プレイヤー登場中ではない。
 						(DDUtils.CountDown(ref this.SnapshotCount) || DDConfig.LOG_ENABLED) // デバッグ中は無制限
@@ -302,7 +312,7 @@ namespace Charlotte.Games
 
 					if (GameConsts.PLAYER_DEAD_FRAME_MAX < frame)
 					{
-						if (this.FinalZone)
+						if (this.FinalZone != null)
 						{
 							this.EndStatus = EndStatus_e.死亡エンド;
 							break;
@@ -473,7 +483,7 @@ namespace Charlotte.Games
 					enemy.Draw();
 				}
 
-				if (!this.FinalZone && 1 <= Ground.I.StartSnapshotCount) // 右下の残りスナップショット回数 -- 0 なら表示しない
+				if (this.FinalZone == null && 1 <= Ground.I.StartSnapshotCount) // 右下の残りスナップショット回数 -- 0 なら表示しない
 				{
 					Action<I2Size> a_draw = drawScreenSize =>
 					{
@@ -617,7 +627,7 @@ namespace Charlotte.Games
 					DDEngine.EachFrame();
 				}
 
-				if (this.FinalZone)
+				if (this.FinalZone != null)
 					this.EndStatus = EndStatus_e.生還エンド;
 			}
 			else // ? タイトルへ戻るを選択した。など
@@ -830,21 +840,38 @@ namespace Charlotte.Games
 				}
 				if (DDInput.R.GetInput() == 1) // ? リスポーン_ボタンが押された。
 				{
-					if (!this.FinalZone)
+					if (this.IsRespawnable())
 					{
 						波紋効果.Add(this.Player.X, this.Player.Y); // リスポーン押下時も出す。
 
 						this.Dead_Respawn = true;
 						return;
 					}
+					else
+						this.リスポーンを阻止した();
 				}
 				DDEngine.EachFrame();
 			}
 
-			if (!this.FinalZone)
+			if (this.FinalZone == null)
 			{
 				波紋効果.Add(this.Player.X, this.Player.Y);
 			}
+		}
+
+		private bool IsRespawnable()
+		{
+			return
+				this.FinalZone == null ||
+				(
+					10 <= Ground.I.ReachedStageIndex && // ? 1度はエンディングに到達している。
+					!this.FinalZone.OH_Event9003.Entered
+				);
+		}
+
+		private void リスポーンを阻止した()
+		{
+			// TODO: SE など
 		}
 
 		private void Respawn()
@@ -860,6 +887,8 @@ namespace Charlotte.Games
 		/// </summary>
 		private void RespawnRestart()
 		{
+			this.RespawnCommon();
+
 			// デフォルトの「プレイヤーのスタート地点」
 			// -- マップの中央
 			this.Player.X = this.Map.W * GameConsts.TILE_W / 2.0;
@@ -899,6 +928,8 @@ namespace Charlotte.Games
 		/// <param name="ss"></param>
 		private void RespawnFromSnapshot(Snapshot ss)
 		{
+			this.RespawnCommon();
+
 			this.Player.X = ss.PlayerPosition.X;
 			this.Player.Y = ss.PlayerPosition.Y;
 
@@ -915,6 +946,32 @@ namespace Charlotte.Games
 			this.Enemies = new DDList<Enemy>(ss.Enemies.Select(enemy => enemy.GetClone()).ToList());
 
 			波紋効果.Add(this.Player.X, this.Player.Y);
+		}
+
+		private void RespawnCommon()
+		{
+			// Enemy_Meteor による地形変更を戻す。
+			{
+				for (int x = 0; x < this.Map.W; x++)
+				{
+					for (int y = 0; y < this.Map.H; y++)
+					{
+						MapCell cell = this.Map.GetCell(x, y);
+
+						if (cell.KindOrig != null)
+						{
+							cell.Kind = cell.KindOrig.Value;
+							cell.KindOrig = null;
+						}
+					}
+				}
+			}
+
+			if (this.FinalZone != null) // ? 最終ゾーンからのリスポーン
+			{
+				DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
+				this.FinalZone = null; // 最終ゾーン_解除
+			}
 		}
 
 		private void カメラ位置調整(bool 一瞬で)
@@ -1327,9 +1384,7 @@ namespace Charlotte.Games
 					"PAUSE",
 					new string[]
 					{
-						Game.I.FinalZone ?
-							"－－－－－－－－－－－－－－－" :
-							"このステージの最初からやり直す",
+						"このステージの最初からやり直す",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -1340,12 +1395,8 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						if (!Game.I.FinalZone)
-						{
-							this.Pause_Respawn = true;
-							goto endLoop;
-						}
-						break;
+						this.Pause_Respawn = true;
+						goto endLoop;
 
 					case 1:
 						this.Pause_ReturnToTitleMenu = true;

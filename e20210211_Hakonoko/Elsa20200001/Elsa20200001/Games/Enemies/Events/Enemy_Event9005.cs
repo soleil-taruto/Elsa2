@@ -17,7 +17,7 @@ namespace Charlotte.Games.Enemies.Events
 		{
 			if (DDUtils.GetDistance(new D2Point(this.X, this.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) < 50.0)
 			{
-				Game.I.FZEnding_復讐_突入 = true;
+				Game.I.FinalZone.Ending_復讐_突入 = true;
 			}
 		}
 

@@ -92,11 +92,15 @@ namespace Charlotte.Games.Enemies
 
 					if (
 						!cell.IsDefault && // ? 画面外ではない。
-						300.0 < DDUtils.GetDistance(new D2Point(dotPos.X, dotPos.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) && // ? 近すぎではない。
+						300.0 < DDUtils.GetDistance(new D2Point(dotPos.X, dotPos.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) && // ? 近すぎない。
 						(cell.Kind == MapCell.Kind_e.WALL || cell.Kind == MapCell.Kind_e.DEATH)
 						)
 					{
-						cell.Kind = MapCell.Kind_e.DEATH;
+						if (cell.Kind == MapCell.Kind_e.WALL)
+						{
+							cell.Kind = MapCell.Kind_e.DEATH;
+							cell.KindOrig = MapCell.Kind_e.WALL;
+						}
 
 						D2Point enemyPos = new D2Point(
 							cellPos.X * GameConsts.TILE_W + GameConsts.TILE_W / 2,

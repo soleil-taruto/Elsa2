@@ -52,5 +52,14 @@ namespace Charlotte.Games
 				yield return true;
 			}
 		}
+
+		public static IEnumerable<bool> Liteフラッシュ()
+		{
+			foreach (DDScene scene in DDSceneUtils.Create(60))
+			{
+				DDCurtain.DrawCurtain((1.0 - scene.Rate) * 0.5);
+				yield return true;
+			}
+		}
 	}
 }

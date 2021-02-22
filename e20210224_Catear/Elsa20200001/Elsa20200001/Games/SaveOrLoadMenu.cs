@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
@@ -244,11 +246,16 @@ namespace Charlotte.Games
 
 				using (WorkingDir wd = new WorkingDir())
 				{
-					string file = wd.MakePath();
+					string bmpFile = wd.MakePath();
+					string pngFile = wd.MakePath();
 
-					DX.SaveDrawScreenToBMP(0, 0, THUMB_W, THUMB_H, file);
+					DX.SaveDrawScreenToBMP(0, 0, THUMB_W, THUMB_H, bmpFile);
 
-					return new DDHashedData(File.ReadAllBytes(file));
+					using (Bitmap bmp = (Bitmap)Bitmap.FromFile(bmpFile))
+					{
+						bmp.Save(pngFile, ImageFormat.Png);
+					}
+					return new DDHashedData(File.ReadAllBytes(pngFile));
 				}
 			}
 		}

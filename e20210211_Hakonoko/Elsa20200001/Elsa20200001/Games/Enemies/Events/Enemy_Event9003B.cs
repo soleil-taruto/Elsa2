@@ -18,23 +18,11 @@ namespace Charlotte.Games.Enemies.Events
 		{
 			if (DDUtils.GetDistance(new D2Point(this.X, this.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) < 50.0)
 			{
-				if (!Game.I.FZEvent9003B_Actived)
+				if (Game.I.FinalZone.OH_Event9003B.Once())
 				{
-					Game.I.FZEvent9003B_Actived = true;
-
 					Game.I.Map.Design = new Design_0003();
-
-					DDGround.EL.Add(SCommon.Supplier(this.E_フラッシュ()));
+					DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
 				}
-			}
-		}
-
-		private IEnumerable<bool> E_フラッシュ()
-		{
-			foreach (DDScene scene in DDSceneUtils.Create(60))
-			{
-				DDCurtain.DrawCurtain((1.0 - scene.Rate) * 0.5);
-				yield return true;
 			}
 		}
 

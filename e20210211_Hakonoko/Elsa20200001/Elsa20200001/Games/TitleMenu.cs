@@ -334,17 +334,20 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			// memo:
-			// selectIndex                 -->  0 ～  8 == LAYER 9 ～ 1
-			// *stageIndex                 -->  1 ～  9 == LAYER 9 ～ 1         , 0 == テスト用ステージ
-			// Ground.I.ReachedStageIndex  -->  2 ～ 10 == LAYER 9 ～ 1 Cleared , 0 == クリアステージ無し
-
+			// 値：
+			// 0 == LAYER 9
+			// 1 == LAYER 8
+			// 2 == LAYER 7
+			// ...
+			// 8 == LAYER 1
+			// 9 == 戻る
+			//
 			int selectIndex = Math.Min(Math.Max(0, Ground.I.ReachedStageIndex - 1), 8);
 
 			for (; ; )
 			{
-				string[] items = Enumerable.Range(0, 9)
-					.Select(stageIndex => "LAYER " + (9 - stageIndex) + (Math.Max(0, Ground.I.ReachedStageIndex - 1) < stageIndex ? " (未到達)" : ""))
+				string[] items = Enumerable.Range(1, 9)
+					.Select(stageIndex => "LAYER " + (10 - stageIndex) + (Math.Max(1, Ground.I.ReachedStageIndex) < stageIndex ? " (未到達)" : ""))
 					.Concat(new string[] { "戻る" })
 					.ToArray();
 
@@ -353,6 +356,14 @@ namespace Charlotte.Games
 				if (selectIndex == items.Length - 1) // ? 戻る
 					break;
 
+				// 値：
+				// 0 == テストステージ -- 選択出来ない。
+				// 1 == LAYER 9
+				// 2 == LAYER 8
+				// 3 == LAYER 7
+				// ...
+				// 9 == LAYER 1
+				//
 				int selectedStageIndex = selectIndex + 1;
 
 				if (selectedStageIndex <= Ground.I.ReachedStageIndex || DDConfig.LOG_ENABLED)

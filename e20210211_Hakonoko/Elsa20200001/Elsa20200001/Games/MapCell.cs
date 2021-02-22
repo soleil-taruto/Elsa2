@@ -170,6 +170,7 @@ namespace Charlotte.Games
 		};
 
 		public Kind_e Kind;
+		public Kind_e? KindOrig = null; // リスポーン時_復元用
 
 		/// <summary>
 		/// 色位相

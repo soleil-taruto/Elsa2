@@ -18,10 +18,8 @@ namespace Charlotte.Games.Enemies.Events
 		{
 			if (DDUtils.GetDistance(new D2Point(this.X, this.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) < 50.0)
 			{
-				if (!Game.I.FZEvent9003_Actived)
+				if (Game.I.FinalZone.OH_Event9003.Once())
 				{
-					Game.I.FZEvent9003_Actived = true;
-
 					for (int x = 0; x < Game.I.Map.W; x++)
 					{
 						for (int y = 0; y < Game.I.Map.H; y++)
@@ -35,27 +33,14 @@ namespace Charlotte.Games.Enemies.Events
 								cell.Kind = MapCell.Kind_e.WALL;
 						}
 					}
-#if true
+
+					// 必要なイベント以外を除去
+					//
 					Game.I.Enemies.RemoveAll(enemy => !(
 						enemy is Enemy_Event9003B ||
 						enemy is Enemy_Event9004 ||
 						enemy is Enemy_Event9005
 						));
-#elif true // ng
-					Game.I.Enemies.RemoveAll(enemy =>
-						enemy is Enemy_Death ||
-						enemy is Enemy_Meteor ||
-						enemy is Enemy_MeteorLoader
-						);
-#elif true // ng
-					Game.I.Enemies.Clear();
-#else // ng
-					// MeteorLoader に動かれるとマズい。なので Clear した方が手っ取り早い。
-					// -- memo: DeadFlag による除去に統一する必要は無い。
-					//
-					foreach (Enemy enemy in Game.I.Enemies.Iterate())
-						enemy.DeadFlag = true;
-#endif
 
 					Game.I.Map.Design = new Design_0002();
 

@@ -258,5 +258,19 @@ namespace Charlotte
 			});
 #endif
 		}
+
+		public class OnceHandler
+		{
+			public bool Entered = false;
+
+			public bool Once()
+			{
+				if (this.Entered)
+					return false;
+
+				this.Entered = true;
+				return true;
+			}
+		}
 	}
 }

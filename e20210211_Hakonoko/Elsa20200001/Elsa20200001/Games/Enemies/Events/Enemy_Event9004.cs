@@ -17,13 +17,9 @@ namespace Charlotte.Games.Enemies.Events
 		{
 			if (DDUtils.GetDistance(new D2Point(this.X, this.Y), new D2Point(Game.I.Player.X, Game.I.Player.Y)) < 50.0)
 			{
-				if (!Game.I.FZEvent9004_Actived)
+				if (Game.I.FinalZone.OH_Event9004.Once())
 				{
-					Game.I.FZEvent9004_Actived = true;
-
-					// none ???
-
-					//DDCurtain.SetCurtain(50, -1.0);
+					// none
 				}
 			}
 		}
