@@ -68,7 +68,7 @@ namespace Charlotte
 					DDPrint.SetPrint();
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
-					DDPrint.Print(string.Join(" ",
+					DDPrint.DebugPrint(string.Join(" ",
 						DDEngine.FrameProcessingMillis,
 						DDEngine.FrameProcessingMillis_Worst,
 

@@ -150,6 +150,7 @@ namespace Charlotte.GameCommons
 				//DDFontRegister.Add(@"e20200928_NovelAdv\Font\riitf\RiiT_F.otf");
 				DDFontRegister.Add(@"dat\Font\K Gothic\K Gothic.ttf");
 				DDFontRegister.Add(@"dat\Font\焚火フォント\03Takibi-Regular.otf");
+				DDFontRegister.Add(@"dat\Font\廻想体\Kaiso-Next-B.otf");
 			}
 
 			Ground.I = new Ground();

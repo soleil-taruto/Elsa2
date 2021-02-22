@@ -65,9 +65,26 @@ namespace Charlotte.GameCommons
 			P_Y += P_YStep;
 		}
 
+		private static DDFont Font
+		{
+			get
+			{
+				return DDFontUtils.GetFont("廻想体 ネクスト B", 32);
+			}
+		}
+
+		private static bool DebugFlag = false;
+
 		private static void Print_Main2(string line, int x, int y, I3Color color)
 		{
-			DX.DrawString(x, y, line, DDUtils.GetColor(color));
+			if (DebugFlag)
+			{
+				DX.DrawString(x, y, line, DDUtils.GetColor(color));
+			}
+			else
+			{
+				DDFontUtils.DrawString(x, y, line, Font, false, color);
+			}
 		}
 
 		private static void Print_Main(string line, int x, int y)
@@ -124,6 +141,20 @@ namespace Charlotte.GameCommons
 		{
 			Print(line);
 			PrintRet();
+		}
+
+		public static void DebugPrint(string line)
+		{
+			DebugFlag = true;
+			Print(line);
+			DebugFlag = false; // restore
+		}
+
+		public static void DebugPrintLine(string line)
+		{
+			DebugFlag = true;
+			PrintLine(line);
+			DebugFlag = false; // restore
 		}
 	}
 }
