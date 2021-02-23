@@ -133,7 +133,12 @@ namespace Charlotte.GameCommons
 				});
 			}
 
-			int w = DX.GetDrawStringWidth(line, SCommon.ENCODING_SJIS.GetByteCount(line));
+			int w;
+
+			if (DebugFlag)
+				w = DX.GetDrawStringWidth(line, SCommon.ENCODING_SJIS.GetByteCount(line));
+			else
+				w = DX.GetDrawStringWidthToHandle(line, SCommon.ENCODING_SJIS.GetByteCount(line), Font.GetHandle(), 0);
 
 			if (w < 0 || SCommon.IMAX < w)
 				throw new DDError();

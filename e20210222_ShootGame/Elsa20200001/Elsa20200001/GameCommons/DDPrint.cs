@@ -49,14 +49,26 @@ namespace Charlotte.GameCommons
 		private static int P_YStep;
 		private static int P_X;
 		private static int P_Y;
+		private static int P_FontSize = -1; // -1 == デフォルトのフォントを使用する。
 
-		public static void SetPrint(int x = 0, int y = 0, int yStep = 16)
+		public static void SetPrint(int x = 0, int y = 0)
+		{
+			P_BaseX = x;
+			P_BaseY = y;
+			P_YStep = 16;
+			P_X = 0;
+			P_Y = 0;
+			P_FontSize = -1;
+		}
+
+		public static void SetPrint(int x, int y, int yStep, int fontSize = 24)
 		{
 			P_BaseX = x;
 			P_BaseY = y;
 			P_YStep = yStep;
 			P_X = 0;
 			P_Y = 0;
+			P_FontSize = fontSize;
 		}
 
 		public static void PrintRet()
@@ -65,9 +77,24 @@ namespace Charlotte.GameCommons
 			P_Y += P_YStep;
 		}
 
+		private static DDFont Font
+		{
+			get
+			{
+				return DDFontUtils.GetFont("木漏れ日ゴシック", P_FontSize);
+			}
+		}
+
 		private static void Print_Main2(string line, int x, int y, I3Color color)
 		{
-			DX.DrawString(x, y, line, DDUtils.GetColor(color));
+			if (P_FontSize == -1)
+			{
+				DX.DrawString(x, y, line, DDUtils.GetColor(color));
+			}
+			else
+			{
+				DDFontUtils.DrawString(x, y, line, Font, false, color);
+			}
 		}
 
 		private static void Print_Main(string line, int x, int y)
@@ -112,7 +139,12 @@ namespace Charlotte.GameCommons
 				});
 			}
 
-			int w = DX.GetDrawStringWidth(line, SCommon.ENCODING_SJIS.GetByteCount(line));
+			int w;
+
+			if (P_FontSize == -1)
+				w = DX.GetDrawStringWidth(line, SCommon.ENCODING_SJIS.GetByteCount(line));
+			else
+				w = DX.GetDrawStringWidthToHandle(line, SCommon.ENCODING_SJIS.GetByteCount(line), Font.GetHandle(), 0);
 
 			if (w < 0 || SCommon.IMAX < w)
 				throw new DDError();
