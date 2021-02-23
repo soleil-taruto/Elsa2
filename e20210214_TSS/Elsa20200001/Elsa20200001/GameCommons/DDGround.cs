@@ -86,8 +86,8 @@ namespace Charlotte.GameCommons
 			DDInput.DIR_4.KeyIds = new int[] { DX.KEY_INPUT_LEFT };
 			DDInput.DIR_6.KeyIds = new int[] { DX.KEY_INPUT_RIGHT };
 			DDInput.DIR_8.KeyIds = new int[] { DX.KEY_INPUT_UP };
-			DDInput.A.KeyIds = new int[] { DX.KEY_INPUT_RETURN };
-			DDInput.B.KeyIds = new int[] { DX.KEY_INPUT_DELETE };
+			DDInput.A.KeyIds = new int[] { DX.KEY_INPUT_RETURN, DX.KEY_INPUT_Z };
+			DDInput.B.KeyIds = new int[] { DX.KEY_INPUT_DELETE, DX.KEY_INPUT_X };
 			DDInput.C.KeyIds = new int[] { DX.KEY_INPUT_C };
 			DDInput.D.KeyIds = new int[] { DX.KEY_INPUT_V };
 			DDInput.E.KeyIds = new int[] { DX.KEY_INPUT_A };

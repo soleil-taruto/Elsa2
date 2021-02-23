@@ -607,8 +607,8 @@ namespace Charlotte.Games
 				DDInput.DIR_4.KeyIds = new int[] { DX.KEY_INPUT_LEFT };
 				DDInput.DIR_6.KeyIds = new int[] { DX.KEY_INPUT_RIGHT };
 				DDInput.DIR_8.KeyIds = new int[] { DX.KEY_INPUT_UP };
-				DDInput.A.KeyIds = new int[] { DX.KEY_INPUT_RETURN };
-				DDInput.B.KeyIds = new int[] { DX.KEY_INPUT_DELETE };
+				DDInput.A.KeyIds = new int[] { DX.KEY_INPUT_RETURN, DX.KEY_INPUT_Z };
+				DDInput.B.KeyIds = new int[] { DX.KEY_INPUT_DELETE, DX.KEY_INPUT_X };
 				DDInput.L.KeyIds = new int[] { DX.KEY_INPUT_LCONTROL, DX.KEY_INPUT_RCONTROL };
 			}
 		}
@@ -617,24 +617,28 @@ namespace Charlotte.Games
 		{
 			int y = 230 + padButtonIndex * 90;
 
-			string setting;
+			Func<DDInput.Button, string> getSetting;
 
-			if (キー設定Flag)
-				setting = string.Join(" , ", button.KeyIds.Select(keyId => DDSimpleMenu.GetKeyName(keyId)));
-			else
-				setting = string.Join(" , ", button.BtnIds.Select(btnId => DDSimpleMenu.GetPadButtonName(btnId)));
+			{
+				Func<string, string> w = s => Common.FirstNotEmpty(s, "割り当てナシ");
+
+				if (キー設定Flag)
+					getSetting = btn => w(string.Join(" , ", btn.KeyIds.Select(keyId => DDSimpleMenu.GetKeyName(keyId))));
+				else
+					getSetting = btn => w(string.Join(" , ", btn.BtnIds.Select(btnId => DDSimpleMenu.GetPadButtonName(btnId))));
+			}
 
 			this.DrawButton(300, y + 25, Ground.I.Picture.SettingButton_変更, true);
 
 			if (this.LastButtonHoveringFlag && DDMouse.L.GetInput() == -1)
 			{
-				InputPadButtonKeySetting(キー設定Flag, title, button);
+				InputPadButtonKeySetting(キー設定Flag, title, button, getSetting);
 			}
 
 			DDFontUtils.DrawString(
 				550,
 				y,
-				"「" + title + "」　＝　" + setting,
+				"「" + title + "」　＝　" + getSetting(button),
 				DDFontUtils.GetFont("Kゴシック", 50),
 				false,
 				キー設定Flag ? new I3Color(192, 255, 128) : new I3Color(255, 192, 128),
@@ -642,24 +646,21 @@ namespace Charlotte.Games
 				);
 		}
 
-		private void InputPadButtonKeySetting(bool キー設定Flag, string title, DDInput.Button button)
+		private void InputPadButtonKeySetting(bool キー設定Flag, string title, DDInput.Button button, Func<DDInput.Button, string> getSetting)
 		{
 			DDEngine.FreezeInput();
 
+			button.Backup();
+
+			if (キー設定Flag)
+				button.KeyIds = new int[0];
+			else
+				button.BtnIds = new int[0];
+
 			for (; ; )
 			{
-				if (
-					DDInput.A.GetInput() == 1 ||
-					DDInput.B.GetInput() == 1 ||
-					DDMouse.R.GetInput() == -1
-					)
-					break;
+				CheckInputPadButtonKey(キー設定Flag, button);
 
-				if (CheckInputPadButtonKey(キー設定Flag, button))
-				{
-					DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP); // 決定・キャンセルを変更した場合を考慮して、長めにフリーズしておく
-					break;
-				}
 				this.DrawWall();
 
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
@@ -671,25 +672,57 @@ namespace Charlotte.Games
 
 				DDFontUtils.DrawString(
 					100,
-					520,
-					"「" + title + "」に割り当てる" + (キー設定Flag ? "キー" : "ボタン") + "を押して下さい。",
+					400,
+					"「" + title + "」に割り当てる" + (キー設定Flag ? "キー" : "ボタン") + "を押して下さい。(複数可)",
 					DDFontUtils.GetFont("Kゴシック", 50),
 					false,
 					new I3Color(255, 255, 255),
 					new I3Color(100, 100, 0)
 					);
+				DDFontUtils.DrawString(
+					100,
+					475,
+					"入力が終わったら「決定」をクリックして下さい。",
+					DDFontUtils.GetFont("Kゴシック", 50),
+					false,
+					new I3Color(255, 255, 255),
+					new I3Color(100, 100, 0)
+					);
+				DDFontUtils.DrawString(
+					100,
+					600,
+					"現在の割り当て：" + getSetting(button),
+					DDFontUtils.GetFont("Kゴシック", 50),
+					false,
+					new I3Color(255, 255, 255),
+					new I3Color(100, 0, 100)
+					);
+
+				bool inputDone;
+
+				if (キー設定Flag)
+					inputDone = 1 <= button.KeyIds.Length;
+				else
+					inputDone = 1 <= button.BtnIds.Length;
+
+				this.DrawButton(1200, 950, Ground.I.Picture.SettingButton_決定, inputDone);
+
+				if (this.LastButtonHoveringFlag && DDMouse.L.GetInput() == -1 && inputDone)
+					break;
 
 				this.DrawButton(1630, 950, Ground.I.Picture.SettingButton_キャンセル, true);
 
-				if (this.LastButtonHoveringFlag && DDMouse.L.GetInput() == -1)
+				if (this.LastButtonHoveringFlag && DDMouse.L.GetInput() == -1 || DDMouse.R.GetInput() == -1)
+				{
+					button.Restore();
 					break;
-
+				}
 				DDEngine.EachFrame();
 			}
 			DDEngine.FreezeInput();
 		}
 
-		private bool CheckInputPadButtonKey(bool キー設定Flag, DDInput.Button targetButton) // ret: 設定した。
+		private void CheckInputPadButtonKey(bool キー設定Flag, DDInput.Button targetButton)
 		{
 			DDInput.Button[] buttons = new DDInput.Button[]
 			{
@@ -712,38 +745,11 @@ namespace Charlotte.Games
 
 				if (pressKeyId != -1)
 				{
-					int[] keyIds;
-
-					switch (pressKeyId)
-					{
-						case DX.KEY_INPUT_LCONTROL:
-						case DX.KEY_INPUT_RCONTROL:
-							keyIds = new int[] { DX.KEY_INPUT_LCONTROL, DX.KEY_INPUT_RCONTROL };
-							break;
-
-						case DX.KEY_INPUT_LSHIFT:
-						case DX.KEY_INPUT_RSHIFT:
-							keyIds = new int[] { DX.KEY_INPUT_LSHIFT, DX.KEY_INPUT_RSHIFT };
-							break;
-
-						case DX.KEY_INPUT_LALT:
-						case DX.KEY_INPUT_RALT:
-							keyIds = new int[] { DX.KEY_INPUT_LALT, DX.KEY_INPUT_RALT };
-							break;
-
-						default:
-							keyIds = new int[] { pressKeyId };
-							break;
-					}
-
 					// 他ボタンとの重複回避
-					if (SCommon.Comp(targetButton.KeyIds, keyIds, SCommon.Comp) != 0) // ? 違う
-						foreach (DDInput.Button button in buttons)
-							if (SCommon.Comp(button.KeyIds, keyIds, SCommon.Comp) == 0) // ? 同じ
-								button.KeyIds = targetButton.KeyIds;
+					foreach (DDInput.Button button in buttons)
+						button.KeyIds = button.KeyIds.Where(keyId => keyId != pressKeyId).ToArray();
 
-					targetButton.KeyIds = keyIds;
-					return true;
+					targetButton.KeyIds = targetButton.KeyIds.Concat(new int[] { pressKeyId }).ToArray();
 				}
 			}
 			else
@@ -757,19 +763,13 @@ namespace Charlotte.Games
 
 				if (pressBtnId != -1)
 				{
-					int[] btnIds = new int[] { pressBtnId };
-
 					// 他ボタンとの重複回避
-					if (SCommon.Comp(targetButton.BtnIds, btnIds, SCommon.Comp) != 0) // ? 違う
-						foreach (DDInput.Button button in buttons)
-							if (SCommon.Comp(button.BtnIds, btnIds, SCommon.Comp) == 0) // ? 同じ
-								button.BtnIds = targetButton.BtnIds;
+					foreach (DDInput.Button button in buttons)
+						button.BtnIds = button.BtnIds.Where(btnId => btnId != pressBtnId).ToArray();
 
-					targetButton.BtnIds = btnIds;
-					return true;
+					targetButton.BtnIds = targetButton.BtnIds.Concat(new int[] { pressBtnId }).ToArray();
 				}
 			}
-			return false;
 		}
 	}
 }

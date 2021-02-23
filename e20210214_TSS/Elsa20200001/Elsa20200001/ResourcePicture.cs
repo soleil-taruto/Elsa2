@@ -62,6 +62,7 @@ namespace Charlotte
 		public DDPicture SettingButton_キャンセル = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\キャンセル.png");
 		public DDPicture SettingButton_変更 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\変更.png");
 		public DDPicture SettingButton_戻る = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\戻る.png");
+		public DDPicture SettingButton_決定 = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\決定.png");
 
 		public DDPicture SettingButton_前へ = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\前へ.png");
 		public DDPicture SettingButton_次へ = DDPictureLoaders.Standard(@"dat\タイトル設定ボタン\次へ.png");

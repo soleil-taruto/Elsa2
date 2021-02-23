@@ -16,5 +16,10 @@ namespace Charlotte
 		{
 			return value == Consts.SERIALIZED_NULL ? null : value.Substring(Consts.SERIALIZED_NOT_NULL_PREFIX.Length);
 		}
+
+		public static string FirstNotEmpty(params string[] strs)
+		{
+			return strs.First(str => !string.IsNullOrEmpty(str));
+		}
 	}
 }

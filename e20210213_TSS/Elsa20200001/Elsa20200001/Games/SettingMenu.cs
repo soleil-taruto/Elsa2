@@ -649,8 +649,8 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				if (
-					DDInput.A.GetInput() == 1 ||
-					DDInput.B.GetInput() == 1 ||
+					//DDInput.A.GetInput() == 1 || // ... 現在の割り当てボタン・キーに反応してしまうんでない？
+					//DDInput.B.GetInput() == 1 ||
 					DDMouse.R.GetInput() == -1
 					)
 					break;
