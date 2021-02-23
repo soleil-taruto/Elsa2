@@ -236,10 +236,7 @@ namespace Charlotte.GameProgressMasters
 		{
 			for (int index = this.StartStageIndex; ; index++)
 			{
-				// TODO 開発中_抑止
-				// TODO 開発中_抑止
-				// TODO 開発中_抑止
-				//レイヤ表示.Perform(index, this.ThemeColors[index]);
+				レイヤ表示.Perform(index, this.ThemeColors[index]);
 
 				Game.EndStatus_e endStatus;
 

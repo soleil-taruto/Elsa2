@@ -49,14 +49,16 @@ namespace Charlotte.GameCommons
 		private static int P_YStep;
 		private static int P_X;
 		private static int P_Y;
+		private static int P_FontSize;
 
-		public static void SetPrint(int x = 0, int y = 0, int yStep = 16)
+		public static void SetPrint(int x = 0, int y = 0, int yStep = 16, int fontSize = 24)
 		{
 			P_BaseX = x;
 			P_BaseY = y;
 			P_YStep = yStep;
 			P_X = 0;
 			P_Y = 0;
+			P_FontSize = fontSize;
 		}
 
 		public static void PrintRet()
@@ -69,7 +71,9 @@ namespace Charlotte.GameCommons
 		{
 			get
 			{
-				return DDFontUtils.GetFont("廻想体 ネクスト B", 32);
+				return DDFontUtils.GetFont("木漏れ日ゴシック", P_FontSize);
+				//return DDFontUtils.GetFont("木漏れ日ゴシック", 24);
+				//return DDFontUtils.GetFont("廻想体 ネクスト B", 32); // old
 			}
 		}
 

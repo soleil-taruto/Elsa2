@@ -37,10 +37,10 @@ namespace Charlotte.GameCommons
 				DDSEUtils.PlayLoop(this);
 		}
 
-		public void Fade(int frameMax = 30)
-		{
-			throw null; // TODO
-		}
+		//public void Fade(int frameMax = 30)
+		//{
+		//    throw null; // 未実装
+		//}
 
 		public void Stop()
 		{

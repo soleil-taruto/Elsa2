@@ -15,9 +15,6 @@ namespace Charlotte.GameCommons
 		public DDPicture WallPicture = null;
 		public double WallCurtain = 0.0; // -1.0 ～ 1.0
 		public Action WallDrawer = null;
-		public int X = 16;
-		public int Y = 16;
-		public int YStep = 32;
 
 		// <---- prm
 
@@ -56,8 +53,16 @@ namespace Charlotte.GameCommons
 				this.WallDrawer();
 		}
 
-		public int Perform(string title, string[] items, int selectIndex, bool ポーズボタンでメニュー終了 = false)
+		private int X;
+		private int Y;
+		private int YStep;
+
+		public int Perform(string title, string[] items, int selectIndex, bool ポーズボタンでメニュー終了, int x, int y, int yStep)
 		{
+			this.X = x;
+			this.Y = y;
+			this.YStep = yStep;
+
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
@@ -135,8 +140,9 @@ namespace Charlotte.GameCommons
 				if (this.BorderColor != null)
 					DDPrint.SetBorder(this.BorderColor.Value);
 
-				DDPrint.SetPrint(DDConsts.Screen_W - 45, 2);
-				DDPrint.Print("[M:" + (this.MouseUsable ? "E" : "D") + "]");
+				// old
+				//DDPrint.SetPrint(DDConsts.Screen_W - 45, 2);
+				//DDPrint.Print("[M:" + (this.MouseUsable ? "E" : "D") + "]");
 
 				DDPrint.SetPrint(this.X, this.Y, this.YStep);
 				//DDPrint.SetPrint(16, 16, 32); // old
@@ -318,18 +324,18 @@ namespace Charlotte.GameCommons
 #else
 				// アプリ固有の設定 >
 
+				new ButtonInfo(DDInput.DIR_8, "上"),
 				new ButtonInfo(DDInput.DIR_2, "下"),
 				new ButtonInfo(DDInput.DIR_4, "左"),
 				new ButtonInfo(DDInput.DIR_6, "右"),
-				new ButtonInfo(DDInput.DIR_8, "上"),
-				new ButtonInfo(DDInput.A, "ジャンプボタン／決定"),
-				new ButtonInfo(DDInput.B, "低速移動／キャンセル"),
+				new ButtonInfo(DDInput.A, "ジャンプボタン ／ 決定"),
+				new ButtonInfo(DDInput.B, "低速移動 ／ キャンセル"),
 				new ButtonInfo(DDInput.C, "リスポーン地点設置"),
 				//new ButtonInfo(DDInput.D, ""),
 				//new ButtonInfo(DDInput.E, ""),
 				//new ButtonInfo(DDInput.F, ""),
 				new ButtonInfo(DDInput.L, "画面スライド"),
-				new ButtonInfo(DDInput.R, "強制リスポーン／会話スキップ"),
+				new ButtonInfo(DDInput.R, "リスポーン ／ 会話スキップ"),
 				new ButtonInfo(DDInput.PAUSE, "ポーズボタン"),
 				//new ButtonInfo(DDInput.START, ""),
 
@@ -396,8 +402,8 @@ namespace Charlotte.GameCommons
 						if (this.BorderColor != null)
 							DDPrint.SetBorder(this.BorderColor.Value);
 
-						DDPrint.SetPrint(this.X, this.Y, this.YStep);
-						//DDPrint.SetPrint(16, 16, 32); // old
+						//DDPrint.SetPrint(this.X, this.Y, this.YStep); // old
+						DDPrint.SetPrint(35, 50, 42, 20);
 						DDPrint.PrintLine("キーボードのキー設定");
 
 						for (int c = 0; c < btnInfos.Length; c++)
@@ -417,9 +423,15 @@ namespace Charlotte.GameCommons
 							}
 							DDPrint.PrintRet();
 						}
-						DDPrint.PrintLine("★　カーソルの指す機能に割り当てるキーを押して下さい。");
-						DDPrint.PrintLine("★　画面を左クリックするとキーの割り当てをスキップします。(非推奨)");
-						DDPrint.PrintLine("★　画面を右クリックするとキャンセルします。");
+						DDPrint.SetPrint(420, 365, 35, 20);
+						DDPrint.PrintLine("/// ＴＩＰＳ ///");
+						DDPrint.PrintLine("カーソルの指す機能に割り当てるキーを押して下さい。");
+						DDPrint.PrintLine("画面を左クリックするとキーの割り当てをスキップします。(非推奨)");
+						DDPrint.SetColor(new I3Color(255, 255, 0));
+						DDPrint.SetBorder(new I3Color(100, 50, 0));
+						DDPrint.PrintLine("画面を右クリックするとキャンセルします。");
+						DDPrint.SetColor(new I3Color(255, 255, 255)); // restore
+						DDPrint.SetBorder(new I3Color(0, 0, 0)); // restore
 
 						DDEngine.EachFrame();
 					}
@@ -474,8 +486,8 @@ namespace Charlotte.GameCommons
 						if (this.BorderColor != null)
 							DDPrint.SetBorder(this.BorderColor.Value);
 
-						DDPrint.SetPrint(this.X, this.Y, this.YStep);
-						//DDPrint.SetPrint(16, 16, 32); // old
+						//DDPrint.SetPrint(this.X, this.Y, this.YStep); // old
+						DDPrint.SetPrint(35, 50, 42, 20);
 						DDPrint.PrintLine("ゲームパッドのボタン設定");
 
 						for (int c = 0; c < btnInfos.Length; c++)
@@ -491,23 +503,29 @@ namespace Charlotte.GameCommons
 								if (btnId == -1)
 									DDPrint.Print("割り当てナシ");
 								else
-									DDPrint.Print("" + btnId);
+									DDPrint.Print(btnId.ToString("D2"));
 							}
 							DDPrint.PrintRet();
 						}
-						DDPrint.PrintLine("★　カーソルの指す機能に割り当てるボタンを押して下さい。");
-						DDPrint.PrintLine("★　[Z]キーを押すとボタンの割り当てをスキップします。");
-						DDPrint.PrintLine("★　スペースキーを押すとキャンセルします。");
+						DDPrint.SetPrint(435, 365, 35, 20);
+						DDPrint.PrintLine("/// ＴＩＰＳ ///");
+						DDPrint.PrintLine("カーソルの指す機能に割り当てるボタンを押して下さい。");
+						DDPrint.PrintLine("Ｚキーを押すとボタンの割り当てをスキップします。");
+						DDPrint.SetColor(new I3Color(255, 255, 0));
+						DDPrint.SetBorder(new I3Color(100, 50, 0));
+						DDPrint.PrintLine("スペースキーを押すとキャンセルします。");
+						DDPrint.SetColor(new I3Color(255, 255, 255)); // restore
+						DDPrint.SetBorder(new I3Color(0, 0, 0)); // restore
 
-						if (this.MouseUsable)
-						{
-							DDPrint.PrintLine("★　右クリックするとキャンセルします。");
+						//if (this.MouseUsable)
+						//{
+						//    DDPrint.PrintLine("★　右クリックするとキャンセルします。");
 
-							if (DDMouse.R.GetInput() == -1)
-							{
-								return;
-							}
-						}
+						//    if (DDMouse.R.GetInput() == -1)
+						//    {
+						//        return;
+						//    }
+						//}
 
 						DDEngine.EachFrame();
 					}
@@ -567,7 +585,7 @@ namespace Charlotte.GameCommons
 
 			for (; ; )
 			{
-				selectIndex = Perform("ウィンドウサイズ設定", items, selectIndex);
+				selectIndex = Perform("ウィンドウサイズ設定", items, selectIndex, false, 235, 20, 34);
 
 				switch (selectIndex)
 				{
@@ -602,6 +620,30 @@ namespace Charlotte.GameCommons
 			}
 		endLoop:
 			;
+		}
+
+		private static string GetMeterString(int value, int minval, int maxval, int meterLen)
+		{
+			int indicatorPos;
+
+			if (value == minval)
+				indicatorPos = 0;
+			else if (value == maxval)
+				indicatorPos = meterLen - 1;
+			else
+				indicatorPos = (int)(DDUtils.RateAToB(minval + 1, maxval - 1, value) * (meterLen - 3)) + 1;
+
+			StringBuilder buff = new StringBuilder();
+
+			buff.Append("[");
+
+			for (int index = 0; index < meterLen; index++)
+				buff.Append(index == indicatorPos ? "■" : "-");
+
+			buff.Append("] ");
+			buff.Append(value);
+
+			return buff.ToString();
 		}
 
 		public int IntVolumeConfig(string title, int value, int minval, int maxval, int valStep, int valFastStep, Action<int> valChanged, Action pulse)
@@ -672,27 +714,35 @@ namespace Charlotte.GameCommons
 				if (this.BorderColor != null)
 					DDPrint.SetBorder(this.BorderColor.Value);
 
-				DDPrint.SetPrint(this.X, this.Y, this.YStep);
+				//DDPrint.SetPrint(this.X, this.Y, this.YStep); // old
+				DDPrint.SetPrint(40, 40, 40);
 				DDPrint.PrintLine(title);
-				DDPrint.PrintLine(string.Format("[{0}]　最小={1}　最大={2}", value, minval, maxval));
+				//DDPrint.PrintLine(string.Format("[{0}]　最小={1}　最大={2}", value, minval, maxval)); // old
+				DDPrint.PrintLine("");
+				DDPrint.PrintLine("");
+				DDPrint.PrintLine(GetMeterString(value, minval, maxval, 67));
+				DDPrint.PrintLine("");
+				DDPrint.PrintLine("");
+				DDPrint.PrintLine("");
 
-				if (this.MouseUsable)
+				//if (this.MouseUsable)
+				//{
+				//    DDPrint.PrintLine("★　ホイール上・右＝上げる");
+				//    DDPrint.PrintLine("★　ホイール下・左＝下げる");
+				//    DDPrint.PrintLine("★　上＝速く上げる");
+				//    DDPrint.PrintLine("★　下＝速く下げる");
+				//    DDPrint.PrintLine("★　調整が終わったら左クリック・決定ボタンを押して下さい。");
+				//    DDPrint.PrintLine("★　右クリック・キャンセルボタンを押すと変更をキャンセルします。");
+				//}
+				//else
 				{
-					DDPrint.PrintLine("★　ホイール上・右＝上げる");
-					DDPrint.PrintLine("★　ホイール下・左＝下げる");
-					DDPrint.PrintLine("★　上＝速く上げる");
-					DDPrint.PrintLine("★　下＝速く下げる");
-					DDPrint.PrintLine("★　調整が終わったら左クリック・決定ボタンを押して下さい。");
-					DDPrint.PrintLine("★　右クリック・キャンセルボタンを押すと変更をキャンセルします。");
-				}
-				else
-				{
-					DDPrint.PrintLine("★　右＝上げる");
-					DDPrint.PrintLine("★　左＝下げる");
-					DDPrint.PrintLine("★　上＝速く上げる");
-					DDPrint.PrintLine("★　下＝速く下げる");
-					DDPrint.PrintLine("★　調整が終わったら決定ボタンを押して下さい。");
-					DDPrint.PrintLine("★　キャンセルボタンを押すと変更をキャンセルします。");
+					string INDENT = "　　　　　　　　　　　　　";
+
+					DDPrint.PrintLine(INDENT + "/// ＴＩＰＳ ///");
+					DDPrint.PrintLine(INDENT + "右 または 上 ＝ 上げる");
+					DDPrint.PrintLine(INDENT + "左 または 下 ＝ 下げる");
+					DDPrint.PrintLine(INDENT + "調整が終わったら決定ボタンを押して下さい。");
+					DDPrint.PrintLine(INDENT + "キャンセルボタンを押すと変更をキャンセルします。");
 				}
 				DDPrint.Reset();
 

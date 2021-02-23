@@ -20,6 +20,6 @@ namespace Charlotte
 		/// <summary>
 		/// 残りリスポーン地点設置回数_初期値の最大値
 		/// </summary>
-		public const int START_SNAPSHOT_COUNT_MAX = 13;
+		public const int START_SNAPSHOT_COUNT_MAX = 12;
 	}
 }

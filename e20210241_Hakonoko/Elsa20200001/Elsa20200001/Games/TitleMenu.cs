@@ -346,12 +346,18 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				string[] items = Enumerable.Range(1, 9)
-					.Select(stageIndex => "LAYER " + (10 - stageIndex) + (Math.Max(1, Ground.I.ReachedStageIndex) < stageIndex ? " (未到達)" : ""))
+				string[] items = Enumerable.Range(1, SCommon.ToRange(Ground.I.ReachedStageIndex, 1, 9))
+					.Select(stageIndex => "LAYER " + (10 - stageIndex))
 					.Concat(new string[] { "戻る" })
 					.ToArray();
 
-				selectIndex = this.SimpleMenu.Perform("コンテニュー", items, selectIndex);
+				{
+					int Y_STEP = 40 + Math.Max(0, 7 - items.Length) * 5;
+					int ITEMS_H = items.Length * Y_STEP + 24;
+					int Y = (DDConsts.Screen_H - ITEMS_H) / 2;
+
+					selectIndex = this.SimpleMenu.Perform("レイヤーセレクト", items, selectIndex, false, 380, Y, Y_STEP);
+				}
 
 				if (selectIndex == items.Length - 1) // ? 戻る
 					break;
@@ -377,7 +383,7 @@ namespace Charlotte.Games
 					}
 					this.ReturnTitleMenu();
 
-					//break; // タイトルメニューへ戻っておく。
+					break; // タイトルメニューへ戻っておく。
 				}
 			}
 			DDEngine.FreezeInput();
@@ -395,7 +401,7 @@ namespace Charlotte.Games
 				"ウィンドウサイズ変更",
 				"ＢＧＭ音量",
 				"ＳＥ音量",
-				"スナップショット・ストック数(リスポーン地点設置回数)",
+				"スナップショット・ストック数",
 				"戻る",
 			};
 
@@ -408,7 +414,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform("設定", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform("設定", items, selectIndex, false, 282, 48, 60);
 
 				switch (selectIndex)
 				{
@@ -480,7 +486,7 @@ namespace Charlotte.Games
 					.Concat(new string[] { "戻る" })
 					.ToArray();
 
-				selectIndex = this.SimpleMenu.Perform("スナップショット・ストック数(リスポーン地点設置回数)の設定", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform("スナップショット・ストック数(リスポーン地点設置回数)の設定", items, selectIndex, false, 132, 20, 34);
 
 				if (selectIndex == items.Length - 1) // ? 戻る
 					break;

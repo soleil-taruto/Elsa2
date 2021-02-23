@@ -1372,8 +1372,17 @@ namespace Charlotte.Games
 			{
 				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 128),
-				WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				WallCurtain = -0.5,
+				//WallPicture = DDGround.KeptMainScreen.ToPicture(),
+				//WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
+
+					DDDraw.SetAlpha(0.8);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 4, DDConsts.Screen_W, DDConsts.Screen_H / 2);
+					DDDraw.Reset();
+				},
 			};
 
 			DDEngine.FreezeInput();
@@ -1387,7 +1396,7 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"PAUSE",
+					"ＰＡＵＳＥ",
 					new string[]
 					{
 						Game.I.FinalZone == null ?
@@ -1397,7 +1406,10 @@ namespace Charlotte.Games
 						"ゲームに戻る",
 					},
 					selectIndex,
-					true
+					true,
+					250,
+					180,
+					50
 					);
 
 				switch (selectIndex)
@@ -1468,7 +1480,10 @@ namespace Charlotte.Games
 						"ゲームに戻る",
 					},
 					selectIndex,
-					true
+					true,
+					40,
+					40,
+					40
 					);
 
 				switch (selectIndex)
