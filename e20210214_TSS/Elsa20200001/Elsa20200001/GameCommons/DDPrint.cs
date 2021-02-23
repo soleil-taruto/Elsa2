@@ -36,7 +36,7 @@ namespace Charlotte.GameCommons
 			Extra.Color = color;
 		}
 
-		public static void SetBorder(I3Color color, int width = 1)
+		public static void SetBorder(I3Color color, int width = 2)
 		{
 			Extra.BorderColor = color;
 			Extra.BorderWidth = width;
@@ -50,7 +50,7 @@ namespace Charlotte.GameCommons
 		private static int P_X;
 		private static int P_Y;
 
-		public static void SetPrint(int x = 0, int y = 0, int yStep = 16)
+		public static void SetPrint(int x = 0, int y = 0, int yStep = 32)
 		{
 			P_BaseX = x;
 			P_BaseY = y;
@@ -65,12 +65,27 @@ namespace Charlotte.GameCommons
 			P_Y += P_YStep;
 		}
 
-		private static void Print_Main2(string line, int x, int y, I3Color color)
+		private static DDFont _font
 		{
-			DX.DrawString(x, y, line, DDUtils.GetColor(color));
+			get
+			{
+				return DDFontUtils.GetFont("Kゴシック", 32);
+			}
 		}
 
-		private static void Print_Main(string line, int x, int y)
+		private static void Print_Main2(string line, int x, int y, I3Color color, double centeringRate)
+		{
+			// centeringRate:
+			// 0.0 == 右寄せ (最初の文字の左側面が x になる)
+			// 0.5 == 中央寄せ
+			// 1.0 == 左寄せ (最後の文字の右側面が x になる)
+
+			x -= SCommon.ToInt(DDFontUtils.GetDrawStringWidth(line, _font) * centeringRate);
+
+			DDFontUtils.DrawString(x, y, line, _font, false, color);
+		}
+
+		private static void Print_Main(string line, int x, int y, double centeringRate)
 		{
 			if (Extra.BorderWidth != 0)
 			{
@@ -79,12 +94,12 @@ namespace Charlotte.GameCommons
 
 				for (int xc = -BORDER_WIDTH; xc <= BORDER_WIDTH; xc += BORDER_STEP)
 					for (int yc = -BORDER_WIDTH; yc <= BORDER_WIDTH; yc += BORDER_STEP)
-						Print_Main2(line, x + xc, y + yc, Extra.BorderColor);
+						Print_Main2(line, x + xc, y + yc, Extra.BorderColor, centeringRate);
 			}
-			Print_Main2(line, x, y, Extra.Color);
+			Print_Main2(line, x, y, Extra.Color, centeringRate);
 		}
 
-		public static void Print(string line)
+		public static void Print(string line, double centeringRate = 0.0)
 		{
 			if (line == null)
 				throw new DDError();
@@ -94,7 +109,7 @@ namespace Charlotte.GameCommons
 
 			if (Extra.TL == null)
 			{
-				Print_Main(line, x, y);
+				Print_Main(line, x, y, centeringRate);
 			}
 			else
 			{
@@ -105,14 +120,15 @@ namespace Charlotte.GameCommons
 					ExtraInfo currExtra = Extra;
 
 					Extra = storedExtra;
-					Print_Main(line, x, y);
+					Print_Main(line, x, y, centeringRate);
 					Extra = currExtra;
 
 					return false;
 				});
 			}
 
-			int w = DX.GetDrawStringWidth(line, SCommon.ENCODING_SJIS.GetByteCount(line));
+			//int w = DX.GetDrawStringWidth(line, SCommon.ENCODING_SJIS.GetByteCount(line));
+			int w = DX.GetDrawStringWidthToHandle(line, SCommon.ENCODING_SJIS.GetByteCount(line), _font.GetHandle(), 0);
 
 			if (w < 0 || SCommon.IMAX < w)
 				throw new DDError();
