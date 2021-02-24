@@ -485,6 +485,18 @@ namespace Charlotte.GameCommons
 			return a + (b - a) * rate;
 		}
 
+		/// <summary>
+		/// 始点から終点までの間の位置をレートに変換する。
+		/// </summary>
+		/// <param name="a">始点</param>
+		/// <param name="b">終点</param>
+		/// <param name="value">位置</param>
+		/// <returns>レート</returns>
+		public static double RateAToB(double a, double b, double value)
+		{
+			return (value - a) / (b - a);
+		}
+
 		public static int Sign(double value)
 		{
 			if (value < 0) return -1;

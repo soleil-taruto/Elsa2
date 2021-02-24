@@ -5,6 +5,7 @@ using System.Text;
 using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
+using Charlotte.Games;
 using Charlotte.Novels.Surfaces;
 
 namespace Charlotte.Novels
@@ -14,6 +15,10 @@ namespace Charlotte.Novels
 		public NovelStatus Status = new NovelStatus(); // 軽量な仮設オブジェクト
 
 		// <---- prm
+
+		public bool ReturnToTitleMenu = false;
+
+		// <---- ret
 
 		public static Novel I;
 
@@ -182,7 +187,10 @@ namespace Charlotte.Novels
 							throw null; // never
 					}
 					if (this.SystemMenu_ReturnToTitleMenu)
+					{
+						this.ReturnToTitleMenu = true;
 						break;
+					}
 				}
 
 				if (
@@ -418,18 +426,30 @@ namespace Charlotte.Novels
 
 		private bool SystemMenu_ReturnToTitleMenu = false;
 
+		private static DDSubScreen SystemMenu_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+
 		/// <summary>
 		/// システムメニュー画面
 		/// </summary>
 		private void SystemMenu()
 		{
+			DDMain.KeepMainScreen();
+			SCommon.Swap(ref DDGround.KeptMainScreen, ref SystemMenu_KeptMainScreen);
+
 			this.SystemMenu_ReturnToTitleMenu = false; // reset
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 0),
-				WallColor = new I3Color(32, 96, 32),
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(SystemMenu_KeptMainScreen.ToPicture(), 0, 0);
+
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 4, DDConsts.Screen_W, DDConsts.Screen_H / 2);
+					DDDraw.Reset();
+				},
 			};
 
 			int selectIndex = 0;
@@ -437,9 +457,13 @@ namespace Charlotte.Novels
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
+					100,
+					180,
+					50,
 					"システムメニュー",
 					new string[]
 					{
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -449,10 +473,32 @@ namespace Charlotte.Novels
 				switch (selectIndex)
 				{
 					case 0:
-						this.SystemMenu_ReturnToTitleMenu = true;
-						goto endLoop;
+						using (new SettingMenu()
+						{
+							SimpleMenu = new DDSimpleMenu()
+							{
+								BorderColor = new I3Color(0, 64, 0),
+								WallDrawer = () =>
+								{
+									DDDraw.DrawSimple(SystemMenu_KeptMainScreen.ToPicture(), 0, 0);
+									DDCurtain.DrawCurtain(-0.5);
+								},
+							},
+						})
+						{
+							SettingMenu.I.Perform();
+						}
+						break;
 
 					case 1:
+						if (new Confirm().Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.SystemMenu_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
+
+					case 2:
 						goto endLoop;
 
 					default:

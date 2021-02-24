@@ -47,7 +47,8 @@ namespace Charlotte.Games.Enemies.Tests
 					DDPrint.SetPrint(
 						(int)this.X - DDGround.ICamera.X - 10,
 						(int)this.Y - DDGround.ICamera.Y - 10,
-						20
+						20,
+						-1
 						);
 					DDPrint.PrintLine("敵(仮)");
 					DDPrint.PrintLine("[無害]");

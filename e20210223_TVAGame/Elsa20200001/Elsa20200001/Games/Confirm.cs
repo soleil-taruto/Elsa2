@@ -11,8 +11,8 @@ namespace Charlotte.Games
 	{
 		public I3Color BorderColor = new I3Color(100, 0, 200);
 		public I4Rect BackBoardRect = new I4Rect(0, DDConsts.Screen_H / 3, DDConsts.Screen_W, DDConsts.Screen_H / 3);
-		public int Text_L = 50;
-		public int Text_T = DDConsts.Screen_H / 3 + 50;
+		public int Text_L = 35;
+		public int Text_T = DDConsts.Screen_H / 3 + 35;
 
 		// <---- prm
 
@@ -27,16 +27,14 @@ namespace Charlotte.Games
 				{
 					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
 
-					DDDraw.SetAlpha(0.9);
+					DDDraw.SetAlpha(0.7);
 					DDDraw.SetBright(0, 0, 0);
 					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, this.BackBoardRect.ToD4Rect());
 					DDDraw.Reset();
 				},
-				X = this.Text_L,
-				Y = this.Text_T,
 			};
 
-			return simpleMenu.Perform(prompt, options, 0);
+			return simpleMenu.Perform(Text_L, Text_T, 40, 24, prompt, options, 0);
 		}
 	}
 }

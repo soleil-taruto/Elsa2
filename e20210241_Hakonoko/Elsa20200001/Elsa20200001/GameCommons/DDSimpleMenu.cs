@@ -631,7 +631,11 @@ namespace Charlotte.GameCommons
 			else if (value == maxval)
 				indicatorPos = meterLen - 1;
 			else
-				indicatorPos = (int)(DDUtils.RateAToB(minval + 1, maxval - 1, value) * (meterLen - 3)) + 1;
+				indicatorPos = SCommon.ToRange(
+					SCommon.ToInt(DDUtils.RateAToB(minval, maxval, value) * (meterLen - 1)),
+					1,
+					meterLen - 2
+					);
 
 			StringBuilder buff = new StringBuilder();
 

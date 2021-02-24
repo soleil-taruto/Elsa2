@@ -68,8 +68,12 @@ namespace Charlotte.Games.Enemies.Tests
 
 			using (new Novel())
 			{
-				Novel.I.Status.Scenario = new Scenario("イベント0001");
+				Novel.I.Status.Scenario = new Scenario("テスト0001");
+				//Novel.I.Status.Scenario = new Scenario("イベント0001"); // old
 				Novel.I.Perform();
+
+				if (Novel.I.ReturnToTitleMenu)
+					Game.I.RequestReturnToTitleMenu = true;
 			}
 
 			MusicCollection.Get(Game.I.Map.MusicName).Play();

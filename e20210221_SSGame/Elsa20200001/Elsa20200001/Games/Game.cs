@@ -48,6 +48,8 @@ namespace Charlotte.Games
 		public int Frame;
 		public bool UserInputDisabled = false;
 
+		public bool RequestReturnToTitleMenu = false;
+
 		public void Perform()
 		{
 			Func<bool> f_ゴミ回収 = SCommon.Supplier(this.E_ゴミ回収());
@@ -111,6 +113,11 @@ namespace Charlotte.Games
 						this.Status.ExitDirection = 5;
 						break;
 					}
+				}
+				if (this.RequestReturnToTitleMenu)
+				{
+					this.Status.ExitDirection = 5;
+					break;
 				}
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_RETURN) == 1)
 				{
@@ -1207,19 +1214,28 @@ namespace Charlotte.Games
 		private bool Pause_ReturnToTitleMenu = false;
 		private bool 当たり判定表示 = false;
 
+		private static DDSubScreen Pause_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+
 		/// <summary>
 		/// ポーズメニュー
 		/// </summary>
 		private void Pause()
 		{
 			DDMain.KeepMainScreen();
+			SCommon.Swap(ref DDGround.KeptMainScreen, ref Pause_KeptMainScreen);
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 128),
-				WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 4, DDConsts.Screen_W, DDConsts.Screen_H / 2);
+					DDDraw.Reset();
+				},
 			};
 
 			DDEngine.FreezeInput();
@@ -1229,24 +1245,49 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"PAUSE",
+					100,
+					180,
+					50,
+					"システムメニュー",
 					new string[]
 					{
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
 					selectIndex,
-					true,
 					true
 					);
 
 				switch (selectIndex)
 				{
 					case 0:
-						this.Pause_ReturnToTitleMenu = true;
-						goto endLoop;
+						using (new SettingMenu()
+						{
+							SimpleMenu = new DDSimpleMenu()
+							{
+								BorderColor = new I3Color(0, 64, 128),
+								WallDrawer = () =>
+								{
+									DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+									DDCurtain.DrawCurtain(-0.7);
+								},
+							},
+						})
+						{
+							SettingMenu.I.Perform();
+						}
+						break;
 
 					case 1:
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.Pause_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
+
+					case 2:
 						goto endLoop;
 
 					default:
@@ -1270,10 +1311,12 @@ namespace Charlotte.Games
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 128, 64),
-				WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
+					DDCurtain.DrawCurtain(-0.5);
+				},
 			};
 
 			DDEngine.FreezeInput();
@@ -1283,6 +1326,9 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
+					40,
+					40,
+					40,
 					"デバッグ用メニュー",
 					new string[]
 					{

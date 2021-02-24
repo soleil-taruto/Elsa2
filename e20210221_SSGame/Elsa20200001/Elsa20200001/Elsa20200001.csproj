@@ -182,6 +182,7 @@
     <Compile Include="Games\Map.cs" />
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MusicCollection.cs" />
+    <Compile Include="Games\SettingMenu.cs" />
     <Compile Include="Games\Shots\Shot_さやか接地攻撃.cs" />
     <Compile Include="Games\Shots\Shot_ほむらシールド.cs" />
     <Compile Include="Games\Shots\Shot_ほむら接地攻撃.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Games\Walls\Wall_Dark.cs" />
     <Compile Include="Games\Walls\Wall_Simple.cs" />
     <Compile Include="Games\World.cs" />
+    <Compile Include="Games\ぼかし効果.cs" />
     <Compile Include="Ground.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs" />
     <Compile Include="LevelEditors\LevelEditorDlg.cs">

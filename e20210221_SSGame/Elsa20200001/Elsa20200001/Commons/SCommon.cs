@@ -75,17 +75,18 @@ namespace Charlotte.Commons
 			list[b] = tmp;
 		}
 
+		public static void Swap<T>(ref T a, ref T b)
+		{
+			T tmp = a;
+			a = b;
+			b = tmp;
+		}
+
 		public static byte[] EMPTY_BYTES = new byte[0];
 
 		public static int Comp(byte a, byte b)
 		{
-			if (a < b)
-				return -1;
-
-			if (a > b)
-				return 1;
-
-			return 0;
+			return (int)a - (int)b;
 		}
 
 		public static int Comp(byte[] a, byte[] b)

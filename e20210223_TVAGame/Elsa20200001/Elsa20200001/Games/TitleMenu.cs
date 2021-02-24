@@ -29,7 +29,7 @@ namespace Charlotte.Games
 		private class DrawWallTask : DDTask
 		{
 			public bool TopMenuLeaved = false;
-			public bool KeyConfigEntered = false;
+			public bool DeepConfigEntered = false;
 
 			public override IEnumerable<bool> E_Task()
 			{
@@ -40,8 +40,10 @@ namespace Charlotte.Games
 				double ldy;
 				double shadow_a = 0.0;
 				double shadow_x = 0.0;
+				double title_a = 0.0;
 				double shadow_targ_a;
 				double shadow_targ_x;
+				double title_targ_a;
 
 				for (int frame = 0; ; frame++)
 				{
@@ -67,6 +69,9 @@ namespace Charlotte.Games
 
 					double tba = 0.5 + Math.Sin(frame / 103.0) * 0.185 + Math.Sin(frame / 3.0) * 0.015 * Math.Sin(frame / 107.0);
 					double tfa = 0.3;
+
+					tba *= title_a;
+					tfa *= title_a;
 
 					{
 						const int FRAME_MAX = 300;
@@ -102,23 +107,27 @@ namespace Charlotte.Games
 						}
 					}
 
-					if (this.KeyConfigEntered)
+					if (this.DeepConfigEntered)
 					{
 						shadow_targ_a = 0.3;
-						shadow_targ_x = 600.0;
+						shadow_targ_x = DDConsts.Screen_W;
+						title_targ_a = 0.0;
 					}
 					else if (this.TopMenuLeaved)
 					{
 						shadow_targ_a = 0.3;
 						shadow_targ_x = 480.0;
+						title_targ_a = 1.0;
 					}
 					else
 					{
 						shadow_targ_a = 0.0;
 						shadow_targ_x = 30.0;
+						title_targ_a = 1.0;
 					}
 					DDUtils.Approach(ref shadow_a, shadow_targ_a, 0.8);
 					DDUtils.Approach(ref shadow_x, shadow_targ_x, 0.8);
+					DDUtils.Approach(ref title_a, title_targ_a, 0.97);
 
 					DDDraw.SetAlpha(shadow_a);
 					DDDraw.SetBright(0, 0, 0);
@@ -241,13 +250,11 @@ namespace Charlotte.Games
 
 			Ground.I.Music.Title.Play();
 
-			this.SimpleMenu = new DDSimpleMenu();
-
-			this.SimpleMenu.BorderColor = new I3Color(0, 96, 0);
-			//this.SimpleMenu.WallColor = new I3Color(0, 64, 0);
-			//this.SimpleMenu.WallPicture = Ground.I.Picture.P_TITLE_WALL;
-			//this.SimpleMenu.WallCurtain = -0.8;
-			this.SimpleMenu.WallDrawer = this.DrawWall.Execute;
+			this.SimpleMenu = new DDSimpleMenu()
+			{
+				BorderColor = new I3Color(0, 96, 0),
+				WallDrawer = this.DrawWall.Execute,
+			};
 
 			this.TopMenu.SelectIndex = 0;
 
@@ -282,7 +289,9 @@ namespace Charlotte.Games
 
 						case 1:
 							{
+								this.DrawWall.DeepConfigEntered = true;
 								Ground.P_SaveDataSlot saveDataSlot = LoadGame();
+								this.DrawWall.DeepConfigEntered = false;
 
 								if (saveDataSlot != null)
 								{
@@ -332,14 +341,14 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 
 			DDEngine.FreezeInput();
 		}
 
-		private static Ground.P_SaveDataSlot LoadGame() // ret: null == キャンセル, ret.GameStatus を使用する際は GetClone を忘れずに！
+		private Ground.P_SaveDataSlot LoadGame() // ret: null == キャンセル, ret.GameStatus を使用する際は GetClone を忘れずに！
 		{
 			Ground.P_SaveDataSlot saveDataSlot = null;
 
@@ -348,10 +357,17 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			DDSimpleMenu simpleMenu = new DDSimpleMenu();
-
-			simpleMenu.BorderColor = new I3Color(0, 128, 0);
-			simpleMenu.WallColor = new I3Color(64, 64, 128);
+			// old
+			//DDSimpleMenu simpleMenu = new DDSimpleMenu()
+			//{
+			//    BorderColor = new I3Color(0, 128, 0),
+			//    WallDrawer = () =>
+			//    {
+			//        DDDraw.SetBright(new I3Color(64, 64, 128));
+			//        DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+			//        DDDraw.Reset();
+			//    },
+			//};
 
 			string[] items = Ground.I.SaveDataSlots.Select(v => v.GameStatus == null ?
 				"----" :
@@ -361,7 +377,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = simpleMenu.Perform("ロード画面", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(18, 18, 32, 24, "ロード", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
@@ -405,11 +421,13 @@ namespace Charlotte.Games
 					"ＢＧＭ音量",
 					"ＳＥ音量",
 					"ノベルパートのメッセージ表示速度",
-					"高速ボタンをリバース [ " + Ground.I.FastReverseMode + " ]",
+					"高速ボタンをリバース [ " + (Ground.I.FastReverseMode ? "リバース" : "無効(デフォルト)" ) + " ]",
 					"戻る",
 				};
 
-				selectIndex = this.SimpleMenu.Perform("設定", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 18, "設定", items, selectIndex);
+
+				this.DrawWall.DeepConfigEntered = true;
 
 				switch (selectIndex)
 				{
@@ -418,9 +436,7 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						this.DrawWall.KeyConfigEntered = true;
 						this.SimpleMenu.PadConfig(true);
-						this.DrawWall.KeyConfigEntered = false;
 						break;
 
 					case 2:
@@ -477,8 +493,10 @@ namespace Charlotte.Games
 					default:
 						throw new DDError();
 				}
+				this.DrawWall.DeepConfigEntered = false;
 			}
 		endMenu:
+			this.DrawWall.DeepConfigEntered = false;
 			DDEngine.FreezeInput();
 		}
 
@@ -489,7 +507,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 
