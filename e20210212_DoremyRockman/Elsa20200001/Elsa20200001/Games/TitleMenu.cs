@@ -121,6 +121,7 @@ namespace Charlotte.Games
 				"Stage_Sanae_v001",
 				"w0001(テスト用)",
 				"w1001(テスト用)",
+				"戻る",
 			},
 			0
 			);

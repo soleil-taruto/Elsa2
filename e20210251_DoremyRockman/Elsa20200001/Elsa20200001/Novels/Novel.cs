@@ -427,9 +427,13 @@ namespace Charlotte.Novels
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 0),
-				WallColor = new I3Color(32, 96, 32),
+				WallDrawer = () =>
+				{
+					DDDraw.SetBright(new I3Color(32, 96, 32));
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+					DDDraw.Reset();
+				},
 			};
 
 			int selectIndex = 0;
@@ -437,6 +441,9 @@ namespace Charlotte.Novels
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
+					50,
+					50,
+					50,
 					"システムメニュー",
 					new string[]
 					{

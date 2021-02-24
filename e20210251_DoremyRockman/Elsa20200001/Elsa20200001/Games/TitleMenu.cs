@@ -35,31 +35,37 @@ namespace Charlotte.Games
 
 			string[] items = new string[]
 			{
+				"開発デバッグ用_ワールドセレクト",
 				"ゲームスタート",
-				"コンテニュー(未実装)",
+				"コンテニュー",
 				"設定",
 				"終了",
 			};
 
 			int selectIndex = 0;
 
-			this.SimpleMenu = new DDSimpleMenu();
-
-			this.SimpleMenu.BorderColor = new I3Color(64, 0, 0);
-			this.SimpleMenu.WallColor = new I3Color(96, 0, 0);
-			//this.SimpleMenu.WallPicture = Ground.I.Picture.Title;
-			//this.SimpleMenu.WallCurtain = -0.8;
+			this.SimpleMenu = new DDSimpleMenu()
+			{
+				BorderColor = new I3Color(64, 0, 0),
+				WallDrawer = () =>
+				{
+					DDDraw.SetBright(new I3Color(32, 0, 0));
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+					DDDraw.Reset();
+				},
+			};
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform("ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, "ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
 
 				switch (selectIndex)
 				{
 					case 0:
-#if true // 開発デバッグ用
 						this.Debug_SelectWorld();
-#else
+						break;
+
+					case 1:
 						{
 							this.LeaveTitleMenu();
 
@@ -69,18 +75,21 @@ namespace Charlotte.Games
 							}
 							this.ReturnTitleMenu();
 						}
-#endif
-						break;
-
-					case 1:
-						// TODO
 						break;
 
 					case 2:
-						this.Setting();
+						// TODO
 						break;
 
 					case 3:
+						using (new SettingMenu())
+						{
+							SettingMenu.I.SimpleMenu = this.SimpleMenu;
+							SettingMenu.I.Perform();
+						}
+						break;
+
+					case 4:
 						goto endMenu;
 
 					default:
@@ -93,7 +102,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 
@@ -115,12 +124,13 @@ namespace Charlotte.Games
 				this.ReturnTitleMenu();
 			};
 
-			int selectIndex = this.SimpleMenu.Perform("開発デバッグ用_ワールドセレクト", new string[]
+			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, "開発デバッグ用_ワールドセレクト", new string[]
 			{
 				"Stage_Raimu_v001",
 				"Stage_Sanae_v001",
 				"w0001(テスト用)",
 				"w1001(テスト用)",
+				"戻る",
 			},
 			0
 			);
@@ -151,81 +161,6 @@ namespace Charlotte.Games
 			}
 		}
 
-		private void Setting()
-		{
-			DDCurtain.SetCurtain();
-			DDEngine.FreezeInput();
-
-			string[] items = new string[]
-			{
-				"ゲームパッドのボタン設定",
-				"キーボードのキー設定",
-				"ウィンドウサイズ変更",
-				"ＢＧＭ音量",
-				"ＳＥ音量",
-				"戻る",
-			};
-
-			DDSE[] seSamples = Ground.I.SE.テスト用s;
-
-			int selectIndex = 0;
-
-			for (; ; )
-			{
-				selectIndex = this.SimpleMenu.Perform("設定", items, selectIndex);
-
-				switch (selectIndex)
-				{
-					case 0:
-						this.SimpleMenu.PadConfig();
-						break;
-
-					case 1:
-						this.SimpleMenu.PadConfig(true);
-						break;
-
-					case 2:
-						this.SimpleMenu.WindowSizeConfig();
-						break;
-
-					case 3:
-						this.SimpleMenu.VolumeConfig("ＢＧＭ音量", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
-						{
-							DDGround.MusicVolume = volume;
-							DDMusicUtils.UpdateVolume();
-						},
-						() => { }
-						);
-						break;
-
-					case 4:
-						this.SimpleMenu.VolumeConfig("ＳＥ音量", DDGround.SEVolume, 0, 100, 1, 10, volume =>
-						{
-							DDGround.SEVolume = volume;
-							//DDSEUtils.UpdateVolume(); // old
-
-							foreach (DDSE se in seSamples) // サンプルのみ音量更新
-								se.UpdateVolume();
-						},
-						() =>
-						{
-							DDUtils.Random.ChooseOne(seSamples).Play();
-						}
-						);
-						DDSEUtils.UpdateVolume(); // 全音量更新
-						break;
-
-					case 5:
-						goto endMenu;
-
-					default:
-						throw new DDError();
-				}
-			}
-		endMenu:
-			DDEngine.FreezeInput();
-		}
-
 		private void LeaveTitleMenu()
 		{
 			DDMusicUtils.Fade();
@@ -233,7 +168,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 

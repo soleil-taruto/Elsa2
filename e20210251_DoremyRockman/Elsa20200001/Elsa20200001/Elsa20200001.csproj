@@ -73,6 +73,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="GameCommons\DDTouch.cs" />
+    <Compile Include="Games\Confirm.cs" />
     <Compile Include="Games\Enemies\EnemyCommon.cs" />
     <Compile Include="Games\Enemies\Enemy_Bird.cs" />
     <Compile Include="Games\Enemies\Enemy_BirdShit.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Games\Map.cs" />
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MusicCollection.cs" />
+    <Compile Include="Games\SettingMenu.cs" />
     <Compile Include="Games\Tiles\Tile_Brick_Back.cs" />
     <Compile Include="Games\Tiles\Tile_Brick_Front.cs" />
     <Compile Include="Games\Tiles\Tile_Double.cs" />
