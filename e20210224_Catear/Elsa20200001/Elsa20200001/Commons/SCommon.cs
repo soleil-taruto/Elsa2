@@ -1187,6 +1187,8 @@ namespace Charlotte.Commons
 			};
 		}
 
+		// sync > @ Base64_TimeStamp
+
 		#region Base64
 
 		public class Base64
@@ -1571,5 +1573,7 @@ namespace Charlotte.Commons
 		}
 
 		#endregion
+
+		// < sync
 	}
 }

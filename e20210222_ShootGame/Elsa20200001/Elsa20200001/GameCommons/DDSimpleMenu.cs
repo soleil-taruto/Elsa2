@@ -61,7 +61,7 @@ namespace Charlotte.GameCommons
 				DDPrint.SetBorder(this.BorderColor.Value);
 		}
 
-		public int Perform(int x, int y, int yStep, string title, string[] items, int selectIndex, bool ポーズボタンでメニュー終了 = false, bool noPound = false)
+		public int Perform(int x, int y, int yStep, int fontSize, string title, string[] items, int selectIndex, bool ポーズボタンでメニュー終了 = false, bool noPound = false)
 		{
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
@@ -139,7 +139,7 @@ namespace Charlotte.GameCommons
 				//DDPrint.SetPrint(DDConsts.Screen_W - 45, 2);
 				//DDPrint.Print("[M:" + (this.MouseUsable ? "E" : "D") + "]");
 
-				DDPrint.SetPrint(x, y, yStep);
+				DDPrint.SetPrint(x, y, yStep, fontSize);
 				//DDPrint.SetPrint(16, 16, 32); // old
 				DDPrint.PrintLine(title);
 
@@ -566,7 +566,7 @@ namespace Charlotte.GameCommons
 
 			for (; ; )
 			{
-				selectIndex = Perform(230, 13, 35, "ウィンドウサイズ設定", items, selectIndex);
+				selectIndex = Perform(230, 13, 35, 24, "ウィンドウサイズ設定", items, selectIndex);
 
 				switch (selectIndex)
 				{

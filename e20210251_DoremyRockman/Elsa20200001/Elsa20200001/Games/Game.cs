@@ -1398,6 +1398,7 @@ namespace Charlotte.Games
 					250,
 					180,
 					50,
+					24,
 					"システムメニュー",
 					new string[]
 					{
@@ -1481,6 +1482,7 @@ namespace Charlotte.Games
 					50,
 					50,
 					50,
+					24,
 					"デバッグ用メニュー",
 					new string[]
 					{

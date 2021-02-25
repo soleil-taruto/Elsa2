@@ -1386,7 +1386,7 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"PAUSE",
+					"ＰＡＵＳＥ",
 					new string[]
 					{
 						"タイトルに戻る",

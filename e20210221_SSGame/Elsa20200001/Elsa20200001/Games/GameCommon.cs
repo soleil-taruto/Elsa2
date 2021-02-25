@@ -152,7 +152,7 @@ namespace Charlotte.Games
 					"----" :
 					"[" + v.TimeStamp + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
 
-				selectIndex = simpleMenu.Perform(18, 18, 32, "セーブ", items, selectIndex);
+				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "セーブ", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{

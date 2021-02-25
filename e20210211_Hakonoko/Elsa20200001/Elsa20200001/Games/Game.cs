@@ -1387,7 +1387,7 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"PAUSE",
+					"ＰＡＵＳＥ",
 					new string[]
 					{
 						Game.I.FinalZone == null ?

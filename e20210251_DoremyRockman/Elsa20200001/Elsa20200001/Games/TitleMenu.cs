@@ -59,7 +59,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, "ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -139,7 +139,7 @@ namespace Charlotte.Games
 				this.ReturnTitleMenu();
 			};
 
-			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, "開発デバッグ用_ワールドセレクト", new string[]
+			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用_ワールドセレクト", new string[]
 			{
 				"Stage_Raimu_v001",
 				"Stage_Sanae_v001",

@@ -306,7 +306,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, "横シュー・テストコード / タイトルメニュー", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横シュー・テストコード / タイトルメニュー", items, selectIndex);
 
 				switch (selectIndex)
 				{

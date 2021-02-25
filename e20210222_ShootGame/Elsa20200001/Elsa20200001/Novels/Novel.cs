@@ -460,6 +460,7 @@ namespace Charlotte.Novels
 					100,
 					180,
 					50,
+					24,
 					"システムメニュー",
 					new string[]
 					{

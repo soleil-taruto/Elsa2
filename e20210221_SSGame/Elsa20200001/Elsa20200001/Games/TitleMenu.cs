@@ -62,7 +62,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, "横スクロール アクションゲーム タイプ-K テストコード / タイトルメニュー", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横スクロール アクションゲーム タイプ-K テストコード / タイトルメニュー", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -175,7 +175,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = simpleMenu.Perform(18, 18, 32, "ロード", items, selectIndex);
+				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "ロード", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{

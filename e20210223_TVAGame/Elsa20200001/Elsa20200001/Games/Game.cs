@@ -1135,7 +1135,7 @@ namespace Charlotte.Games
 					180,
 					50,
 					24,
-					"PAUSE",
+					"ＰＡＵＳＥ",
 					new string[]
 					{
 						"設定",
