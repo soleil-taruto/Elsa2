@@ -16,7 +16,7 @@ namespace Charlotte.Commons
 	{
 		// APP_IDENT の衝突の解消 -> t20210105_SolveUUIDCollision
 
-		public const string APP_IDENT = "{3529b48b-1e5e-43aa-a3cf-d3bbf74e3ac0}"; // アプリ毎に変更する。
+		public const string APP_IDENT = "{7ed32ee0-b660-4b92-97b0-5e07d221a85e}"; // アプリ毎に変更する。
 		public const string APP_TITLE = "Elsa20200001-Game";
 
 		public static string SelfFile;
