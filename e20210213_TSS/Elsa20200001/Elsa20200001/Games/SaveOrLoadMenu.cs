@@ -251,9 +251,18 @@ namespace Charlotte.Games
 
 					DX.SaveDrawScreenToBMP(0, 0, THUMB_W, THUMB_H, bmpFile);
 
-					using (Bitmap bmp = (Bitmap)Bitmap.FromFile(bmpFile))
+					using (
+						Bitmap // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+							bmp =
+								(Bitmap)Bitmap.FromFile( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+									bmpFile
+									))
 					{
-						bmp.Save(pngFile, ImageFormat.Png);
+						bmp
+							.Save( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+								pngFile,
+								ImageFormat.Png // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+								);
 					}
 					return new DDHashedData(File.ReadAllBytes(pngFile));
 				}
