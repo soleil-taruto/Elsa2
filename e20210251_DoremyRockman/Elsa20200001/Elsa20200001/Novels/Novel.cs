@@ -6,6 +6,7 @@ using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.Novels.Surfaces;
+using Charlotte.Games;
 
 namespace Charlotte.Novels
 {
@@ -369,13 +370,13 @@ namespace Charlotte.Novels
 				this.DrawSurfaces();
 				DDCurtain.DrawCurtain(-0.5);
 
-				for (int c = 1; c <= 16; c++)
+				for (int c = 1; c <= 17; c++)
 				{
 					int i = logLines.Count - backIndex - c;
 
 					if (0 <= i)
 					{
-						DDFontUtils.DrawString(10, DDConsts.Screen_H - c * 30 - 15, logLines[i], DDFontUtils.GetFont("Kゴシック", 16));
+						DDFontUtils.DrawString(8, DDConsts.Screen_H - c * 30 - 8, logLines[i], DDFontUtils.GetFont("Kゴシック", 16));
 					}
 				}
 				DDEngine.EachFrame();
@@ -418,11 +419,16 @@ namespace Charlotte.Novels
 
 		private bool SystemMenu_ReturnToTitleMenu = false;
 
+		private static DDSubScreen SystemMenu_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+
 		/// <summary>
 		/// システムメニュー画面
 		/// </summary>
 		private void SystemMenu()
 		{
+			DDMain.KeepMainScreen();
+			SCommon.Swap(ref DDGround.KeptMainScreen, ref SystemMenu_KeptMainScreen);
+
 			this.SystemMenu_ReturnToTitleMenu = false; // reset
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
@@ -430,8 +436,11 @@ namespace Charlotte.Novels
 				BorderColor = new I3Color(0, 64, 0),
 				WallDrawer = () =>
 				{
-					DDDraw.SetBright(new I3Color(32, 96, 32));
-					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+					DDDraw.DrawSimple(SystemMenu_KeptMainScreen.ToPicture(), 0, 0);
+
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 4, DDConsts.Screen_W, DDConsts.Screen_H / 2);
 					DDDraw.Reset();
 				},
 			};
@@ -441,12 +450,13 @@ namespace Charlotte.Novels
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					50,
-					50,
+					100,
+					180,
 					50,
 					"システムメニュー",
 					new string[]
 					{
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -456,10 +466,32 @@ namespace Charlotte.Novels
 				switch (selectIndex)
 				{
 					case 0:
-						this.SystemMenu_ReturnToTitleMenu = true;
-						goto endLoop;
+						using (new SettingMenu()
+						{
+							SimpleMenu = new DDSimpleMenu()
+							{
+								BorderColor = new I3Color(0, 64, 0),
+								WallDrawer = () =>
+								{
+									DDDraw.DrawSimple(SystemMenu_KeptMainScreen.ToPicture(), 0, 0);
+									DDCurtain.DrawCurtain(-0.5);
+								},
+							},
+						})
+						{
+							SettingMenu.I.Perform();
+						}
+						break;
 
 					case 1:
+						if (new Confirm().Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.SystemMenu_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
+
+					case 2:
 						goto endLoop;
 
 					default:

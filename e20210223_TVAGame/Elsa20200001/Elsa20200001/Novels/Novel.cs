@@ -377,13 +377,13 @@ namespace Charlotte.Novels
 				this.DrawSurfaces();
 				DDCurtain.DrawCurtain(-0.5);
 
-				for (int c = 1; c <= 16; c++)
+				for (int c = 1; c <= 17; c++)
 				{
 					int i = logLines.Count - backIndex - c;
 
 					if (0 <= i)
 					{
-						DDFontUtils.DrawString(10, DDConsts.Screen_H - c * 30 - 15, logLines[i], DDFontUtils.GetFont("Kゴシック", 16));
+						DDFontUtils.DrawString(8, DDConsts.Screen_H - c * 30 - 8, logLines[i], DDFontUtils.GetFont("Kゴシック", 16));
 					}
 				}
 				DDEngine.EachFrame();
@@ -464,7 +464,7 @@ namespace Charlotte.Novels
 					"システムメニュー",
 					new string[]
 					{
-						"－－－－－－－", //"設定", // ここから開く設定には対応しない。
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -474,7 +474,21 @@ namespace Charlotte.Novels
 				switch (selectIndex)
 				{
 					case 0:
-						// TODO: 不要ならこの項目を除去
+						using (new SettingMenu()
+						{
+							SimpleMenu = new DDSimpleMenu()
+							{
+								BorderColor = new I3Color(0, 64, 0),
+								WallDrawer = () =>
+								{
+									DDDraw.DrawSimple(SystemMenu_KeptMainScreen.ToPicture(), 0, 0);
+									DDCurtain.DrawCurtain(-0.5);
+								},
+							},
+						})
+						{
+							SettingMenu.I.Perform();
+						}
 						break;
 
 					case 1:

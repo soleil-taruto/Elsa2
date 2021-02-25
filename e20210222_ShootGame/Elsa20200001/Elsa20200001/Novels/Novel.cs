@@ -377,13 +377,13 @@ namespace Charlotte.Novels
 				this.DrawSurfaces();
 				DDCurtain.DrawCurtain(-0.5);
 
-				for (int c = 1; c <= 16; c++)
+				for (int c = 1; c <= 17; c++)
 				{
 					int i = logLines.Count - backIndex - c;
 
 					if (0 <= i)
 					{
-						DDFontUtils.DrawString(10, DDConsts.Screen_H - c * 30 - 15, logLines[i], DDFontUtils.GetFont("Kゴシック", 16));
+						DDFontUtils.DrawString(8, DDConsts.Screen_H - c * 30 - 8, logLines[i], DDFontUtils.GetFont("Kゴシック", 16));
 					}
 				}
 				DDEngine.EachFrame();

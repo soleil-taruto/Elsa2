@@ -1419,7 +1419,7 @@ namespace Charlotte.Games
 								BorderColor = new I3Color(0, 64, 128),
 								WallDrawer = () =>
 								{
-									DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
+									DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
 									DDCurtain.DrawCurtain(-0.5);
 								},
 							},

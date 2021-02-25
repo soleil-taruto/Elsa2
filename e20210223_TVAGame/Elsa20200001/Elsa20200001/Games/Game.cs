@@ -1138,7 +1138,7 @@ namespace Charlotte.Games
 					"PAUSE",
 					new string[]
 					{
-						"－－－－－－－", //"設定", // ここから開く設定には対応しない。
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -1150,12 +1150,30 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						// TODO: 不要ならこの項目を除去
+						using (new SettingMenu()
+						{
+							SimpleMenu = new DDSimpleMenu()
+							{
+								BorderColor = new I3Color(0, 64, 128),
+								WallDrawer = () =>
+								{
+									DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+									DDCurtain.DrawCurtain(-0.7);
+								},
+							},
+						})
+						{
+							SettingMenu.I.Perform();
+						}
 						break;
 
 					case 1:
-						this.Pause_ReturnToTitleMenu = true;
-						goto endLoop;
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.Pause_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
 
 					case 2:
 						goto endLoop;

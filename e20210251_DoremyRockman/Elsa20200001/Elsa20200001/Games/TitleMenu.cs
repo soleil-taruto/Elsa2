@@ -5,6 +5,7 @@ using System.Text;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.GameProgressMasters;
+using Charlotte.Novels;
 
 namespace Charlotte.Games
 {
@@ -37,7 +38,8 @@ namespace Charlotte.Games
 			{
 				"開発デバッグ用_ワールドセレクト",
 				"ゲームスタート",
-				"コンテニュー",
+				"コンテニュー(未実装)",
+				"ノベルパート(テスト)",
 				"設定",
 				"終了",
 			};
@@ -82,6 +84,19 @@ namespace Charlotte.Games
 						break;
 
 					case 3:
+						{
+							this.LeaveTitleMenu();
+
+							using (new Novel())
+							{
+								Novel.I.Status.Scenario = new Scenario("テスト0001");
+								Novel.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 4:
 						using (new SettingMenu())
 						{
 							SettingMenu.I.SimpleMenu = this.SimpleMenu;
@@ -89,7 +104,7 @@ namespace Charlotte.Games
 						}
 						break;
 
-					case 4:
+					case 5:
 						goto endMenu;
 
 					default:
