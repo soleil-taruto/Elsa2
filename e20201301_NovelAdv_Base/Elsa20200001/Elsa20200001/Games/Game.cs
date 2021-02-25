@@ -378,13 +378,13 @@ namespace Charlotte.Games
 				this.DrawSurfaces();
 				DDCurtain.DrawCurtain(-0.5);
 
-				for (int c = 1; c <= 16; c++)
+				for (int c = 1; c <= 17; c++)
 				{
 					int i = logLines.Count - backIndex - c;
 
 					if (0 <= i)
 					{
-						DDFontUtils.DrawString(10, DDConsts.Screen_H - c * 60 - 15, logLines[i], DDFontUtils.GetFont("Kゴシック", 32));
+						DDFontUtils.DrawString(16, DDConsts.Screen_H - c * 60 - 16, logLines[i], DDFontUtils.GetFont("Kゴシック", 32));
 					}
 				}
 				DDEngine.EachFrame();
