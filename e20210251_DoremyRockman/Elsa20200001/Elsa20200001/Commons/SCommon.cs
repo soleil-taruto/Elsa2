@@ -1580,6 +1580,11 @@ namespace Charlotte.Commons
 				return new SimpleDateTime(instance.ToSec() + sec);
 			}
 
+			public static SimpleDateTime operator +(long sec, SimpleDateTime instance)
+			{
+				return new SimpleDateTime(instance.ToSec() + sec);
+			}
+
 			public static SimpleDateTime operator -(SimpleDateTime instance, long sec)
 			{
 				return new SimpleDateTime(instance.ToSec() - sec);
