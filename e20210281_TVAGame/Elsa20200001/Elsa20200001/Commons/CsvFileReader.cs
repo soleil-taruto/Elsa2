@@ -23,7 +23,11 @@ namespace Charlotte.Commons
 			: this(file, SCommon.ENCODING_SJIS)
 		{ }
 
-		public CsvFileReader(string file, Encoding encoding, char delimiter = DELIMITER_COMMA)
+		public CsvFileReader(string file, Encoding encoding) // 難読化のため、デフォルト引数にしない。
+			: this(file, encoding, DELIMITER_COMMA)
+		{ }
+
+		public CsvFileReader(string file, Encoding encoding, char delimiter)
 			: this(new StreamReader(file, encoding))
 		{
 			this.Delimiter = delimiter;
