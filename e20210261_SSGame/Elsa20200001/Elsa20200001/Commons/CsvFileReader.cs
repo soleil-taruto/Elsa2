@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+// ^ sync @ CsvFileReader
+
 namespace Charlotte.Commons
 {
+	// sync > @ CsvFileReader
+
 	public class CsvFileReader : IDisposable
 	{
 		public const char DELIMITER_COMMA = ',';
@@ -110,4 +114,6 @@ namespace Charlotte.Commons
 			}
 		}
 	}
+
+	// < sync
 }
