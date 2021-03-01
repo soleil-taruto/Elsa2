@@ -18,9 +18,9 @@ namespace Charlotte.Games
 
 			Func<bool> a_script = DDUtils.Scripter(this.Script());
 
-			for (int scrCnt = 0; a_script(); scrCnt++)
+			for (int scrfrm = 0; a_script(); scrfrm++)
 			{
-				if (DDInput.L.GetInput() == 1 && 180 < scrCnt) // エンディング_スキップ
+				if (DDInput.L.GetInput() == 1 && 180 < scrfrm) // エンディング_スキップ
 				{
 					DDEngine.EachFrame();
 

@@ -224,6 +224,7 @@
     <Compile Include="ResourcePicture.cs" />
     <Compile Include="ResourcePicture2.cs" />
     <Compile Include="ResourceSE.cs" />
+    <Compile Include="Tests\Games\EndingTest.cs" />
     <Compile Include="Tests\Games\GameMasterTest.cs" />
     <Compile Include="Tests\Games\TitleMenuTest.cs" />
     <Compile Include="Tests\Games\箱から出るTest.cs" />

@@ -15,6 +15,10 @@ namespace Charlotte.Novels
 
 		// <---- prm
 
+		public bool 会話スキップした = false;
+
+		// <---- ret
+
 		public static Novel I;
 
 		public Novel()
@@ -107,10 +111,15 @@ namespace Charlotte.Novels
 
 				// 入力：会話スキップ
 				if (DDInput.L.GetInput() == 1)
+				{
+					this.会話スキップした = true;
 					break;
-
+				}
 				if (this.NovelEnd)
+				{
+					this.会話スキップした = true;
 					break;
+				}
 
 				//if (this.SkipMode)
 				//    if (1 <= this.DispPageEndedCount)
