@@ -500,6 +500,7 @@ namespace Charlotte.Commons
 		{
 			return lines.Length == 0 ? "" : string.Join("\r\n", lines) + "\r\n";
 		}
+
 		/// <summary>
 		/// テキストを行リストに変換します。
 		/// </summary>
@@ -517,6 +518,7 @@ namespace Charlotte.Commons
 			}
 			return lines;
 		}
+
 		public delegate int Read_d(byte[] buff, int offset, int count);
 		public delegate void Write_d(byte[] buff, int offset, int count);
 
