@@ -33,5 +33,7 @@ namespace Charlotte
 		/// 残りリスポーン地点設置回数_初期値
 		/// </summary>
 		public int StartSnapshotCount = Consts.START_SNAPSHOT_COUNT_DEF;
+
+		public bool 会話スキップ抑止 = false;
 	}
 }

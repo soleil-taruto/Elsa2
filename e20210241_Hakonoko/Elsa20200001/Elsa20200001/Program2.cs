@@ -74,7 +74,8 @@ namespace Charlotte
 
 						波紋効果.Count,
 						Game.I == null ? "-" : "" + Game.I.SnapshotCount,
-						Game.I == null ? "-" : "" + Game.I.タイル接近_敵描画_Points.Count
+						Game.I == null ? "-" : "" + Game.I.タイル接近_敵描画_Points.Count,
+						"会ス抑=" + (Ground.I.会話スキップ抑止 ? 1 : 0)
 
 						// デバッグ表示する情報をここへ追加..
 						));
@@ -103,7 +104,7 @@ namespace Charlotte
 			//new Test0001().Test03(); // NG !!!
 			//new Test0001().Test04();
 			//new Test0001().Test05();
-			//new TitleMenuTest().Test01();
+			new TitleMenuTest().Test01();
 			//new GameMasterTest().Test01(); // 開始ステージを選択
 			//new NovelTest().Test01();
 			//new NovelTest().Test02();
@@ -111,7 +112,7 @@ namespace Charlotte
 			//new 箱から出るTest().Test01();
 			//new EndingTest().Test_死亡();
 			//new EndingTest().Test_生還();
-			new EndingTest().Test_復讐();
+			//new EndingTest().Test_復讐();
 
 			// ----
 		}

@@ -250,7 +250,19 @@ namespace Charlotte.GameProgressMasters
 						break;
 				}
 
+#if true
+				int reachedStageIndexNew = index + 1;
+				bool 初見 = false;
+
+				if (Ground.I.ReachedStageIndex < reachedStageIndexNew)
+				{
+					Ground.I.ReachedStageIndex = reachedStageIndexNew;
+					初見 = true;
+				}
+				Ground.I.会話スキップ抑止 = 初見;
+#else // old
 				DDUtils.Maxim(ref Ground.I.ReachedStageIndex, index + 1);
+#endif
 
 				try
 				{
@@ -285,7 +297,6 @@ namespace Charlotte.GameProgressMasters
 								throw new 箱から出る.Cancelled();
 						}
 						new Ending_復讐().Perform();
-
 						break;
 					}
 					else
@@ -298,6 +309,8 @@ namespace Charlotte.GameProgressMasters
 				finally
 				{
 					DDUtils.SetMouseDispMode(false);
+
+					Ground.I.会話スキップ抑止 = false; // restore
 				}
 			}
 		}

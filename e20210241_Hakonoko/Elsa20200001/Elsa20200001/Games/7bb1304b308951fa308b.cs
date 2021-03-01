@@ -78,7 +78,7 @@ namespace Charlotte.Games
 		private static void P_EachFrame()
 		{
 			// 入力：会話スキップ
-			if (DDInput.L.GetInput() == 1)
+			if (DDInput.L.GetInput() == 1 && !Ground.I.会話スキップ抑止)
 				throw new Cancelled();
 
 			DDEngine.EachFrame();

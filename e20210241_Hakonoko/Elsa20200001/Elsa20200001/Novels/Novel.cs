@@ -110,12 +110,12 @@ namespace Charlotte.Novels
 				}
 
 				// 入力：会話スキップ
-				if (DDInput.L.GetInput() == 1)
+				if (DDInput.L.GetInput() == 1 && !Ground.I.会話スキップ抑止)
 				{
 					this.会話スキップした = true;
 					break;
 				}
-				if (this.会話スキップ_Request)
+				if (this.会話スキップ_Request && !Ground.I.会話スキップ抑止)
 				{
 					this.会話スキップした = true;
 					break;
