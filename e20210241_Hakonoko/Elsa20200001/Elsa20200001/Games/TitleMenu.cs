@@ -5,6 +5,7 @@ using System.Text;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.GameProgressMasters;
+using DxLibDLL;
 
 namespace Charlotte.Games
 {
@@ -265,6 +266,10 @@ namespace Charlotte.Games
 				this.TopMenu.SelectIndex += TopMenuTask.ITEM_NUM;
 				this.TopMenu.SelectIndex %= TopMenuTask.ITEM_NUM;
 
+				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1)
+				{
+					Ground.I.ReachedStageIndex = 10;
+				}
 				if (DDInput.A.GetInput() == 1) // ? 決定ボタン押下
 				{
 					switch (this.TopMenu.SelectIndex)

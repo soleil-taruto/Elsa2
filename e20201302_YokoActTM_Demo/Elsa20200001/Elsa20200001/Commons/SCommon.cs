@@ -510,6 +510,8 @@ namespace Charlotte.Commons
 			return lines.Length == 0 ? "" : string.Join("\r\n", lines) + "\r\n";
 		}
 
+		// sync > @ 202103011257
+
 		/// <summary>
 		/// テキストを行リストに変換します。
 		/// </summary>
@@ -523,10 +525,12 @@ namespace Charlotte.Commons
 
 			if (1 <= lines.Length && lines[lines.Length - 1] == "")
 			{
-				lines = new List<string>(lines).GetRange(0, lines.Length - 1).ToArray();
+				lines = lines.Take(lines.Length - 1).ToArray();
 			}
 			return lines;
 		}
+
+		// < sync
 
 		public delegate int Read_d(byte[] buff, int offset, int count);
 		public delegate void Write_d(byte[] buff, int offset, int count);
