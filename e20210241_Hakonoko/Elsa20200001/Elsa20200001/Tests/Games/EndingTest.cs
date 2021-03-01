@@ -21,8 +21,6 @@ namespace Charlotte.Tests.Games
 
 		public void Test_復讐()
 		{
-			// sync > @ 202103020558
-
 			using (new Novel())
 			{
 				Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
@@ -32,8 +30,6 @@ namespace Charlotte.Tests.Games
 					throw new 箱から出る.Cancelled();
 			}
 			new Ending_復讐().Perform();
-
-			// < sync
 		}
 	}
 }

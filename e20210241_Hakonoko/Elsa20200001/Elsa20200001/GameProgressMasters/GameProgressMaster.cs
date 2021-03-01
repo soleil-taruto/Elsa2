@@ -276,8 +276,6 @@ namespace Charlotte.GameProgressMasters
 					}
 					else if (endStatus == Game.EndStatus_e.復讐エンド)
 					{
-						// sync > @ 202103020558
-
 						using (new Novel())
 						{
 							Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
@@ -287,8 +285,6 @@ namespace Charlotte.GameProgressMasters
 								throw new 箱から出る.Cancelled();
 						}
 						new Ending_復讐().Perform();
-
-						// < sync
 
 						break;
 					}
