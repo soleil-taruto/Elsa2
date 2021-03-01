@@ -1529,6 +1529,11 @@ namespace Charlotte.Commons
 			public readonly int Second;
 			public readonly string Weekday;
 
+			public static SimpleDateTime Now()
+			{
+				return new SimpleDateTime(TimeStampToSec.ToSec(DateTime.Now));
+			}
+
 			public static SimpleDateTime FromTimeStamp(long timeStamp)
 			{
 				return new SimpleDateTime(TimeStampToSec.ToSec(timeStamp));
