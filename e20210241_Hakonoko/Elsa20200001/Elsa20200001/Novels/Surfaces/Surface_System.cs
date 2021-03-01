@@ -59,7 +59,7 @@ namespace Charlotte.Novels.Surfaces
 					// 入力：会話スキップ
 					if (DDInput.L.GetInput() == 1)
 					{
-						Novel.I.NovelEnd = true;
+						Novel.I.会話スキップ_Request = true;
 						break;
 					}
 
@@ -85,13 +85,13 @@ namespace Charlotte.Novels.Surfaces
 			//}
 			else if (command == "NovelEnd")
 			{
-				Novel.I.NovelEnd = true;
+				Novel.I.会話スキップ_Request = true;
 			}
 			else if (command == "A_NovelEnd")
 			{
 				this.Act.Add(() =>
 				{
-					Novel.I.NovelEnd = true;
+					Novel.I.会話スキップ_Request = true;
 					return false;
 				});
 			}

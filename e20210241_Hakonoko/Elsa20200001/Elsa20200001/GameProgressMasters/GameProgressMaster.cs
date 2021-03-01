@@ -276,7 +276,20 @@ namespace Charlotte.GameProgressMasters
 					}
 					else if (endStatus == Game.EndStatus_e.復讐エンド)
 					{
+						// sync > @ 202103020558
+
+						using (new Novel())
+						{
+							Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
+							Novel.I.Perform();
+
+							if (Novel.I.会話スキップした)
+								throw new 箱から出る.Cancelled();
+						}
 						new Ending_復讐().Perform();
+
+						// < sync
+
 						break;
 					}
 					else

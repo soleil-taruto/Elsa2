@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Charlotte.Games;
+using Charlotte.Novels;
 
 namespace Charlotte.Tests.Games
 {
@@ -16,6 +17,23 @@ namespace Charlotte.Tests.Games
 		public void Test_生還()
 		{
 			new Ending_生還().Perform();
+		}
+
+		public void Test_復讐()
+		{
+			// sync > @ 202103020558
+
+			using (new Novel())
+			{
+				Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
+				Novel.I.Perform();
+
+				if (Novel.I.会話スキップした)
+					throw new 箱から出る.Cancelled();
+			}
+			new Ending_復讐().Perform();
+
+			// < sync
 		}
 	}
 }
