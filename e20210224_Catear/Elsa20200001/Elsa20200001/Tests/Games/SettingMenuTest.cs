@@ -15,7 +15,7 @@ namespace Charlotte.Tests.Games
 		{
 			using (new SettingMenu())
 			{
-				SettingMenu.I.Perform(() => DX.ClearDrawScreen());
+				SettingMenu.I.Perform(() => { });
 			}
 		}
 	}

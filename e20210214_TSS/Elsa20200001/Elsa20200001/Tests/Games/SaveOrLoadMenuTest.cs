@@ -13,7 +13,7 @@ namespace Charlotte.Tests.Games
 		{
 			using (new SaveOrLoadMenu())
 			{
-				SaveOrLoadMenu.I.Save(() => DX.ClearDrawScreen());
+				SaveOrLoadMenu.I.Save(() => { });
 			}
 		}
 	}

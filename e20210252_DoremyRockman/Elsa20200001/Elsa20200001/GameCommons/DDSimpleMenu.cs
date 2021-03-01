@@ -11,7 +11,7 @@ namespace Charlotte.GameCommons
 	{
 		public I3Color? Color = null;
 		public I3Color? BorderColor = null;
-		public Action WallDrawer = () => DX.ClearDrawScreen();
+		public Action WallDrawer = () => { };
 
 		// <---- prm
 

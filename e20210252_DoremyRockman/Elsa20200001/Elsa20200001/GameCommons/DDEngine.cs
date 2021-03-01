@@ -160,6 +160,8 @@ namespace Charlotte.GameCommons
 				}
 				DDEngine.FreezeInput(30); // エンターキー押下がゲームに影響しないように
 			}
+
+			DX.ClearDrawScreen();
 		}
 
 		public static void FreezeInput(int frame = 1) // frame: 1 == このフレームのみ, 2 == このフレームと次のフレーム ...

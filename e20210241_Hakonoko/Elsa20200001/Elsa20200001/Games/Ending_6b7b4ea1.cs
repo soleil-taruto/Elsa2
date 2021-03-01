@@ -6,23 +6,19 @@ using Charlotte.GameCommons;
 
 namespace Charlotte.Games
 {
-	public static class Ending_死亡
+	public class Ending_死亡 : Ending
 	{
-		public static void Perform()
+		protected override IEnumerable<int> Script()
 		{
-			DDCurtain.SetCurtain();
-
-			foreach (DDScene scene in DDSceneUtils.Create(120))
+			DDGround.EL.Add(() =>
 			{
-				// TODO: 3秒後あたりから L でスキップできるようにする。
-
-				DDCurtain.DrawCurtain();
-
 				DDPrint.SetPrint();
 				DDPrint.Print("Ending_死亡");
 
-				DDEngine.EachFrame();
-			}
+				return true;
+			});
+
+			yield return 300;
 		}
 	}
 }
