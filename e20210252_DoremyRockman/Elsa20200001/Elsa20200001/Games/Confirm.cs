@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Charlotte.GameCommons;
 using Charlotte.Commons;
+using Charlotte.GameCommons;
 
 namespace Charlotte.Games
 {
@@ -27,7 +27,7 @@ namespace Charlotte.Games
 				{
 					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
 
-					DDDraw.SetAlpha(0.9);
+					DDDraw.SetAlpha(0.7);
 					DDDraw.SetBright(0, 0, 0);
 					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, this.BackBoardRect.ToD4Rect());
 					DDDraw.Reset();
