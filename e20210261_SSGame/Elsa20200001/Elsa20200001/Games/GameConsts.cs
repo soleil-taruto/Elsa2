@@ -43,14 +43,11 @@ namespace Charlotte.Games
 		/// プレイヤーキャラクタの重力加速度
 		/// </summary>
 		public const double PLAYER_GRAVITY = 0.6;
-		//public const double PLAYER_GRAVITY = 0.8; // 速すぎる。@ 2020.11.4
-		//public const double PLAYER_GRAVITY = 0.4; // 遅すぎる。@ 2020.11.4
 
 		/// <summary>
 		/// プレイヤーキャラクタの落下最高速度
 		/// </summary>
 		public const double PLAYER_FALL_SPEED_MAX = 12.0;
-		//public const double PLAYER_FALL_SPEED_MAX = 16.0;
 
 		/// <summary>
 		/// プレイヤーキャラクタの(横移動)速度
@@ -62,11 +59,10 @@ namespace Charlotte.Games
 		/// </summary>
 		public const double PLAYER_SLOW_SPEED = 2.0;
 
-		//public const double PLAYER_ジャンプ初速度 = -12.0;
 		public const double PLAYER_ジャンプ初速度 = -16.0;
 
 		// 上昇が速すぎると、脳天判定より先に側面判定に引っ掛かってしまう可能性がある。
-		// -- ( -(PLAYER_ジャンプ初速度) < 脳天判定Pt_Y - 側面判定Pt_Y ) を維持すること。
+		// -- ( -(PLAYER_ジャンプ初速度) < 脳天判定Pt_Y - 側面判定Pt_Y ) を維持すること。-- 左右同時接触時の再判定によりこの制約は緩和される。
 		// 下降が速すぎると、接地判定より先に側面判定に引っ掛かってしまう可能性がある。
 		// -- ( PLAYER_FALL_SPEED_MAX < 接地判定Pt_Y - 側面判定Pt_Y ) を維持すること。
 
