@@ -383,7 +383,7 @@ namespace Charlotte.Games
 						break;
 					}
 					int frame = this.Player.DeadFrame; // 値域 == 2 ～ GameConsts.PLAYER_DEAD_FRAME_MAX
-					double rate = (double)(frame - 2) / (GameConsts.PLAYER_DEAD_FRAME_MAX - 2);
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DEAD_FRAME_MAX, frame);
 
 					// ---- Dead
 
@@ -410,7 +410,7 @@ namespace Charlotte.Games
 						}
 					}
 					int frame = this.Player.DamageFrame; // 値域 == 2 ～ GameConsts.PLAYER_DAMAGE_FRAME_MAX
-					double rate = (double)(frame - 2) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX - 2);
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DAMAGE_FRAME_MAX, frame);
 
 					// ---- Damage
 
@@ -427,7 +427,7 @@ namespace Charlotte.Games
 						goto endInvincible;
 					}
 					int frame = this.Player.InvincibleFrame; // 値域 == 2 ～ GameConsts.PLAYER_INVINCIBLE_FRAME_MAX
-					double rate = (double)(frame - 2) / (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX - 2);
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_INVINCIBLE_FRAME_MAX, frame);
 
 					// ---- Invincible
 

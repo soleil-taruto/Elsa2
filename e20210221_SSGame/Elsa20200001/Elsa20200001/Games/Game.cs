@@ -376,19 +376,16 @@ namespace Charlotte.Games
 			startDead:
 				if (1 <= this.Player.DeadFrame) // プレイヤー死亡中の処理
 				{
-					int frame = this.Player.DeadFrame - 1;
-
-					if (GameConsts.PLAYER_DEAD_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_DEAD_FRAME_MAX < ++this.Player.DeadFrame)
 					{
 						this.Player.DeadFrame = 0;
 						this.Status.ExitDirection = 5;
 						break;
 					}
-					this.Player.DeadFrame++;
+					int frame = this.Player.DeadFrame; // 値域 == 2 ～ GameConsts.PLAYER_DEAD_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DEAD_FRAME_MAX, frame);
 
-					// この時点でとりうる this.Player.DeadFrame の最大値は Consts.PLAYER_DEAD_FRAME_MAX + 2
-
-					// ----
+					// ---- Dead
 
 					// noop
 				}
@@ -397,9 +394,7 @@ namespace Charlotte.Games
 				//startDamage:
 				if (1 <= this.Player.DamageFrame) // プレイヤー・ダメージ中の処理
 				{
-					int frame = this.Player.DamageFrame - 1;
-
-					if (GameConsts.PLAYER_DAMAGE_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_DAMAGE_FRAME_MAX < ++this.Player.DamageFrame)
 					{
 						this.Player.DamageFrame = 0;
 
@@ -414,35 +409,27 @@ namespace Charlotte.Games
 							goto startDead;
 						}
 					}
-					this.Player.DamageFrame++;
+					int frame = this.Player.DamageFrame; // 値域 == 2 ～ GameConsts.PLAYER_DAMAGE_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DAMAGE_FRAME_MAX, frame);
 
-					// この時点でとりうる this.Player.DamageFrame の最大値は Consts.PLAYER_DAMAGE_FRAME_MAX + 2
+					// ---- Damage
 
-					// ----
-
-					{
-						double rate = (double)frame / GameConsts.PLAYER_DAMAGE_FRAME_MAX;
-
-						this.Player.X -= (9.0 - 6.0 * rate) * (this.Player.FacingLeft ? -1 : 1);
-					}
+					this.Player.X -= (9.0 - 6.0 * rate) * (this.Player.FacingLeft ? -1 : 1);
 				}
 			endDamage:
 
 				//startInvincible:
 				if (1 <= this.Player.InvincibleFrame) // プレイヤー無敵時間中の処理
 				{
-					int frame = this.Player.InvincibleFrame - 1;
-
-					if (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX < ++this.Player.InvincibleFrame)
 					{
 						this.Player.InvincibleFrame = 0;
 						goto endInvincible;
 					}
-					this.Player.InvincibleFrame++;
+					int frame = this.Player.InvincibleFrame; // 値域 == 2 ～ GameConsts.PLAYER_INVINCIBLE_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_INVINCIBLE_FRAME_MAX, frame);
 
-					// この時点でとりうる this.Player.InvincibleFrame の最大値は Consts.PLAYER_INVINCIBLE_FRAME_MAX + 2
-
-					// ----
+					// ---- Invincible
 
 					// noop
 				}

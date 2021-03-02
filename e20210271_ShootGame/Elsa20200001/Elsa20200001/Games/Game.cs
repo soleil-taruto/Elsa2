@@ -163,9 +163,7 @@ namespace Charlotte.Games
 				//startDead:
 				if (1 <= this.Player.DeadFrame) // プレイヤー死亡中の処理
 				{
-					int frame = this.Player.DeadFrame - 1;
-
-					if (GameConsts.PLAYER_DEAD_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_DEAD_FRAME_MAX < ++this.Player.DeadFrame)
 					{
 						this.Player.DeadFrame = 0;
 
@@ -179,11 +177,12 @@ namespace Charlotte.Games
 						this.Player.RebornFrame = 1;
 						goto endDead;
 					}
-					this.Player.DeadFrame++;
+					int frame = this.Player.DeadFrame; // 値域 == 2 ～ GameConsts.PLAYER_DEAD_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DEAD_FRAME_MAX, frame);
 
-					// ----
+					// ---- Dead
 
-					if (frame == 0) // init
+					if (frame == 2) // init
 					{
 						DDMain.KeepMainScreen();
 
@@ -206,21 +205,18 @@ namespace Charlotte.Games
 				//startReborn:
 				if (1 <= this.Player.RebornFrame) // プレイヤー登場中の処理
 				{
-					int frame = this.Player.RebornFrame - 1;
-
-					if (GameConsts.PLAYER_REBORN_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_REBORN_FRAME_MAX < ++this.Player.RebornFrame)
 					{
 						this.Player.RebornFrame = 0;
 						this.Player.InvincibleFrame = 1;
 						goto endReborn;
 					}
-					this.Player.RebornFrame++;
+					int frame = this.Player.RebornFrame; // 値域 == 2 ～ GameConsts.PLAYER_REBORN_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_REBORN_FRAME_MAX, frame);
 
-					// ----
+					// ---- Reborn
 
-					double rate = (double)frame / GameConsts.PLAYER_REBORN_FRAME_MAX;
-
-					if (frame == 0) // init
+					if (frame == 2) // init
 					{
 						this.Player.Reborn_X = -50.0;
 						this.Player.Reborn_Y = GameConsts.FIELD_H / 2.0;
@@ -233,16 +229,15 @@ namespace Charlotte.Games
 				//startInvincible:
 				if (1 <= this.Player.InvincibleFrame) // プレイヤー無敵時間中の処理
 				{
-					int frame = this.Player.InvincibleFrame - 1;
-
-					if (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX < ++this.Player.InvincibleFrame)
 					{
 						this.Player.InvincibleFrame = 0;
 						goto endInvincible;
 					}
-					this.Player.InvincibleFrame++;
+					int frame = this.Player.InvincibleFrame; // 値域 == 2 ～ GameConsts.PLAYER_INVINCIBLE_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_INVINCIBLE_FRAME_MAX, frame);
 
-					// ----
+					// ---- Invincible
 
 					// noop
 				}
