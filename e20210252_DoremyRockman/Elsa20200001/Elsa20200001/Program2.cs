@@ -75,7 +75,8 @@ namespace Charlotte
 						DDEngine.FrameProcessingMillis_Worst,
 
 						Game.I == null ? "-" : "" + Game.I.Player.HP,
-						Game.I == null ? "-" : "" + Game.I.Player.JumpCount
+						Game.I == null ? "-" : "" + Game.I.Player.JumpCount,
+						Game.I == null ? "-" : "" + Game.I.Status.Equipment
 
 						// デバッグ表示する情報をここへ追加..
 						));

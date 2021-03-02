@@ -62,6 +62,20 @@ namespace Charlotte.Games
 		/// </summary>
 		public int ExitDirection = 5;
 
+		public enum Equipment_e
+		{
+			Normal = 1, // 通常攻撃
+			跳ねる陰陽玉,
+			ハンマー陰陽玉,
+			エアーシューター,
+			マグネットエアー,
+		}
+
+		/// <summary>
+		/// 装備している武器
+		/// </summary>
+		public Equipment_e Equipment = Equipment_e.Normal;
+
 		// <---- prm
 	}
 }

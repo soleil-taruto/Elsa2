@@ -113,7 +113,8 @@ namespace Charlotte.Games
 					DDInput.PAUSE.GetInput() == 1
 					)
 				{
-					this.Pause();
+					this.EquipmentMenu();
+					//this.Pause(); // old
 
 					if (this.Pause_ReturnToTitleMenu)
 					{
@@ -1353,17 +1354,117 @@ namespace Charlotte.Games
 				y < -DDConsts.Screen_H * MGN_SCREEN_NUM || this.Map.H * GameConsts.TILE_H + DDConsts.Screen_H * MGN_SCREEN_NUM < y;
 		}
 
+		private static DDSubScreen EquipmentMenu_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+
+		private void EquipmentMenu()
+		{
+			DDMain.KeepMainScreen();
+			SCommon.Swap(ref DDGround.KeptMainScreen, ref EquipmentMenu_KeptMainScreen);
+
+			DDSimpleMenu simpleMenu = new DDSimpleMenu()
+			{
+				BorderColor = new I3Color(0, 128, 0),
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 8, DDConsts.Screen_W, DDConsts.Screen_H * 3 / 4);
+					DDDraw.Reset();
+				},
+			};
+
+			DDEngine.FreezeInput();
+
+			int selectIndex = 0;
+
+			switch (this.Status.Equipment)
+			{
+				case GameStatus.Equipment_e.跳ねる陰陽玉: selectIndex = 1; break;
+				case GameStatus.Equipment_e.ハンマー陰陽玉: selectIndex = 2; break;
+				case GameStatus.Equipment_e.エアーシューター: selectIndex = 3; break;
+				case GameStatus.Equipment_e.マグネットエアー: selectIndex = 4; break;
+
+				default:
+					break;
+			}
+
+			for (; ; )
+			{
+				selectIndex = simpleMenu.Perform(
+					250,
+					80,
+					50,
+					24,
+					"ＥＱＵＩＰＭＥＮＴメニュー(仮)",
+					new string[]
+					{
+						"通常武器",
+						"跳ねる陰陽玉",
+						"ハンマー陰陽玉",
+						"ＡｉｒＳｈｏｏｔｅｒ",
+						"ＭａｇｎｅｔＡｉｒ",
+						"システムメニュー",
+						"戻る",
+					},
+					selectIndex,
+					true
+					);
+
+				switch (selectIndex)
+				{
+					case 0:
+						this.Status.Equipment = GameStatus.Equipment_e.Normal;
+						goto endLoop;
+
+					case 1:
+						this.Status.Equipment = GameStatus.Equipment_e.跳ねる陰陽玉;
+						goto endLoop;
+
+					case 2:
+						this.Status.Equipment = GameStatus.Equipment_e.ハンマー陰陽玉;
+						goto endLoop;
+
+					case 3:
+						this.Status.Equipment = GameStatus.Equipment_e.エアーシューター;
+						goto endLoop;
+
+					case 4:
+						this.Status.Equipment = GameStatus.Equipment_e.マグネットエアー;
+						goto endLoop;
+
+					case 5:
+						this.Pause();
+						goto endLoop;
+
+					case 6:
+						goto endLoop;
+
+					default:
+						throw null; // never
+				}
+				//DDEngine.EachFrame(); // 不要
+			}
+		endLoop:
+			DDEngine.FreezeInput();
+
+			DDInput.A.FreezeInputUntilRelease = true;
+			DDInput.B.FreezeInputUntilRelease = true;
+		}
+
 		private bool Pause_ReturnToTitleMenu = false;
 
-		private static DDSubScreen Pause_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+		//private static DDSubScreen Pause_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+		private static DDSubScreen Pause_KeptMainScreen { get { return EquipmentMenu_KeptMainScreen; } }
 
 		/// <summary>
 		/// ポーズメニュー
 		/// </summary>
 		private void Pause()
 		{
-			DDMain.KeepMainScreen();
-			SCommon.Swap(ref DDGround.KeptMainScreen, ref Pause_KeptMainScreen);
+			//DDMain.KeepMainScreen();
+			//SCommon.Swap(ref DDGround.KeptMainScreen, ref Pause_KeptMainScreen);
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{

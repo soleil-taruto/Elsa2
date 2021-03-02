@@ -178,6 +178,7 @@
     <Compile Include="Games\Map.cs" />
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MusicCollection.cs" />
+    <Compile Include="Games\RingMenu.cs" />
     <Compile Include="Games\SettingMenu.cs" />
     <Compile Include="Games\Tiles\Tile_Brick_Back.cs" />
     <Compile Include="Games\Tiles\Tile_Brick_Front.cs" />
