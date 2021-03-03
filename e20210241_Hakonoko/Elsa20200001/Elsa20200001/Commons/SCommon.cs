@@ -1520,13 +1520,17 @@ namespace Charlotte.Commons
 
 			public static SimpleDateTime Now()
 			{
-				return new SimpleDateTime(TimeStampToSec.ToSec(DateTime.Now));
+				return new SimpleDateTime(DateTime.Now);
 			}
 
 			public static SimpleDateTime FromTimeStamp(long timeStamp)
 			{
 				return new SimpleDateTime(TimeStampToSec.ToSec(timeStamp));
 			}
+
+			public SimpleDateTime(DateTime dateTime)
+				: this(TimeStampToSec.ToSec(dateTime))
+			{ }
 
 			public SimpleDateTime(long sec)
 			{
