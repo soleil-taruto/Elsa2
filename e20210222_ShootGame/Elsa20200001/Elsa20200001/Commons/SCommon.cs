@@ -1559,6 +1559,11 @@ namespace Charlotte.Commons
 				return string.Format(format, this.Year, this.Month, this.Day, this.Weekday, this.Hour, this.Minute, this.Second);
 			}
 
+			public DateTime ToDateTime()
+			{
+				return new DateTime(this.Year, this.Month, this.Day, this.Hour, this.Minute, this.Second);
+			}
+
 			public long ToTimeStamp()
 			{
 				return
