@@ -29,6 +29,7 @@ namespace Charlotte.Games
 		public int DamageFrame = 0; // 0 == 無効, 1～ == ダメージ中
 		public int InvincibleFrame = 0; // 0 == 無効, 1～ == 無敵時間中
 		public int HP = 1; // -1 == 死亡, 1～ == 生存
+		public int ShotChargePCT = 0; // チャージショット溜めPCT, 連携：GameCommon.ShotChargePCTToLevel()
 
 		/// <summary>
 		/// プレイヤーの攻撃モーション
@@ -172,6 +173,30 @@ namespace Charlotte.Games
 			else
 			{
 				return DDCrashUtils.Rect_CenterSize(new D2Point(this.X, this.Y), new D2Size(20.0, 30.0));
+			}
+		}
+
+		/// <summary>
+		/// ショット
+		/// ショットの強さレベル：
+		/// -- 関連：GameCommon.ShotChargePCTToLevel()
+		/// </summary>
+		/// <param name="level">ショットの強さレベル</param>
+		public void Shot(int level)
+		{
+			switch (Game.I.Status.Equipment)
+			{
+				case GameStatus.Equipment_e.Normal:
+					Game.I.Shots.Add(new Shot_Normal(
+						Game.I.Player.X + 34.0 * (Game.I.Player.FacingLeft ? -1 : 1),
+						Game.I.Player.Y - 2.0,
+						Game.I.Player.FacingLeft,
+						level
+						));
+					break;
+
+				default:
+					throw null; // never
 			}
 		}
 	}

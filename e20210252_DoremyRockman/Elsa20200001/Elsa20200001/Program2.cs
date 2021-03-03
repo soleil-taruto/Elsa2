@@ -71,14 +71,16 @@ namespace Charlotte
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
 					DDPrint.Print(string.Join(" ",
-						DDEngine.FrameProcessingMillis,
-						DDEngine.FrameProcessingMillis_Worst,
 
-						Game.I == null ? "-" : "" + Game.I.Player.HP,
+						//Game.I == null ? "-" : "" + Game.I.Player.HP,
 						Game.I == null ? "-" : "" + Game.I.Player.JumpCount,
-						Game.I == null ? "-" : "" + Game.I.Status.Equipment
+						Game.I == null ? "-" : "" + Game.I.Player.ShotChargePCT.ToString("D3"),
+						Game.I == null ? "-" : "" + Game.I.Status.Equipment,
 
 						// デバッグ表示する情報をここへ追加..
+
+						DDEngine.FrameProcessingMillis,
+						DDEngine.FrameProcessingMillis_Worst
 						));
 
 					DDPrint.Reset();

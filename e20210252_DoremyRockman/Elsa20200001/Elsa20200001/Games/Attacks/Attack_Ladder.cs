@@ -90,11 +90,7 @@ namespace Charlotte.Games.Attacks
 				{
 					if (DDInput.B.GetInput() == 1)
 					{
-						Game.I.Shots.Add(new Shot_Normal(
-							Game.I.Player.X + 34.0 * (Game.I.Player.FacingLeft ? -1 : 1),
-							Game.I.Player.Y - 2.0,
-							Game.I.Player.FacingLeft
-							));
+						Game.I.Player.Shot(1);
 					}
 					shootingFrame = SHOOTING_FRAME_MAX;
 				}

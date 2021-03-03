@@ -223,5 +223,19 @@ namespace Charlotte.Games
 			}
 			return ret;
 		}
+
+		public static int ShotChargePCTToLevel(int pct)
+		{
+			if (pct < 33)
+				return 1;
+
+			if (pct < 66)
+				return 2;
+
+			if (pct < 100)
+				return 3;
+
+			return 4;
+		}
 	}
 }

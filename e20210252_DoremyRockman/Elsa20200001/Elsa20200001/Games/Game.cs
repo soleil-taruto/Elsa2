@@ -342,17 +342,22 @@ namespace Charlotte.Games
 					{
 						if (attack == 1)
 						{
-							this.Shots.Add(new Shot_Normal(
-								this.Player.X + 34.0 * (this.Player.FacingLeft ? -1 : 1),
-								this.Player.Y - 2.0,
-								this.Player.FacingLeft
-								));
+							this.Player.Shot(1);
 						}
 						this.Player.ShootingFrame = GameConsts.PLAYER_SHOOTING_FRAME_MAX;
+						this.Player.ShotChargePCT++;
+						DDUtils.Minim(ref this.Player.ShotChargePCT, 100);
 					}
 					else
 					{
 						DDUtils.CountDown(ref this.Player.ShootingFrame);
+						int level = GameCommon.ShotChargePCTToLevel(this.Player.ShotChargePCT);
+						this.Player.ShotChargePCT = 0;
+
+						if (2 <= level)
+						{
+							this.Player.Shot(level);
+						}
 					}
 				}
 

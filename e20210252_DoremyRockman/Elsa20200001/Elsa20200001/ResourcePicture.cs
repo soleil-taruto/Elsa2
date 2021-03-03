@@ -338,5 +338,8 @@ namespace Charlotte
 		public DDPicture Stage02_Chip_h14 = DDPictureLoaders.Expand(@"dat\Game\ロックマン風\stage02_chip_h14.png", CHARA_TIP_EXPNUM);
 
 		// --
+
+		public DDPicture 陰陽玉 = DDPictureLoaders.Standard(@"dat\Game\blueberry\nc116914.png");
+		//public DDPicture 陰陽玉 = DDPictureLoaders.Expand(@"dat\Game\blueberry\nc116914.png", CHARA_TIP_EXPNUM);
 	}
 }
