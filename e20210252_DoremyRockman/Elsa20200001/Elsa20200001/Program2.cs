@@ -70,8 +70,8 @@ namespace Charlotte
 					DDPrint.SetPrint();
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
-					DDPrint.Print(string.Join(" ",
-
+					DDPrint.Print(string.Join(
+						" ",
 						//Game.I == null ? "-" : "" + Game.I.Player.HP,
 						Game.I == null ? "-" : "" + Game.I.Player.JumpCount,
 						Game.I == null ? "-" : "" + Game.I.Player.ShotChargePCT.ToString("D3"),

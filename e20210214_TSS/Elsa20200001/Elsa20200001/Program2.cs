@@ -70,13 +70,16 @@ namespace Charlotte
 					DDPrint.SetPrint();
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
-					DDPrint.Print(string.Join(" ",
-						DDEngine.FrameProcessingMillis,
-						DDEngine.FrameProcessingMillis_Worst,
-						DDMouse.X,
-						DDMouse.Y
+					DDPrint.Print(string.Join(
+						" ",
+						Game.I == null ? "-" : "" + Game.I.Status.CurrPageIndex,
 
 						// デバッグ表示する情報をここへ追加..
+
+						DDMouse.X,
+						DDMouse.Y,
+						DDEngine.FrameProcessingMillis,
+						DDEngine.FrameProcessingMillis_Worst
 						));
 
 					DDPrint.Reset();

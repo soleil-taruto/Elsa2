@@ -70,14 +70,15 @@ namespace Charlotte
 					DDPrint.SetPrint();
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
-					DDPrint.Print(string.Join(" ",
-						DDEngine.FrameProcessingMillis,
-						DDEngine.FrameProcessingMillis_Worst,
-
+					DDPrint.Print(string.Join(
+						" ",
 						Game.I == null ? "-" : "" + Game.I.Player.HP,
-						Game.I == null ? "-" : "" + Game.I.Player.JumpCount
+						Game.I == null ? "-" : "" + Game.I.Player.JumpCount,
 
 						// デバッグ表示する情報をここへ追加..
+
+						DDEngine.FrameProcessingMillis,
+						DDEngine.FrameProcessingMillis_Worst
 						));
 
 					DDPrint.Reset();

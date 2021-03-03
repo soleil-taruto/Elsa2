@@ -68,16 +68,17 @@ namespace Charlotte
 					DDPrint.SetPrint();
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
-					DDPrint.DebugPrint(string.Join(" ",
-						DDEngine.FrameProcessingMillis,
-						DDEngine.FrameProcessingMillis_Worst,
-
+					DDPrint.DebugPrint(string.Join(
+						" ",
 						波紋効果.Count,
 						Game.I == null ? "-" : "" + Game.I.SnapshotCount,
 						Game.I == null ? "-" : "" + Game.I.タイル接近_敵描画_Points.Count,
-						"会ス抑=" + (Ground.I.会話スキップ抑止 ? 1 : 0)
+						"会ス抑=" + (Ground.I.会話スキップ抑止 ? 1 : 0),
 
 						// デバッグ表示する情報をここへ追加..
+
+						DDEngine.FrameProcessingMillis,
+						DDEngine.FrameProcessingMillis_Worst
 						));
 
 					DDPrint.Reset();
