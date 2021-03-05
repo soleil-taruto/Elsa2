@@ -434,7 +434,7 @@
 2021/02/25 (木) 15:17:40 | 2021/01/16 (土) 02:21:59 |     66589 | res\Worlds\Stage_Raimu_v001\Map\Room_02.txt
 2021/02/25 (木) 15:17:40 | 2021/01/16 (土) 21:40:39 |    360559 | res\Worlds\Stage_Raimu_v001\Map\Room_03.txt
 2021/02/25 (木) 15:17:40 | 2021/02/22 (月) 17:42:59 |    136366 | res\Worlds\Stage_Raimu_v001\Map\Room_04.txt
-2021/02/25 (木) 15:17:40 | 2021/01/26 (火) 20:10:03 |    344338 | res\Worlds\Stage_Raimu_v001\Map\Start.txt
+2021/02/25 (木) 15:17:40 | 2021/03/04 (木) 06:59:18 |    344338 | res\Worlds\Stage_Raimu_v001\Map\Start.txt
 2021/02/25 (木) 15:17:40 | 2021/01/16 (土) 02:02:20 |        31 | res\Worlds\Stage_Raimu_v001\World.csv
 2021/02/25 (木) 15:17:40 | 2021/01/15 (金) 04:06:35 |        10 | res\Worlds\Stage_Sanae_v001\Map\Room_02.txt
 2021/02/25 (木) 15:17:40 | 2021/01/15 (金) 04:06:35 |        10 | res\Worlds\Stage_Sanae_v001\Map\Start.txt

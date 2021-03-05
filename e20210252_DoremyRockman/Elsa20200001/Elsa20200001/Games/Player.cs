@@ -195,6 +195,26 @@ namespace Charlotte.Games
 						));
 					break;
 
+				case GameStatus.Equipment_e.跳ねる陰陽玉:
+					Game.I.Shots.Add(new Shot_跳ねる陰陽玉(
+						Game.I.Player.X, // 初期位置調整は Shot 側で行う。
+						Game.I.Player.Y,
+						Game.I.Player.FacingLeft,
+						level
+						));
+					break;
+
+				case GameStatus.Equipment_e.ハンマー陰陽玉:
+					Game.I.Shots.Iterate().Where(shot => shot is Shot_ハンマー陰陽玉)
+						.FirstOrDefault(shot => { shot.DeadFlag = true; return false; }); // ハンマーを除去
+					Game.I.Shots.Add(new Shot_ハンマー陰陽玉(
+						Game.I.Player.X,
+						Game.I.Player.Y,
+						Game.I.Player.FacingLeft,
+						level
+						));
+					break;
+
 				default:
 					throw null; // never
 			}

@@ -180,6 +180,7 @@
     <Compile Include="Games\MusicCollection.cs" />
     <Compile Include="Games\RingMenu.cs" />
     <Compile Include="Games\SettingMenu.cs" />
+    <Compile Include="Games\Shots\Shot_ハンマー陰陽玉.cs" />
     <Compile Include="Games\Shots\Shot_跳ねる陰陽玉.cs" />
     <Compile Include="Games\Tiles\Tile_Brick_Back.cs" />
     <Compile Include="Games\Tiles\Tile_Brick_Front.cs" />

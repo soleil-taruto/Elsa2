@@ -703,11 +703,29 @@ namespace Charlotte.Games
 
 									continue; // この自弾は消滅した(跳ね返した)ので、次の弾の判定へ移る。
 								}
-								if (!shot.敵を貫通する)
-									shot.Kill();
-
 								enemy.HP -= shot.AttackPoint;
 
+								switch (shot.敵を貫通する)
+								{
+									case Shot.敵を貫通する_e.しない:
+										shot.Kill();
+										break;
+
+									case Shot.敵を貫通する_e.する:
+										break;
+
+									case Shot.敵を貫通する_e.相殺:
+										{
+											if (0 <= enemy.HP)
+												shot.Kill();
+											else
+												shot.AttackPoint = -enemy.HP;
+										}
+										break;
+
+									default:
+										throw null; // never
+								}
 								if (1 <= enemy.HP) // ? まだ生存している。
 								{
 									enemy.Damaged(shot);

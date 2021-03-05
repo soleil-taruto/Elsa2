@@ -11,6 +11,6 @@ namespace Charlotte
 	{
 		//public DDPicture[] Dummy = DDDerivations.GetAnimation(Ground.I.Picture.Dummy, 0, 0, 25, 25, 2, 2).ToArray();
 
-		public DDPicture 陰陽玉 = DDDerivations.GetPicture(Ground.I.Picture.陰陽玉, 50, 30, 470, 470);
+		public DDPicture 陰陽玉 = DDDerivations.GetPicture(Ground.I.Picture.陰陽玉, 58, 39, 451, 451);
 	}
 }

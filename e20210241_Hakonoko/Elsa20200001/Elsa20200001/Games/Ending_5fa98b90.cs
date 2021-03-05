@@ -32,7 +32,10 @@ namespace Charlotte.Games
 			yield return 600;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(320, 250, "「 アカ色 」 だけが。")));
 
-			yield return 840;
+			yield return 800;
+			DDCurtain.SetCurtain(30, -1.0);
+			DDMusicUtils.Fade();
+			yield return 40;
 		}
 
 		private IEnumerable<bool> DrawString(int x, int y, string text, int frameMax = 600)

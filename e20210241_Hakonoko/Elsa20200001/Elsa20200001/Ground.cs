@@ -29,6 +29,10 @@ namespace Charlotte
 		/// </summary>
 		public int ReachedStageIndex;
 
+		public bool SawEnding_死亡 = false;
+		public bool SawEnding_生還 = false;
+		public bool SawEnding_復讐 = false;
+
 		/// <summary>
 		/// 残りリスポーン地点設置回数_初期値
 		/// </summary>

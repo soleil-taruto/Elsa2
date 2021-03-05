@@ -278,16 +278,26 @@ namespace Charlotte.GameProgressMasters
 					}
 					else if (endStatus == Game.EndStatus_e.死亡エンド)
 					{
+						Ground.I.会話スキップ抑止 = !Ground.I.SawEnding_死亡;
+
 						new Ending_死亡().Perform();
+
+						Ground.I.SawEnding_死亡 = true;
 						break;
 					}
 					else if (endStatus == Game.EndStatus_e.生還エンド)
 					{
+						Ground.I.会話スキップ抑止 = !Ground.I.SawEnding_生還;
+
 						new Ending_生還().Perform();
+
+						Ground.I.SawEnding_生還 = true;
 						break;
 					}
 					else if (endStatus == Game.EndStatus_e.復讐エンド)
 					{
+						Ground.I.会話スキップ抑止 = !Ground.I.SawEnding_復讐;
+
 						using (new Novel())
 						{
 							Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
@@ -297,6 +307,8 @@ namespace Charlotte.GameProgressMasters
 								throw new 箱から出る.Cancelled();
 						}
 						new Ending_復讐().Perform();
+
+						Ground.I.SawEnding_復讐 = true;
 						break;
 					}
 					else
