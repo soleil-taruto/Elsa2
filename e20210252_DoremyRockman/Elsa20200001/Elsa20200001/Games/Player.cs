@@ -197,7 +197,8 @@ namespace Charlotte.Games
 
 				case GameStatus.Equipment_e.跳ねる陰陽玉:
 					Game.I.Shots.Add(new Shot_跳ねる陰陽玉(
-						Game.I.Player.X, // 初期位置調整は Shot 側で行う。
+						// 初期位置調整は Shot 側で行う。
+						Game.I.Player.X,
 						Game.I.Player.Y,
 						Game.I.Player.FacingLeft,
 						level
@@ -205,11 +206,36 @@ namespace Charlotte.Games
 					break;
 
 				case GameStatus.Equipment_e.ハンマー陰陽玉:
-					Game.I.Shots.Iterate().Where(shot => shot is Shot_ハンマー陰陽玉)
-						.FirstOrDefault(shot => { shot.DeadFlag = true; return false; }); // ハンマーを除去
+					foreach (Shot shot in Game.I.Shots.Iterate().Where(shot => shot is Shot_ハンマー陰陽玉))
+						shot.Kill();
+
 					Game.I.Shots.Add(new Shot_ハンマー陰陽玉(
+						// 初期位置はプレイヤー中央で良い。
 						Game.I.Player.X,
 						Game.I.Player.Y,
+						Game.I.Player.FacingLeft,
+						level
+						));
+					break;
+
+				case GameStatus.Equipment_e.エアーシューター:
+					for (int order = 0; order < 3; order++)
+					{
+						Game.I.Shots.Add(new Shot_AirShooter(
+							// 初期位置調整は Shot 側で行う。
+							Game.I.Player.X,
+							Game.I.Player.Y,
+							Game.I.Player.FacingLeft,
+							order,
+							level
+							));
+					}
+					break;
+
+				case GameStatus.Equipment_e.マグネットエアー:
+					Game.I.Shots.Add(new Shot_MagnetAir(
+						Game.I.Player.X + 34.0 * (Game.I.Player.FacingLeft ? -1 : 1),
+						Game.I.Player.Y - 2.0,
 						Game.I.Player.FacingLeft,
 						level
 						));
