@@ -61,8 +61,8 @@ namespace Charlotte.Games.Shots
 
 			// 初期位置調整
 			{
-				this.X += R * (1 + 2 * this.Order) * (this.FacingLeft ? -1 : 1);
-				this.Y -= R;
+				this.X += 36.0 + R * (1 + 2 * this.Order) * (this.FacingLeft ? -1 : 1);
+				//this.Y += 0.0;
 			}
 
 			for (; ; )
