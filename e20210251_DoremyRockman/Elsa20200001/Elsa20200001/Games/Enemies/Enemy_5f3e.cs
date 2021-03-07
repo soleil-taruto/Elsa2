@@ -56,7 +56,7 @@ namespace Charlotte.Games.Enemies
 						DDDraw.DrawSetSize(CHARA_R * 2, CHARA_R * 2);
 						DDDraw.DrawEnd();
 
-						DDPrint.SetPrint((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
+						DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 						DDPrint.SetBorder(new I3Color(0, 0, 0));
 						DDPrint.Print("[敵弾]");
 						DDPrint.Reset();

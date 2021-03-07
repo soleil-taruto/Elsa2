@@ -31,7 +31,7 @@ namespace Charlotte.Games.Scripts.Tests
 			{
 				DDGround.EL.Add(() =>
 				{
-					DDPrint.SetPrint(GameConsts.FIELD_W - 180, 0);
+					DDPrint.SetDebug(GameConsts.FIELD_W - 180, 0);
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 					DDPrint.Print(scene.Numer + " / " + scene.Denom + " = " + scene.Rate.ToString("F3"));
 					DDPrint.Reset();
@@ -85,7 +85,7 @@ namespace Charlotte.Games.Scripts.Tests
 				{
 					DDGround.EL.Add(() =>
 					{
-						DDPrint.SetPrint(GameConsts.FIELD_W - 140, 0);
+						DDPrint.SetDebug(GameConsts.FIELD_W - 140, 0);
 						DDPrint.SetBorder(new I3Color(0, 0, 0));
 						DDPrint.Print("BOSS_HP = " + boss.HP);
 						DDPrint.Reset();

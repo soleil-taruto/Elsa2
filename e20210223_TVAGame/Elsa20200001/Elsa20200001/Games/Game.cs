@@ -930,7 +930,7 @@ namespace Charlotte.Games
 
 						DDGround.EL.Add(() =>
 						{
-							DDPrint.SetPrint(0, 16);
+							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
 							DDPrint.Print("セーブしました...");
 							DDPrint.Reset();
@@ -949,7 +949,7 @@ namespace Charlotte.Games
 
 						DDGround.EL.Add(() =>
 						{
-							DDPrint.SetPrint(0, 16);
+							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
 							DDPrint.Print("ロードしました...");
 							DDPrint.Reset();

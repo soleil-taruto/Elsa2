@@ -50,7 +50,7 @@ namespace Charlotte.Games.Enemies.Tests
 				DDDraw.DrawRotate(DDEngine.ProcFrame / 10.0);
 				DDDraw.DrawEnd();
 
-				DDPrint.SetPrint((int)this.X, (int)this.Y);
+				DDPrint.SetDebug((int)this.X, (int)this.Y);
 				DDPrint.SetBorder(new I3Color(0, 0, 0));
 				DDPrint.PrintLine("アイテム");
 				DDPrint.PrintLine("効用：" + 効用_e_Names[(int)this.効用]);

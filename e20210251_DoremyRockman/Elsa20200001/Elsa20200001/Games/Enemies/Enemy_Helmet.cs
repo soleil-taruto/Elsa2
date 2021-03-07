@@ -76,7 +76,7 @@ namespace Charlotte.Games.Enemies
 						DDDraw.DrawEnd();
 						DDDraw.Reset();
 
-						DDPrint.SetPrint((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
+						DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 						DDPrint.SetBorder(new I3Color(0, 0, 0));
 						DDPrint.Print(string.Format("[メット◆ル_{0}_{1}]", this.HP, this.防御中 ? "防" : "攻"));
 						DDPrint.Reset();

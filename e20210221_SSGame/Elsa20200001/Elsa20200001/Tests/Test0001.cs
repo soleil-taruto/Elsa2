@@ -64,7 +64,7 @@ namespace Charlotte.Tests
 				DDCurtain.DrawCurtain(1.0);
 				DDCurtain.DrawCurtain(-0.5);
 
-				DDPrint.SetPrint();
+				DDPrint.SetDebug();
 				DDPrint.Print(string.Join(", ", motionIndex, komaIndex, koma));
 
 				DDDraw.DrawCenter(motion[koma], DDConsts.Screen_W / 2, DDConsts.Screen_H / 2);

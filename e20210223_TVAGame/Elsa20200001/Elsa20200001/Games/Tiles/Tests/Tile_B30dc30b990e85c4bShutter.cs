@@ -21,7 +21,7 @@ namespace Charlotte.Games.Tiles.Tests
 			DDDraw.DrawEnd();
 
 			DDPrint.SetBorder(new I3Color(0, 0, 0));
-			DDPrint.SetPrint((int)draw_x, (int)draw_y);
+			DDPrint.SetDebug((int)draw_x, (int)draw_y);
 			DDPrint.Print("扉");
 			DDPrint.Reset();
 		}

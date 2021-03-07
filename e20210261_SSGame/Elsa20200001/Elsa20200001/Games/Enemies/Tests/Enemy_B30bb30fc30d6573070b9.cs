@@ -29,7 +29,7 @@ namespace Charlotte.Games.Enemies.Tests
 					DDDraw.DrawRotate(DDEngine.ProcFrame / 30.0);
 					DDDraw.DrawEnd();
 
-					DDPrint.SetPrint((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
+					DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 					DDPrint.PrintLine("セーブ地点");
 					DDPrint.Reset();

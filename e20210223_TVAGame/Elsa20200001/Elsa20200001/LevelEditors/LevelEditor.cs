@@ -70,7 +70,7 @@ namespace Charlotte.LevelEditors
 						DDDraw.Reset();
 
 						DDPrint.SetBorder(new I3Color(0, 128, 255));
-						DDPrint.SetPrint(tileL - cam_l, tileT - cam_t);
+						DDPrint.SetDebug(tileL - cam_l, tileT - cam_t);
 						DDPrint.Print(cell.EnemyName);
 						DDPrint.Reset();
 					}

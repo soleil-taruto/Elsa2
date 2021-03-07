@@ -67,7 +67,7 @@ namespace Charlotte
 			{
 				DDEngine.DispDebug = () =>
 				{
-					DDPrint.SetPrint();
+					DDPrint.SetDebug();
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
 
 					DDPrint.Print(string.Join(

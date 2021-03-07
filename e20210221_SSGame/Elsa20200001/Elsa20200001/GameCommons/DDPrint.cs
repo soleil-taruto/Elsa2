@@ -51,18 +51,36 @@ namespace Charlotte.GameCommons
 		private static int P_Y;
 		private static int P_FontSize = -1; // -1 == デフォルトのフォントを使用する。
 
-		public static void SetPrint(int x = 0, int y = 0)
+		// sync > @ 202103071728
+
+		/// <summary>
+		/// 開発デバッグ用文字列描画準備
+		/// </summary>
+		/// <param name="x">X-位置</param>
+		/// <param name="y">Y-位置</param>
+		/// <param name="yStep">Y-ステップ</param>
+		public static void SetDebug(int x = 0, int y = 0, int yStep = 16)
 		{
 			P_BaseX = x;
 			P_BaseY = y;
-			P_YStep = 16;
+			P_YStep = yStep;
 			P_X = 0;
 			P_Y = 0;
 			P_FontSize = -1;
 		}
 
+		/// <summary>
+		/// ゲーム画面用文字列描画準備
+		/// </summary>
+		/// <param name="x">X-位置</param>
+		/// <param name="y">Y-位置</param>
+		/// <param name="yStep">Y-ステップ</param>
+		/// <param name="fontSize">フォントサイズ</param>
 		public static void SetPrint(int x, int y, int yStep, int fontSize = 24)
 		{
+			if (fontSize == -1)
+				throw new DDError("デフォルトのフォントを使用するには SetDebug() を呼び出して下さい。");
+
 			P_BaseX = x;
 			P_BaseY = y;
 			P_YStep = yStep;
@@ -70,6 +88,8 @@ namespace Charlotte.GameCommons
 			P_Y = 0;
 			P_FontSize = fontSize;
 		}
+
+		// < sync
 
 		public static void PrintRet()
 		{
