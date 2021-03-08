@@ -71,6 +71,14 @@ namespace Charlotte.Games.Shots
 				DDDraw.DrawEnd();
 				DDDraw.Reset();
 
+				DDPrint.SetDebug(
+					(int)this.X - DDGround.ICamera.X - 12,
+					(int)this.Y - DDGround.ICamera.Y - 8
+					);
+				DDPrint.SetBorder(new I3Color(0, 0, 0));
+				DDPrint.Print("MA" + this.Level);
+				DDPrint.Reset();
+
 				this.Crash = DDCrashUtils.Circle(new D2Point(this.X, this.Y), R);
 
 				yield return !DDUtils.IsOutOfCamera(new D2Point(this.X, this.Y), R); // カメラから出たら消滅する。

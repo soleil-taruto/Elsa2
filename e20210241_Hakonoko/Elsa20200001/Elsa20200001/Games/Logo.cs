@@ -32,7 +32,7 @@ namespace Charlotte.Games
 				{
 					int sec = endFrame - DDEngine.ProcFrame;
 
-					DDPrint.SetPrint(60, DDConsts.Screen_H - 32);
+					DDPrint.SetPrint(40, DDConsts.Screen_H - 32, 16, 18);
 					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (sec / 60.0).ToString("F1") + " 秒で消えます)");
 
 					return 0 < sec;
