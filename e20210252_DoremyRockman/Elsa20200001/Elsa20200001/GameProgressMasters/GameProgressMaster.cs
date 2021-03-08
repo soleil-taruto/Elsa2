@@ -34,7 +34,7 @@ namespace Charlotte.GameProgressMasters
 			}
 			using (new WorldGameMaster())
 			{
-				WorldGameMaster.I.World = new World("w0001", "t0001"); // 仮？
+				WorldGameMaster.I.World = new World("w0001\\t0001"); // 仮？
 				WorldGameMaster.I.Status = new GameStatus();
 				WorldGameMaster.I.Perform();
 			}

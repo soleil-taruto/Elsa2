@@ -16,17 +16,13 @@ namespace Charlotte.Games
 		private string[][] MapNameTableRows; // 添字：[y][x]
 		private I2Point CurrPoint;
 
-		public string WorldName { private set; get; }
-
-		public World(string worldName, string startMapName)
+		public World(string startMapName)
 		{
-			string worldFile = GameCommon.GetWorldFile(worldName);
-
 			using (WorkingDir wd = new WorkingDir())
 			{
 				string file = wd.MakePath();
 
-				File.WriteAllBytes(file, DDResource.Load(worldFile));
+				File.WriteAllBytes(file, DDResource.Load(@"res\World\World.csv"));
 
 				using (CsvFileReader reader = new CsvFileReader(file))
 				{
@@ -34,7 +30,6 @@ namespace Charlotte.Games
 				}
 			}
 			this.CurrPoint = this.GetPoint(startMapName);
-			this.WorldName = worldName;
 		}
 
 		private I2Point GetPoint(string mapName)

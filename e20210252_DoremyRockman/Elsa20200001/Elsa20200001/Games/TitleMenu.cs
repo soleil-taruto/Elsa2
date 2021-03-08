@@ -126,13 +126,13 @@ namespace Charlotte.Games
 
 		private void Debug_SelectWorld()
 		{
-			Action<string, string> a_gameStart = (worldName, startMapName) =>
+			Action<string> a_gameStart = startMapName =>
 			{
 				this.LeaveTitleMenu();
 
 				using (new WorldGameMaster())
 				{
-					WorldGameMaster.I.World = new World(worldName, startMapName);
+					WorldGameMaster.I.World = new World(startMapName);
 					WorldGameMaster.I.Status = new GameStatus();
 					WorldGameMaster.I.Perform();
 				}
@@ -141,7 +141,8 @@ namespace Charlotte.Games
 
 			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用_ワールドセレクト", new string[]
 			{
-				"Stage_Raimu_v001",
+				"Stage_0001_v001",
+				"Stage_Reimu_v001",
 				"Stage_Sanae_v001",
 				"w0001(テスト用)",
 				"w1001(テスト用)",
@@ -153,22 +154,26 @@ namespace Charlotte.Games
 			switch (selectIndex)
 			{
 				case 0:
-					a_gameStart("Stage_Raimu_v001", "Start");
+					a_gameStart("Stage_0001_v001\\t1001");
 					break;
 
 				case 1:
-					a_gameStart("Stage_Sanae_v001", "Start");
+					a_gameStart("Stage_Reimu_v001\\Start");
 					break;
 
 				case 2:
-					a_gameStart("w0001", "t0001");
+					a_gameStart("Stage_Sanae_v001\\Start");
 					break;
 
 				case 3:
-					a_gameStart("w1001", "t1001");
+					a_gameStart("w0001\\t0001");
 					break;
 
 				case 4:
+					a_gameStart("w1001\\t1001");
+					break;
+
+				case 5:
 					break;
 
 				default:

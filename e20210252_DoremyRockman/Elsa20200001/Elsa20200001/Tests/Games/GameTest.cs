@@ -20,7 +20,7 @@ namespace Charlotte.Tests.Games
 		{
 			using (new Game())
 			{
-				Game.I.World = new World("w0001", "t0001");
+				Game.I.World = new World("w0001\\t0001");
 				Game.I.Status = new GameStatus();
 				Game.I.Perform();
 			}
@@ -28,23 +28,19 @@ namespace Charlotte.Tests.Games
 
 		public void Test03()
 		{
-			string sNames;
+			string startMapName;
 
 			// ---- choose one ----
 
-			sNames = "w0001:t0001";
-			//sNames = "w0001:t0002";
-			//sNames = "w0001:t0003";
+			startMapName = "w0001\\t0001";
+			//startMapName = "w0001\\t0002";
+			//startMapName = "w0001\\t0003";
 
 			// ----
 
-			string[] names = sNames.Split(':');
-			string worldName = names[0];
-			string startMapName = names[1];
-
 			using (new Game())
 			{
-				Game.I.World = new World(worldName, startMapName);
+				Game.I.World = new World(startMapName);
 				Game.I.Status = new GameStatus();
 				Game.I.Perform();
 			}

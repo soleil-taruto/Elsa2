@@ -11,52 +11,11 @@ namespace Charlotte.Games
 {
 	public static class GameCommon
 	{
-		// ===================
-		// ==== World 関連 ====
-		// ===================
-
-		public const string WORLD_FILE_PREFIX = @"res\Worlds\";
-		public const string WORLD_FILE_SUFFIX = @"\World.csv";
-
-		public static string GetWorldFile(string worldName)
-		{
-			if (string.IsNullOrEmpty(worldName))
-				throw new ArgumentException("worldName is null or empty");
-
-			return WORLD_FILE_PREFIX + worldName + WORLD_FILE_SUFFIX;
-		}
-
-		public static string GetWorldName(string worldFile)
-		{
-			if (string.IsNullOrEmpty(worldFile))
-				throw new ArgumentException("worldFile is null or empty");
-
-			if (!SCommon.StartsWithIgnoreCase(worldFile, WORLD_FILE_PREFIX))
-				throw new ArgumentException("Bad worldFile_1");
-
-			worldFile = worldFile.Substring(WORLD_FILE_PREFIX.Length);
-
-			if (!SCommon.EndsWithIgnoreCase(worldFile, WORLD_FILE_SUFFIX))
-				throw new ArgumentException("Bad worldFile_2");
-
-			worldFile = worldFile.Substring(0, worldFile.Length - WORLD_FILE_SUFFIX.Length);
-
-			if (worldFile == "")
-				throw new ArgumentException("Bad worldFile_3");
-
-			return worldFile; // as worldName
-		}
-
-		// =============================
-		// ==== World 関連 (ここまで) ====
-		// =============================
-
 		// ==================
 		// ==== Map 関連 ====
 		// ==================
 
-		public const string MAP_FILE_PREFIX = @"res\Worlds\";
-		public const string MAP_FILE_MIDDLE = @"\Map\";
+		public const string MAP_FILE_PREFIX = @"res\World\Map\";
 		public const string MAP_FILE_SUFFIX = ".txt";
 
 		/// <summary>
@@ -64,33 +23,34 @@ namespace Charlotte.Games
 		/// </summary>
 		/// <param name="mapName">マップ名</param>
 		/// <returns>マップファイル名</returns>
-		public static string GetMapFile(string worldName, string mapName)
+		public static string GetMapFile(string mapName)
 		{
-			if (string.IsNullOrEmpty(worldName))
-				throw new ArgumentException("worldName is null or empty");
-
-			if (string.IsNullOrEmpty(mapName))
-				throw new ArgumentException("mapName is null or empty");
-
-			return MAP_FILE_PREFIX + worldName + MAP_FILE_MIDDLE + mapName + MAP_FILE_SUFFIX;
+			return MAP_FILE_PREFIX + mapName + MAP_FILE_SUFFIX;
 		}
 
 		/// <summary>
 		/// マップファイル名からマップ名を得る。
+		/// 失敗すると、デフォルトのマップ名を返す。
 		/// </summary>
 		/// <param name="mapFile">マップファイル名</param>
+		/// <param name="defval">デフォルトのマップ名</param>
 		/// <returns>マップ名</returns>
-		public static string GetMapName(string mapFile)
+		public static string GetMapName(string mapFile, string defval)
 		{
-			if (string.IsNullOrEmpty(mapFile))
-				throw new ArgumentException("mapFile is null or empty");
+			if (!SCommon.StartsWithIgnoreCase(mapFile, MAP_FILE_PREFIX))
+				return defval;
 
-			string mapName = Path.GetFileNameWithoutExtension(mapFile);
+			mapFile = mapFile.Substring(MAP_FILE_PREFIX.Length);
 
-			if (string.IsNullOrEmpty(mapName))
-				throw new ArgumentException("mapName is null or empty");
+			if (!SCommon.EndsWithIgnoreCase(mapFile, MAP_FILE_SUFFIX))
+				return defval;
 
-			return mapName;
+			mapFile = mapFile.Substring(0, mapFile.Length - MAP_FILE_SUFFIX.Length);
+
+			if (mapFile == "")
+				return defval;
+
+			return mapFile; // as mapName
 		}
 
 		/// <summary>

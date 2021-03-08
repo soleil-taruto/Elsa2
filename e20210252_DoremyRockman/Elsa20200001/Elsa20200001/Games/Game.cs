@@ -51,7 +51,7 @@ namespace Charlotte.Games
 		{
 			Func<bool> f_ゴミ回収 = SCommon.Supplier(this.E_ゴミ回収());
 
-			this.Map = new Map(GameCommon.GetMapFile(this.World.WorldName, this.World.GetCurrMapName()));
+			this.Map = new Map(GameCommon.GetMapFile(this.World.GetCurrMapName()));
 			this.ReloadEnemies();
 
 			// デフォルトの「プレイヤーのスタート地点」
@@ -845,7 +845,7 @@ namespace Charlotte.Games
 					}
 					this.World.Move(xa, ya); // 一時的に移動
 
-					nextMap = new Map(GameCommon.GetMapFile(this.World.WorldName, this.World.GetCurrMapName()));
+					nextMap = new Map(GameCommon.GetMapFile(this.World.GetCurrMapName()));
 
 					this.World.Move(-xa, -ya); // restore
 				}
