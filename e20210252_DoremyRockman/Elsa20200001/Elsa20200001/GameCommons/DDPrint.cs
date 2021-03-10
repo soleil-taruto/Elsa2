@@ -51,8 +51,6 @@ namespace Charlotte.GameCommons
 		private static int P_Y;
 		private static int P_FontSize = -1; // -1 == デフォルトのフォントを使用する。
 
-		// sync > @ 202103071728
-
 		/// <summary>
 		/// 開発デバッグ用文字列描画準備
 		/// </summary>
@@ -88,8 +86,6 @@ namespace Charlotte.GameCommons
 			P_Y = 0;
 			P_FontSize = fontSize;
 		}
-
-		// < sync
 
 		public static void PrintRet()
 		{
