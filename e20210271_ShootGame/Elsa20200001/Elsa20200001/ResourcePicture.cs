@@ -12,7 +12,7 @@ namespace Charlotte
 		public DDPicture Dummy = DDPictureLoaders.Standard(@"dat\General\Dummy.png");
 		public DDPicture WhiteBox = DDPictureLoaders.Standard(@"dat\General\WhiteBox.png");
 		public DDPicture WhiteCircle = DDPictureLoaders.Standard(@"dat\General\WhiteCircle.png");
-		public DDPicture DummyScreen = DDPictureLoaders.Standard(@"dat\DummyScreen.png");
+		public DDPicture DummyScreen = DDPictureLoaders.Standard(@"dat\General\DummyScreen.png");
 
 		public DDPicture Copyright = DDPictureLoaders.Standard(@"dat\Logo\Copyright.png");
 
