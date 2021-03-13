@@ -71,6 +71,8 @@ namespace Charlotte.Games
 			EVENT_9003B,
 			EVENT_9004,
 			EVENT_9005,
+			行き先案内_Start方面,
+			行き先案内_Goal方面,
 		}
 
 		public static string[] Kine_e_Names = new string[]
@@ -119,6 +121,8 @@ namespace Charlotte.Games
 			"EVENT_9003B",
 			"EVENT_9004",
 			"EVENT_9005",
+			"先S:行き先案内_Start方面",
+			"先G:行き先案内_Goal方面",
 		};
 
 		public static I3Color[] Kind_e_Colors = new I3Color[]
@@ -167,6 +171,8 @@ namespace Charlotte.Games
 			new I3Color(   0,   1,   6 ), // EVENT_9003B
 			new I3Color(   0,   0,   7 ), // EVENT_9004
 			new I3Color(   0,   0,   8 ), // EVENT_9005
+			new I3Color(   0,   0,   9 ), // 行き先案内_Start方面
+			new I3Color(   0,   0,  10 ), // 行き先案内_Goal方面
 		};
 
 		public Kind_e Kind;

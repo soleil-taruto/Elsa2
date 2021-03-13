@@ -97,6 +97,13 @@ namespace Charlotte.Games
 		/// </summary>
 		public FinalZoneInfo FinalZone = null;
 
+		public bool Last行き先案内_Crashed_Start方面;
+		public bool Last行き先案内_Crashed_Goal方面;
+		public bool 行き先案内_Crashed_Start方面;
+		public bool 行き先案内_Crashed_Goal方面;
+		public double LastExec行き先案内_X = -SCommon.IMAX;
+		public double LastExec行き先案内_Y = -SCommon.IMAX;
+
 		public void Perform()
 		{
 			this.ReloadEnemies();
@@ -123,6 +130,11 @@ namespace Charlotte.Games
 			for (this.Frame = 0; ; this.Frame++)
 			{
 				f_reorderEnemies();
+
+				this.Last行き先案内_Crashed_Start方面 = this.行き先案内_Crashed_Start方面;
+				this.Last行き先案内_Crashed_Goal方面 = this.行き先案内_Crashed_Goal方面;
+				this.行き先案内_Crashed_Start方面 = false;
+				this.行き先案内_Crashed_Goal方面 = false;
 
 				if (DDInput.PAUSE.GetInput() == 1 || this.Dead_Pause)
 				{
@@ -590,6 +602,42 @@ namespace Charlotte.Games
 				// 当たり判定ここまで
 				// ====
 
+				{
+					// ? ゴール側からスタート側へ移動した。
+					bool g2s =
+						this.Last行き先案内_Crashed_Goal方面 &&
+						!this.Last行き先案内_Crashed_Start方面 &&
+						this.行き先案内_Crashed_Start方面;
+
+					// ? スタート側からゴール側へ移動した。
+					bool s2g =
+						this.Last行き先案内_Crashed_Start方面 &&
+						!this.Last行き先案内_Crashed_Goal方面 &&
+						this.行き先案内_Crashed_Goal方面;
+
+					if (g2s || s2g)
+					{
+						double x = Game.I.Player.X;
+						double y = Game.I.Player.Y;
+
+						// ? 前回と同じ場所
+						if (
+							Math.Abs(x - this.LastExec行き先案内_X) < 100 &&
+							Math.Abs(y - this.LastExec行き先案内_Y) < 100
+							)
+						{
+							// noop
+						}
+						else
+						{
+							this.LastExec行き先案内_X = x;
+							this.LastExec行き先案内_Y = y;
+
+							行き先案内_Effect(x, y, s2g);
+						}
+					}
+				}
+
 				f_ゴミ回収();
 
 				this.Enemies.RemoveAll(v => v.DeadFlag);
@@ -641,6 +689,21 @@ namespace Charlotte.Games
 			波紋効果.Clear();
 
 			// ★★★ end of Perform() ★★★
+		}
+
+		private void 行き先案内_Effect(double x, double y, bool 正しいルート)
+		{
+			for (int tryCount = 1; tryCount <= 30; tryCount++)
+			{
+				I2Point pt = GameCommon.ToTablePoint(x + DDUtils.Random.DReal() * 100.0, y + DDUtils.Random.DReal() * 100.0);
+				MapCell cell = this.Map.GetCell(pt);
+
+				if (!cell.IsDefault && cell.IsWall())
+				{
+					DDUtils.Approach(ref cell.ColorPhase, 正しいルート ? 1.0 : 0.0, 0.5); // TODO TODO TODO
+					break;
+				}
+			}
 		}
 
 		public void TakeSnapshot()
@@ -978,6 +1041,9 @@ namespace Charlotte.Games
 
 				DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
 			}
+
+			this.LastExec行き先案内_X = -SCommon.IMAX;
+			this.LastExec行き先案内_Y = -SCommon.IMAX;
 		}
 
 		private void カメラ位置調整(bool 一瞬で)
@@ -1334,6 +1400,9 @@ namespace Charlotte.Games
 						case MapCell.Kind_e.EVENT_9003B: this.Enemies.Add(new Enemy_Event9003B(pos)); break;
 						case MapCell.Kind_e.EVENT_9004: this.Enemies.Add(new Enemy_Event9004(pos)); break;
 						case MapCell.Kind_e.EVENT_9005: this.Enemies.Add(new Enemy_Event9005(pos)); break;
+
+						case MapCell.Kind_e.行き先案内_Start方面: this.Enemies.Add(new Enemy_行き先案内(pos, false)); break;
+						case MapCell.Kind_e.行き先案内_Goal方面: this.Enemies.Add(new Enemy_行き先案内(pos, true)); break;
 
 						default:
 							break;

@@ -15,14 +15,14 @@ namespace Charlotte.Tests.Games
 
 			// ---- choose one ----
 
-			startStageIndex = 0; // テスト用
+			//startStageIndex = 0; // テスト用
 			//startStageIndex = 1; // 最初のステージ
 			//startStageIndex = 2;
 			//startStageIndex = 3;
 			//startStageIndex = 4;
 			//startStageIndex = 5;
 			//startStageIndex = 6;
-			//startStageIndex = 7;
+			startStageIndex = 7;
 			//startStageIndex = 8;
 			//startStageIndex = 9;
 

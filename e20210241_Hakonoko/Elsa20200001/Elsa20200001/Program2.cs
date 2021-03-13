@@ -75,6 +75,9 @@ namespace Charlotte
 						Game.I == null ? "-" : "" + Game.I.タイル接近_敵描画_Points.Count,
 						"会ス抑=" + (Ground.I.会話スキップ抑止 ? 1 : 0),
 
+						Game.I == null ? "-" : "" + Game.I.行き先案内_Crashed_Start方面,
+						Game.I == null ? "-" : "" + Game.I.行き先案内_Crashed_Goal方面,
+
 						// デバッグ表示する情報をここへ追加..
 
 						DDEngine.FrameProcessingMillis,
@@ -105,8 +108,8 @@ namespace Charlotte
 			//new Test0001().Test03(); // NG !!!
 			//new Test0001().Test04();
 			//new Test0001().Test05();
-			new TitleMenuTest().Test01();
-			//new GameMasterTest().Test01(); // 開始ステージを選択
+			//new TitleMenuTest().Test01();
+			new GameMasterTest().Test01(); // 開始ステージを選択
 			//new NovelTest().Test01();
 			//new NovelTest().Test02();
 			//new NovelTest().Test03(); // 開始シナリオを選択

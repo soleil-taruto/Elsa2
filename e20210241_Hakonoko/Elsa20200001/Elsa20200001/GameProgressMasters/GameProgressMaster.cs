@@ -236,7 +236,9 @@ namespace Charlotte.GameProgressMasters
 		{
 			for (int index = this.StartStageIndex; ; index++)
 			{
+#if !DEBUG // test test test
 				レイヤ表示.Perform(index, this.ThemeColors[index]);
+#endif
 
 				Game.EndStatus_e endStatus;
 
