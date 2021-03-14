@@ -41,6 +41,7 @@ namespace Charlotte.Novels
 		public bool DispFastMode;
 
 		public bool 会話スキップ_Request = false; // ? 会話スキップが入力された(要求された) -> 速やかに会話スキップ(ノベルパート終了)すること。
+		public bool 会話終了_Request = false;
 
 		public void Perform()
 		{
@@ -120,6 +121,8 @@ namespace Charlotte.Novels
 					this.会話スキップした = true;
 					break;
 				}
+				if (this.会話終了_Request)
+					break;
 
 				//if (this.SkipMode)
 				//    if (1 <= this.DispPageEndedCount)

@@ -85,13 +85,13 @@ namespace Charlotte.Novels.Surfaces
 			//}
 			else if (command == "NovelEnd")
 			{
-				Novel.I.会話スキップ_Request = true;
+				Novel.I.会話終了_Request = true;
 			}
 			else if (command == "A_NovelEnd")
 			{
 				this.Act.Add(() =>
 				{
-					Novel.I.会話スキップ_Request = true;
+					Novel.I.会話終了_Request = true;
 					return false;
 				});
 			}
