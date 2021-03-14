@@ -638,6 +638,19 @@ namespace Charlotte.Games
 					}
 				}
 
+				for (int c = 0; c < 100; c++) // 回数_適当
+				{
+					MapCell cell = this.Map.GetCell(
+						DDUtils.Random.GetInt(this.Map.W),
+						DDUtils.Random.GetInt(this.Map.H)
+						);
+
+					//if (cell.IsDefault)
+					//    throw null; // never
+
+					cell.ColorPhaseShift *= 0.99;
+				}
+
 				f_ゴミ回収();
 
 				this.Enemies.RemoveAll(v => v.DeadFlag);

@@ -10,7 +10,7 @@ namespace Charlotte
 		/// <summary>
 		/// 残りリスポーン地点設置回数_初期値のデフォルト値
 		/// </summary>
-		public const int START_SNAPSHOT_COUNT_DEF = 3;
+		public const int START_SNAPSHOT_COUNT_DEF = 6;
 
 		/// <summary>
 		/// 残りリスポーン地点設置回数_初期値の最小値

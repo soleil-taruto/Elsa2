@@ -560,7 +560,7 @@ namespace Charlotte.GameCommons
 		/// <returns>ラジアン</returns>
 		public static double ToAngle(double value)
 		{
-			const int CYCLE = 65536;
+			const int CYCLE = 4096;
 
 			return ToAngle((int)(value * CYCLE), CYCLE);
 		}
