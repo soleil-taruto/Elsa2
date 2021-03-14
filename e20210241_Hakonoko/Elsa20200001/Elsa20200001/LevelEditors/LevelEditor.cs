@@ -120,7 +120,7 @@ namespace Charlotte.LevelEditors
 						{
 							DDPrint.SetBorder(new I3Color(0, 64, 64));
 							DDPrint.SetPrint(tileL - cam_l, tileT - cam_t);
-							DDPrint.Print(name);
+							DDPrint.DebugPrint(name);
 							DDPrint.Reset();
 
 							return false;

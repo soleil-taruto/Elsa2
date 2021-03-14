@@ -63,16 +63,17 @@ namespace Charlotte.Games
 			}
 		}
 
-		public static IEnumerable<bool> 行き先案内(double centerX, double centerY, bool 正しいルート)
+		public static IEnumerable<bool> 行き先案内(int cycle, double rotAdd, int maxDistance, bool 正しいルート)
 		{
-			double rot = DDUtils.ToAngle(DDEngine.ProcFrame, 60);
+			double rot = DDUtils.ToAngle(DDEngine.ProcFrame, cycle);
 
-			foreach (DDScene scene in DDSceneUtils.Create(100))
+			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
-				centerX = Game.I.Player.X;
-				centerY = Game.I.Player.Y;
+				double centerX = Game.I.Player.X;
+				double centerY = Game.I.Player.Y;
 
-				double d = scene.Rate * 500.0;
+				double d = scene.Rate * maxDistance;
+
 				double x = centerX + Math.Cos(rot) * d;
 				double y = centerY + Math.Sin(rot) * d;
 
@@ -80,17 +81,9 @@ namespace Charlotte.Games
 				MapCell cell = Game.I.Map.GetCell(mapPt);
 
 				if (!cell.IsDefault && cell.IsWall())
-				{
-					if (正しいルート)
-					{
-						cell.ColorPhase *= 0.5;
-					}
-					else
-					{
-						DDUtils.Approach(ref cell.ColorPhase, 1.0, 0.5);
-					}
-				}
-				rot += 0.1;
+					DDUtils.Approach(ref cell.ColorPhaseShift, 正しいルート ? -1.0 : 1.0, 0.5);
+
+				rot += rotAdd;
 
 				yield return true;
 			}

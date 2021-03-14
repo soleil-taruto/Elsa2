@@ -187,6 +187,8 @@ namespace Charlotte.Games
 
 		// <---- prm
 
+		public double ColorPhaseShift = 0.0; // -1.0 ～ 1.0
+
 		/// <summary>
 		/// このマップセルは「デフォルトのマップセル」か
 		/// </summary>

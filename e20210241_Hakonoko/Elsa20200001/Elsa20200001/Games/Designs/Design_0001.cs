@@ -116,6 +116,17 @@ namespace Charlotte.Games.Designs
 					else
 						p = p * 0.3 + 0.7;
 				}
+
+				// ColorPhaseShift
+				{
+					if (cell.ColorPhaseShift < -SCommon.MICRO)
+						p *= cell.ColorPhaseShift + 1.0;
+					else if (SCommon.MICRO < cell.ColorPhaseShift)
+						p = DDUtils.AToBRate(p, 1.0, cell.ColorPhaseShift);
+
+					DDUtils.Approach(ref cell.ColorPhaseShift, 0.0, 0.9999);
+				}
+
 				DDDraw.SetAlpha(this.WallAlpha * (1.0 - cell.敵接近_Rate * 0.5));
 				DDDraw.SetBright(new I3Color(
 					SCommon.ToInt(DDUtils.AToBRate(this.Color_A.R, this.Color_B.R, p)),
