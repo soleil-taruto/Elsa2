@@ -62,5 +62,38 @@ namespace Charlotte.Games
 				yield return true;
 			}
 		}
+
+		public static IEnumerable<bool> 行き先案内(double centerX, double centerY, bool 正しいルート)
+		{
+			double rot = DDUtils.ToAngle(DDEngine.ProcFrame, 60);
+
+			foreach (DDScene scene in DDSceneUtils.Create(100))
+			{
+				centerX = Game.I.Player.X;
+				centerY = Game.I.Player.Y;
+
+				double d = scene.Rate * 500.0;
+				double x = centerX + Math.Cos(rot) * d;
+				double y = centerY + Math.Sin(rot) * d;
+
+				I2Point mapPt = GameCommon.ToTablePoint(new D2Point(x, y));
+				MapCell cell = Game.I.Map.GetCell(mapPt);
+
+				if (!cell.IsDefault && cell.IsWall())
+				{
+					if (正しいルート)
+					{
+						cell.ColorPhase *= 0.5;
+					}
+					else
+					{
+						DDUtils.Approach(ref cell.ColorPhase, 1.0, 0.5);
+					}
+				}
+				rot += 0.1;
+
+				yield return true;
+			}
+		}
 	}
 }

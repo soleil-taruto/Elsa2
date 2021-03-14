@@ -364,8 +364,8 @@ namespace Charlotte.GameCommons
 		/// x &lt; 0.5 の区間は加速(等加速)する。
 		/// x &gt; 0.5 の区間は減速(等加速)する。
 		/// </summary>
-		/// <param name="x"></param>
-		/// <returns></returns>
+		/// <param name="x">x軸の値</param>
+		/// <returns>y軸の値</returns>
 		public static double SCurve(double x)
 		{
 			if (x < 0.5)
@@ -532,5 +532,37 @@ namespace Charlotte.GameCommons
 		}
 
 		// < sync
+
+		/// <summary>
+		/// 指定値をラジアンに変換する。
+		/// 0 を 0rad
+		/// サイクル値 を (2.0 * PI)rad とする。
+		/// 戻り値の範囲：0.0 ～ (2.0 * PI)
+		/// </summary>
+		/// <param name="value">指定値</param>
+		/// <param name="cycle">サイクル値</param>
+		/// <returns>ラジアン</returns>
+		public static double ToAngle(int value, int cycle)
+		{
+			value %= cycle;
+			value += cycle;
+			value %= cycle;
+			return value * 2.0 * Math.PI / cycle;
+		}
+
+		/// <summary>
+		/// 指定値をラジアンに変換する。
+		/// 0.0 を 0rad
+		/// 1.0 を (2.0 * PI)rad とする。
+		/// 戻り値の範囲：0.0 ～ (2.0 * PI)
+		/// </summary>
+		/// <param name="value">指定値</param>
+		/// <returns>ラジアン</returns>
+		public static double ToAngle(double value)
+		{
+			const int CYCLE = 65536;
+
+			return ToAngle((int)(value * CYCLE), CYCLE);
+		}
 	}
 }

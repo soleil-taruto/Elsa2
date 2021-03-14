@@ -693,17 +693,7 @@ namespace Charlotte.Games
 
 		private void 行き先案内_Effect(double x, double y, bool 正しいルート)
 		{
-			for (int tryCount = 1; tryCount <= 30; tryCount++)
-			{
-				I2Point pt = GameCommon.ToTablePoint(x + DDUtils.Random.DReal() * 100.0, y + DDUtils.Random.DReal() * 100.0);
-				MapCell cell = this.Map.GetCell(pt);
-
-				if (!cell.IsDefault && cell.IsWall())
-				{
-					DDUtils.Approach(ref cell.ColorPhase, 正しいルート ? 1.0 : 0.0, 0.5); // TODO TODO TODO
-					break;
-				}
-			}
+			DDGround.EL.Add(SCommon.Supplier(Effects.行き先案内(x, y, 正しいルート)));
 		}
 
 		public void TakeSnapshot()
