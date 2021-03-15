@@ -979,6 +979,10 @@ namespace Charlotte.Games
 				}
 			}
 
+			for (int x = 0; x < this.Map.W; x++)
+				for (int y = 0; y < this.Map.H; y++)
+					this.Map.GetCell(x, y).ColorPhaseShift = 0.0;
+
 			this.Player.XSpeed = 0.0;
 			this.Player.YSpeed = 0.0;
 
