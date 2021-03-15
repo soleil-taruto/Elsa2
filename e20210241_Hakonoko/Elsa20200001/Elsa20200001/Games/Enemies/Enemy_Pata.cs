@@ -50,42 +50,42 @@ namespace Charlotte.Games.Enemies
 			if (this.Y < this.Highest_Y + 24.0) // ? 最高高度に近い
 			{
 				if (
-					a2.Table[0, 0].IsEnemyPataWall() ||
-					a2.Table[0, 1].IsEnemyPataWall()
+					a2.Table[0, 0].IsEnemyWall_NoNarrow() ||
+					a2.Table[0, 1].IsEnemyWall_NoNarrow()
 					)
 					xDirSign++;
 
 				if (
-					a2.Table[1, 0].IsEnemyPataWall() ||
-					a2.Table[1, 1].IsEnemyPataWall()
+					a2.Table[1, 0].IsEnemyWall_NoNarrow() ||
+					a2.Table[1, 1].IsEnemyWall_NoNarrow()
 					)
 					xDirSign--;
 			}
 			else
 			{
 				if (
-					a2.Table[0, 0].IsEnemyPataWall() &&
-					a2.Table[0, 1].IsEnemyPataWall()
+					a2.Table[0, 0].IsEnemyWall_NoNarrow() &&
+					a2.Table[0, 1].IsEnemyWall_NoNarrow()
 					)
 					xDirSign++;
 
 				if (
-					a2.Table[1, 0].IsEnemyPataWall() &&
-					a2.Table[1, 1].IsEnemyPataWall()
+					a2.Table[1, 0].IsEnemyWall_NoNarrow() &&
+					a2.Table[1, 1].IsEnemyWall_NoNarrow()
 					)
 					xDirSign--;
 			}
 
 			if (
-				!a2.Table[0, 0].IsEnemyPataWall() && a2.Table[0, 1].IsEnemyPataWall() ||
-				!a2.Table[1, 0].IsEnemyPataWall() && a2.Table[1, 1].IsEnemyPataWall()
+				!a2.Table[0, 0].IsEnemyWall_NoNarrow() && a2.Table[0, 1].IsEnemyWall_NoNarrow() ||
+				!a2.Table[1, 0].IsEnemyWall_NoNarrow() && a2.Table[1, 1].IsEnemyWall_NoNarrow()
 				)
 			{
 				yDirSign = -1;
 			}
 			else if (
-				a2.Table[0, 0].IsEnemyPataWall() &&
-				a2.Table[1, 0].IsEnemyPataWall()
+				a2.Table[0, 0].IsEnemyWall_NoNarrow() &&
+				a2.Table[1, 0].IsEnemyWall_NoNarrow()
 				)
 			{
 				yDirSign = 1;

@@ -9,8 +9,8 @@ using Charlotte.GameCommons;
 using Charlotte.Games.Designs;
 using Charlotte.Games.Enemies;
 using Charlotte.Games.Enemies.Events;
-using Charlotte.LevelEditors;
 using Charlotte.GameProgressMasters;
+using Charlotte.LevelEditors;
 
 namespace Charlotte.Games
 {

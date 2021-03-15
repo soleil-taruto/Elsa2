@@ -254,10 +254,11 @@ namespace Charlotte.Games
 		}
 
 		/// <summary>
-		/// 敵(パタパタ)にとっての壁かどうか判定する。
+		/// 敵にとっての壁かどうか判定する。
+		/// 但し、1マス分の通路も壁と見なす。
 		/// </summary>
-		/// <returns>敵(パタパタ)にとっての壁か</returns>
-		public bool IsEnemyPataWall()
+		/// <returns>敵にとっての壁か</returns>
+		public bool IsEnemyWall_NoNarrow()
 		{
 			return
 				this.IsEnemyWall() ||
