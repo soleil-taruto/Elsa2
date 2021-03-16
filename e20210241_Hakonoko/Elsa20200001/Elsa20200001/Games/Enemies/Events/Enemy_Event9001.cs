@@ -53,11 +53,16 @@ namespace Charlotte.Games.Enemies.Events
 					DDEngine.EachFrame();
 				}
 
+				Ground.I.会話スキップ抑止 = !Ground.I.SawFinalNovel;
+
 				using (new Novel())
 				{
 					Novel.I.Status.Scenario = GameProgressMaster.I.GetFinalScenario();
 					Novel.I.Perform();
 				}
+
+				Ground.I.会話スキップ抑止 = false; // restore
+				Ground.I.SawFinalNovel = true;
 
 				DDCurtain.SetCurtain(0, -1.0);
 				DDCurtain.SetCurtain();

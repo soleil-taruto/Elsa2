@@ -88,13 +88,22 @@ namespace Charlotte.Games.Attacks
 
 				if (1 <= DDInput.B.GetInput())
 				{
-					if (DDInput.B.GetInput() == 1)
-					{
-						Game.I.Player.Shot(1);
-					}
 					shootingFrame = SHOOTING_FRAME_MAX;
+					Game.I.Player.ShotChargePCT++;
+					DDUtils.Minim(ref Game.I.Player.ShotChargePCT, 100);
 				}
-				DDUtils.CountDown(ref shootingFrame);
+				else
+				{
+					DDUtils.CountDown(ref shootingFrame);
+					int level = GameCommon.ShotChargePCTToLevel(Game.I.Player.ShotChargePCT);
+					int chargePct = Game.I.Player.ShotChargePCT;
+					Game.I.Player.ShotChargePCT = 0;
+
+					if (1 <= chargePct)
+					{
+						Game.I.Player.Shot(level);
+					}
+				}
 
 				//AttackCommon.ProcPlayer_移動();
 				//AttackCommon.ProcPlayer_Fall();

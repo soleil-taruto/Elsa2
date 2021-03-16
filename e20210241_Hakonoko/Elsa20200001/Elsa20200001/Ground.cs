@@ -29,6 +29,7 @@ namespace Charlotte
 		/// </summary>
 		public int ReachedStageIndex;
 
+		public bool SawFinalNovel = false;
 		public bool SawEnding_死亡 = false;
 		public bool SawEnding_生還 = false;
 		public bool SawEnding_復讐 = false;

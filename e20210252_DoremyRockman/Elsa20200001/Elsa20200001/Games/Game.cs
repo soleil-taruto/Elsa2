@@ -338,9 +338,11 @@ namespace Charlotte.Games
 					}
 					this.CamSlideMode = camSlide;
 
+					bool 攻撃ボタンを押した瞬間撃つ = false;
+
 					if (1 <= attack)
 					{
-						if (attack == 1)
+						if (攻撃ボタンを押した瞬間撃つ && attack == 1)
 						{
 							this.Player.Shot(1);
 						}
@@ -352,9 +354,10 @@ namespace Charlotte.Games
 					{
 						DDUtils.CountDown(ref this.Player.ShootingFrame);
 						int level = GameCommon.ShotChargePCTToLevel(this.Player.ShotChargePCT);
+						int chargePct = this.Player.ShotChargePCT;
 						this.Player.ShotChargePCT = 0;
 
-						if (2 <= level)
+						if (攻撃ボタンを押した瞬間撃つ ? 2 <= level : 1 <= chargePct)
 						{
 							this.Player.Shot(level);
 						}

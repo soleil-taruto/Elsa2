@@ -81,6 +81,7 @@ namespace Charlotte.GameCommons
 				//lines.Add("Donut3-SaveData"); // Dummy
 
 				lines.Add("" + Ground.I.ReachedStageIndex);
+				lines.Add("" + (Ground.I.SawFinalNovel ? 1 : 0));
 				lines.Add("" + (Ground.I.SawEnding_死亡 ? 1 : 0));
 				lines.Add("" + (Ground.I.SawEnding_生還 ? 1 : 0));
 				lines.Add("" + (Ground.I.SawEnding_復讐 ? 1 : 0));
@@ -180,6 +181,7 @@ namespace Charlotte.GameCommons
 					//DDUtils.Noop(lines[c++]); // Dummy
 
 					Ground.I.ReachedStageIndex = int.Parse(lines[c++]);
+					Ground.I.SawFinalNovel = int.Parse(lines[c++]) != 0;
 					Ground.I.SawEnding_死亡 = int.Parse(lines[c++]) != 0;
 					Ground.I.SawEnding_生還 = int.Parse(lines[c++]) != 0;
 					Ground.I.SawEnding_復讐 = int.Parse(lines[c++]) != 0;

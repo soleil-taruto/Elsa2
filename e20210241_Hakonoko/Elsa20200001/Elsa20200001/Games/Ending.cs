@@ -20,7 +20,7 @@ namespace Charlotte.Games
 
 			for (int scrfrm = 0; a_script(); scrfrm++)
 			{
-				if (DDInput.L.GetInput() == 1 && 180 < scrfrm) // エンディング_スキップ
+				if (DDInput.L.GetInput() == 1 && 180 < scrfrm && !Ground.I.会話スキップ抑止) // エンディング_スキップ
 				{
 					DDEngine.EachFrame();
 
