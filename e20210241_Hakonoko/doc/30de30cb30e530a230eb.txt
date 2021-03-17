@@ -31,15 +31,11 @@
 　　タイトルメニューの 設定 > パッドのボタン設定 よりボタン配置を変更できます。
 
 
-■制作
+■制作協力（敬称略）
 
 　●シナリオ
 
 　　eiji
-
-　●プログラム
-
-　　cerulean.charlotte
 
 
 ■素材（敬称略）
@@ -66,4 +62,12 @@
 　　(焚火フォント)
 　　フォントグラフィック
 　　https://fontgraphic.jp/
+
+
+■このゲームの製作者
+
+　cerulean.charlotte
+　https://github.com/soleil-taruto
+
+　連絡先 -> cerulean.charlottes@gmail.com
 

@@ -18,21 +18,69 @@ namespace Charlotte
 
 		public DDPicture Title = DDPictureLoaders.Standard(@"dat\run\22350006_big_p12.jpg");
 
-		public DDPicture ほむらシールド = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむらシールド.png");
-		public DDPicture ほむらバズーカ = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむらバズーカ.png");
-		public DDPicture ほむら死亡 = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむら死亡.png");
-		public DDPicture ほむら走り = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむら走り.png");
-		public DDPicture ほむら滞空攻撃 = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむら滞空攻撃.png");
-		public DDPicture ほむら被弾 = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむら被弾.png");
-		public DDPicture ほむら立ち = DDPictureLoaders.BgTrans(@"dat\Konbe\ほむら立ち.png");
+		public DDPicture Tewi_01 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material01.png");
+		public DDPicture Tewi_02 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material02.png");
+		public DDPicture Tewi_03 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material03.png");
+		public DDPicture Tewi_04 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material04.png");
+		public DDPicture Tewi_05 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material05.png");
+		public DDPicture Tewi_06 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material06.png");
+		public DDPicture Tewi_07 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material07.png");
+		public DDPicture Tewi_08 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material08.png");
+		public DDPicture Tewi_09 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material09.png");
+		public DDPicture Tewi_10 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material10.png");
+		public DDPicture Tewi_11 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material11.png");
+		public DDPicture Tewi_12 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material12.png");
+		public DDPicture Tewi_13 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material13.png");
+		public DDPicture Tewi_14 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material14.png");
+		public DDPicture Tewi_15 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material15.png");
+		public DDPicture Tewi_16 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material16.png");
+		public DDPicture Tewi_17 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material17.png");
+		public DDPicture Tewi_18 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material18.png");
+		public DDPicture Tewi_19 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material19.png");
+		public DDPicture Tewi_20 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material20.png");
+		public DDPicture Tewi_21 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material21.png");
+		public DDPicture Tewi_22 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material22.png");
+		public DDPicture Tewi_23 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material23.png");
+		public DDPicture Tewi_24 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material24.png");
+		public DDPicture Tewi_25 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material25.png");
+		public DDPicture Tewi_26 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material26.png");
+		public DDPicture Tewi_27 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material27.png");
+		public DDPicture Tewi_28 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material28.png");
+		public DDPicture Tewi_29 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material29.png");
+		public DDPicture Tewi_30 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material30.png");
+		public DDPicture Tewi_31 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material31.png");
+		public DDPicture Tewi_32 = DDPictureLoaders.Standard(@"dat\オオバコ\因幡てゐ\tewi_material32.png");
 
-		public DDPicture さやか死亡 = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか死亡.png");
-		public DDPicture さやか接地攻撃 = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか接地攻撃.png");
-		public DDPicture さやか走り = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか走り.png");
-		public DDPicture さやか滞空攻撃 = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか滞空攻撃.png");
-		public DDPicture さやか突き = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか突き.png");
-		public DDPicture さやか被弾 = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか被弾.png");
-		public DDPicture さやか立ち = DDPictureLoaders.BgTrans(@"dat\Konbe\さやか立ち.png");
+		public DDPicture Cirno_01 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno01.png");
+		public DDPicture Cirno_02 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno02.png");
+		public DDPicture Cirno_03 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno03.png");
+		public DDPicture Cirno_04 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno04.png");
+		public DDPicture Cirno_05 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno05.png");
+		public DDPicture Cirno_06 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno06.png");
+		public DDPicture Cirno_07 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno07.png");
+		public DDPicture Cirno_08 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno08.png");
+		public DDPicture Cirno_09 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno09.png");
+		public DDPicture Cirno_10 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno10.png");
+		public DDPicture Cirno_11 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno11.png");
+		public DDPicture Cirno_12 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno12.png");
+		public DDPicture Cirno_13 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno13.png");
+		public DDPicture Cirno_14 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno14.png");
+		public DDPicture Cirno_15 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno15.png");
+		public DDPicture Cirno_16 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno16.png");
+		public DDPicture Cirno_17 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno17.png");
+		public DDPicture Cirno_18 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno18.png");
+		public DDPicture Cirno_19 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno19.png");
+		public DDPicture Cirno_20 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno20.png");
+		public DDPicture Cirno_21 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno21.png");
+		public DDPicture Cirno_22 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno22.png");
+		public DDPicture Cirno_23 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno23.png");
+		public DDPicture Cirno_24 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno24.png");
+		public DDPicture Cirno_25 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno25.png");
+		public DDPicture Cirno_26 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno26.png");
+		public DDPicture Cirno_27 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno27.png");
+		public DDPicture Cirno_28 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno28.png");
+		public DDPicture Cirno_29 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno29.png");
+		public DDPicture Cirno_30 = DDPictureLoaders.Standard(@"dat\オオバコ\チルノ\free_cirno30.png");
 
 		public DDPicture Tile_None = DDPictureLoaders.Standard(@"dat\Tile\Tile_None.png");
 		public DDPicture Tile_B0001 = DDPictureLoaders.Standard(@"dat\Tile\Tile_B0001.png");
@@ -54,7 +102,6 @@ namespace Charlotte
 
 		public DDPicture Enemy_B0003 = DDPictureLoaders.Standard(@"dat\Enemy_B0003.png");
 
-		//public DDPicture Enemy_神奈子 = DDPictureLoaders.Reduct(@"dat\きつね仮\yukkuri-kanako.png", 4); // 4000x4000 -> 1000x1000
 		public DDPicture Enemy_神奈子 = DDPictureLoaders.Standard(@"dat\きつね仮\yukkuri-kanako.png"); // 1000x1000 resized png
 
 		// ノベルパート用システム画像
