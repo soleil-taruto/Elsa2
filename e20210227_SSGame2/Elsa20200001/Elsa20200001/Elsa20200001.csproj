@@ -72,6 +72,9 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="GameCommons\DDHash.cs" />
+    <Compile Include="GameCommons\DDHashedData.cs" />
+    <Compile Include="GameCommons\DDHashedResource.cs" />
     <Compile Include="GameCommons\DDTouch.cs" />
     <Compile Include="Games\Confirm.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bイベント0001.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="Games\Map.cs" />
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MusicCollection.cs" />
+    <Compile Include="Games\SettingMenu.cs" />
     <Compile Include="Games\Shots\Shot_FireBall.cs" />
     <Compile Include="Games\Shots\Shot_Laser.cs" />
     <Compile Include="Games\Shots\Shot_WaveBeam.cs" />

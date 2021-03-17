@@ -130,10 +130,16 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			DDSimpleMenu simpleMenu = new DDSimpleMenu();
-
-			simpleMenu.BorderColor = new I3Color(0, 128, 0);
-			simpleMenu.WallColor = new I3Color(128, 64, 0);
+			DDSimpleMenu simpleMenu = new DDSimpleMenu()
+			{
+				BorderColor = new I3Color(0, 128, 0),
+				WallDrawer = () =>
+				{
+					DDDraw.SetBright(new I3Color(128, 64, 0));
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+					DDDraw.Reset();
+				},
+			};
 
 			int selectIndex = 0;
 
@@ -144,7 +150,7 @@ namespace Charlotte.Games
 					"----" :
 					"[" + v.TimeStamp + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
 
-				selectIndex = simpleMenu.Perform("セーブ画面", items, selectIndex);
+				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "セーブ", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
@@ -163,7 +169,7 @@ namespace Charlotte.Games
 						Ground.P_SaveDataSlot saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
 
 						saveDataSlot.TimeStamp = DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss");
-						saveDataSlot.Description = "＠＠＠～～～＠＠＠～～～＠＠＠～～～＠＠＠～～～＠＠＠";
+						saveDataSlot.Description = "＠～＠～＠";
 						saveDataSlot.MapName = GameCommon.GetMapName(Game.I.Map.MapFile, "t0001");
 						saveDataSlot.GameStatus = gameStatus;
 					}

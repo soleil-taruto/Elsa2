@@ -43,16 +43,25 @@ namespace Charlotte.Games
 
 			int selectIndex = 0;
 
-			this.SimpleMenu = new DDSimpleMenu();
+			this.SimpleMenu = new DDSimpleMenu()
+			{
+				BorderColor = new I3Color(64, 0, 0),
+				WallDrawer = () =>
+				{
+					DDPicture picture = Ground.I.Picture.Title;
 
-			this.SimpleMenu.BorderColor = new I3Color(64, 0, 0);
-			//this.SimpleMenu.WallColor = new I3Color(130, 120, 0);
-			this.SimpleMenu.WallPicture = Ground.I.Picture.Title;
-			this.SimpleMenu.WallCurtain = -0.4;
+					DDDraw.DrawRect(
+						picture,
+						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+						);
+
+					DDCurtain.DrawCurtain(-0.4);
+				},
+			};
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform("横スクロール アクションゲーム タイプ-M テストコード / タイトルメニュー", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横スクロール アクションゲーム タイプ-M テストコード / タイトルメニュー", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -91,7 +100,13 @@ namespace Charlotte.Games
 						break;
 
 					case 2:
-						this.Setting();
+						using (new SettingMenu()
+						{
+							SimpleMenu = this.SimpleMenu,
+						})
+						{
+							SettingMenu.I.Perform();
+						}
 						break;
 
 					case 3:
@@ -107,7 +122,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 
@@ -123,10 +138,16 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			DDSimpleMenu simpleMenu = new DDSimpleMenu();
-
-			simpleMenu.BorderColor = new I3Color(0, 128, 0);
-			simpleMenu.WallColor = new I3Color(64, 64, 128);
+			DDSimpleMenu simpleMenu = new DDSimpleMenu()
+			{
+				BorderColor = new I3Color(0, 128, 0),
+				WallDrawer = () =>
+				{
+					DDDraw.SetBright(new I3Color(64, 64, 128));
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+					DDDraw.Reset();
+				},
+			};
 
 			string[] items = Ground.I.SaveDataSlots.Select(v => v.GameStatus == null ?
 				"----" :
@@ -136,7 +157,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = simpleMenu.Perform("ロード画面", items, selectIndex);
+				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "ロード画面", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
@@ -161,99 +182,6 @@ namespace Charlotte.Games
 			return saveDataSlot;
 		}
 
-		private void Setting()
-		{
-			DDCurtain.SetCurtain();
-			DDEngine.FreezeInput();
-
-			string[] items = new string[]
-			{
-				"ゲームパッドのボタン設定",
-				"キーボードのキー設定",
-				"ウィンドウサイズ変更",
-				"ＢＧＭ音量",
-				"ＳＥ音量",
-				"ノベルパートのメッセージ表示速度",
-				"戻る",
-			};
-
-			DDSE[] seSamples = new DDSE[]
-			{
-				Ground.I.SE.EnemyDamaged,
-				Ground.I.SE.EnemyKilled,
-			};
-
-			int selectIndex = 0;
-
-			for (; ; )
-			{
-				selectIndex = this.SimpleMenu.Perform("設定", items, selectIndex);
-
-				switch (selectIndex)
-				{
-					case 0:
-						this.SimpleMenu.PadConfig();
-						break;
-
-					case 1:
-						this.SimpleMenu.PadConfig(true);
-						break;
-
-					case 2:
-						this.SimpleMenu.WindowSizeConfig();
-						break;
-
-					case 3:
-						this.SimpleMenu.VolumeConfig("ＢＧＭ音量", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
-						{
-							DDGround.MusicVolume = volume;
-							DDMusicUtils.UpdateVolume();
-						},
-						() => { }
-						);
-						break;
-
-					case 4:
-						this.SimpleMenu.VolumeConfig("ＳＥ音量", DDGround.SEVolume, 0, 100, 1, 10, volume =>
-						{
-							DDGround.SEVolume = volume;
-							//DDSEUtils.UpdateVolume(); // old
-
-							foreach (DDSE se in seSamples) // サンプルのみ音量更新
-								se.UpdateVolume();
-						},
-						() =>
-						{
-							DDUtils.Random.ChooseOne(seSamples).Play();
-						}
-						);
-						DDSEUtils.UpdateVolume(); // 全音量更新
-						break;
-
-					case 5:
-						this.SimpleMenu.IntVolumeConfig(
-							"ノベルパートのメッセージ表示速度",
-							Ground.I.NovelMessageSpeed,
-							NovelConsts.MESSAGE_SPEED_MIN,
-							NovelConsts.MESSAGE_SPEED_MAX,
-							1,
-							2,
-							speed => Ground.I.NovelMessageSpeed = speed,
-							() => { }
-							);
-						break;
-
-					case 6:
-						goto endMenu;
-
-					default:
-						throw new DDError();
-				}
-			}
-		endMenu:
-			DDEngine.FreezeInput();
-		}
-
 		private void LeaveTitleMenu()
 		{
 			DDMusicUtils.Fade();
@@ -261,7 +189,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 

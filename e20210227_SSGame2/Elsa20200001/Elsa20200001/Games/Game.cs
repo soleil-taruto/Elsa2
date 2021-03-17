@@ -58,6 +58,8 @@ namespace Charlotte.Games
 		public int Frame;
 		public bool UserInputDisabled = false;
 
+		public bool RequestReturnToTitleMenu = false;
+
 		public void Perform()
 		{
 			Func<bool> f_ゴミ回収 = SCommon.Supplier(this.E_ゴミ回収());
@@ -114,6 +116,11 @@ namespace Charlotte.Games
 						this.Status.ExitDirection = 5;
 						break;
 					}
+				}
+				if (this.RequestReturnToTitleMenu)
+				{
+					this.Status.ExitDirection = 5;
+					break;
 				}
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_RETURN) == 1)
 				{
@@ -272,27 +279,24 @@ namespace Charlotte.Games
 				//startDead:
 				if (1 <= this.Player.DeadFrame) // プレイヤー死亡中の処理
 				{
-					int frame = this.Player.DeadFrame - 1;
-
-					if (GameConsts.PLAYER_DEAD_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_DEAD_FRAME_MAX < ++this.Player.DeadFrame)
 					{
 						this.Player.DeadFrame = 0;
 						this.Status.ExitDirection = 5;
 						break;
 					}
-					this.Player.DeadFrame++;
+					int frame = this.Player.DeadFrame; // 値域 == 2 ～ GameConsts.PLAYER_DEAD_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DEAD_FRAME_MAX, frame);
 
-					// この時点でとりうる this.Player.DeadFrame の最大値は Consts.PLAYER_DEAD_FRAME_MAX + 2
-
-					// ----
+					// ---- Dead
 
 					const int HIT_BACK_FRAME_MAX = 30;
 
 					if (frame < HIT_BACK_FRAME_MAX)
 					{
-						double rate = (double)frame / HIT_BACK_FRAME_MAX;
+						double hitBackRate = (double)frame / HIT_BACK_FRAME_MAX;
 
-						this.Player.X -= 10.0 * (1.0 - rate) * (this.Player.FacingLeft ? -1 : 1);
+						this.Player.X -= 10.0 * (1.0 - hitBackRate) * (this.Player.FacingLeft ? -1 : 1);
 					}
 				}
 				//endDead:
@@ -300,43 +304,33 @@ namespace Charlotte.Games
 				//startDamage:
 				if (1 <= this.Player.DamageFrame) // プレイヤー・ダメージ中の処理
 				{
-					int frame = this.Player.DamageFrame - 1;
-
-					if (GameConsts.PLAYER_DAMAGE_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_DAMAGE_FRAME_MAX < ++this.Player.DamageFrame)
 					{
 						this.Player.DamageFrame = 0;
 						this.Player.InvincibleFrame = 1;
 						goto endDamage;
 					}
-					this.Player.DamageFrame++;
+					int frame = this.Player.DamageFrame; // 値域 == 2 ～ GameConsts.PLAYER_DAMAGE_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_DAMAGE_FRAME_MAX, frame);
 
-					// この時点でとりうる this.Player.DamageFrame の最大値は Consts.PLAYER_DAMAGE_FRAME_MAX + 2
+					// ---- Damage
 
-					// ----
-
-					{
-						double rate = (double)frame / GameConsts.PLAYER_DAMAGE_FRAME_MAX;
-
-						this.Player.X -= (9.0 - 6.0 * rate) * (this.Player.FacingLeft ? -1 : 1);
-					}
+					this.Player.X -= (9.0 - 6.0 * rate) * (this.Player.FacingLeft ? -1 : 1);
 				}
 			endDamage:
 
 				//startInvincible:
 				if (1 <= this.Player.InvincibleFrame) // プレイヤー無敵時間中の処理
 				{
-					int frame = this.Player.InvincibleFrame - 1;
-
-					if (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX < frame)
+					if (GameConsts.PLAYER_INVINCIBLE_FRAME_MAX < ++this.Player.InvincibleFrame)
 					{
 						this.Player.InvincibleFrame = 0;
 						goto endInvincible;
 					}
-					this.Player.InvincibleFrame++;
+					int frame = this.Player.InvincibleFrame; // 値域 == 2 ～ GameConsts.PLAYER_INVINCIBLE_FRAME_MAX
+					double rate = DDUtils.RateAToB(2, GameConsts.PLAYER_INVINCIBLE_FRAME_MAX, frame);
 
-					// この時点でとりうる this.Player.InvincibleFrame の最大値は Consts.PLAYER_INVINCIBLE_FRAME_MAX + 2
-
-					// ----
+					// ---- Invincible
 
 					// noop
 				}
@@ -351,10 +345,10 @@ namespace Charlotte.Games
 						if (this.Player.MoveSlow)
 						{
 							speed = this.Player.MoveFrame * 0.2;
-							DDUtils.Minim(ref speed, 2.0);
+							DDUtils.Minim(ref speed, GameConsts.PLAYER_SLOW_SPEED);
 						}
 						else
-							speed = 6.0;
+							speed = GameConsts.PLAYER_SPEED;
 
 						speed *= this.Player.FacingLeft ? -1 : 1;
 
@@ -363,39 +357,33 @@ namespace Charlotte.Games
 					else
 						this.Player.X = (double)SCommon.ToInt(this.Player.X);
 
-					const double 重力加速度 = 1.0;
-					const double 落下最高速度 = 8.0;
-					const double ジャンプによる上昇_YSpeed = -8.0;
-
 					if (1 <= this.Player.JumpFrame)
-						this.Player.YSpeed = ジャンプによる上昇_YSpeed;
+						this.Player.YSpeed = GameConsts.PLAYER_ジャンプによる上昇速度;
 					else
-						this.Player.YSpeed += 重力加速度;
+						this.Player.YSpeed += GameConsts.PLAYER_GRAVITY;
 
-					DDUtils.Minim(ref this.Player.YSpeed, 落下最高速度);
+					DDUtils.Minim(ref this.Player.YSpeed, GameConsts.PLAYER_FALL_SPEED_MAX);
 
 					this.Player.Y += this.Player.YSpeed; // 自由落下
 				}
 
-				// 上昇が速すぎると、脳天判定より先に側面判定に引っ掛かってしまう可能性がある。
-				// -- ( -(ジャンプによる上昇_YSpeed) < 脳天判定Pt_Y - 側面判定Pt_Y ) を維持すること。
-				// 下降が速すぎると、接地判定より先に側面判定に引っ掛かってしまう可能性がある。
-				// -- ( 落下最高速度 < 接地判定Pt_Y - 側面判定Pt_Y ) を維持すること。
-
 				// プレイヤー位置矯正
 				{
-					const double 側面判定Pt_X = 10.0;
-					const double 側面判定Pt_Y = GameConsts.TILE_H / 2.0;
-
 					bool touchSide_L =
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - 側面判定Pt_X, this.Player.Y - 側面判定Pt_Y)).Tile.IsWall() ||
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - 側面判定Pt_X, this.Player.Y)).Tile.IsWall() ||
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - 側面判定Pt_X, this.Player.Y + 側面判定Pt_Y)).Tile.IsWall();
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - GameConsts.PLAYER_側面判定Pt_X, this.Player.Y - GameConsts.PLAYER_側面判定Pt_Y)).Tile.IsWall() ||
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - GameConsts.PLAYER_側面判定Pt_X, this.Player.Y)).Tile.IsWall() ||
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - GameConsts.PLAYER_側面判定Pt_X, this.Player.Y + GameConsts.PLAYER_側面判定Pt_Y)).Tile.IsWall();
 
 					bool touchSide_R =
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + 側面判定Pt_X, this.Player.Y - 側面判定Pt_Y)).Tile.IsWall() ||
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + 側面判定Pt_X, this.Player.Y)).Tile.IsWall() ||
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + 側面判定Pt_X, this.Player.Y + 側面判定Pt_Y)).Tile.IsWall();
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + GameConsts.PLAYER_側面判定Pt_X, this.Player.Y - GameConsts.PLAYER_側面判定Pt_Y)).Tile.IsWall() ||
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + GameConsts.PLAYER_側面判定Pt_X, this.Player.Y)).Tile.IsWall() ||
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + GameConsts.PLAYER_側面判定Pt_X, this.Player.Y + GameConsts.PLAYER_側面判定Pt_Y)).Tile.IsWall();
+
+					if (touchSide_L && touchSide_R) // -> 壁抜け防止のため再チェック
+					{
+						touchSide_L = this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - GameConsts.PLAYER_側面判定Pt_X, this.Player.Y)).Tile.IsWall();
+						touchSide_R = this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + GameConsts.PLAYER_側面判定Pt_X, this.Player.Y)).Tile.IsWall();
+					}
 
 					if (touchSide_L && touchSide_R)
 					{
@@ -403,27 +391,24 @@ namespace Charlotte.Games
 					}
 					else if (touchSide_L)
 					{
-						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W + 側面判定Pt_X;
+						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W + GameConsts.PLAYER_側面判定Pt_X;
 					}
 					else if (touchSide_R)
 					{
-						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W - 側面判定Pt_X;
+						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W - GameConsts.PLAYER_側面判定Pt_X;
 					}
 
-					const double 脳天判定Pt_X = 9.0;
-					const double 脳天判定Pt_Y = GameConsts.TILE_H;
-
 					bool touchCeiling_L =
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - 脳天判定Pt_X, this.Player.Y - 脳天判定Pt_Y)).Tile.IsWall();
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - GameConsts.PLAYER_脳天判定Pt_X, this.Player.Y - GameConsts.PLAYER_脳天判定Pt_Y)).Tile.IsWall();
 
 					bool touchCeiling_R =
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + 脳天判定Pt_X, this.Player.Y - 脳天判定Pt_Y)).Tile.IsWall();
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + GameConsts.PLAYER_脳天判定Pt_X, this.Player.Y - GameConsts.PLAYER_脳天判定Pt_Y)).Tile.IsWall();
 
 					if (touchCeiling_L && touchCeiling_R)
 					{
 						if (this.Player.YSpeed < 0.0)
 						{
-							double plY = ((int)((this.Player.Y - 脳天判定Pt_Y) / GameConsts.TILE_H) + 1) * GameConsts.TILE_H + 脳天判定Pt_Y;
+							double plY = ((int)((this.Player.Y - GameConsts.PLAYER_脳天判定Pt_Y) / GameConsts.TILE_H) + 1) * GameConsts.TILE_H + GameConsts.PLAYER_脳天判定Pt_Y;
 
 							this.Player.Y = plY;
 							this.Player.YSpeed = 0.0;
@@ -432,25 +417,22 @@ namespace Charlotte.Games
 					}
 					else if (touchCeiling_L)
 					{
-						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W + 脳天判定Pt_X;
+						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W + GameConsts.PLAYER_脳天判定Pt_X;
 					}
 					else if (touchCeiling_R)
 					{
-						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W - 脳天判定Pt_X;
+						this.Player.X = (double)SCommon.ToInt(this.Player.X / GameConsts.TILE_W) * GameConsts.TILE_W - GameConsts.PLAYER_脳天判定Pt_X;
 					}
 
-					const double 接地判定Pt_X = 9.0;
-					const double 接地判定Pt_Y = GameConsts.TILE_H;
-
 					bool touchGround =
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - 接地判定Pt_X, this.Player.Y + 接地判定Pt_Y)).Tile.IsWall() ||
-						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + 接地判定Pt_X, this.Player.Y + 接地判定Pt_Y)).Tile.IsWall();
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X - GameConsts.PLAYER_接地判定Pt_X, this.Player.Y + GameConsts.PLAYER_接地判定Pt_Y)).Tile.IsWall() ||
+						this.Map.GetCell(GameCommon.ToTablePoint(this.Player.X + GameConsts.PLAYER_接地判定Pt_X, this.Player.Y + GameConsts.PLAYER_接地判定Pt_Y)).Tile.IsWall();
 
 					if (touchGround)
 					{
 						if (0.0 < this.Player.YSpeed)
 						{
-							double plY = (int)((this.Player.Y + 接地判定Pt_Y) / GameConsts.TILE_H) * GameConsts.TILE_H - 接地判定Pt_Y;
+							double plY = (int)((this.Player.Y + GameConsts.PLAYER_接地判定Pt_Y) / GameConsts.TILE_H) * GameConsts.TILE_H - GameConsts.PLAYER_接地判定Pt_Y;
 
 							this.Player.Y = plY;
 							this.Player.YSpeed = 0.0;
@@ -964,7 +946,7 @@ namespace Charlotte.Games
 
 						DDGround.EL.Add(() =>
 						{
-							DDPrint.SetPrint(0, 16);
+							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
 							DDPrint.Print("セーブしました...");
 							DDPrint.Reset();
@@ -983,7 +965,7 @@ namespace Charlotte.Games
 
 						DDGround.EL.Add(() =>
 						{
-							DDPrint.SetPrint(0, 16);
+							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
 							DDPrint.Print("ロードしました...");
 							DDPrint.Reset();
@@ -1131,19 +1113,28 @@ namespace Charlotte.Games
 		private bool Pause_ReturnToTitleMenu = false;
 		private bool 当たり判定表示 = false;
 
+		private static DDSubScreen Pause_KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
+
 		/// <summary>
 		/// ポーズメニュー
 		/// </summary>
 		private void Pause()
 		{
 			DDMain.KeepMainScreen();
+			SCommon.Swap(ref DDGround.KeptMainScreen, ref Pause_KeptMainScreen);
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 128),
-				WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(0, 0, 0);
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 4, DDConsts.Screen_W, DDConsts.Screen_H / 2);
+					DDDraw.Reset();
+				},
 			};
 
 			DDEngine.FreezeInput();
@@ -1153,24 +1144,50 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"PAUSE",
+					100,
+					180,
+					50,
+					24,
+					"システムメニュー",
 					new string[]
 					{
+						"設定",
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
 					selectIndex,
-					true,
 					true
 					);
 
 				switch (selectIndex)
 				{
 					case 0:
-						this.Pause_ReturnToTitleMenu = true;
-						goto endLoop;
+						using (new SettingMenu()
+						{
+							SimpleMenu = new DDSimpleMenu()
+							{
+								BorderColor = new I3Color(0, 64, 128),
+								WallDrawer = () =>
+								{
+									DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+									DDCurtain.DrawCurtain(-0.7);
+								},
+							},
+						})
+						{
+							SettingMenu.I.Perform();
+						}
+						break;
 
 					case 1:
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						{
+							this.Pause_ReturnToTitleMenu = true;
+							goto endLoop;
+						}
+						break;
+
+					case 2:
 						goto endLoop;
 
 					default:
@@ -1194,10 +1211,12 @@ namespace Charlotte.Games
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
 			{
-				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 128, 64),
-				WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
+					DDCurtain.DrawCurtain(-0.5);
+				},
 			};
 
 			DDEngine.FreezeInput();
@@ -1207,6 +1226,10 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
+					40,
+					40,
+					40,
+					24,
 					"デバッグ用メニュー",
 					new string[]
 					{
