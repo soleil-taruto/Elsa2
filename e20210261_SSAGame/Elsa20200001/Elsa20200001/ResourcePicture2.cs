@@ -13,9 +13,7 @@ namespace Charlotte
 
 		// ---- 因幡てゐ ----
 
-		// 基本
-		//
-		public DDPicture[] Tewi_立ち;
+		public DDPicture[] Tewi_立ち = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_01, 0, 0, 160, 192).Take(12).ToArray();
 		public DDPicture[] Tewi_振り向き;
 		public DDPicture[] Tewi_しゃがみ;
 		public DDPicture[] Tewi_しゃがみ振り向き;
@@ -27,9 +25,6 @@ namespace Charlotte
 		public DDPicture[] Tewi_しゃがみ小ダメージ;
 		public DDPicture[] Tewi_しゃがみ大ダメージ;
 		public DDPicture[] Tewi_飛翔;
-
-		// 攻撃
-		//
 		public DDPicture[] Tewi_弱攻撃;
 		public DDPicture[] Tewi_中攻撃;
 		public DDPicture[] Tewi_強攻撃;
@@ -42,7 +37,27 @@ namespace Charlotte
 
 		// ---- チルノ ----
 
-		// TODO
+		public DDPicture[] Cirno_立ち;
+		public DDPicture[] Cirno_振り向き;
+		public DDPicture[] Cirno_しゃがみ;
+		public DDPicture[] Cirno_しゃがみ振り向き;
+		public DDPicture[] Cirno_ジャンプ;
+		public DDPicture[] Cirno_歩く;
+		public DDPicture[] Cirno_走る;
+		public DDPicture[] Cirno_小ダメージ;
+		public DDPicture[] Cirno_大ダメージ;
+		public DDPicture[] Cirno_しゃがみ小ダメージ;
+		public DDPicture[] Cirno_しゃがみ大ダメージ;
+		public DDPicture[] Cirno_飛翔;
+		public DDPicture[] Cirno_弱攻撃;
+		public DDPicture[] Cirno_中攻撃;
+		public DDPicture[] Cirno_強攻撃;
+		public DDPicture[] Cirno_しゃがみ弱攻撃;
+		public DDPicture[] Cirno_しゃがみ中攻撃;
+		public DDPicture[] Cirno_しゃがみ強攻撃;
+		public DDPicture[] Cirno_ジャンプ弱攻撃;
+		public DDPicture[] Cirno_ジャンプ中攻撃;
+		public DDPicture[] Cirno_ジャンプ強攻撃;
 
 		// ----
 

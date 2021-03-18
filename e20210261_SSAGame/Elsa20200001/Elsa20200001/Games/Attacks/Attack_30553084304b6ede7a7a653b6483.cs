@@ -21,7 +21,7 @@ namespace Charlotte.Games.Attacks
 				if (2 * 4 < frame && DDInput.B.GetInput() == 1) // ? 再発砲
 					frame = 0;
 
-				int koma = Math.Min(frame / 4, Ground.I.Picture2.さやか滞空攻撃.Length - 1);
+				int koma = 0; ////Math.Min(frame / 4, Ground.I.Picture2.さやか滞空攻撃.Length - 1);
 
 				AttackCommon.ProcPlayer_移動();
 				AttackCommon.ProcPlayer_Fall();
@@ -42,11 +42,11 @@ namespace Charlotte.Games.Attacks
 						));
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				DDDraw.DrawBegin(
-					Ground.I.Picture2.さやか滞空攻撃[koma],
-					Game.I.Player.X - DDGround.ICamera.X,
-					Game.I.Player.Y - DDGround.ICamera.Y
-					);
+				////DDDraw.DrawBegin(
+				////Ground.I.Picture2.さやか滞空攻撃[koma],
+				////Game.I.Player.X - DDGround.ICamera.X,
+				////Game.I.Player.Y - DDGround.ICamera.Y
+				////);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();

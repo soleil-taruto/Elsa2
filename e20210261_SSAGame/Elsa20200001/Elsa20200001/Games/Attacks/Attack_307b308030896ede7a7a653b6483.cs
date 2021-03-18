@@ -35,7 +35,7 @@ namespace Charlotte.Games.Attacks
 						));
 				}
 
-				int koma = Math.Min((frame + 15) / 4, Ground.I.Picture2.ほむら滞空攻撃.Length - 1);
+				int koma = 0; ////Math.Min((frame + 15) / 4, Ground.I.Picture2.ほむら滞空攻撃.Length - 1);
 
 				AttackCommon.ProcPlayer_移動();
 				AttackCommon.ProcPlayer_Fall();
@@ -47,11 +47,11 @@ namespace Charlotte.Games.Attacks
 					break;
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				DDDraw.DrawBegin(
-					Ground.I.Picture2.ほむら滞空攻撃[koma],
-					x - DDGround.ICamera.X,
-					y - DDGround.ICamera.Y
-					);
+				////DDDraw.DrawBegin(
+				////Ground.I.Picture2.ほむら滞空攻撃[koma],
+				////x - DDGround.ICamera.X,
+				////y - DDGround.ICamera.Y
+				////);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();

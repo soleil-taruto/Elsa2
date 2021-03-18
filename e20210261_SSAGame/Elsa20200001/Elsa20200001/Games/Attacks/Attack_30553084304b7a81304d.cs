@@ -38,11 +38,11 @@ namespace Charlotte.Games.Attacks
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				DDDraw.DrawBegin(
-					Ground.I.Picture2.さやか突き[koma],
-					Game.I.Player.X - DDGround.ICamera.X + 30.0 * xZoom,
-					Game.I.Player.Y - DDGround.ICamera.Y
-					);
+				////DDDraw.DrawBegin(
+				////Ground.I.Picture2.さやか突き[koma],
+				////Game.I.Player.X - DDGround.ICamera.X + 30.0 * xZoom,
+				////Game.I.Player.Y - DDGround.ICamera.Y
+				////);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();
@@ -91,11 +91,11 @@ namespace Charlotte.Games.Attacks
 					));
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				DDDraw.DrawBegin(
-					Ground.I.Picture2.さやか突き[koma],
-					Game.I.Player.X - DDGround.ICamera.X,
-					Game.I.Player.Y - DDGround.ICamera.Y + 8.0
-					);
+				////DDDraw.DrawBegin(
+				////Ground.I.Picture2.さやか突き[koma],
+				////Game.I.Player.X - DDGround.ICamera.X,
+				////Game.I.Player.Y - DDGround.ICamera.Y + 8.0
+				////);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();
@@ -112,11 +112,11 @@ namespace Charlotte.Games.Attacks
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				DDDraw.DrawBegin(
-					Ground.I.Picture2.さやか突き[koma],
-					Game.I.Player.X - DDGround.ICamera.X + 30.0 * xZoom,
-					Game.I.Player.Y - DDGround.ICamera.Y
-					);
+				////DDDraw.DrawBegin(
+				////Ground.I.Picture2.さやか突き[koma],
+				////Game.I.Player.X - DDGround.ICamera.X + 30.0 * xZoom,
+				////Game.I.Player.Y - DDGround.ICamera.Y
+				////);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();

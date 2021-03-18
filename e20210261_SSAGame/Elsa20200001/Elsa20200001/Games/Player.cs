@@ -83,7 +83,7 @@ namespace Charlotte.Games
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
-							picture = Ground.I.Picture2.ほむら死亡[4];
+							////picture = Ground.I.Picture2.ほむら死亡[4];
 							xa = 14;
 							ya = 6;
 						}
@@ -91,11 +91,11 @@ namespace Charlotte.Games
 						{
 							if (1 <= this.MoveFrame)
 							{
-								picture = Ground.I.Picture2.ほむら走り[5];
+								////picture = Ground.I.Picture2.ほむら走り[5];
 							}
 							else
 							{
-								picture = Ground.I.Picture2.ほむら滞空攻撃[0];
+								////picture = Ground.I.Picture2.ほむら滞空攻撃[0];
 								xa = 12;
 							}
 						}
@@ -103,16 +103,16 @@ namespace Charlotte.Games
 						{
 							if (this.MoveSlow)
 							{
-								picture = Ground.I.Picture2.ほむら走り[(Game.I.Frame / 10) % Ground.I.Picture2.ほむら走り.Length];
+								////picture = Ground.I.Picture2.ほむら走り[(Game.I.Frame / 10) % Ground.I.Picture2.ほむら走り.Length];
 							}
 							else
 							{
-								picture = Ground.I.Picture2.ほむら走り[(Game.I.Frame / 5) % Ground.I.Picture2.ほむら走り.Length];
+								////picture = Ground.I.Picture2.ほむら走り[(Game.I.Frame / 5) % Ground.I.Picture2.ほむら走り.Length];
 							}
 						}
 						else
 						{
-							picture = Ground.I.Picture2.ほむら立ち[(Game.I.Frame / 10) % Ground.I.Picture2.ほむら立ち.Length];
+							////picture = Ground.I.Picture2.ほむら立ち[(Game.I.Frame / 10) % Ground.I.Picture2.ほむら立ち.Length];
 						}
 					}
 					break;
@@ -121,7 +121,7 @@ namespace Charlotte.Games
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
-							picture = Ground.I.Picture2.さやか立ち[0];
+							////picture = Ground.I.Picture2.さやか立ち[0];
 							xa = -14;
 							ya = 20;
 							yZoom = 0.666;
@@ -130,12 +130,12 @@ namespace Charlotte.Games
 						{
 							if (1 <= this.MoveFrame)
 							{
-								picture = Ground.I.Picture2.さやか走り[1];
+								////picture = Ground.I.Picture2.さやか走り[1];
 								ya = -4;
 							}
 							else
 							{
-								picture = Ground.I.Picture2.さやか突き[9];
+								////picture = Ground.I.Picture2.さやか突き[9];
 								xa = 30;
 							}
 						}
@@ -143,18 +143,18 @@ namespace Charlotte.Games
 						{
 							if (this.MoveSlow)
 							{
-								picture = Ground.I.Picture2.さやか走り[(Game.I.Frame / 10) % Ground.I.Picture2.さやか走り.Length];
+								////picture = Ground.I.Picture2.さやか走り[(Game.I.Frame / 10) % Ground.I.Picture2.さやか走り.Length];
 								ya = -4;
 							}
 							else
 							{
-								picture = Ground.I.Picture2.さやか走り[(Game.I.Frame / 5) % Ground.I.Picture2.さやか走り.Length];
+								////picture = Ground.I.Picture2.さやか走り[(Game.I.Frame / 5) % Ground.I.Picture2.さやか走り.Length];
 								ya = -4;
 							}
 						}
 						else
 						{
-							picture = Ground.I.Picture2.さやか立ち[(Game.I.Frame / 10) % Ground.I.Picture2.さやか立ち.Length];
+							////picture = Ground.I.Picture2.さやか立ち[(Game.I.Frame / 10) % Ground.I.Picture2.さやか立ち.Length];
 							xa = -14;
 							ya = 2;
 						}
@@ -171,12 +171,12 @@ namespace Charlotte.Games
 				switch (Game.I.Player.Chara)
 				{
 					case Chara_e.HOMURA:
-						picture = Ground.I.Picture2.ほむら死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.ほむら死亡.Length - 1)];
+						////picture = Ground.I.Picture2.ほむら死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.ほむら死亡.Length - 1)];
 						ya = 6;
 						break;
 
 					case Chara_e.SAYAKA:
-						picture = Ground.I.Picture2.さやか死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.さやか死亡.Length - 1)];
+						////picture = Ground.I.Picture2.さやか死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.さやか死亡.Length - 1)];
 						xa = -10;
 						ya = -6;
 						break;
@@ -192,11 +192,11 @@ namespace Charlotte.Games
 				switch (Game.I.Player.Chara)
 				{
 					case Chara_e.HOMURA:
-						picture = Ground.I.Picture2.ほむら被弾[(this.DamageFrame * Ground.I.Picture2.ほむら被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
+						////picture = Ground.I.Picture2.ほむら被弾[(this.DamageFrame * Ground.I.Picture2.ほむら被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
 						break;
 
 					case Chara_e.SAYAKA:
-						picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
+						////picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
 						xa = -20;
 						break;
 

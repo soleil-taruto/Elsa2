@@ -13,21 +13,29 @@ namespace Charlotte.Tests
 		{
 			DDPicture[][] motions = new DDPicture[][]
 			{
-				Ground.I.Picture2.ほむらシールド,
-				Ground.I.Picture2.ほむらバズーカ,
-				Ground.I.Picture2.ほむら死亡,
-				Ground.I.Picture2.ほむら走り,
-				Ground.I.Picture2.ほむら滞空攻撃,
-				Ground.I.Picture2.ほむら被弾,
-				Ground.I.Picture2.ほむら立ち,
+				Ground.I.Picture2.Tewi_立ち,
+				//Ground.I.Picture2.Tewi_振り向き,
+				//Ground.I.Picture2.Tewi_しゃがみ,
+				//Ground.I.Picture2.Tewi_しゃがみ振り向き,
+				//Ground.I.Picture2.Tewi_ジャンプ,
+				//Ground.I.Picture2.Tewi_歩く,
+				//Ground.I.Picture2.Tewi_走る,
+				//Ground.I.Picture2.Tewi_小ダメージ,
+				//Ground.I.Picture2.Tewi_大ダメージ,
+				//Ground.I.Picture2.Tewi_しゃがみ小ダメージ,
+				//Ground.I.Picture2.Tewi_しゃがみ大ダメージ,
+				//Ground.I.Picture2.Tewi_飛翔,
+				//Ground.I.Picture2.Tewi_弱攻撃,
+				//Ground.I.Picture2.Tewi_中攻撃,
+				//Ground.I.Picture2.Tewi_強攻撃,
+				//Ground.I.Picture2.Tewi_しゃがみ弱攻撃,
+				//Ground.I.Picture2.Tewi_しゃがみ中攻撃,
+				//Ground.I.Picture2.Tewi_しゃがみ強攻撃,
+				//Ground.I.Picture2.Tewi_ジャンプ弱攻撃,
+				//Ground.I.Picture2.Tewi_ジャンプ中攻撃,
+				//Ground.I.Picture2.Tewi_ジャンプ強攻撃,
 
-				Ground.I.Picture2.さやか死亡,
-				Ground.I.Picture2.さやか接地攻撃,
-				Ground.I.Picture2.さやか走り,
-				Ground.I.Picture2.さやか滞空攻撃,
-				Ground.I.Picture2.さやか突き,
-				Ground.I.Picture2.さやか被弾,
-				Ground.I.Picture2.さやか立ち,
+				// TODO チルノ
 			};
 
 			DDEngine.FreezeInput();

@@ -20,8 +20,8 @@ namespace Charlotte.Games.Attacks
 			{
 				int koma = frame / 6;
 
-				if (Ground.I.Picture2.ほむらシールド.Length <= koma)
-					break;
+				////if (Ground.I.Picture2.ほむらシールド.Length <= koma)
+				////break;
 
 				if (frame == 4 * 6)
 					this.カットイン();
@@ -29,11 +29,11 @@ namespace Charlotte.Games.Attacks
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				DDDraw.DrawBegin(
-					Ground.I.Picture2.ほむらシールド[koma],
-					Game.I.Player.X - DDGround.ICamera.X - 8.0 * xZoom,
-					Game.I.Player.Y - DDGround.ICamera.Y + 2.0
-					);
+				////DDDraw.DrawBegin(
+				////Ground.I.Picture2.ほむらシールド[koma],
+				////Game.I.Player.X - DDGround.ICamera.X - 8.0 * xZoom,
+				////Game.I.Player.Y - DDGround.ICamera.Y + 2.0
+				////);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();
