@@ -30,6 +30,11 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		/// <summary>
+		/// 各色を反転する。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <returns>画像</returns>
 		public static DDPicture Inverse(string file)
 		{
 			return new DDPicture(
@@ -61,6 +66,12 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		/// <summary>
+		/// 幅を2倍にして、左に元の画像、右に元の画像を左右反転した画像を配置する。
+		/// 左右対称で「元画像には左側しかない場合」用
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <returns>画像</returns>
 		public static DDPicture Mirror(string file)
 		{
 			return new DDPicture(
@@ -96,92 +107,14 @@ namespace Charlotte.GameCommons
 				);
 		}
 
-		public static DDPicture BgTrans(string file)
-		{
-			return new DDPicture(
-				() =>
-				{
-					int siHandle = DDPictureLoaderUtils.FileData2SoftImage(DDPictureLoaderUtils.File2FileData(file));
-					int w;
-					int h;
-
-					DDPictureLoaderUtils.GetSoftImageSize(siHandle, out w, out h);
-
-					DDPictureLoaderUtils.Dot targetDot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, 0, 0); // 左上隅のピクセル
-
-					for (int x = 0; x < w; x++)
-					{
-						for (int y = 0; y < h; y++)
-						{
-							DDPictureLoaderUtils.Dot dot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, x, y);
-
-							if (
-								targetDot.R == dot.R &&
-								targetDot.G == dot.G &&
-								targetDot.B == dot.B
-								)
-							{
-								dot.A = 0;
-
-								DDPictureLoaderUtils.SetSoftImageDot(siHandle, x, y, dot);
-							}
-						}
-					}
-					return DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(siHandle));
-				},
-				DDPictureLoaderUtils.ReleaseInfo,
-				DDPictureUtils.Add
-				);
-		}
-
-		public static DDPicture SelectARGB(string file, string mode) // mode: "XXXX", X == "ARGB"
-		{
-			const string s_argb = "ARGB";
-
-			int ia = s_argb.IndexOf(mode[0]);
-			int ir = s_argb.IndexOf(mode[1]);
-			int ig = s_argb.IndexOf(mode[2]);
-			int ib = s_argb.IndexOf(mode[3]);
-
-			return new DDPicture(
-				() =>
-				{
-					int siHandle = DDPictureLoaderUtils.FileData2SoftImage(DDPictureLoaderUtils.File2FileData(file));
-					int w;
-					int h;
-
-					DDPictureLoaderUtils.GetSoftImageSize(siHandle, out w, out h);
-
-					for (int x = 0; x < w; x++)
-					{
-						for (int y = 0; y < h; y++)
-						{
-							DDPictureLoaderUtils.Dot dot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, x, y);
-
-							List<int> argb = new int[]
-							{
-								dot.A,
-								dot.R,
-								dot.G,
-								dot.B,
-							}
-							.ToList();
-
-							dot.A = argb[ia];
-							dot.R = argb[ir];
-							dot.G = argb[ig];
-							dot.B = argb[ib];
-
-							DDPictureLoaderUtils.SetSoftImageDot(siHandle, x, y, dot);
-						}
-					}
-					return DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(siHandle));
-				},
-				DDPictureLoaderUtils.ReleaseInfo,
-				DDPictureUtils.Add
-				);
-		}
-
+		/// <summary>
+		/// 指定領域を元画像として処理する。
+		/// 幅を2倍にして、左に元の画像、右に元の画像を左右反転した画像を配置する。
+		/// 左右対称で「元画像には左側しかない場合」用
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <param name="derRect">指定領域</param>
+		/// <returns>画像</returns>
 		public static DDPicture Mirror(string file, I4Rect derRect)
 		{
 			return new DDPicture(
@@ -231,6 +164,55 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		/// <summary>
+		/// 左上隅のピクセルの色を透明色として処理する。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <returns>画像</returns>
+		public static DDPicture BgTrans(string file)
+		{
+			return new DDPicture(
+				() =>
+				{
+					int siHandle = DDPictureLoaderUtils.FileData2SoftImage(DDPictureLoaderUtils.File2FileData(file));
+					int w;
+					int h;
+
+					DDPictureLoaderUtils.GetSoftImageSize(siHandle, out w, out h);
+
+					DDPictureLoaderUtils.Dot targetDot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, 0, 0); // 左上隅のピクセル
+
+					for (int x = 0; x < w; x++)
+					{
+						for (int y = 0; y < h; y++)
+						{
+							DDPictureLoaderUtils.Dot dot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, x, y);
+
+							if (
+								targetDot.R == dot.R &&
+								targetDot.G == dot.G &&
+								targetDot.B == dot.B
+								)
+							{
+								dot.A = 0;
+
+								DDPictureLoaderUtils.SetSoftImageDot(siHandle, x, y, dot);
+							}
+						}
+					}
+					return DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(siHandle));
+				},
+				DDPictureLoaderUtils.ReleaseInfo,
+				DDPictureUtils.Add
+				);
+		}
+
+		/// <summary>
+		/// 指定された色を透明色として処理する。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <param name="targetColor">指定色</param>
+		/// <returns>画像</returns>
 		public static DDPicture RGBToTrans(string file, I3Color targetColor)
 		{
 			return new DDPicture(
@@ -269,6 +251,66 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		/// <summary>
+		/// 各色を入れ替える。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <param name="mode">色の入れ替え指定</param>
+		/// <returns>画像</returns>
+		public static DDPicture SelectARGB(string file, string mode) // mode: "XXXX", X == "ARGB"
+		{
+			const string s_argb = "ARGB";
+
+			int ia = s_argb.IndexOf(mode[0]);
+			int ir = s_argb.IndexOf(mode[1]);
+			int ig = s_argb.IndexOf(mode[2]);
+			int ib = s_argb.IndexOf(mode[3]);
+
+			return new DDPicture(
+				() =>
+				{
+					int siHandle = DDPictureLoaderUtils.FileData2SoftImage(DDPictureLoaderUtils.File2FileData(file));
+					int w;
+					int h;
+
+					DDPictureLoaderUtils.GetSoftImageSize(siHandle, out w, out h);
+
+					for (int x = 0; x < w; x++)
+					{
+						for (int y = 0; y < h; y++)
+						{
+							DDPictureLoaderUtils.Dot dot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, x, y);
+
+							List<int> argb = new int[]
+							{
+								dot.A,
+								dot.R,
+								dot.G,
+								dot.B,
+							}
+							.ToList();
+
+							dot.A = argb[ia];
+							dot.R = argb[ir];
+							dot.G = argb[ig];
+							dot.B = argb[ib];
+
+							DDPictureLoaderUtils.SetSoftImageDot(siHandle, x, y, dot);
+						}
+					}
+					return DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(siHandle));
+				},
+				DDPictureLoaderUtils.ReleaseInfo,
+				DDPictureUtils.Add
+				);
+		}
+
+		/// <summary>
+		/// 縮小する。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <param name="denom">拡大率の逆数</param>
+		/// <returns>画像</returns>
 		public static DDPicture Reduct(string file, int denom)
 		{
 			return new DDPicture(
@@ -332,6 +374,12 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		/// <summary>
+		/// 拡大する。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <param name="expNum">拡大率</param>
+		/// <returns>画像</returns>
 		public static DDPicture Expand(string file, int expNum)
 		{
 			return new DDPicture(
@@ -370,6 +418,13 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		/// <summary>
+		/// 左上隅のピクセルの色を透明色として処理する。
+		/// 拡大する。
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <param name="expNum">拡大率</param>
+		/// <returns>画像</returns>
 		public static DDPicture BgTransExpand(string file, int expNum)
 		{
 			return new DDPicture(
@@ -416,8 +471,6 @@ namespace Charlotte.GameCommons
 				DDPictureUtils.Add
 				);
 		}
-
-		// 新しい画像ローダーをここへ追加..
 	}
 
 	// < sync
