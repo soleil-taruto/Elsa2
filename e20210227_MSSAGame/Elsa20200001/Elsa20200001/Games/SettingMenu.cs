@@ -41,7 +41,7 @@ namespace Charlotte.Games
 				"戻る",
 			};
 
-			DDSE[] seSamples = new DDSE[] { Ground.I.SE.Dummy };
+			DDSE[] seSamples = Ground.I.SE.テスト用s;
 
 			int selectIndex = 0;
 

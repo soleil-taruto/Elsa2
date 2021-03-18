@@ -10,6 +10,13 @@ namespace Charlotte
 	{
 		public DDSE Dummy = new DDSE(@"dat\General\muon.wav");
 
+		public DDSE[] テスト用s = new DDSE[]
+		{
+			new DDSE(@"dat\小森平\sfxrse\01pickup\coin01.mp3"),
+			new DDSE(@"dat\小森平\sfxrse\01pickup\coin02.mp3"),
+			new DDSE(@"dat\小森平\sfxrse\01pickup\coin04.mp3"),
+		};
+
 		public DDSE EnemyDamaged = new DDSE(@"dat\小森平\sfxrse\05hit\hit04.mp3");
 		public DDSE EnemyKilled = new DDSE(@"dat\小森平\sfxrse\03explosion\explosion06.mp3");
 

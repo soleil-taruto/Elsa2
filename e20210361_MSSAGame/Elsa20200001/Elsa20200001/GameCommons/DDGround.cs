@@ -53,8 +53,6 @@ namespace Charlotte.GameCommons
 		// Camera:
 		// ICamera:
 		//
-		// カメラの左上座標
-		//
 		// カメラ位置を変更する場合、フレームループ内で描画を行う前に Camera を更新し、その直後に以下のとおり ICamera を更新すること。
 		// DDGround.ICamera.X = DoubleTools.ToInt(DDGround.Camera.X);
 		// DDGround.ICamera.Y = DoubleTools.ToInt(DDGround.Camera.Y);

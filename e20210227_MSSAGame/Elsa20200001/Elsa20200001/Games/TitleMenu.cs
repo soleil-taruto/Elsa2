@@ -157,7 +157,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "ロード画面", items, selectIndex);
+				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "ロード", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
