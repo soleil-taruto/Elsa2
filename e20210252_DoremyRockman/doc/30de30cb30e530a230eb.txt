@@ -27,20 +27,11 @@
 　★ゲームパッドの使用をおすすめします。
 
 
-■操作方法(開発用)
-
-　E　　エディットモード
-
-
-■制作
+■制作協力
 
 　●グラフィック
 
 　　フランツ カフカ
-
-　●プログラム
-
-　　cerulean.charlotte
 
 
 ■素材（敬称略）
@@ -60,4 +51,12 @@
 　　(K ゴシック)
 　　ケイ
 　　https://k-gothic-font.hatenablog.com/
+
+
+■このゲームの製作者
+
+　cerulean.charlotte
+　https://github.com/soleil-taruto
+
+　連絡先 -> cerulean.charlottes@gmail.com
 
