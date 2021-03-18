@@ -376,7 +376,7 @@ namespace Charlotte.Games
 					break;
 
 				this.DrawSurfaces();
-				DDCurtain.DrawCurtain(-0.5);
+				DDCurtain.DrawCurtain(-0.8);
 
 				for (int c = 1; c <= 17; c++)
 				{
