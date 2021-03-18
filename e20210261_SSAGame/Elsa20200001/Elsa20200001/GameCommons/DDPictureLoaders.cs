@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 
+// ^ sync @ DDPictureLoaders
+
 namespace Charlotte.GameCommons
 {
+	// sync > @ DDPictureLoaders
+
 	/// <summary>
 	/// <para>ここで取得した DDPicture は Unload する必要あり</para>
 	/// <para>必要なし -> DDPictureLoader2</para>
@@ -415,4 +419,6 @@ namespace Charlotte.GameCommons
 
 		// 新しい画像ローダーをここへ追加..
 	}
+
+	// < sync
 }

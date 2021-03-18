@@ -13,7 +13,7 @@ namespace Charlotte
 
 		// ---- 因幡てゐ ----
 
-		public DDPicture[] Tewi_立ち = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_01, 0, 0, 160, 192).Take(12).ToArray();
+		public DDPicture[] Tewi_立ち = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_01, 0, 0, 80, 96).Take(12).ToArray();
 		public DDPicture[] Tewi_振り向き;
 		public DDPicture[] Tewi_しゃがみ;
 		public DDPicture[] Tewi_しゃがみ振り向き;

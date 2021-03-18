@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 
+// ^ sync @ DDPictureLoaders
+
 namespace Charlotte.GameCommons
 {
+	// sync > @ DDPictureLoaders
+
 	/// <summary>
 	/// <para>ここで取得した DDPicture は Unload する必要あり</para>
 	/// <para>必要なし -> DDPictureLoader2</para>
@@ -366,6 +370,55 @@ namespace Charlotte.GameCommons
 				);
 		}
 
+		public static DDPicture BgTransExpand(string file, int expNum)
+		{
+			return new DDPicture(
+				() =>
+				{
+					int siHandle = DDPictureLoaderUtils.FileData2SoftImage(DDPictureLoaderUtils.File2FileData(file));
+					int w;
+					int h;
+
+					DDPictureLoaderUtils.GetSoftImageSize(siHandle, out w, out h);
+
+					DDPictureLoaderUtils.Dot targetDot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, 0, 0); // 左上隅のピクセル
+
+					{
+						int new_w = w * expNum;
+						int new_h = h * expNum;
+						int new_si_h = DDPictureLoaderUtils.CreateSoftImage(new_w, new_h);
+
+						for (int x = 0; x < w; x++)
+						{
+							for (int y = 0; y < h; y++)
+							{
+								DDPictureLoaderUtils.Dot dot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, x, y);
+
+								if (
+									targetDot.R == dot.R &&
+									targetDot.G == dot.G &&
+									targetDot.B == dot.B
+									)
+									dot.A = 0;
+
+								for (int sx = 0; sx < expNum; sx++)
+									for (int sy = 0; sy < expNum; sy++)
+										DDPictureLoaderUtils.SetSoftImageDot(new_si_h, x * expNum + sx, y * expNum + sy, dot);
+							}
+						}
+						DDPictureLoaderUtils.ReleaseSoftImage(siHandle);
+						siHandle = new_si_h;
+					}
+
+					return DDPictureLoaderUtils.GraphicHandle2Info(DDPictureLoaderUtils.SoftImage2GraphicHandle(siHandle));
+				},
+				DDPictureLoaderUtils.ReleaseInfo,
+				DDPictureUtils.Add
+				);
+		}
+
 		// 新しい画像ローダーをここへ追加..
 	}
+
+	// < sync
 }
