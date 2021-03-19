@@ -263,18 +263,25 @@ namespace Charlotte.GameCommons
 
 		/// <summary>
 		/// 各色を入れ替える。
+		/// 色の入れ替え指定：
+		/// -- 4文字の文字列
+		/// -- 各文字は "RGBA" の何れか, 重複可, ex. "RRRR", "GBRA"
+		/// -- [0] == 出力 R に適用する色を指定する。
+		/// -- [1] == 出力 G に適用する色を指定する。
+		/// -- [2] == 出力 B に適用する色を指定する。
+		/// -- [3] == 出力 A に適用する色を指定する。
 		/// </summary>
 		/// <param name="file">画像ファイル</param>
 		/// <param name="mode">色の入れ替え指定</param>
 		/// <returns>画像</returns>
-		public static DDPicture SelectARGB(string file, string mode) // mode: "XXXX", X == "ARGB"
+		public static DDPicture SelectRGBA(string file, string mode)
 		{
-			const string s_argb = "ARGB";
+			const string s_rgba = "RGBA";
 
-			int ia = s_argb.IndexOf(mode[0]);
-			int ir = s_argb.IndexOf(mode[1]);
-			int ig = s_argb.IndexOf(mode[2]);
-			int ib = s_argb.IndexOf(mode[3]);
+			int ir = s_rgba.IndexOf(mode[0]);
+			int ig = s_rgba.IndexOf(mode[1]);
+			int ib = s_rgba.IndexOf(mode[2]);
+			int ia = s_rgba.IndexOf(mode[3]);
 
 			return new DDPicture(
 				() =>
@@ -291,19 +298,18 @@ namespace Charlotte.GameCommons
 						{
 							DDPictureLoaderUtils.Dot dot = DDPictureLoaderUtils.GetSoftImageDot(siHandle, x, y);
 
-							List<int> argb = new int[]
+							int[] rgba = new int[]
 							{
-								dot.A,
 								dot.R,
 								dot.G,
 								dot.B,
-							}
-							.ToList();
+								dot.A,
+							};
 
-							dot.A = argb[ia];
-							dot.R = argb[ir];
-							dot.G = argb[ig];
-							dot.B = argb[ib];
+							dot.R = rgba[ir];
+							dot.G = rgba[ig];
+							dot.B = rgba[ib];
+							dot.A = rgba[ia];
 
 							DDPictureLoaderUtils.SetSoftImageDot(siHandle, x, y, dot);
 						}
