@@ -13,27 +13,85 @@ namespace Charlotte
 
 		// ---- 因幡てゐ ----
 
-		public DDPicture[] Tewi_立ち = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_01, 0, 0, 80, 96).Take(12).ToArray();
-		public DDPicture[] Tewi_振り向き;
-		public DDPicture[] Tewi_しゃがみ;
-		public DDPicture[] Tewi_しゃがみ振り向き;
-		public DDPicture[] Tewi_ジャンプ;
-		public DDPicture[] Tewi_歩く;
-		public DDPicture[] Tewi_走る;
-		public DDPicture[] Tewi_小ダメージ;
-		public DDPicture[] Tewi_大ダメージ;
-		public DDPicture[] Tewi_しゃがみ小ダメージ;
-		public DDPicture[] Tewi_しゃがみ大ダメージ;
-		public DDPicture[] Tewi_飛翔;
-		public DDPicture[] Tewi_弱攻撃;
-		public DDPicture[] Tewi_中攻撃;
-		public DDPicture[] Tewi_強攻撃;
-		public DDPicture[] Tewi_しゃがみ弱攻撃;
-		public DDPicture[] Tewi_しゃがみ中攻撃;
-		public DDPicture[] Tewi_しゃがみ強攻撃;
-		public DDPicture[] Tewi_ジャンプ弱攻撃;
-		public DDPicture[] Tewi_ジャンプ中攻撃;
-		public DDPicture[] Tewi_ジャンプ強攻撃;
+		private class D_Tewi
+		{
+			// http://zassoh.starfree.jp/
+
+			// 基本動作
+
+			public DDPicture[] Tewi_01 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_01, 0, 0, 80, 96).ToArray(); // ニュートラル・しゃがみ・振り向き・ジャンプ
+			public DDPicture[] Tewi_02 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_02, 0, 0, 80, 96).ToArray(); // 前進・後退
+			public DDPicture[] Tewi_03 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_03, 0, 0, 80, 96).ToArray(); // ダッシュ・バックステップ
+			//public DDPicture[] Tewi_04 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_04, 0, 0, 80, 96).ToArray(); // ガード
+			public DDPicture[] Tewi_05 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_05, 0, 0, 80, 96).ToArray(); // ダメージ
+			//public DDPicture[] Tewi_06 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_06, 0, 0, 80, 96).ToArray(); // その場(足払い？)転倒・起き上がり
+			//public DDPicture[] Tewi_07 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_07, 0, 0, 96, 96).ToArray(); // 空中ダメージ・落下・ダウン・起き上がり
+			public DDPicture[] Tewi_13 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_13, 0, 0, 96, 96).ToArray(); // 飛翔
+
+			// 通常攻撃風動作_1
+
+			// none
+
+			// 通常攻撃風動作_2
+
+			// none
+
+			// 通常攻撃風動作_3
+
+			public DDPicture[] Tewi_18 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_18, 0, 0, 120, 96).ToArray(); // 攻撃パターンC・杵を使った攻撃(立ち)_ファイル_1
+			//public DDPicture[] Tewi_19 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_19, 0, 0, 104, 128).ToArray(); // 攻撃パターンC・杵を使った攻撃(立ち)_ファイル_2
+			public DDPicture[] Tewi_20 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_20, 0, 0, 152, 128).ToArray(); // 攻撃パターンC・杵を使った攻撃(立ち)_ファイル_3
+			public DDPicture[] Tewi_21 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_21, 0, 0, 168, 128).ToArray(); // 攻撃パターンC・杵を使った攻撃(立ち)_ファイル_4
+			public DDPicture[] Tewi_22 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_22, 0, 0, 152, 128).ToArray(); // 攻撃パターンC・杵を使った攻撃(しゃがみ)_ファイル_1
+			public DDPicture[] Tewi_23 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_23, 0, 0, 168, 128).ToArray(); // 攻撃パターンC・杵を使った攻撃(しゃがみ)_ファイル_2
+			public DDPicture[] Tewi_24 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_24, 0, 0, 128, 128).ToArray(); // 攻撃パターンC・杵を使った攻撃(ジャンプ)_ファイル_1
+			public DDPicture[] Tewi_25 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_25, 0, 0, 144, 144).ToArray(); // 攻撃パターンC・杵を使った攻撃(ジャンプ)_ファイル_2
+			public DDPicture[] Tewi_26 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Tewi_26, 0, 0, 144, 144).ToArray(); // 攻撃パターンC・杵を使った攻撃(ジャンプ)_ファイル_3
+		}
+
+		private static D_Tewi _tewi = null;
+
+		private static D_Tewi Tewi
+		{
+			get
+			{
+				if (_tewi == null)
+					_tewi = new D_Tewi();
+
+				return _tewi;
+			}
+		}
+
+		public DDPicture[] Tewi_立ち = Tewi.Tewi_01.Skip(0).Take(12).ToArray();
+		public DDPicture[] Tewi_振り向き = Tewi.Tewi_01.Skip(13).Take(2).ToArray();
+		public DDPicture[] Tewi_しゃがみ = Tewi.Tewi_01.Skip(20).Take(5).ToArray();
+		public DDPicture[] Tewi_しゃがみ振り向き = Tewi.Tewi_01.Skip(16).Take(2).ToArray();
+		public DDPicture[] Tewi_ジャンプ_開始 = Tewi.Tewi_01.Skip(30).Take(2).ToArray();
+		public DDPicture[] Tewi_ジャンプ_上昇 = Tewi.Tewi_01.Skip(32).Take(5).ToArray();
+		public DDPicture[] Tewi_ジャンプ_下降 = Tewi.Tewi_01.Skip(37).Take(3).ToArray();
+		public DDPicture[] Tewi_ジャンプ_着地 = Tewi.Tewi_01.Skip(40).Take(3).ToArray();
+		public DDPicture[] Tewi_後ろジャンプ = Tewi.Tewi_01.Skip(44).Take(6).ToArray();
+		public DDPicture[] Tewi_歩く = Tewi.Tewi_02.Skip(0).Take(10).ToArray();
+		public DDPicture[] Tewi_走る = Tewi.Tewi_03.Skip(2).Take(6).ToArray();
+		public DDPicture[] Tewi_小ダメージ = Tewi.Tewi_05.Skip(0).Take(3).ToArray();
+		public DDPicture[] Tewi_大ダメージ = Tewi.Tewi_05.Skip(4).Take(3).ToArray();
+		public DDPicture[] Tewi_しゃがみ小ダメージ = Tewi.Tewi_05.Skip(20).Take(3).ToArray();
+		public DDPicture[] Tewi_しゃがみ大ダメージ = Tewi.Tewi_05.Skip(24).Take(3).ToArray();
+		public DDPicture[] Tewi_飛翔_開始 = Tewi.Tewi_13.Skip(0).Take(2).ToArray();
+		public DDPicture[] Tewi_飛翔_前進 = Tewi.Tewi_13.Skip(3).Take(3).ToArray();
+		public DDPicture[] Tewi_弱攻撃 = Tewi.Tewi_18.Skip(0).Take(10).ToArray();
+		public DDPicture[] Tewi_中攻撃 = Tewi.Tewi_20.Skip(0).Take(11).ToArray();
+		//public DDPicture[] Tewi_強攻撃_開始_01 = Tewi.Tewi_21.Skip(0).Take(4).ToArray();
+		//public DDPicture[] Tewi_強攻撃_開始_02 = Tewi.Tewi_21.Skip(5).Take(6).ToArray();
+		public DDPicture[] Tewi_強攻撃 = Tewi.Tewi_21.Skip(15).Take(8).ToArray();
+		public DDPicture[] Tewi_しゃがみ弱攻撃 = Tewi.Tewi_22.Skip(10).Take(8).ToArray();
+		public DDPicture[] Tewi_しゃがみ中攻撃 = Tewi.Tewi_22.Skip(0).Take(9).ToArray();
+		public DDPicture[] Tewi_しゃがみ強攻撃 = Tewi.Tewi_23.Skip(0).Take(14).ToArray();
+		public DDPicture[] Tewi_ジャンプ弱攻撃 = Tewi.Tewi_24.Skip(0).Take(11).ToArray();
+		public DDPicture[] Tewi_ジャンプ中攻撃 = Tewi.Tewi_26.Skip(0).Take(8).ToArray();
+		public DDPicture[] Tewi_ジャンプ強攻撃_開始 = Tewi.Tewi_25.Skip(0).Take(6).ToArray();
+		public DDPicture[] Tewi_ジャンプ強攻撃_回転 = Tewi.Tewi_25.Skip(6).Take(2).ToArray();
+		public DDPicture[] Tewi_ジャンプ強攻撃_終了 = Tewi.Tewi_25.Skip(8).Take(7).ToArray();
 
 		// ---- チルノ ----
 
