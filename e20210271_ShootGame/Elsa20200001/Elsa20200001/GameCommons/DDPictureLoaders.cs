@@ -11,16 +11,26 @@ namespace Charlotte.GameCommons
 	// sync > @ DDPictureLoaders
 
 	/// <summary>
-	/// <para>ここで取得した DDPicture は Unload する必要あり</para>
-	/// <para>必要なし -> DDPictureLoader2</para>
+	/// ここで取得した DDPicture は Unload する必要あり
+	/// 必要なし -> DDPictureLoader2
 	/// </summary>
 	public static class DDPictureLoaders
 	{
+		/// <summary>
+		/// 標準
+		/// </summary>
+		/// <param name="file">画像ファイル</param>
+		/// <returns>画像</returns>
 		public static DDPicture Standard(string file)
 		{
 			return Standard(() => DDPictureLoaderUtils.File2FileData(file));
 		}
 
+		/// <summary>
+		/// 標準
+		/// </summary>
+		/// <param name="getFileData">画像データ取得先</param>
+		/// <returns>画像</returns>
 		public static DDPicture Standard(Func<byte[]> getFileData)
 		{
 			return new DDPicture(
