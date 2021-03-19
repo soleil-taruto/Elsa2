@@ -16,6 +16,7 @@ namespace Charlotte.Tests
 				Ground.I.Picture2.Tewi_立ち,
 				Ground.I.Picture2.Tewi_振り向き,
 				Ground.I.Picture2.Tewi_しゃがみ,
+				Ground.I.Picture2.Tewi_しゃがみ解除,
 				Ground.I.Picture2.Tewi_しゃがみ振り向き,
 				Ground.I.Picture2.Tewi_ジャンプ_開始,
 				Ground.I.Picture2.Tewi_ジャンプ_上昇,
@@ -42,7 +43,19 @@ namespace Charlotte.Tests
 				Ground.I.Picture2.Tewi_ジャンプ強攻撃_回転,
 				Ground.I.Picture2.Tewi_ジャンプ強攻撃_終了,
 
-				// TODO チルノ
+				Ground.I.Picture2.Cirno_立ち,
+				Ground.I.Picture2.Cirno_しゃがみ,
+				Ground.I.Picture2.Cirno_しゃがみ解除,
+				Ground.I.Picture2.Cirno_ジャンプ_開始,
+				Ground.I.Picture2.Cirno_ジャンプ_上昇,
+				Ground.I.Picture2.Cirno_ジャンプ_下降,
+				Ground.I.Picture2.Cirno_ジャンプ_着地,
+				Ground.I.Picture2.Cirno_後ろジャンプ,
+				Ground.I.Picture2.Cirno_歩く,
+				Ground.I.Picture2.Cirno_走る,
+				Ground.I.Picture2.Cirno_ダメージ,
+				Ground.I.Picture2.Cirno_しゃがみダメージ,
+				Ground.I.Picture2.Cirno_飛翔,
 			};
 
 			DDEngine.FreezeInput();
