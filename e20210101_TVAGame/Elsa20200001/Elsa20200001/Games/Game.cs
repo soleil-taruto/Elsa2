@@ -691,8 +691,8 @@ namespace Charlotte.Games
 				this.TargCamSlideX = this.CamSlideX;
 				this.TargCamSlideY = this.CamSlideY;
 			}
-			double targCamX = this.Player.X - DDConsts.Screen_W / 2 + this.TargCamSlideX * (DDConsts.Screen_W / 3);
-			double targCamY = this.Player.Y - DDConsts.Screen_H / 2 + this.TargCamSlideY * (DDConsts.Screen_H / 3);
+			double targCamX = this.Player.X - DDConsts.Screen_W / 2 + (this.TargCamSlideX * DDConsts.Screen_W / 3);
+			double targCamY = this.Player.Y - DDConsts.Screen_H / 2 + (this.TargCamSlideY * DDConsts.Screen_H / 3);
 
 			DDUtils.ToRange(ref targCamX, 0.0, this.Map.W * GameConsts.TILE_W - DDConsts.Screen_W);
 			DDUtils.ToRange(ref targCamY, 0.0, this.Map.H * GameConsts.TILE_H - DDConsts.Screen_H);
