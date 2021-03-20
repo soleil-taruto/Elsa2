@@ -27,7 +27,7 @@ namespace Charlotte.Games
 
 		public double X;
 		public double Y;
-		public int FaceDirection; // プレイヤーが向いている方向 { 2, 4, 6, 8 } == { 下, 左, 右, 上 }
+		public int FaceDirection; // プレイヤーが向いている方向 { 1-4, 6-9 } == 8方向
 		public int MoveFrame;
 		public int AttackFrame;
 		public int DeadFrame = 0; // 0 == 無効, 1～ == 死亡中

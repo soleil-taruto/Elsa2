@@ -44,11 +44,10 @@ namespace Charlotte.Games.Enemies.Tests
 					DDDraw.DrawEnd();
 
 					DDPrint.SetBorder(new I3Color(64, 64, 0));
-					DDPrint.SetPrint(
+					DDPrint.SetDebug(
 						(int)this.X - DDGround.ICamera.X - 10,
 						(int)this.Y - DDGround.ICamera.Y - 10,
-						20,
-						-1
+						20
 						);
 					DDPrint.PrintLine("敵(仮)");
 					DDPrint.PrintLine("[無害]");

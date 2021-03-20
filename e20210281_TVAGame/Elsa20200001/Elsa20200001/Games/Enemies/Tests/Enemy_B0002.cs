@@ -78,7 +78,7 @@ namespace Charlotte.Games.Enemies.Tests
 					DDDraw.Reset();
 
 					DDPrint.SetBorder(new I3Color(128, 64, 0));
-					DDPrint.SetPrint(
+					DDPrint.SetDebug(
 						(int)this.X - DDGround.ICamera.X - 46,
 						(int)this.Y - DDGround.ICamera.Y - 46,
 						20

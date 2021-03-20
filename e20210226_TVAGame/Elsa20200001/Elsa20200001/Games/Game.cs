@@ -51,10 +51,10 @@ namespace Charlotte.Games
 		public Map Map;
 		private Wall Wall;
 
-		private bool CamSlideMode; // ? モード中
+		public bool CamSlideMode; // ? モード中
 		private int CamSlideCount;
-		private int CamSlideX; // -1 ～ 1
-		private int CamSlideY; // -1 ～ 1
+		public int CamSlideX; // -1 ～ 1
+		public int CamSlideY; // -1 ～ 1
 
 		public int Frame;
 		public bool UserInputDisabled = false;
@@ -661,6 +661,55 @@ namespace Charlotte.Games
 
 		private void カメラ位置調整(bool 一瞬で)
 		{
+			if (!this.CamSlideMode && (this.CamSlideX | this.CamSlideY) != 0)
+			{
+				switch (this.Player.FaceDirection)
+				{
+					case 1:
+						this.CamSlideX = -1;
+						this.CamSlideY = 1;
+						break;
+
+					case 2:
+						this.CamSlideX = 0;
+						this.CamSlideY = 1;
+						break;
+
+					case 3:
+						this.CamSlideX = 1;
+						this.CamSlideY = 1;
+						break;
+
+					case 4:
+						this.CamSlideX = -1;
+						this.CamSlideY = 0;
+						break;
+
+					case 6:
+						this.CamSlideX = 1;
+						this.CamSlideY = 0;
+						break;
+
+					case 7:
+						this.CamSlideX = -1;
+						this.CamSlideY = -1;
+						break;
+
+					case 8:
+						this.CamSlideX = 0;
+						this.CamSlideY = -1;
+						break;
+
+					case 9:
+						this.CamSlideX = 1;
+						this.CamSlideY = -1;
+						break;
+
+					default:
+						throw null; // never
+				}
+			}
+
 			double targCamX = this.Player.X - DDConsts.Screen_W / 2 + (this.CamSlideX * DDConsts.Screen_W / 3);
 			double targCamY = this.Player.Y - DDConsts.Screen_H / 2 + (this.CamSlideY * DDConsts.Screen_H / 3);
 
@@ -674,8 +723,10 @@ namespace Charlotte.Games
 			if (this.Map.H * GameConsts.TILE_H - DDConsts.Screen_H < GameConsts.TILE_H) // ? カメラの縦の可動域が1タイルより狭い場合
 				targCamY = (this.Map.H * GameConsts.TILE_H - DDConsts.Screen_H) / 2; // 中心に合わせる。
 
-			DDUtils.Approach(ref DDGround.Camera.X, targCamX, 一瞬で ? 0.0 : 0.8);
-			DDUtils.Approach(ref DDGround.Camera.Y, targCamY, 一瞬で ? 0.0 : 0.8);
+			DDUtils.Approach(ref DDGround.Camera.X, targCamX, 一瞬で ? 0.0 : 0.93);
+			DDUtils.Approach(ref DDGround.Camera.Y, targCamY, 一瞬で ? 0.0 : 0.93);
+			//DDUtils.Approach(ref DDGround.Camera.X, targCamX, 一瞬で ? 0.0 : 0.8);
+			//DDUtils.Approach(ref DDGround.Camera.Y, targCamY, 一瞬で ? 0.0 : 0.8);
 
 			//DDUtils.ToRange(ref DDGround.Camera.X, 0.0, this.Map.W * Consts.TILE_W - DDConsts.Screen_W);
 			//DDUtils.ToRange(ref DDGround.Camera.Y, 0.0, this.Map.H * Consts.TILE_H - DDConsts.Screen_H);
