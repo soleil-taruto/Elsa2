@@ -69,8 +69,19 @@ namespace Charlotte.GameCommons
 
 			if (DDGround.RealScreenDraw_W == -1)
 			{
+				bool mosaicFlag =
+					DDConfig.DrawScreen_MosaicFlag &&
+					DDGround.RealScreen_W % DDConsts.Screen_W == 0 &&
+					DDGround.RealScreen_H % DDConsts.Screen_H == 0;
+
+				if (mosaicFlag)
+					DX.SetDrawMode(DX.DX_DRAWMODE_NEAREST);
+
 				if (DX.DrawExtendGraph(0, 0, DDGround.RealScreen_W, DDGround.RealScreen_H, DDGround.MainScreen.GetHandle(), 0) != 0) // ? 失敗
 					throw new DDError();
+
+				if (mosaicFlag)
+					DX.SetDrawMode(DDConsts.DEFAULT_DX_DRAWMODE); // restore
 			}
 			else
 			{
@@ -79,8 +90,8 @@ namespace Charlotte.GameCommons
 
 				bool mosaicFlag =
 					DDConfig.DrawScreen_MosaicFlag &&
-					DDGround.RealScreenDraw_W == DDConsts.Screen_W * 2 &&
-					DDGround.RealScreenDraw_H == DDConsts.Screen_H * 2;
+					DDGround.RealScreenDraw_W % DDConsts.Screen_W == 0 &&
+					DDGround.RealScreenDraw_H % DDConsts.Screen_H == 0;
 
 				if (mosaicFlag)
 					DX.SetDrawMode(DX.DX_DRAWMODE_NEAREST);
