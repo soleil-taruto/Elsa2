@@ -14,4 +14,4 @@ C:\Factory\Tools\xcp.exe doc out
 C:\Factory\Petra\EditConfig.exe out\Config.conf ;[LOG_ENABLED_MARK] 1
 COPY /B AUTHORS out
 
-C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out YokoActTK_Demo
+C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out *P

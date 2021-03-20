@@ -16,4 +16,4 @@ COPY /B Elsa20200001\Elsa20200001\bin\Release\DxLibDotNet.dll out
 C:\Factory\Tools\xcp.exe doc out
 COPY /B AUTHORS out
 
-C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out TopViewAct_Demo
+C:\Factory\SubTools\zip.exe /PE- /RVE- %* /G out *P
