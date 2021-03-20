@@ -77,6 +77,8 @@ namespace Charlotte
 						Game.I == null ? "-" : "" + Game.I.CamSlideMode,
 						Game.I == null ? "-" : "" + Game.I.CamSlideX,
 						Game.I == null ? "-" : "" + Game.I.CamSlideY,
+						Game.I == null ? "-" : "" + Game.I.TargCamSlideX.ToString("F3"),
+						Game.I == null ? "-" : "" + Game.I.TargCamSlideY.ToString("F3"),
 
 						// デバッグ表示する情報をここへ追加..
 
