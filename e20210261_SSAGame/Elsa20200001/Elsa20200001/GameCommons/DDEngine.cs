@@ -63,6 +63,8 @@ namespace Charlotte.GameCommons
 
 			DDSubScreenUtils.ChangeDrawScreen(DX.DX_SCREEN_BACK);
 
+			// sync > @ 20210321_DrawScreen_Mosaic
+
 			if (DDGround.RealScreenDraw_W == -1)
 			{
 				if (DX.DrawExtendGraph(0, 0, DDGround.RealScreen_W, DDGround.RealScreen_H, DDGround.MainScreen.GetHandle(), 0) != 0) // ? 失敗
@@ -91,6 +93,8 @@ namespace Charlotte.GameCommons
 				if (mosaicFlag)
 					DX.SetDrawMode(DDConsts.DEFAULT_DX_DRAWMODE); // restore
 			}
+
+			// < sync
 
 			GC.Collect(0);
 
