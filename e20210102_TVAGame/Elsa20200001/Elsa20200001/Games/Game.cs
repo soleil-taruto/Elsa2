@@ -51,10 +51,10 @@ namespace Charlotte.Games
 		public Map Map;
 		private Wall Wall;
 
-		private bool CamSlideMode; // ? モード中
-		private int CamSlideCount;
-		private int CamSlideX; // -1 ～ 1
-		private int CamSlideY; // -1 ～ 1
+		public bool CamSlideMode; // ? モード中
+		public int CamSlideCount;
+		public int CamSlideX; // -1 ～ 1
+		public int CamSlideY; // -1 ～ 1
 
 		public int Frame;
 		public bool UserInputDisabled = false;
@@ -659,10 +659,40 @@ namespace Charlotte.Games
 			}
 		}
 
+		public double TargCamSlideX = 0.0;
+		public double TargCamSlideY = 0.0;
+
 		private void カメラ位置調整(bool 一瞬で)
 		{
-			double targCamX = this.Player.X - DDConsts.Screen_W / 2 + (this.CamSlideX * DDConsts.Screen_W / 3);
-			double targCamY = this.Player.Y - DDConsts.Screen_H / 2 + (this.CamSlideY * DDConsts.Screen_H / 3);
+			if (!this.CamSlideMode && (this.CamSlideX | this.CamSlideY) != 0)
+			{
+				double tx;
+				double ty;
+
+				switch (this.Player.FaceDirection)
+				{
+					case 1: tx = -1; ty = 1; break;
+					case 2: tx = 0; ty = 1; break;
+					case 3: tx = 1; ty = 1; break;
+					case 4: tx = -1; ty = 0; break;
+					case 6: tx = 1; ty = 0; break;
+					case 7: tx = -1; ty = -1; break;
+					case 8: tx = 0; ty = -1; break;
+					case 9: tx = 1; ty = -1; break;
+
+					default:
+						throw null; // never
+				}
+				DDUtils.Approach(ref this.TargCamSlideX, tx, 0.97);
+				DDUtils.Approach(ref this.TargCamSlideY, ty, 0.97);
+			}
+			else
+			{
+				this.TargCamSlideX = this.CamSlideX;
+				this.TargCamSlideY = this.CamSlideY;
+			}
+			double targCamX = this.Player.X - DDConsts.Screen_W / 2 + (this.TargCamSlideX * DDConsts.Screen_W / 3);
+			double targCamY = this.Player.Y - DDConsts.Screen_H / 2 + (this.TargCamSlideY * DDConsts.Screen_H / 3);
 
 			DDUtils.ToRange(ref targCamX, 0.0, this.Map.W * GameConsts.TILE_W - DDConsts.Screen_W);
 			DDUtils.ToRange(ref targCamY, 0.0, this.Map.H * GameConsts.TILE_H - DDConsts.Screen_H);
