@@ -88,7 +88,6 @@
     <Compile Include="Games\Enemies\Enemy_即死トラップThe針.cs" />
     <Compile Include="Games\GameCommon.cs" />
     <Compile Include="Commons\ArgsReader.cs" />
-    <Compile Include="Commons\AttachString.cs" />
     <Compile Include="Commons\CsvFileReader.cs" />
     <Compile Include="Commons\D2Point.cs" />
     <Compile Include="Commons\D2Size.cs" />

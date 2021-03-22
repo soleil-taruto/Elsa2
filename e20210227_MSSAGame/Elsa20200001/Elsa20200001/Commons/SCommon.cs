@@ -199,6 +199,40 @@ namespace Charlotte.Commons
 			return dest.ToArray();
 		}
 
+		// sync > @ Serializer
+
+		public class Serializer
+		{
+			public static Serializer I = new Serializer();
+
+			private Serializer()
+			{ }
+
+			private const char DELIMITER = ':';
+
+			public string Join(string[] plainStrings)
+			{
+				return string.Join(string.Empty, plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
+			}
+
+			public string[] Split(string serializedString)
+			{
+				return serializedString.Split(DELIMITER).Skip(1).Select(encodedString => Decode(encodedString)).ToArray();
+			}
+
+			public string Encode(string plainString)
+			{
+				return SCommon.Base64.I.Encode(Encoding.UTF8.GetBytes(plainString));
+			}
+
+			public string Decode(string encodedString)
+			{
+				return Encoding.UTF8.GetString(SCommon.Base64.I.Decode(encodedString));
+			}
+		}
+
+		// < sync
+
 		public static Dictionary<string, V> CreateDictionary<V>()
 		{
 			return new Dictionary<string, V>(new IECompString());
