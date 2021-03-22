@@ -84,12 +84,12 @@ namespace Charlotte.Games
 
 			// ★★★ シリアライズ_ここまで ★★★
 
-			return AttachString.I.Untokenize(dest);
+			return SCommon.Serializer.I.Join(dest.ToArray());
 		}
 
 		private void S_Deserialize(string value)
 		{
-			string[] lines = AttachString.I.Tokenize(value);
+			string[] lines = SCommon.Serializer.I.Split(value);
 			int c = 0;
 
 			// ★★★ デシリアライズ_ここから ★★★
