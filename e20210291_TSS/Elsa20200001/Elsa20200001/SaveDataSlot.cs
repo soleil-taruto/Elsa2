@@ -29,7 +29,7 @@ namespace Charlotte
 
 		public string Serialize()
 		{
-			return AttachString.I.Untokenize(new string[]
+			return SCommon.Serializer.I.Join(new string[]
 			{
 				Common.WrapNullOrString(this.SerializedGameStatus),
 				"" + this.SavedTime.ToTimeStamp(),
@@ -39,7 +39,7 @@ namespace Charlotte
 
 		public void Deserialize(string value)
 		{
-			string[] lines = AttachString.I.Tokenize(value);
+			string[] lines = SCommon.Serializer.I.Split(value);
 			int c = 0;
 
 			this.SerializedGameStatus = Common.UnwrapNullOrString(lines[c++]);

@@ -225,8 +225,8 @@ namespace Charlotte.Games.Surfaces
 		{
 			return new string[]
 			{
-				AttachString.I.Untokenize(
-					this.Layers.Select(layer => AttachString.I.Untokenize(layer.Serialize()))
+				SCommon.Serializer.I.Join(
+					this.Layers.Select(layer => SCommon.Serializer.I.Join(layer.Serialize())).ToArray()
 					),
 			};
 		}
@@ -235,8 +235,8 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			this.Layers = AttachString.I.Tokenize(lines[c++])
-				.Select(line => LayerInfo.Deserialize(AttachString.I.Tokenize(line)))
+			this.Layers = SCommon.Serializer.I.Split(lines[c++])
+				.Select(line => LayerInfo.Deserialize(SCommon.Serializer.I.Split(line)))
 				.ToList();
 		}
 	}

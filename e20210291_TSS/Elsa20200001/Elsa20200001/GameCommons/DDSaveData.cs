@@ -205,12 +205,12 @@ namespace Charlotte.GameCommons
 
 		private static string P_Join(int[] values)
 		{
-			return AttachString.I.Untokenize(values.Select(value => "" + value));
+			return SCommon.Serializer.I.Join(values.Select(value => "" + value).ToArray());
 		}
 
 		private static int[] P_Split(string line)
 		{
-			return AttachString.I.Tokenize(line).Select(token => int.Parse(token)).ToArray();
+			return SCommon.Serializer.I.Split(line).Select(token => int.Parse(token)).ToArray();
 		}
 	}
 }
