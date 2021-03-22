@@ -65,15 +65,15 @@ namespace Charlotte.Games
 
 		public string Serialize()
 		{
-			return AttachString.I.Untokenize(new string[]
+			return SCommon.Serializer.I.Join(new string[]
 			{
 				this.Scenario.Name,
 				this.CurrPageIndex.ToString(),
-				AttachString.I.Untokenize(this.Surfaces.Select(v =>
+				SCommon.Serializer.I.Join(this.Surfaces.Select(v =>
 				{
 					try
 					{
-						return AttachString.I.Untokenize(new string[]
+						return SCommon.Serializer.I.Join(new string[]
 						{
 							v.TypeName,
 							v.InstanceName,
@@ -86,21 +86,21 @@ namespace Charlotte.Games
 						ProcMain.WriteLog(v.InstanceName);
 						throw;
 					}
-				}
-				)),
+				})
+				.ToArray()),
 			});
 		}
 
 		private void S_Deserialize(string value)
 		{
-			string[] lines = AttachString.I.Tokenize(value);
+			string[] lines = SCommon.Serializer.I.Split(value);
 			int c = 0;
 
 			this.Scenario = new Scenario(lines[c++]);
 			this.CurrPageIndex = int.Parse(lines[c++]);
-			this.Surfaces = AttachString.I.Tokenize(lines[c++]).Select(v =>
+			this.Surfaces = SCommon.Serializer.I.Split(lines[c++]).Select(v =>
 			{
-				string[] lines2 = AttachString.I.Tokenize(v);
+				string[] lines2 = SCommon.Serializer.I.Split(v);
 				int c2 = 0;
 
 				string typeName = lines2[c2++];

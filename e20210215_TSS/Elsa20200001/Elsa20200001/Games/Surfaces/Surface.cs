@@ -136,7 +136,7 @@ namespace Charlotte.Games.Surfaces
 		/// <returns></returns>
 		public string Serialize()
 		{
-			return AttachString.I.Untokenize(SCommon.Concat(new string[][]
+			return SCommon.Serializer.I.Join(SCommon.Concat(new string[][]
 			{
 				new string[]
 				{
@@ -147,8 +147,8 @@ namespace Charlotte.Games.Surfaces
 					this.Z.ToString(),
 				},
 				this.Serialize_02(),
-			}
-			));
+			})
+			.ToArray());
 		}
 
 		/// <summary>
@@ -157,7 +157,7 @@ namespace Charlotte.Games.Surfaces
 		/// <param name="lines">シリアライザから取得した状態データ</param>
 		public void Deserialize(string value)
 		{
-			string[] lines = AttachString.I.Tokenize(value);
+			string[] lines = SCommon.Serializer.I.Split(value);
 			int c = 0;
 
 			//this.TypeName = lines[c++];
