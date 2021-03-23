@@ -358,6 +358,8 @@ namespace Charlotte.Commons
 
 		// sync > @ DeletePath_CreateDir
 
+		private const int IO_TRY_MAX = 10;
+
 		public static void DeletePath(string path)
 		{
 			if (string.IsNullOrEmpty(path))
@@ -365,46 +367,48 @@ namespace Charlotte.Commons
 
 			if (File.Exists(path))
 			{
-				for (int c = 1; ; c++)
+				for (int trycnt = 1; ; trycnt++)
 				{
 					try
 					{
 						File.Delete(path);
 					}
-					catch //(Exception e)
+					catch (Exception ex)
 					{
-						//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。"); // 表示抑止
+						if (IO_TRY_MAX <= trycnt)
+							throw new Exception("ファイルの削除に失敗しました。" + path + ", " + ex);
 					}
 					if (!File.Exists(path))
 						break;
 
-					if (10 < c)
+					if (IO_TRY_MAX <= trycnt)
 						throw new Exception("ファイルの削除に失敗しました。" + path);
 
 					ProcMain.WriteLog("ファイルの削除をリトライします。" + path);
-					Thread.Sleep(c * 100);
+					Thread.Sleep(trycnt * 100);
 				}
 			}
 			else if (Directory.Exists(path))
 			{
-				for (int c = 1; ; c++)
+				for (int trycnt = 1; ; trycnt++)
 				{
 					try
 					{
 						Directory.Delete(path, true);
 					}
-					catch //(Exception e)
+					catch (Exception ex)
 					{
-						//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。"); // 表示抑止
+						if (IO_TRY_MAX <= trycnt)
+							throw new Exception("ディレクトリの削除に失敗しました。" + path + ", " + ex);
 					}
 					if (!Directory.Exists(path))
 						break;
 
-					if (10 < c)
+					if (IO_TRY_MAX <= trycnt)
 						throw new Exception("ディレクトリの削除に失敗しました。" + path);
 
 					ProcMain.WriteLog("ディレクトリの削除をリトライします。" + path);
-					Thread.Sleep(c * 100);
+					Thread.Sleep(trycnt * 100);
 				}
 			}
 		}
@@ -414,24 +418,25 @@ namespace Charlotte.Commons
 			if (string.IsNullOrEmpty(dir))
 				throw new Exception("作成しようとしたディレクトリは null 又は空文字列です。");
 
-			for (int c = 1; ; c++)
+			for (int trycnt = 1; ; trycnt++)
 			{
 				try
 				{
 					Directory.CreateDirectory(dir); // ディレクトリが存在するときは何もしない。
 				}
-				catch //(Exception e)
+				catch (Exception ex)
 				{
-					//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。"); // 表示抑止
+					if (IO_TRY_MAX <= trycnt)
+						throw new Exception("ディレクトリを作成出来ません。" + dir + ", " + ex);
 				}
 				if (Directory.Exists(dir))
 					break;
 
-				if (10 < c)
+				if (IO_TRY_MAX <= trycnt)
 					throw new Exception("ディレクトリを作成出来ません。" + dir);
 
 				ProcMain.WriteLog("ディレクトリの作成をリトライします。" + dir);
-				Thread.Sleep(c * 100);
+				Thread.Sleep(trycnt * 100);
 			}
 		}
 
