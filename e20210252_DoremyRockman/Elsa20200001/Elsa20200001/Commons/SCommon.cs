@@ -40,9 +40,9 @@ namespace Charlotte.Commons
 
 		// sync > @ 20210323_Comp_etc
 
-		public static int Comp<T>(T[] a, T[] b, Comparison<T> comp)
+		public static int Comp<T>(IList<T> a, IList<T> b, Comparison<T> comp)
 		{
-			int minlen = Math.Min(a.Length, b.Length);
+			int minlen = Math.Min(a.Count, b.Count);
 
 			for (int index = 0; index < minlen; index++)
 			{
@@ -51,13 +51,13 @@ namespace Charlotte.Commons
 				if (ret != 0)
 					return ret;
 			}
-			return Comp(a.Length, b.Length);
+			return Comp(a.Count, b.Count);
 		}
 
-		public static int IndexOf<T>(T[] arr, Predicate<T> match)
+		public static int IndexOf<T>(IList<T> list, Predicate<T> match)
 		{
-			for (int index = 0; index < arr.Length; index++)
-				if (match(arr[index]))
+			for (int index = 0; index < list.Count; index++)
+				if (match(list[index]))
 					return index;
 
 			return -1; // not found
