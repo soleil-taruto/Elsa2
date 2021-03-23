@@ -383,7 +383,7 @@ namespace Charlotte.Commons
 					catch (Exception ex)
 					{
 						if (IO_TRY_MAX <= trycnt)
-							throw new Exception("ファイルの削除に失敗しました。" + path + ", " + ex);
+							throw new Exception("ファイルの削除に失敗しました。" + path + "\r\n" + ex);
 					}
 					if (!File.Exists(path))
 						break;
@@ -406,7 +406,7 @@ namespace Charlotte.Commons
 					catch (Exception ex)
 					{
 						if (IO_TRY_MAX <= trycnt)
-							throw new Exception("ディレクトリの削除に失敗しました。" + path + ", " + ex);
+							throw new Exception("ディレクトリの削除に失敗しました。" + path + "\r\n" + ex);
 					}
 					if (!Directory.Exists(path))
 						break;
@@ -434,7 +434,7 @@ namespace Charlotte.Commons
 				catch (Exception ex)
 				{
 					if (IO_TRY_MAX <= trycnt)
-						throw new Exception("ディレクトリを作成出来ません。" + dir + ", " + ex);
+						throw new Exception("ディレクトリを作成出来ません。" + dir + "\r\n" + ex);
 				}
 				if (Directory.Exists(dir))
 					break;
