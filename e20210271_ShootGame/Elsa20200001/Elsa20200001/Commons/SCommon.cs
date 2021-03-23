@@ -363,6 +363,8 @@ namespace Charlotte.Commons
 			return ret;
 		}
 
+		// sync > @ DeletePath_CreateDir
+
 		public static void DeletePath(string path)
 		{
 			if (string.IsNullOrEmpty(path))
@@ -439,6 +441,8 @@ namespace Charlotte.Commons
 				Thread.Sleep(c * 100);
 			}
 		}
+
+		// < sync
 
 		public static string EraseExt(string path)
 		{
