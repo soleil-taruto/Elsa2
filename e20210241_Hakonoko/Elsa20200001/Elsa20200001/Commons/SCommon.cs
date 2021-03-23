@@ -203,22 +203,35 @@ namespace Charlotte.Commons
 
 			private const char DELIMITER = ':';
 
+			/// <summary>
+			/// 文字列のリストを連結してシリアライズします。
+			/// シリアライズされた文字列：
+			/// -- 空文字列ではない。
+			/// -- 書式 == ^[+/:=0-9A-Za-z]+$
+			/// </summary>
+			/// <param name="plainStrings">任意の文字列のリスト</param>
+			/// <returns>シリアライズされた文字列</returns>
 			public string Join(string[] plainStrings)
 			{
-				return string.Join(string.Empty, plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
+				return DELIMITER + string.Join(string.Empty, plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
 			}
 
+			/// <summary>
+			/// シリアライズされた文字列から文字列のリストを復元します。
+			/// </summary>
+			/// <param name="serializedString">シリアライズされた文字列</param>
+			/// <returns>元の文字列リスト</returns>
 			public string[] Split(string serializedString)
 			{
-				return serializedString.Split(DELIMITER).Skip(1).Select(encodedString => Decode(encodedString)).ToArray();
+				return serializedString.Split(DELIMITER).Skip(2).Select(encodedString => Decode(encodedString)).ToArray();
 			}
 
-			public string Encode(string plainString)
+			private string Encode(string plainString)
 			{
 				return SCommon.Base64.I.Encode(Encoding.UTF8.GetBytes(plainString));
 			}
 
-			public string Decode(string encodedString)
+			private string Decode(string encodedString)
 			{
 				return Encoding.UTF8.GetString(SCommon.Base64.I.Decode(encodedString));
 			}
