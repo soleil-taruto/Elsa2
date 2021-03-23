@@ -35,8 +35,6 @@ namespace Charlotte.Games
 
 		public Player Player = new Player();
 
-		// PlayerHacker -- Type-K では対応しない。
-
 		public Map Map;
 		private Wall Wall;
 
