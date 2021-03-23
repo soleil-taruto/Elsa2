@@ -29,22 +29,25 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain();
 			DDEngine.FreezeInput();
 
-			string[] items = new string[]
-			{
-				"ゲームパッドのボタン設定",
-				"キーボードのキー設定",
-				"ウィンドウサイズ変更",
-				"ＢＧＭ音量",
-				"ＳＥ音量",
-				"戻る",
-			};
-
 			DDSE[] seSamples = Ground.I.SE.テスト用s;
 
 			int selectIndex = 0;
 
 			for (; ; )
 			{
+				string[] items = new string[]
+				{
+					"ゲームパッドのボタン設定",
+					"キーボードのキー設定",
+					"ウィンドウサイズ変更",
+					"ＢＧＭ音量",
+					"ＳＥ音量",
+					"ショットのタイミング [ ショットボタンを" +
+						(Ground.I.ショットのタイミング == Ground.ショットのタイミング_e.ショットボタンを押し下げた時 ? "押し下げた" : "離した") +
+						"時 ]",
+					"戻る",
+				};
+
 				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "設定", items, selectIndex);
 
 				switch (selectIndex)
@@ -89,6 +92,13 @@ namespace Charlotte.Games
 						break;
 
 					case 5:
+						Ground.I.ショットのタイミング =
+							Ground.I.ショットのタイミング == Ground.ショットのタイミング_e.ショットボタンを押し下げた時 ?
+							Ground.ショットのタイミング_e.ショットボタンを離した時 :
+							Ground.ショットのタイミング_e.ショットボタンを押し下げた時;
+						break;
+
+					case 6:
 						goto endMenu;
 
 					default:

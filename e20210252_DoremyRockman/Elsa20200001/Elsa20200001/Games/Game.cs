@@ -338,7 +338,7 @@ namespace Charlotte.Games
 					}
 					this.CamSlideMode = camSlide;
 
-					bool 攻撃ボタンを押した瞬間撃つ = false;
+					bool 攻撃ボタンを押した瞬間撃つ = Ground.I.ショットのタイミング == Ground.ショットのタイミング_e.ショットボタンを押し下げた時;
 
 					if (1 <= attack)
 					{

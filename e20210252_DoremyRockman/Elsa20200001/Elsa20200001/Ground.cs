@@ -19,5 +19,13 @@ namespace Charlotte
 		// DDSaveData.Save/Load でセーブ・ロードする情報はここに保持する。
 
 		public int NovelMessageSpeed = NovelConsts.MESSAGE_SPEED_DEF;
+
+		public enum ショットのタイミング_e
+		{
+			ショットボタンを押し下げた時 = 1,
+			ショットボタンを離した時,
+		};
+
+		public ショットのタイミング_e ショットのタイミング = ショットのタイミング_e.ショットボタンを押し下げた時;
 	}
 }
