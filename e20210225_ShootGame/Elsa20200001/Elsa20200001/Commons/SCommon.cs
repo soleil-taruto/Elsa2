@@ -380,7 +380,7 @@ namespace Charlotte.Commons
 					}
 					catch //(Exception e)
 					{
-						//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。");
+						//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。"); // 表示抑止
 					}
 					if (!File.Exists(path))
 						break;
@@ -402,7 +402,7 @@ namespace Charlotte.Commons
 					}
 					catch //(Exception e)
 					{
-						//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。");
+						//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。"); // 表示抑止
 					}
 					if (!Directory.Exists(path))
 						break;
@@ -429,7 +429,7 @@ namespace Charlotte.Commons
 				}
 				catch //(Exception e)
 				{
-					//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。");
+					//ProcMain.WriteLog(e + " <---- 例外ここまで、処理を続行します。"); // 表示抑止
 				}
 				if (Directory.Exists(dir))
 					break;
