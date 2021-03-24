@@ -164,13 +164,13 @@ namespace Charlotte
 		//public DDPicture[] Cirno_しゃがみ大ダメージ;
 		public DDPicture[] Cirno_飛翔 = Cirno.Cirno_13.Skip(0).Take(7).ToArray();
 		//public DDPicture[] Cirno_弱攻撃;
-		//public DDPicture[] Cirno_中攻撃; // 検討中
+		//public DDPicture[] Cirno_中攻撃; // TODO 検討中
 		//public DDPicture[] Cirno_強攻撃;
 		//public DDPicture[] Cirno_しゃがみ弱攻撃;
-		//public DDPicture[] Cirno_しゃがみ中攻撃; // 検討中
+		//public DDPicture[] Cirno_しゃがみ中攻撃; // TODO 検討中
 		//public DDPicture[] Cirno_しゃがみ強攻撃;
 		//public DDPicture[] Cirno_ジャンプ弱攻撃;
-		//public DDPicture[] Cirno_ジャンプ中攻撃; // 検討中
+		//public DDPicture[] Cirno_ジャンプ中攻撃; // TODO 検討中
 		//public DDPicture[] Cirno_ジャンプ強攻撃;
 
 		// ----
