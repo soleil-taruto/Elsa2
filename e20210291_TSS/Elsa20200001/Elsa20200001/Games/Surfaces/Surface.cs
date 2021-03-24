@@ -201,7 +201,7 @@ namespace Charlotte.Games.Surfaces
 
 		private static readonly string[] SERIALIZED_DUMMY = new string[] { "SERIALIZED_DUMMY" };
 		//private static readonly string[] SERIALIZED_DUMMY = new string[] { "SERIALIZED_DUMMY_01", "SERIALIZED_DUMMY_02", "SERIALIZED_DUMMY_03" };
-		//private static readonly string[] SERIALIZED_DUMMY = SCommon.EMPRY_STRINGS;
+		//private static readonly string[] SERIALIZED_DUMMY = SCommon.EMPTY_STRINGS;
 
 		/// <summary>
 		/// <para>シリアライザ</para>
