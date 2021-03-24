@@ -15,7 +15,7 @@ namespace Charlotte.Games
 		// (テスト時など)特にフィールドを設定せずにインスタンスを生成する使い方を想定して、
 		// 全てのパラメータはデフォルト値で初期化すること。
 
-		public Player.Chara_e StartChara = Player.Chara_e.HOMURA;
+		public Player.Chara_e StartChara = Player.Chara_e.TEWI;
 
 		/// <summary>
 		/// プレイヤーの最大HP

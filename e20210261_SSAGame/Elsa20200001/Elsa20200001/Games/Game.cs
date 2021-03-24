@@ -95,9 +95,6 @@ namespace Charlotte.Games
 
 			for (this.Frame = 0; ; this.Frame++)
 			{
-				// Attack_ほむらシールド 終了から Shot_ほむらシールド の PlayerTracer.Start 実行の間に
-				// ポーズできるタイミングは無いはずだけど、曲芸的で気持ち悪い。
-
 				if (
 					!this.UserInputDisabled &&
 					//Game.I.Player.Attack == null && // ? プレイヤーの攻撃モーション中ではない。// モーション中でも良いはず！
@@ -128,7 +125,7 @@ namespace Charlotte.Games
 
 				this.カメラ位置調整(false);
 
-				if (DDKey.GetInput(DX.KEY_INPUT_E) == 1) // エディットモード(デバッグ用)
+				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_E) == 1) // エディットモード(デバッグ用)
 				{
 					this.Edit();
 					this.ReloadEnemies();
@@ -325,7 +322,7 @@ namespace Charlotte.Games
 						{
 							switch (this.Player.Chara)
 							{
-								case Player.Chara_e.HOMURA:
+								case Player.Chara_e.TEWI:
 									{
 										if (this.Player.AirborneFrame == 0)
 											this.Player.Attack = new Attack_ほむら接地攻撃();
@@ -334,7 +331,7 @@ namespace Charlotte.Games
 									}
 									break;
 
-								case Player.Chara_e.SAYAKA:
+								case Player.Chara_e.CIRNO:
 									{
 										if (this.Player.AirborneFrame == 0)
 											this.Player.Attack = new Attack_さやか接地攻撃();
@@ -351,14 +348,14 @@ namespace Charlotte.Games
 						{
 							switch (this.Player.Chara)
 							{
-								case Player.Chara_e.HOMURA:
+								case Player.Chara_e.TEWI:
 									{
 										if (this.Player.AirborneFrame == 0)
 											this.Player.Attack = new Attack_ほむらシールド();
 									}
 									break;
 
-								case Player.Chara_e.SAYAKA:
+								case Player.Chara_e.CIRNO:
 									{
 										this.Player.Attack = new Attack_さやか突き();
 									}

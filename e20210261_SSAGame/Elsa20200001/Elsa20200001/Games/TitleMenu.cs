@@ -89,7 +89,7 @@ namespace Charlotte.Games
 								WorldGameMaster.I.World = new World("t0001"); // 仮？
 								WorldGameMaster.I.Status = new GameStatus()
 								{
-									StartChara = Player.Chara_e.SAYAKA,
+									StartChara = Player.Chara_e.CIRNO,
 								};
 								WorldGameMaster.I.Perform();
 							}

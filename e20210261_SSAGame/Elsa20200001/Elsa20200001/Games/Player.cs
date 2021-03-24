@@ -18,16 +18,16 @@ namespace Charlotte.Games
 	{
 		public enum Chara_e
 		{
-			HOMURA,
-			SAYAKA,
+			TEWI,
+			CIRNO,
 		}
 
 		public static string GetName(Chara_e chara)
 		{
 			return new string[]
 			{
-				"ほむら",
-				"さやか",
+				"因幡てゐ",
+				"チルノ",
 			}
 			[(int)chara];
 		}
@@ -79,7 +79,7 @@ namespace Charlotte.Games
 
 			switch (Game.I.Player.Chara) // キャラクタ別_各種モーション
 			{
-				case Chara_e.HOMURA:
+				case Chara_e.TEWI:
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
@@ -117,7 +117,7 @@ namespace Charlotte.Games
 					}
 					break;
 
-				case Chara_e.SAYAKA:
+				case Chara_e.CIRNO:
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
@@ -170,12 +170,12 @@ namespace Charlotte.Games
 
 				switch (Game.I.Player.Chara)
 				{
-					case Chara_e.HOMURA:
+					case Chara_e.TEWI:
 						////picture = Ground.I.Picture2.ほむら死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.ほむら死亡.Length - 1)];
 						ya = 6;
 						break;
 
-					case Chara_e.SAYAKA:
+					case Chara_e.CIRNO:
 						////picture = Ground.I.Picture2.さやか死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.さやか死亡.Length - 1)];
 						xa = -10;
 						ya = -6;
@@ -191,11 +191,11 @@ namespace Charlotte.Games
 
 				switch (Game.I.Player.Chara)
 				{
-					case Chara_e.HOMURA:
+					case Chara_e.TEWI:
 						////picture = Ground.I.Picture2.ほむら被弾[(this.DamageFrame * Ground.I.Picture2.ほむら被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
 						break;
 
-					case Chara_e.SAYAKA:
+					case Chara_e.CIRNO:
 						////picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
 						xa = -20;
 						break;
