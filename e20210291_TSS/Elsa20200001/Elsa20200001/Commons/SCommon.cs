@@ -217,7 +217,7 @@ namespace Charlotte.Commons
 			/// <returns>シリアライズされた文字列</returns>
 			public string Join(string[] plainStrings)
 			{
-				return DELIMITER + string.Join(string.Empty, plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
+				return DELIMITER + string.Join("", plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
 			}
 
 			/// <summary>
