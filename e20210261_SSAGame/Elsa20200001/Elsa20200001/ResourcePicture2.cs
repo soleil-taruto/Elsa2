@@ -119,9 +119,9 @@ namespace Charlotte
 			public DDPicture[] Cirno_13 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_13, 0, 0, 80, 96).ToArray(); // コマンド技パターンA(ロケット頭突き？)
 			//public DDPicture[] Cirno_08 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_08, 0, 0, 128, 96).ToArray(); // 攻撃パターンB(手技)ファイル1
 			//public DDPicture[] Cirno_09 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_09, 0, 0, 96, 96).ToArray(); // 攻撃パターンB(手技)ファイル2
-			//public DDPicture[] Cirno_10 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_10, 0, 0, 112, 96).ToArray(); // 攻撃パターンC(羽根を使った攻撃)ファイル1
-			//public DDPicture[] Cirno_11 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_11, 0, 0, 112, 112).ToArray(); // 攻撃パターンC(羽根を使った攻撃)ファイル2
-			//public DDPicture[] Cirno_12 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_12, 0, 0, 112, 112).ToArray(); // 攻撃パターンC(羽根を使った攻撃)ファイル3
+			public DDPicture[] Cirno_10 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_10, 0, 0, 112, 96).ToArray(); // 攻撃パターンC(羽根を使った攻撃)ファイル1
+			public DDPicture[] Cirno_11 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_11, 0, 0, 112, 112).ToArray(); // 攻撃パターンC(羽根を使った攻撃)ファイル2
+			public DDPicture[] Cirno_12 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_12, 0, 0, 112, 112).ToArray(); // 攻撃パターンC(羽根を使った攻撃)ファイル3
 			//public DDPicture[] Cirno_17 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_17, 0, 0, 80, 96).ToArray(); // 攻撃パターンD(足技)ファイル1
 			//public DDPicture[] Cirno_18 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_18, 0, 0, 112, 96).ToArray(); // 攻撃パターンD(足技)ファイル2
 			//public DDPicture[] Cirno_19 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Cirno_19, 0, 0, 112, 112).ToArray(); // 攻撃パターンD(足技)ファイル3
@@ -163,14 +163,17 @@ namespace Charlotte
 		//public DDPicture[] Cirno_しゃがみ小ダメージ;
 		//public DDPicture[] Cirno_しゃがみ大ダメージ;
 		public DDPicture[] Cirno_飛翔 = Cirno.Cirno_13.Skip(0).Take(7).ToArray();
+		public DDPicture[] Cirno_攻撃 = Cirno.Cirno_10.Skip(12).Take(11).ToArray();
 		//public DDPicture[] Cirno_弱攻撃;
-		//public DDPicture[] Cirno_中攻撃; // TODO 検討中
+		//public DDPicture[] Cirno_中攻撃;
 		//public DDPicture[] Cirno_強攻撃;
+		public DDPicture[] Cirno_しゃがみ攻撃 = Cirno.Cirno_11.Skip(0).Take(11).ToArray();
 		//public DDPicture[] Cirno_しゃがみ弱攻撃;
-		//public DDPicture[] Cirno_しゃがみ中攻撃; // TODO 検討中
+		//public DDPicture[] Cirno_しゃがみ中攻撃;
 		//public DDPicture[] Cirno_しゃがみ強攻撃;
+		public DDPicture[] Cirno_ジャンプ攻撃 = Cirno.Cirno_12.Skip(0).Take(7).ToArray();
 		//public DDPicture[] Cirno_ジャンプ弱攻撃;
-		//public DDPicture[] Cirno_ジャンプ中攻撃; // TODO 検討中
+		//public DDPicture[] Cirno_ジャンプ中攻撃;
 		//public DDPicture[] Cirno_ジャンプ強攻撃;
 
 		// ----

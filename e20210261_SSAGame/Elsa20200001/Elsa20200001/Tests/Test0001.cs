@@ -56,6 +56,9 @@ namespace Charlotte.Tests
 				Ground.I.Picture2.Cirno_ダメージ,
 				Ground.I.Picture2.Cirno_しゃがみダメージ,
 				Ground.I.Picture2.Cirno_飛翔,
+				Ground.I.Picture2.Cirno_攻撃,
+				Ground.I.Picture2.Cirno_しゃがみ攻撃,
+				Ground.I.Picture2.Cirno_ジャンプ攻撃,
 			};
 
 			DDEngine.FreezeInput();
