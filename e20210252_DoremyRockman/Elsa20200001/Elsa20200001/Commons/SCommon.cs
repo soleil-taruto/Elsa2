@@ -224,7 +224,7 @@ namespace Charlotte.Commons
 			/// <returns>シリアライズされた文字列</returns>
 			public string Join(string[] plainStrings)
 			{
-				return DELIMITER + string.Join("", plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
+				return DELIMITER + string.Join(SCommon.EMPTY_STRING, plainStrings.Select(plainString => DELIMITER + Encode(plainString)));
 			}
 
 			/// <summary>
@@ -247,6 +247,8 @@ namespace Charlotte.Commons
 				return Encoding.UTF8.GetString(SCommon.Base64.I.Decode(encodedString));
 			}
 		}
+
+		public static string EMPTY_STRING = ""; // ConfuserElsa のために string.Empty を使用しない。
 
 		// < sync
 
