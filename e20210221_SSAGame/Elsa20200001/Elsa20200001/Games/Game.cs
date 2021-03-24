@@ -130,7 +130,7 @@ namespace Charlotte.Games
 
 				this.カメラ位置調整(false);
 
-				if (DDKey.GetInput(DX.KEY_INPUT_E) == 1) // エディットモード(デバッグ用)
+				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_E) == 1) // エディットモード(デバッグ用)
 				{
 					this.Edit();
 					this.ReloadEnemies();
