@@ -101,7 +101,7 @@ namespace Charlotte.Games
 
 								picture = Ground.I.Picture2.Tewi_ジャンプ_上昇[koma];
 							}
-							else if (1 <= Game.I.Player.下降_Frame)
+							else
 							{
 								int koma = Game.I.Player.下降_Frame;
 								koma--;
@@ -114,10 +114,6 @@ namespace Charlotte.Games
 									koma = Ground.I.Picture2.Tewi_ジャンプ_下降.Length - 3 + koma;
 								}
 								picture = Ground.I.Picture2.Tewi_ジャンプ_下降[koma];
-							}
-							else
-							{
-								throw new DDError(); // 上昇・下降_Frame が両方 0 になることはない。
 							}
 						}
 						else if (1 <= this.MoveFrame)

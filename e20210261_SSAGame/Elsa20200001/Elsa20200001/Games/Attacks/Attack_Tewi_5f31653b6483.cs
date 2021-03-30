@@ -18,7 +18,9 @@ namespace Charlotte.Games.Attacks
 		{
 			for (int frame = 0; ; frame++)
 			{
-				int koma = frame / 4;
+				int koma = frame;
+				//int koma = frame / 2;
+				//int koma = frame / 3;
 
 				if (Ground.I.Picture2.Tewi_弱攻撃.Length <= koma)
 					break;
