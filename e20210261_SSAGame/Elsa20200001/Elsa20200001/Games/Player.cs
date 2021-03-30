@@ -183,12 +183,10 @@ namespace Charlotte.Games
 			}
 			if (1 <= this.DeadFrame) // 死亡モーション
 			{
-				// 注意：this.DeadFrame == 0 ～ Consts.PLAYER_DEAD_FRAME_MAX + 2
-
 				switch (Game.I.Player.Chara)
 				{
 					case Chara_e.TEWI:
-						////picture = Ground.I.Picture2.ほむら死亡[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.ほむら死亡.Length - 1)];
+						picture = Ground.I.Picture2.Tewi_大ダメージ[Math.Min(this.DeadFrame / 6, Ground.I.Picture2.Tewi_大ダメージ.Length - 1)];
 						ya = 6;
 						break;
 
@@ -204,16 +202,14 @@ namespace Charlotte.Games
 			}
 			if (1 <= this.DamageFrame) // 被弾モーション
 			{
-				// 注意：this.DamageFrame == 0 ～ Consts.PLAYER_DAMAGE_FRAME_MAX + 2
-
 				switch (Game.I.Player.Chara)
 				{
 					case Chara_e.TEWI:
-						////picture = Ground.I.Picture2.ほむら被弾[(this.DamageFrame * Ground.I.Picture2.ほむら被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
+						picture = Ground.I.Picture2.Tewi_大ダメージ[(this.DamageFrame * Ground.I.Picture2.Tewi_大ダメージ.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 1)];
 						break;
 
 					case Chara_e.CIRNO:
-						////picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
+						////picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 1)];
 						xa = -20;
 						break;
 

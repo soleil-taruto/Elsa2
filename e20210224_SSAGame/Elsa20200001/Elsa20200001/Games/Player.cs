@@ -166,8 +166,6 @@ namespace Charlotte.Games
 			}
 			if (1 <= this.DeadFrame) // 死亡モーション
 			{
-				// 注意：this.DeadFrame == 0 ～ Consts.PLAYER_DEAD_FRAME_MAX + 2
-
 				switch (Game.I.Player.Chara)
 				{
 					case Chara_e.HOMURA:
@@ -187,16 +185,14 @@ namespace Charlotte.Games
 			}
 			if (1 <= this.DamageFrame) // 被弾モーション
 			{
-				// 注意：this.DamageFrame == 0 ～ Consts.PLAYER_DAMAGE_FRAME_MAX + 2
-
 				switch (Game.I.Player.Chara)
 				{
 					case Chara_e.HOMURA:
-						picture = Ground.I.Picture2.ほむら被弾[(this.DamageFrame * Ground.I.Picture2.ほむら被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
+						picture = Ground.I.Picture2.ほむら被弾[(this.DamageFrame * Ground.I.Picture2.ほむら被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 1)];
 						break;
 
 					case Chara_e.SAYAKA:
-						picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 3)];
+						picture = Ground.I.Picture2.さやか被弾[(this.DamageFrame * Ground.I.Picture2.さやか被弾.Length) / (GameConsts.PLAYER_DAMAGE_FRAME_MAX + 1)];
 						xa = -20;
 						break;
 

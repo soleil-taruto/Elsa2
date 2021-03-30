@@ -69,7 +69,7 @@ namespace Charlotte.Games
 		public const double PLAYER_側面判定Pt_X = 10.0;
 		public const double PLAYER_側面判定Pt_Y = TILE_H - 1.0;
 		public const double PLAYER_脳天判定Pt_X = 9.0;
-		public const double PLAYER_脳天判定Pt_Y = 40.0;
+		public const double PLAYER_脳天判定Pt_Y = 36.0;
 		public const double PLAYER_接地判定Pt_X = 9.0;
 		public const double PLAYER_接地判定Pt_Y = 46.0;
 	}
