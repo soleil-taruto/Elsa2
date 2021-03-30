@@ -39,9 +39,10 @@ namespace Charlotte.Tests
 				Ground.I.Picture2.Tewi_しゃがみ強攻撃,
 				Ground.I.Picture2.Tewi_ジャンプ弱攻撃,
 				Ground.I.Picture2.Tewi_ジャンプ中攻撃,
-				Ground.I.Picture2.Tewi_ジャンプ強攻撃_開始,
-				Ground.I.Picture2.Tewi_ジャンプ強攻撃_回転,
-				Ground.I.Picture2.Tewi_ジャンプ強攻撃_終了,
+				Ground.I.Picture2.Tewi_ジャンプ強攻撃,
+				//Ground.I.Picture2.Tewi_ジャンプ強攻撃_開始,
+				//Ground.I.Picture2.Tewi_ジャンプ強攻撃_回転,
+				//Ground.I.Picture2.Tewi_ジャンプ強攻撃_終了,
 
 				Ground.I.Picture2.Cirno_立ち,
 				Ground.I.Picture2.Cirno_しゃがみ,

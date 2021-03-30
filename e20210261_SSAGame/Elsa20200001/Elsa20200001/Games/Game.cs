@@ -352,12 +352,12 @@ namespace Charlotte.Games
 						{
 							case Player.Chara_e.TEWI:
 								{
-									// TODO
-
-									if (this.Player.AirborneFrame == 0)
-										this.Player.Attack = new Attack_Tewi_弱攻撃();
+									if (1 <= this.Player.ShagamiFrame)
+										this.Player.Attack = new Attack_Tewi_しゃがみ中攻撃();
+									else if (1 <= this.Player.AirborneFrame)
+										this.Player.Attack = new Attack_Tewi_ジャンプ中攻撃();
 									else
-										this.Player.Attack = new Attack_Tewi_ジャンプ弱攻撃();
+										this.Player.Attack = new Attack_Tewi_中攻撃();
 								}
 								break;
 
@@ -377,10 +377,12 @@ namespace Charlotte.Games
 						{
 							case Player.Chara_e.TEWI:
 								{
-									// TODO
-
-									if (this.Player.AirborneFrame == 0)
-										this.Player.Attack = new Attack_Tewi_弱攻撃();
+									if (1 <= this.Player.ShagamiFrame)
+										this.Player.Attack = new Attack_Tewi_しゃがみ強攻撃();
+									else if (1 <= this.Player.AirborneFrame)
+										this.Player.Attack = new Attack_Tewi_ジャンプ強攻撃();
+									else
+										this.Player.Attack = new Attack_Tewi_強攻撃();
 								}
 								break;
 

@@ -94,6 +94,12 @@
     <Compile Include="GameCommons\DDHashedResource.cs" />
     <Compile Include="GameCommons\DDTouch.cs" />
     <Compile Include="Games\Attacks\Attack_Tewi_しゃがみ弱攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_しゃがみ中攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_ジャンプ中攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_中攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_しゃがみ強攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_ジャンプ強攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_強攻撃.cs" />
     <Compile Include="Games\Confirm.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bアイテム.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bイベント0001.cs" />

@@ -90,9 +90,10 @@ namespace Charlotte
 		public DDPicture[] Tewi_しゃがみ強攻撃 = Tewi.Tewi_23.Skip(0).Take(14).ToArray();
 		public DDPicture[] Tewi_ジャンプ弱攻撃 = Tewi.Tewi_24.Skip(0).Take(11).ToArray();
 		public DDPicture[] Tewi_ジャンプ中攻撃 = Tewi.Tewi_26.Skip(0).Take(8).ToArray();
-		public DDPicture[] Tewi_ジャンプ強攻撃_開始 = Tewi.Tewi_25.Skip(0).Take(6).ToArray();
-		public DDPicture[] Tewi_ジャンプ強攻撃_回転 = Tewi.Tewi_25.Skip(6).Take(2).ToArray();
-		public DDPicture[] Tewi_ジャンプ強攻撃_終了 = Tewi.Tewi_25.Skip(8).Take(7).ToArray();
+		public DDPicture[] Tewi_ジャンプ強攻撃 = Tewi.Tewi_25.Skip(0).Take(15).ToArray();
+		//public DDPicture[] Tewi_ジャンプ強攻撃_開始 = Tewi.Tewi_25.Skip(0).Take(6).ToArray();
+		//public DDPicture[] Tewi_ジャンプ強攻撃_回転 = Tewi.Tewi_25.Skip(6).Take(2).ToArray();
+		//public DDPicture[] Tewi_ジャンプ強攻撃_終了 = Tewi.Tewi_25.Skip(8).Take(7).ToArray();
 
 		// ---- チルノ ----
 
