@@ -164,9 +164,8 @@
     <Compile Include="Games\Attacks\Attack_さやか接地攻撃.cs" />
     <Compile Include="Games\Attacks\Attack_さやか滞空攻撃.cs" />
     <Compile Include="Games\Attacks\Attack_さやか突き.cs" />
-    <Compile Include="Games\Attacks\Attack_ほむらシールド.cs" />
-    <Compile Include="Games\Attacks\Attack_ほむら接地攻撃.cs" />
-    <Compile Include="Games\Attacks\Attack_ほむら滞空攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_弱攻撃.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_ジャンプ弱攻撃.cs" />
     <Compile Include="Games\Effects.cs" />
     <Compile Include="Games\Enemies\Enemy.cs" />
     <Compile Include="Games\Enemies\EnemyCatalog.cs" />

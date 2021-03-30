@@ -83,7 +83,7 @@ namespace Charlotte.Games
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
-							////picture = Ground.I.Picture2.ほむら死亡[4];
+							picture = Ground.I.Picture2.Tewi_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Tewi_しゃがみ.Length)];
 							xa = 14;
 							ya = 6;
 						}
@@ -91,11 +91,11 @@ namespace Charlotte.Games
 						{
 							if (1 <= this.MoveFrame)
 							{
-								////picture = Ground.I.Picture2.ほむら走り[5];
+								picture = Ground.I.Picture2.Tewi_ジャンプ_開始[0];
 							}
 							else
 							{
-								////picture = Ground.I.Picture2.ほむら滞空攻撃[0];
+								picture = Ground.I.Picture2.Tewi_ジャンプ_開始[0];
 								xa = 12;
 							}
 						}
@@ -103,16 +103,16 @@ namespace Charlotte.Games
 						{
 							if (this.MoveSlow)
 							{
-								////picture = Ground.I.Picture2.ほむら走り[(Game.I.Frame / 10) % Ground.I.Picture2.ほむら走り.Length];
+								picture = Ground.I.Picture2.Tewi_歩く[(Game.I.Frame / 10) % Ground.I.Picture2.Tewi_歩く.Length];
 							}
 							else
 							{
-								////picture = Ground.I.Picture2.ほむら走り[(Game.I.Frame / 5) % Ground.I.Picture2.ほむら走り.Length];
+								picture = Ground.I.Picture2.Tewi_走る[(Game.I.Frame / 5) % Ground.I.Picture2.Tewi_走る.Length];
 							}
 						}
 						else
 						{
-							////picture = Ground.I.Picture2.ほむら立ち[(Game.I.Frame / 10) % Ground.I.Picture2.ほむら立ち.Length];
+							picture = Ground.I.Picture2.Tewi_立ち[(Game.I.Frame / 10) % Ground.I.Picture2.Tewi_立ち.Length];
 						}
 					}
 					break;

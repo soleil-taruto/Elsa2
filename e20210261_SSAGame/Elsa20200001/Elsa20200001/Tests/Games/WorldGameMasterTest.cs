@@ -32,8 +32,8 @@ namespace Charlotte.Tests.Games
 
 			// ---- choose one ----
 
-			//startMapName = "t0001";
-			startMapName = "t0002";
+			startMapName = "t0001";
+			//startMapName = "t0002";
 			//startMapName = "t0003";
 			//startMapName = "t0004";
 			//startMapName = "t0005";

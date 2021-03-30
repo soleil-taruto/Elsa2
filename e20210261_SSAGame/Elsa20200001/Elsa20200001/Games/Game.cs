@@ -325,9 +325,9 @@ namespace Charlotte.Games
 								case Player.Chara_e.TEWI:
 									{
 										if (this.Player.AirborneFrame == 0)
-											this.Player.Attack = new Attack_ほむら接地攻撃();
+											this.Player.Attack = new Attack_Tewi_弱攻撃();
 										else
-											this.Player.Attack = new Attack_ほむら滞空攻撃();
+											this.Player.Attack = new Attack_Tewi_ジャンプ弱攻撃();
 									}
 									break;
 
@@ -351,7 +351,7 @@ namespace Charlotte.Games
 								case Player.Chara_e.TEWI:
 									{
 										if (this.Player.AirborneFrame == 0)
-											this.Player.Attack = new Attack_ほむらシールド();
+											this.Player.Attack = new Attack_Tewi_弱攻撃();
 									}
 									break;
 

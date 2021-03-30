@@ -7,7 +7,7 @@ using Charlotte.Games.Shots;
 
 namespace Charlotte.Games.Attacks
 {
-	public class Attack_ほむら滞空攻撃 : Attack
+	public class Attack_Tewi_ジャンプ弱攻撃 : Attack
 	{
 		public override bool IsInvincibleMode()
 		{
@@ -28,14 +28,14 @@ namespace Charlotte.Games.Attacks
 
 				if (frame == 0)
 				{
-					Game.I.Shots.Add(new Shot_ほむら滞空攻撃(
-						x + 50.0 * xZoom,
-						y - 18.0,
-						facingLeft
-						));
+					////Game.I.Shots.Add(new Shot_ほむら滞空攻撃(
+					////    x + 50.0 * xZoom,
+					////    y - 18.0,
+					////    facingLeft
+					////    ));
 				}
 
-				int koma = 0; ////Math.Min((frame + 15) / 4, Ground.I.Picture2.ほむら滞空攻撃.Length - 1);
+				int koma = Math.Min((frame + 15) / 4, Ground.I.Picture2.Tewi_ジャンプ弱攻撃.Length - 1);
 
 				AttackCommon.ProcPlayer_移動();
 				AttackCommon.ProcPlayer_Fall();
@@ -47,11 +47,11 @@ namespace Charlotte.Games.Attacks
 					break;
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
-				////DDDraw.DrawBegin(
-				////Ground.I.Picture2.ほむら滞空攻撃[koma],
-				////x - DDGround.ICamera.X,
-				////y - DDGround.ICamera.Y
-				////);
+				DDDraw.DrawBegin(
+					Ground.I.Picture2.Tewi_ジャンプ弱攻撃[koma],
+					x - DDGround.ICamera.X,
+					y - DDGround.ICamera.Y
+					);
 				DDDraw.DrawZoom_X(xZoom);
 				DDDraw.DrawEnd();
 				DDDraw.Reset();
