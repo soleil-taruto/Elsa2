@@ -257,6 +257,7 @@ namespace Charlotte.Games
 
 								this.Player.JumpFrame = 1;
 								this.Player.JumpCount++;
+								this.Player.AirborneJumpFrame = 0;
 
 								this.Player.YSpeed = GameConsts.PLAYER_ジャンプ初速度;
 
@@ -523,9 +524,15 @@ namespace Charlotte.Games
 					}
 
 					if (touchGround)
+					{
 						this.Player.AirborneFrame = 0;
+						this.Player.AirborneJumpFrame = 0;
+					}
 					else
+					{
 						this.Player.AirborneFrame++;
+						this.Player.AirborneJumpFrame++;
+					}
 				}
 			endPlayer:
 

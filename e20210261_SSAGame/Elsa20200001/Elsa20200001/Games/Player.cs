@@ -48,6 +48,8 @@ namespace Charlotte.Games
 		public int InvincibleFrame = 0; // 0 == 無効, 1～ == 無敵時間中
 		public int HP = 1; // -1 == 死亡, 1～ == 生存
 
+		public int AirborneJumpFrame;
+
 		/// <summary>
 		/// プレイヤーの攻撃モーション
 		/// null の場合は無効
@@ -89,33 +91,37 @@ namespace Charlotte.Games
 						}
 						else if (Game.I.Player.AirborneFrame != 0) // ? 滞空状態
 						{
-							picture = Ground.I.Picture2.Tewi_ジャンプ[Math.Min(Game.I.Player.AirborneFrame / 3, Ground.I.Picture2.Tewi_ジャンプ.Length - 1)];
+							int koma = Game.I.Player.AirborneJumpFrame / 3;
 
-							// del
-							//if (this.YSpeed < 0.0) // ? 上昇
-							//{
-							//    picture = Ground.I.Picture2.Tewi_ジャンプ_上昇[Math.Min(Game.I.Player.AirborneFrame / 3, Ground.I.Picture2.Tewi_ジャンプ_上昇.Length - 1)];
-							//}
-							//else // ? 下降
-							//{
-							//    picture = Ground.I.Picture2.Tewi_ジャンプ_下降[Game.I.Player.AirborneFrame / 3 % Ground.I.Picture2.Tewi_ジャンプ_下降.Length];
-							//    ////xa = 12;
-							//}
+							if (0.0 < Game.I.Player.YSpeed && koma < Ground.I.Picture2.Tewi_ジャンプ_上昇.Length) // ? 下降中
+								Game.I.Player.AirborneJumpFrame = Ground.I.Picture2.Tewi_ジャンプ_上昇.Length * 3;
+
+							if (koma < Ground.I.Picture2.Tewi_ジャンプ_上昇.Length)
+							{
+								picture = Ground.I.Picture2.Tewi_ジャンプ_上昇[koma];
+							}
+							else
+							{
+								koma -= Ground.I.Picture2.Tewi_ジャンプ_上昇.Length;
+								koma %= Ground.I.Picture2.Tewi_ジャンプ_下降.Length;
+
+								picture = Ground.I.Picture2.Tewi_ジャンプ_下降[koma];
+							}
 						}
 						else if (1 <= this.MoveFrame)
 						{
 							if (this.MoveSlow)
 							{
-								picture = Ground.I.Picture2.Tewi_歩く[(Game.I.Frame / 10) % Ground.I.Picture2.Tewi_歩く.Length];
+								picture = Ground.I.Picture2.Tewi_歩く[Game.I.Frame / 10 % Ground.I.Picture2.Tewi_歩く.Length];
 							}
 							else
 							{
-								picture = Ground.I.Picture2.Tewi_走る[(Game.I.Frame / 5) % Ground.I.Picture2.Tewi_走る.Length];
+								picture = Ground.I.Picture2.Tewi_走る[Game.I.Frame / 5 % Ground.I.Picture2.Tewi_走る.Length];
 							}
 						}
 						else
 						{
-							picture = Ground.I.Picture2.Tewi_立ち[(Game.I.Frame / 10) % Ground.I.Picture2.Tewi_立ち.Length];
+							picture = Ground.I.Picture2.Tewi_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Tewi_立ち.Length];
 						}
 					}
 					break;
