@@ -18,8 +18,12 @@ namespace Charlotte.Games.Attacks
 		{
 			for (int frame = 0; ; frame++)
 			{
-				if (1 <= frame && DDInput.B.GetInput() == 1) // ? 再発砲
-					frame = 0;
+				//int koma = frame;
+				int koma = frame / 2;
+				//int koma = frame / 3;
+
+				if (Ground.I.Picture2.Tewi_ジャンプ中攻撃.Length <= koma)
+					break;
 
 				double x = Game.I.Player.X;
 				double y = Game.I.Player.Y;
@@ -30,8 +34,6 @@ namespace Charlotte.Games.Attacks
 				{
 					// TODO: 当たり判定設定
 				}
-
-				int koma = Math.Min((frame + 15) / 4, Ground.I.Picture2.Tewi_ジャンプ中攻撃.Length - 1);
 
 				AttackCommon.ProcPlayer_移動();
 				AttackCommon.ProcPlayer_Fall();
