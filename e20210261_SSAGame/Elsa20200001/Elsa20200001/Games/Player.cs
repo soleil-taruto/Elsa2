@@ -83,21 +83,24 @@ namespace Charlotte.Games
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
-							picture = Ground.I.Picture2.Tewi_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Tewi_しゃがみ.Length)];
+							picture = Ground.I.Picture2.Tewi_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Tewi_しゃがみ.Length - 1)];
 							xa = 14;
 							ya = 6;
 						}
 						else if (Game.I.Player.AirborneFrame != 0) // ? 滞空状態
 						{
-							if (1 <= this.MoveFrame)
-							{
-								picture = Ground.I.Picture2.Tewi_ジャンプ_開始[0];
-							}
-							else
-							{
-								picture = Ground.I.Picture2.Tewi_ジャンプ_開始[0];
-								xa = 12;
-							}
+							picture = Ground.I.Picture2.Tewi_ジャンプ[Math.Min(Game.I.Player.AirborneFrame / 3, Ground.I.Picture2.Tewi_ジャンプ.Length - 1)];
+
+							// del
+							//if (this.YSpeed < 0.0) // ? 上昇
+							//{
+							//    picture = Ground.I.Picture2.Tewi_ジャンプ_上昇[Math.Min(Game.I.Player.AirborneFrame / 3, Ground.I.Picture2.Tewi_ジャンプ_上昇.Length - 1)];
+							//}
+							//else // ? 下降
+							//{
+							//    picture = Ground.I.Picture2.Tewi_ジャンプ_下降[Game.I.Player.AirborneFrame / 3 % Ground.I.Picture2.Tewi_ジャンプ_下降.Length];
+							//    ////xa = 12;
+							//}
 						}
 						else if (1 <= this.MoveFrame)
 						{
