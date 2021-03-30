@@ -18,8 +18,11 @@ namespace Charlotte.Games.Attacks
 		{
 			for (int frame = 0; ; frame++)
 			{
-				//int koma = frame;
-				int koma = frame / 2;
+				if (DDInput.A.GetInput() == 1) // ? ジャンプ押下
+					break;
+
+				int koma = frame;
+				//int koma = frame / 2;
 				//int koma = frame / 3;
 
 				if (Ground.I.Picture2.Tewi_ジャンプ弱攻撃.Length <= koma)

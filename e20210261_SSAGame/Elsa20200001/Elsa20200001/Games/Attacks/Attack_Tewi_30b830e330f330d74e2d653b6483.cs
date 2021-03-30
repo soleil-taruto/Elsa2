@@ -18,6 +18,9 @@ namespace Charlotte.Games.Attacks
 		{
 			for (int frame = 0; ; frame++)
 			{
+				if (DDInput.A.GetInput() == 1) // ? ジャンプ押下
+					break;
+
 				//int koma = frame;
 				int koma = frame / 2;
 				//int koma = frame / 3;
