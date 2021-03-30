@@ -93,6 +93,7 @@
     <Compile Include="GameCommons\DDHashedData.cs" />
     <Compile Include="GameCommons\DDHashedResource.cs" />
     <Compile Include="GameCommons\DDTouch.cs" />
+    <Compile Include="Games\Attacks\Attack_Tewi_しゃがみ弱攻撃.cs" />
     <Compile Include="Games\Confirm.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bアイテム.cs" />
     <Compile Include="Games\Enemies\Tests\Enemy_Bイベント0001.cs" />
@@ -161,9 +162,6 @@
     <Compile Include="GameCommons\DDCrashView.cs" />
     <Compile Include="Games\Attacks\Attack.cs" />
     <Compile Include="Games\Attacks\AttackCommon.cs" />
-    <Compile Include="Games\Attacks\Attack_さやか接地攻撃.cs" />
-    <Compile Include="Games\Attacks\Attack_さやか滞空攻撃.cs" />
-    <Compile Include="Games\Attacks\Attack_さやか突き.cs" />
     <Compile Include="Games\Attacks\Attack_Tewi_弱攻撃.cs" />
     <Compile Include="Games\Attacks\Attack_Tewi_ジャンプ弱攻撃.cs" />
     <Compile Include="Games\Effects.cs" />

@@ -530,7 +530,7 @@ namespace Charlotte.Games
 					else
 						this.Player.AirborneFrame++;
 				}
-			endPlayer:
+			endPlayer: // Attack 合流点
 
 				if (this.Player.X < 0.0) // ? マップの左側に出た。
 				{

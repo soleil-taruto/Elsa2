@@ -148,8 +148,9 @@ namespace Charlotte.Games
 					bool camSlide = false;
 					int jump = 0;
 					bool shagami = false;
-					int attack = 0;
-					int extendedAttack = 0;
+					int attack_弱 = 0;
+					int attack_中 = 0;
+					int attack_強 = 0;
 
 					if (!deadOrDamageOrUID && 1 <= DDInput.DIR_2.GetInput())
 					{
@@ -188,11 +189,15 @@ namespace Charlotte.Games
 					}
 					if (!deadOrDamageOrUID && 1 <= DDInput.B.GetInput())
 					{
-						attack = DDInput.B.GetInput();
+						attack_弱 = DDInput.B.GetInput();
 					}
 					if (!deadOrDamageOrUID && 1 <= DDInput.C.GetInput())
 					{
-						extendedAttack = DDInput.C.GetInput();
+						attack_中 = DDInput.C.GetInput();
+					}
+					if (!deadOrDamageOrUID && 1 <= DDInput.D.GetInput())
+					{
+						attack_強 = DDInput.D.GetInput();
 					}
 
 					if (move)
@@ -313,57 +318,80 @@ namespace Charlotte.Games
 					else
 						this.Player.ShagamiFrame = 0;
 
+					if (attack_弱 == 1)
 					{
-						const int 事前入力時間 = 2; // 無効
-						//const int 事前入力時間 = 5;
-						//const int 事前入力時間 = 10; // HACK: ちょっと長すぎるかもしれない。無効でも良いかもしれない。// 暴発があるので事前入力は無効にする。
-
-						if (1 <= attack && attack < 事前入力時間)
+						switch (this.Player.Chara)
 						{
-							switch (this.Player.Chara)
-							{
-								case Player.Chara_e.TEWI:
-									{
-										if (this.Player.AirborneFrame == 0)
-											this.Player.Attack = new Attack_Tewi_弱攻撃();
-										else
-											this.Player.Attack = new Attack_Tewi_ジャンプ弱攻撃();
-									}
-									break;
+							case Player.Chara_e.TEWI:
+								{
+									if (1 <= this.Player.ShagamiFrame)
+										this.Player.Attack = new Attack_Tewi_しゃがみ弱攻撃();
+									else if (1 <= this.Player.AirborneFrame)
+										this.Player.Attack = new Attack_Tewi_ジャンプ弱攻撃();
+									else
+										this.Player.Attack = new Attack_Tewi_弱攻撃();
+								}
+								break;
 
-								case Player.Chara_e.CIRNO:
-									{
-										if (this.Player.AirborneFrame == 0)
-											this.Player.Attack = new Attack_さやか接地攻撃();
-										else
-											this.Player.Attack = new Attack_さやか滞空攻撃();
-									}
-									break;
+							case Player.Chara_e.CIRNO:
+								{
+									////if (this.Player.AirborneFrame == 0)
+									////    this.Player.Attack = new Attack_さやか接地攻撃();
+									////else
+									////    this.Player.Attack = new Attack_さやか滞空攻撃();
+								}
+								break;
 
-								default:
-									throw null; // never
-							}
+							default:
+								throw null; // never
 						}
-						if (1 <= extendedAttack && extendedAttack < 事前入力時間)
+					}
+					if (attack_中 == 1)
+					{
+						switch (this.Player.Chara)
 						{
-							switch (this.Player.Chara)
-							{
-								case Player.Chara_e.TEWI:
-									{
-										if (this.Player.AirborneFrame == 0)
-											this.Player.Attack = new Attack_Tewi_弱攻撃();
-									}
-									break;
+							case Player.Chara_e.TEWI:
+								{
+									// TODO
 
-								case Player.Chara_e.CIRNO:
-									{
-										this.Player.Attack = new Attack_さやか突き();
-									}
-									break;
+									if (this.Player.AirborneFrame == 0)
+										this.Player.Attack = new Attack_Tewi_弱攻撃();
+									else
+										this.Player.Attack = new Attack_Tewi_ジャンプ弱攻撃();
+								}
+								break;
 
-								default:
-									throw null; // never
-							}
+							case Player.Chara_e.CIRNO:
+								{
+									////this.Player.Attack = new Attack_さやか突き();
+								}
+								break;
+
+							default:
+								throw null; // never
+						}
+					}
+					if (attack_強 == 1)
+					{
+						switch (this.Player.Chara)
+						{
+							case Player.Chara_e.TEWI:
+								{
+									// TODO
+
+									if (this.Player.AirborneFrame == 0)
+										this.Player.Attack = new Attack_Tewi_弱攻撃();
+								}
+								break;
+
+							case Player.Chara_e.CIRNO:
+								{
+									////this.Player.Attack = new Attack_さやか突き();
+								}
+								break;
+
+							default:
+								throw null; // never
 						}
 					}
 				}
