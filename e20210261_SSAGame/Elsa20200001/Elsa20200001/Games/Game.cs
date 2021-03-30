@@ -257,7 +257,6 @@ namespace Charlotte.Games
 
 								this.Player.JumpFrame = 1;
 								this.Player.JumpCount++;
-								this.Player.AirborneJumpFrame = 0;
 
 								this.Player.YSpeed = GameConsts.PLAYER_ジャンプ初速度;
 
@@ -524,17 +523,22 @@ namespace Charlotte.Games
 					}
 
 					if (touchGround)
-					{
 						this.Player.AirborneFrame = 0;
-						this.Player.AirborneJumpFrame = 0;
-					}
 					else
-					{
 						this.Player.AirborneFrame++;
-						this.Player.AirborneJumpFrame++;
-					}
 				}
-			endPlayer:
+			endPlayer: // Attack 合流点
+
+				if (this.Player.YSpeed < 0.0)
+				{
+					this.Player.上昇_Frame++;
+					this.Player.下降_Frame = 0;
+				}
+				else
+				{
+					this.Player.上昇_Frame = 0;
+					this.Player.下降_Frame++;
+				}
 
 				if (this.Player.X < 0.0) // ? マップの左側に出た。
 				{

@@ -84,11 +84,11 @@ namespace Charlotte.Games.Attacks
 
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 
-				Game.I.Shots.Add(new Shot_さやか突き(
-					Game.I.Player.X + 50.0 * xZoom,
-					Game.I.Player.Y,
-					Game.I.Player.FacingLeft
-					));
+				////Game.I.Shots.Add(new Shot_さやか突き(
+				////    Game.I.Player.X + 50.0 * xZoom,
+				////    Game.I.Player.Y,
+				////    Game.I.Player.FacingLeft
+				////    ));
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
 				////DDDraw.DrawBegin(

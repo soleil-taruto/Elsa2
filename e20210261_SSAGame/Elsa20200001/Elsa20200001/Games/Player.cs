@@ -48,7 +48,8 @@ namespace Charlotte.Games
 		public int InvincibleFrame = 0; // 0 == 無効, 1～ == 無敵時間中
 		public int HP = 1; // -1 == 死亡, 1～ == 生存
 
-		public int AirborneJumpFrame;
+		public int 上昇_Frame;
+		public int 下降_Frame;
 
 		/// <summary>
 		/// プレイヤーの攻撃モーション
@@ -86,26 +87,37 @@ namespace Charlotte.Games
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
 							picture = Ground.I.Picture2.Tewi_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Tewi_しゃがみ.Length - 1)];
-							xa = 14;
-							ya = 6;
+							//xa = 0;
+							//ya = 0;
 						}
 						else if (Game.I.Player.AirborneFrame != 0) // ? 滞空状態
 						{
-							int koma = Game.I.Player.AirborneJumpFrame / 3;
-
-							if (0.0 < Game.I.Player.YSpeed && koma < Ground.I.Picture2.Tewi_ジャンプ_上昇.Length) // ? 下降中
-								Game.I.Player.AirborneJumpFrame = Ground.I.Picture2.Tewi_ジャンプ_上昇.Length * 3;
-
-							if (koma < Ground.I.Picture2.Tewi_ジャンプ_上昇.Length)
+							if (1 <= Game.I.Player.上昇_Frame)
 							{
+								int koma = Game.I.Player.上昇_Frame;
+								koma--;
+								koma /= 3;
+								koma = Math.Min(koma, Ground.I.Picture2.Tewi_ジャンプ_上昇.Length - 1);
+
 								picture = Ground.I.Picture2.Tewi_ジャンプ_上昇[koma];
+							}
+							else if (1 <= Game.I.Player.下降_Frame)
+							{
+								int koma = Game.I.Player.下降_Frame;
+								koma--;
+								koma /= 3;
+
+								if (Ground.I.Picture2.Tewi_ジャンプ_下降.Length <= koma)
+								{
+									koma -= Ground.I.Picture2.Tewi_ジャンプ_下降.Length;
+									koma %= 3;
+									koma = Ground.I.Picture2.Tewi_ジャンプ_下降.Length - 3 + koma;
+								}
+								picture = Ground.I.Picture2.Tewi_ジャンプ_下降[koma];
 							}
 							else
 							{
-								koma -= Ground.I.Picture2.Tewi_ジャンプ_上昇.Length;
-								koma %= Ground.I.Picture2.Tewi_ジャンプ_下降.Length;
-
-								picture = Ground.I.Picture2.Tewi_ジャンプ_下降[koma];
+								throw new DDError(); // 上昇・下降_Frame が両方 0 になることはない。
 							}
 						}
 						else if (1 <= this.MoveFrame)

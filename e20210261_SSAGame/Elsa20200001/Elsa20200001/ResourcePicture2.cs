@@ -68,10 +68,10 @@ namespace Charlotte
 		public DDPicture[] Tewi_しゃがみ解除 = Tewi.Tewi_01.Skip(26).Take(4).ToArray();
 		public DDPicture[] Tewi_しゃがみ振り向き = Tewi.Tewi_01.Skip(16).Take(2).ToArray();
 		//public DDPicture[] Tewi_ジャンプ_開始 = Tewi.Tewi_01.Skip(30).Take(2).ToArray();
-		public DDPicture[] Tewi_ジャンプ_上昇 = Tewi.Tewi_01.Skip(32).Take(5).ToArray();
-		public DDPicture[] Tewi_ジャンプ_下降 = Tewi.Tewi_01.Skip(37).Take(3).ToArray();
+		public DDPicture[] Tewi_ジャンプ_上昇 = Tewi.Tewi_01.Skip(32).Take(2).ToArray();
+		public DDPicture[] Tewi_ジャンプ_下降 = Tewi.Tewi_01.Skip(34).Take(6).ToArray();
 		//public DDPicture[] Tewi_ジャンプ_着地 = Tewi.Tewi_01.Skip(40).Take(3).ToArray();
-		public DDPicture[] Tewi_後ろジャンプ = Tewi.Tewi_01.Skip(44).Take(6).ToArray();
+		//public DDPicture[] Tewi_後ろジャンプ = Tewi.Tewi_01.Skip(44).Take(6).ToArray();
 		public DDPicture[] Tewi_歩く = Tewi.Tewi_02.Skip(0).Take(10).ToArray();
 		public DDPicture[] Tewi_走る = Tewi.Tewi_03.Skip(2).Take(6).ToArray();
 		public DDPicture[] Tewi_小ダメージ = Tewi.Tewi_05.Skip(0).Take(3).ToArray();

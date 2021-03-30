@@ -181,12 +181,7 @@
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MusicCollection.cs" />
     <Compile Include="Games\SettingMenu.cs" />
-    <Compile Include="Games\Shots\Shot_さやか接地攻撃.cs" />
-    <Compile Include="Games\Shots\Shot_ほむらシールド.cs" />
-    <Compile Include="Games\Shots\Shot_ほむら接地攻撃.cs" />
-    <Compile Include="Games\Shots\Shot_ほむら滞空攻撃.cs" />
-    <Compile Include="Games\Shots\Shot_さやか滞空攻撃.cs" />
-    <Compile Include="Games\Shots\Shot_さやか突き.cs" />
+    <Compile Include="Games\Shots\Shot_Dummy0001.cs" />
     <Compile Include="Games\Tiles\Tests\Tile_Bボス部屋Shutter.cs" />
     <Compile Include="Games\WorldGameMaster.cs" />
     <Compile Include="Games\Player.cs" />

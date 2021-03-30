@@ -34,12 +34,12 @@ namespace Charlotte.Games.Attacks
 
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 
-				if (frame == 2 * 4)
-					Game.I.Shots.Add(new Shot_さやか滞空攻撃(
-						Game.I.Player.X + 50.0 * xZoom,
-						Game.I.Player.Y,
-						Game.I.Player.FacingLeft
-						));
+				////if (frame == 2 * 4)
+				////    Game.I.Shots.Add(new Shot_さやか滞空攻撃(
+				////        Game.I.Player.X + 50.0 * xZoom,
+				////        Game.I.Player.Y,
+				////        Game.I.Player.FacingLeft
+				////        ));
 
 				DDDraw.SetTaskList(Game.I.Player.Draw_EL);
 				////DDDraw.DrawBegin(

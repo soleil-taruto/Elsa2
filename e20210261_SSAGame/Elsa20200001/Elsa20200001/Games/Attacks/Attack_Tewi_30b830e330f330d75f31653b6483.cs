@@ -28,11 +28,7 @@ namespace Charlotte.Games.Attacks
 
 				if (frame == 0)
 				{
-					////Game.I.Shots.Add(new Shot_ほむら滞空攻撃(
-					////    x + 50.0 * xZoom,
-					////    y - 18.0,
-					////    facingLeft
-					////    ));
+					// TODO: 当たり判定設定
 				}
 
 				int koma = Math.Min((frame + 15) / 4, Ground.I.Picture2.Tewi_ジャンプ弱攻撃.Length - 1);

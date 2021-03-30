@@ -22,7 +22,7 @@ namespace Charlotte.Tests
 				Ground.I.Picture2.Tewi_ジャンプ_上昇,
 				Ground.I.Picture2.Tewi_ジャンプ_下降,
 				//Ground.I.Picture2.Tewi_ジャンプ_着地,
-				Ground.I.Picture2.Tewi_後ろジャンプ,
+				//Ground.I.Picture2.Tewi_後ろジャンプ,
 				Ground.I.Picture2.Tewi_歩く,
 				Ground.I.Picture2.Tewi_走る,
 				Ground.I.Picture2.Tewi_小ダメージ,

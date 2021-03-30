@@ -47,7 +47,7 @@ namespace Charlotte.Games
 		/// <summary>
 		/// プレイヤーキャラクタの落下最高速度
 		/// </summary>
-		public const double PLAYER_FALL_SPEED_MAX = 12.0;
+		public const double PLAYER_FALL_SPEED_MAX = 10.0;
 
 		/// <summary>
 		/// プレイヤーキャラクタの(横移動)速度
@@ -71,6 +71,6 @@ namespace Charlotte.Games
 		public const double PLAYER_脳天判定Pt_X = 9.0;
 		public const double PLAYER_脳天判定Pt_Y = 40.0;
 		public const double PLAYER_接地判定Pt_X = 9.0;
-		public const double PLAYER_接地判定Pt_Y = 48.0;
+		public const double PLAYER_接地判定Pt_Y = 46.0;
 	}
 }
