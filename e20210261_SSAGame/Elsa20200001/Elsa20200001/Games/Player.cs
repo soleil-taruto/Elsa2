@@ -84,15 +84,15 @@ namespace Charlotte.Games
 			{
 				case Chara_e.TEWI:
 					{
-						if (1 <= Game.I.Player.ShagamiFrame)
+						if (1 <= Game.I.Player.ShagamiFrame) // てゐ_しゃがみ
 						{
 							picture = Ground.I.Picture2.Tewi_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Tewi_しゃがみ.Length - 1)];
 							//xa = 0;
 							//ya = 0;
 						}
-						else if (Game.I.Player.AirborneFrame != 0) // ? 滞空状態
+						else if (Game.I.Player.AirborneFrame != 0) // てゐ_滞空状態
 						{
-							if (1 <= Game.I.Player.上昇_Frame)
+							if (1 <= Game.I.Player.上昇_Frame) // てゐ_上昇
 							{
 								int koma = Game.I.Player.上昇_Frame;
 								koma--;
@@ -101,7 +101,7 @@ namespace Charlotte.Games
 
 								picture = Ground.I.Picture2.Tewi_ジャンプ_上昇[koma];
 							}
-							else
+							else // てゐ_下降
 							{
 								int koma = Game.I.Player.下降_Frame;
 								koma--;
@@ -116,7 +116,7 @@ namespace Charlotte.Games
 								picture = Ground.I.Picture2.Tewi_ジャンプ_下降[koma];
 							}
 						}
-						else if (1 <= this.MoveFrame)
+						else if (1 <= this.MoveFrame) // てゐ_移動
 						{
 							if (this.MoveSlow)
 							{
@@ -127,7 +127,7 @@ namespace Charlotte.Games
 								picture = Ground.I.Picture2.Tewi_走る[Game.I.Frame / 5 % Ground.I.Picture2.Tewi_走る.Length];
 							}
 						}
-						else
+						else // てゐ_立ち
 						{
 							picture = Ground.I.Picture2.Tewi_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Tewi_立ち.Length];
 						}
@@ -136,16 +136,16 @@ namespace Charlotte.Games
 
 				case Chara_e.CIRNO:
 					{
-						if (1 <= Game.I.Player.ShagamiFrame)
+						if (1 <= Game.I.Player.ShagamiFrame) // チルノ_しゃがみ
 						{
 							picture = Ground.I.Picture2.Cirno_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Cirno_しゃがみ.Length - 1)];
 							//xa = 0;
 							//ya = 0;
 							//yZoom = 1.0;
 						}
-						else if (Game.I.Player.AirborneFrame != 0) // ? 滞空状態
+						else if (Game.I.Player.AirborneFrame != 0) // チルノ_滞空状態
 						{
-							if (1 <= Game.I.Player.上昇_Frame)
+							if (1 <= Game.I.Player.上昇_Frame) // チルノ_上昇
 							{
 								int koma = Game.I.Player.上昇_Frame;
 								koma--;
@@ -154,17 +154,17 @@ namespace Charlotte.Games
 
 								picture = Ground.I.Picture2.Cirno_ジャンプ_上昇[koma];
 							}
-							else
+							else // チルノ_下降
 							{
 								int koma = Game.I.Player.下降_Frame;
 								koma--;
-								koma /= 3;
+								koma /= 5;
 								koma %= 2;
 
 								picture = Ground.I.Picture2.Cirno_ジャンプ_下降[koma];
 							}
 						}
-						else if (1 <= this.MoveFrame)
+						else if (1 <= this.MoveFrame) // チルノ_移動
 						{
 							if (this.MoveSlow)
 							{
@@ -173,11 +173,22 @@ namespace Charlotte.Games
 							}
 							else
 							{
-								picture = Ground.I.Picture2.Cirno_走る[Game.I.Frame / 5 % Ground.I.Picture2.Cirno_走る.Length];
+								int koma = this.MoveFrame;
+								koma--;
+								//koma /= 1;
+
+								if (Ground.I.Picture2.Cirno_走る.Length <= koma)
+								{
+									koma -= Ground.I.Picture2.Cirno_走る.Length;
+									koma /= 5;
+									koma %= 2;
+									koma = Ground.I.Picture2.Cirno_走る.Length - 2 + koma;
+								}
+								picture = Ground.I.Picture2.Cirno_走る[koma];
 								//ya = 0;
 							}
 						}
-						else
+						else // チルノ_立ち
 						{
 							picture = Ground.I.Picture2.Cirno_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Cirno_立ち.Length];
 							//xa = 0;

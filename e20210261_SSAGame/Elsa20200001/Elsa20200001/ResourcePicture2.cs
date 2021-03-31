@@ -149,10 +149,8 @@ namespace Charlotte
 		public DDPicture[] Cirno_しゃがみ解除 = Cirno.Cirno_01.Skip(28).Take(2).ToArray();
 		//public DDPicture[] Cirno_しゃがみ振り向き;
 		//public DDPicture[] Cirno_ジャンプ_開始 = Cirno.Cirno_01.Skip(8).Take(1).ToArray();
-		public DDPicture[] Cirno_ジャンプ_上昇 = Cirno.Cirno_01.Skip(20).Take(2).ToArray();
-		public DDPicture[] Cirno_ジャンプ_下降 =
-			Cirno.Cirno_01.Skip(22).Take(1).Concat(
-			Cirno.Cirno_01.Skip(16).Take(1)).ToArray();
+		public DDPicture[] Cirno_ジャンプ_上昇 = Cirno.Cirno_01.Skip(20).Take(3).ToArray();
+		public DDPicture[] Cirno_ジャンプ_下降 = Cirno.Cirno_01.Skip(13).Take(3).ToArray();
 		//public DDPicture[] Cirno_ジャンプ_着地 = Cirno.Cirno_01.Skip(16).Take(3).ToArray();
 		//public DDPicture[] Cirno_後ろジャンプ = Cirno.Cirno_01.Skip(9).Take(4).ToArray();
 		public DDPicture[] Cirno_歩く =
