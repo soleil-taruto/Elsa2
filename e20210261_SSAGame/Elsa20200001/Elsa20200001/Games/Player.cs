@@ -138,42 +138,50 @@ namespace Charlotte.Games
 					{
 						if (1 <= Game.I.Player.ShagamiFrame)
 						{
-							////picture = Ground.I.Picture2.さやか立ち[0];
-							xa = -14;
-							ya = 20;
-							yZoom = 0.666;
+							picture = Ground.I.Picture2.Cirno_しゃがみ[Math.Min(Game.I.Player.ShagamiFrame / 3, Ground.I.Picture2.Cirno_しゃがみ.Length - 1)];
+							//xa = 0;
+							//ya = 0;
+							//yZoom = 1.0;
 						}
 						else if (Game.I.Player.AirborneFrame != 0) // ? 滞空状態
 						{
-							if (1 <= this.MoveFrame)
+							if (1 <= Game.I.Player.上昇_Frame)
 							{
-								////picture = Ground.I.Picture2.さやか走り[1];
-								ya = -4;
+								int koma = Game.I.Player.上昇_Frame;
+								koma--;
+								koma /= 3;
+								koma = Math.Min(koma, Ground.I.Picture2.Cirno_ジャンプ_上昇.Length - 1);
+
+								picture = Ground.I.Picture2.Cirno_ジャンプ_上昇[koma];
 							}
 							else
 							{
-								////picture = Ground.I.Picture2.さやか突き[9];
-								xa = 30;
+								int koma = Game.I.Player.下降_Frame;
+								koma--;
+								koma /= 3;
+								koma %= 2;
+
+								picture = Ground.I.Picture2.Cirno_ジャンプ_下降[koma];
 							}
 						}
 						else if (1 <= this.MoveFrame)
 						{
 							if (this.MoveSlow)
 							{
-								////picture = Ground.I.Picture2.さやか走り[(Game.I.Frame / 10) % Ground.I.Picture2.さやか走り.Length];
-								ya = -4;
+								picture = Ground.I.Picture2.Cirno_歩く[Game.I.Frame / 10 % Ground.I.Picture2.Cirno_歩く.Length];
+								//ya = 0;
 							}
 							else
 							{
-								////picture = Ground.I.Picture2.さやか走り[(Game.I.Frame / 5) % Ground.I.Picture2.さやか走り.Length];
-								ya = -4;
+								picture = Ground.I.Picture2.Cirno_走る[Game.I.Frame / 5 % Ground.I.Picture2.Cirno_走る.Length];
+								//ya = 0;
 							}
 						}
 						else
 						{
-							////picture = Ground.I.Picture2.さやか立ち[(Game.I.Frame / 10) % Ground.I.Picture2.さやか立ち.Length];
-							xa = -14;
-							ya = 2;
+							picture = Ground.I.Picture2.Cirno_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Cirno_立ち.Length];
+							//xa = 0;
+							//ya = 0;
 						}
 					}
 					break;
