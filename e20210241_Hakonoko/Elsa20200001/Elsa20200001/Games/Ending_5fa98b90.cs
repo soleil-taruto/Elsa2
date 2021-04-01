@@ -11,13 +11,8 @@ namespace Charlotte.Games
 	{
 		protected override IEnumerable<int> Script()
 		{
-			yield return 180;
-			DDCurtain.SetCurtain(0);
-			DDGround.EL.Add(SCommon.Supplier(DrawString(420, 250, "さよなら")));
-
-			yield return 1000;
-			DDCurtain.SetCurtain(0, -1.0);
-			DDCurtain.SetCurtain();
+			// TODO: 背景
+			// TODO: BGM
 
 			yield return 240;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(50, 200, "生還したアタシの世界には色がなかった。", 1200)));
