@@ -279,7 +279,7 @@ namespace Charlotte.Games
 
 								using (new WorldGameMaster())
 								{
-									WorldGameMaster.I.World = new World("t0001"); // 仮？
+									WorldGameMaster.I.World = new World("Start");
 									WorldGameMaster.I.Status = new GameStatus();
 									WorldGameMaster.I.Perform();
 								}
