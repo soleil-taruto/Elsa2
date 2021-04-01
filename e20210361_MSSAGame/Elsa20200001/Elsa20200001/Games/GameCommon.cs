@@ -170,7 +170,7 @@ namespace Charlotte.Games
 
 						saveDataSlot.TimeStamp = DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss");
 						saveDataSlot.Description = "＠～＠～＠";
-						saveDataSlot.MapName = GameCommon.GetMapName(Game.I.Map.MapFile, "t0001");
+						saveDataSlot.MapName = GameCommon.GetMapName(Game.I.Map.MapFile, "Tests\\t0001");
 						saveDataSlot.GameStatus = gameStatus;
 					}
 				}

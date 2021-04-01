@@ -55,13 +55,24 @@ namespace Charlotte.Games
 						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
 						);
 
+					DDDraw.SetMosaic();
+					DDDraw.DrawBegin(
+						Ground.I.Picture.PlayerStands[DDEngine.ProcFrame / 120 % 2][DDEngine.ProcFrame / 30 % 2],
+						610,
+						392
+						);
+					DDDraw.DrawZoom_X(-1.0);
+					DDDraw.DrawZoom(14.0);
+					DDDraw.DrawEnd();
+					DDDraw.Reset();
+
 					DDCurtain.DrawCurtain(-0.4);
 				},
 			};
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横スクロール アクションゲーム タイプ-M テストコード / タイトルメニュー", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "MSSAGame(仮)", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -71,7 +82,7 @@ namespace Charlotte.Games
 
 							using (new WorldGameMaster())
 							{
-								WorldGameMaster.I.World = new World("t0001"); // マップ名_仮？
+								WorldGameMaster.I.World = new World("Start");
 								WorldGameMaster.I.Status = new GameStatus();
 								WorldGameMaster.I.Perform();
 							}
