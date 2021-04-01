@@ -335,10 +335,12 @@ namespace Charlotte.Games
 
 							case Player.Chara_e.CIRNO:
 								{
-									////if (this.Player.AirborneFrame == 0)
-									////    this.Player.Attack = new Attack_さやか接地攻撃();
-									////else
-									////    this.Player.Attack = new Attack_さやか滞空攻撃();
+									if (1 <= this.Player.ShagamiFrame)
+										this.Player.Attack = new Attack_Cirno_しゃがみ弱攻撃();
+									else if (1 <= this.Player.AirborneFrame)
+										this.Player.Attack = new Attack_Cirno_ジャンプ弱攻撃();
+									else
+										this.Player.Attack = new Attack_Cirno_弱攻撃();
 								}
 								break;
 
@@ -363,7 +365,12 @@ namespace Charlotte.Games
 
 							case Player.Chara_e.CIRNO:
 								{
-									////this.Player.Attack = new Attack_さやか突き();
+									if (1 <= this.Player.ShagamiFrame)
+										this.Player.Attack = new Attack_Cirno_しゃがみ中攻撃();
+									else if (1 <= this.Player.AirborneFrame)
+										this.Player.Attack = new Attack_Cirno_ジャンプ中攻撃();
+									else
+										this.Player.Attack = new Attack_Cirno_中攻撃();
 								}
 								break;
 
@@ -388,7 +395,12 @@ namespace Charlotte.Games
 
 							case Player.Chara_e.CIRNO:
 								{
-									////this.Player.Attack = new Attack_さやか突き();
+									if (1 <= this.Player.ShagamiFrame)
+										this.Player.Attack = new Attack_Cirno_しゃがみ強攻撃();
+									else if (1 <= this.Player.AirborneFrame)
+										this.Player.Attack = new Attack_Cirno_ジャンプ強攻撃();
+									else
+										this.Player.Attack = new Attack_Cirno_強攻撃();
 								}
 								break;
 
