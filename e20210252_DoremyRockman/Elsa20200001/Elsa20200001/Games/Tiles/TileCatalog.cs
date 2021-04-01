@@ -15,8 +15,8 @@ namespace Charlotte.Games.Tiles
 	{
 		private class TileInfo
 		{
-			public string Name;
-			public string DisplayName;
+			public string Name; // 敵の名前、マップ上の配置とか識別に使用する。(開発中、変更してはならない)
+			public string DisplayName; // 表示名(開発中、変更しても良い)
 			public Func<Tile> Creator;
 
 			public TileInfo(string name, Func<Tile> creator)

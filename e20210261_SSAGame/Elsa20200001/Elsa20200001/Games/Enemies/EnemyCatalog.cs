@@ -16,12 +16,24 @@ namespace Charlotte.Games.Enemies
 	{
 		private class EnemyInfo
 		{
-			public string Name;
+			public string Name; // 敵の名前、マップ上の配置とか識別に使用する。(開発中、変更してはならない)
+			public string DisplayName; // 表示名(開発中、変更しても良い)
 			public Func<Enemy> Creator;
 
 			public EnemyInfo(string name, Func<Enemy> creator)
 			{
-				this.Name = name;
+				int colonIndex = name.IndexOf(':');
+
+				if (colonIndex == -1)
+				{
+					this.Name = name;
+					this.DisplayName = name;
+				}
+				else
+				{
+					this.Name = name.Substring(0, colonIndex);
+					this.DisplayName = name.Substring(colonIndex + 1);
+				}
 				this.Creator = creator;
 			}
 		}
@@ -56,6 +68,11 @@ namespace Charlotte.Games.Enemies
 		public static string[] GetNames()
 		{
 			return Tiles.Select(enemy => enemy.Name).ToArray();
+		}
+
+		public static string[] GetDisplayNames()
+		{
+			return Tiles.Select(enemy => enemy.DisplayName).ToArray();
 		}
 
 		public static Enemy Create(string name, double x, double y)

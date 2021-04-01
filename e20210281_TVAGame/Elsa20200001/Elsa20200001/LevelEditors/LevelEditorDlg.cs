@@ -53,12 +53,12 @@ namespace Charlotte.LevelEditors
 			this.Tile_R.Items.Clear();
 			this.Enemy.Items.Clear();
 
-			foreach (string tileName in TileCatalog.GetNames())
+			foreach (string tileName in TileCatalog.GetDisplayNames())
 			{
 				this.Tile_L.Items.Add(tileName);
 				this.Tile_R.Items.Add(tileName);
 			}
-			foreach (string enemyName in EnemyCatalog.GetNames())
+			foreach (string enemyName in EnemyCatalog.GetDisplayNames())
 				this.Enemy.Items.Add(enemyName);
 
 			this.Tile_L.SelectedIndex = 0;
