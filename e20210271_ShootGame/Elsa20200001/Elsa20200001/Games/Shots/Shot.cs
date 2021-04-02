@@ -72,6 +72,9 @@ namespace Charlotte.Games.Shots
 		/// <returns>列挙：この自弾は生存しているか</returns>
 		protected abstract IEnumerable<bool> E_Draw();
 
+		/// <summary>
+		/// Killed 複数回実行回避のため、DeadFlag をチェックして Killed を実行する。
+		/// </summary>
 		public void Kill()
 		{
 			if (!this.DeadFlag)
