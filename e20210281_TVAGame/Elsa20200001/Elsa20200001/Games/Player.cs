@@ -38,8 +38,37 @@ namespace Charlotte.Games
 
 		public void Draw()
 		{
+			int koma = 1;
+
+			if (1 <= this.MoveFrame)
+			{
+				koma = (Game.I.Frame / 5) % 4;
+
+				if (koma == 3)
+					koma = 1;
+			}
+
 			DDPicture picture;
 
+			if (Game.I.Status.東方キャラ選択中)
+			{
+				picture = Ground.I.Picture2.GetPlayer(Game.I.Status.東方キャラ).GetPicture(this.FaceDirection, koma);
+
+				// ダメージ中等差し替え ...
+
+				if (1 <= this.DeadFrame)
+				{
+					DDDraw.SetTaskList(DDGround.EL);
+					DDDraw.SetBright(1.0, 0.3, 0.3);
+					DDDraw.SetAlpha(0.7);
+				}
+				else if (1 <= this.DamageFrame || 1 <= this.InvincibleFrame)
+				{
+					DDDraw.SetTaskList(DDGround.EL);
+					DDDraw.SetAlpha(0.5);
+				}
+			}
+			else
 			{
 				var infos = new[]
 				{
@@ -55,30 +84,23 @@ namespace Charlotte.Games
 					new { Pic = Ground.I.Picture2.Player_05, Y = 3 }, // 9 (右上向き)
 				};
 
-				int koma = 1;
-
-				if (1 <= this.MoveFrame)
-				{
-					koma = (Game.I.Frame / 5) % 4;
-
-					if (koma == 3)
-						koma = 1;
-				}
-
 				var info = infos[this.FaceDirection];
 
 				picture = info.Pic[koma, info.Y];
+
+				// ダメージ中等差し替え ...
+
+				if (1 <= this.DeadFrame)
+				{
+					picture = Ground.I.Picture2.Player_02[0, 3];
+				}
+				else if (1 <= this.DamageFrame || 1 <= this.InvincibleFrame)
+				{
+					DDDraw.SetTaskList(DDGround.EL);
+					DDDraw.SetAlpha(0.5);
+				}
 			}
 
-			if (1 <= this.DeadFrame)
-			{
-				picture = Ground.I.Picture2.Player_02[0, 3];
-			}
-			if (1 <= this.DamageFrame || 1 <= this.InvincibleFrame)
-			{
-				DDDraw.SetTaskList(DDGround.EL);
-				DDDraw.SetAlpha(0.5);
-			}
 			DDDraw.DrawCenter(
 				picture,
 				(int)this.X - DDGround.ICamera.X,

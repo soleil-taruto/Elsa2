@@ -24,7 +24,61 @@ namespace Charlotte
 
 		#region Players
 
-		public const int Player_e_Length = 50;
+		public const int Player_e_Length = 50; // Player_e の項目数と一致すること
+
+		public static string[] Player_e_Names = new string[] // 並び方は Player_e と一致すること
+		{
+			"Alice",
+			"高麗野あうん",
+			"赤蛮奇_体",
+			"Cirno",
+			"戎珱花",
+			"易者",
+			"依神女苑",
+			"今泉影狼",
+			"今泉影狼_狼",
+			"埴安神袿姫",
+			"秦こころ",
+			"秦こころ_面01",
+			"秦こころ_面02",
+			"秦こころ_面03",
+			"秦こころ_面04",
+			"秦こころ_面05",
+			"秦こころ_面06",
+			"秦こころ_面07",
+			"秦こころ_面08",
+			"秦こころ_面09",
+			"秦こころ_面10",
+			"庭渡久侘歌",
+			"ラルバ",
+			"丁礼田舞",
+			"杖刀偶磨弓",
+			"矢田寺成美",
+			"矢田寺成美_地蔵",
+			"矢田寺成美_NoHat",
+			"坂田ネムノ",
+			"摩多羅隠岐奈",
+			"摩多羅隠岐奈_Chair",
+			"面01",
+			"面02",
+			"面03",
+			"面04",
+			"面05",
+			"面06",
+			"面07",
+			"面08",
+			"面09",
+			"面10",
+			"驪駒早鬼",
+			"爾子田里乃",
+			"赤蛮奇_頭",
+			"赤蛮奇",
+			"依神紫苑_覚",
+			"依神紫苑",
+			"牛崎潤美",
+			"わかさぎ姫",
+			"吉弔八千慧",
+		};
 
 		public enum Player_e
 		{
@@ -80,7 +134,7 @@ namespace Charlotte
 			吉弔八千慧,
 		}
 
-		private PlayerInfo[] Players = new PlayerInfo[] // 並び方は Player_e に対応すること
+		private PlayerInfo[] Players = new PlayerInfo[] // 並び方は Player_e と一致すること
 		{
 			new PlayerInfo(Ground.I.Picture.Player_Alice),
 			new PlayerInfo(Ground.I.Picture.Player_高麗野あうん),
@@ -136,16 +190,37 @@ namespace Charlotte
 
 		public class PlayerInfo
 		{
-			public DDPicture Picture;
+			private DDPicture Picture;
+			private DDPicture[,] PictureTable;
 
 			public PlayerInfo(DDPicture picture)
 			{
 				this.Picture = picture;
-
-				// TODO
+				this.PictureTable = DDDerivations.GetAnimation(picture, 0, 0, 24, 32);
 			}
 
-			// TODO
+			public DDPicture GetPicture(int faceDirection, int koma)
+			{
+				int l;
+				int t;
+
+				switch (faceDirection)
+				{
+					case 2: l = 0; t = 0; break; // 下
+					case 4: l = 0; t = 1; break; // 左
+					case 6: l = 0; t = 2; break; // 右
+					case 8: l = 0; t = 3; break; // 上
+
+					case 1: l = 3; t = 0; break; // 左下
+					case 3: l = 3; t = 1; break; // 右下
+					case 7: l = 3; t = 2; break; // 左上
+					case 9: l = 3; t = 3; break; // 右上
+
+					default:
+						throw null; // never
+				}
+				return this.PictureTable[l + koma, t];
+			}
 		}
 
 		public PlayerInfo GetPlayer(Player_e index)

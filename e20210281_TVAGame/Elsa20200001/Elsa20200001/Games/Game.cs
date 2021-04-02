@@ -1210,6 +1210,13 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
+				string 現在のキャラクタ;
+
+				if (this.Status.東方キャラ選択中)
+					現在のキャラクタ = ResourcePicture2.Player_e_Names[(int)this.Status.東方キャラ];
+				else
+					現在のキャラクタ = "標準(Actor83)";
+
 				selectIndex = simpleMenu.Perform(
 					40,
 					40,
@@ -1218,7 +1225,7 @@ namespace Charlotte.Games
 					"デバッグ用メニュー",
 					new string[]
 					{
-						"キャラクタ切り替え [ 現在のキャラクタ：---- ]",
+						"キャラクタ切り替え [ 現在のキャラクタ：" + 現在のキャラクタ + " ]",
 						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
 						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
 						"ゲームに戻る",
@@ -1231,6 +1238,27 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
+						if (this.Status.東方キャラ選択中)
+						{
+							int chara = (int)this.Status.東方キャラ;
+
+							chara++;
+
+							if (chara < ResourcePicture2.Player_e_Length)
+							{
+								this.Status.東方キャラ = (ResourcePicture2.Player_e)chara;
+							}
+							else
+							{
+								this.Status.東方キャラ選択中 = false;
+								this.Status.東方キャラ = ResourcePicture2.Player_e.Alice; // 適当なキャラを設定しておく
+							}
+						}
+						else
+						{
+							this.Status.東方キャラ選択中 = true;
+							this.Status.東方キャラ = ResourcePicture2.Player_e.Alice; // 最初のキャラ
+						}
 						break;
 
 					case 1:
