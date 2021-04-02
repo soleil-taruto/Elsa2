@@ -61,10 +61,13 @@ namespace Charlotte.Games.Shots
 		/// <summary>
 		/// 現在のフレームにおける描画を行う。
 		/// するべきこと：
-		/// -- 行動
+		/// -- 行動・移動
 		/// -- 描画
-		/// -- Crash を設定する。
-		/// -- 必要に応じて DeadFlag を設定する。
+		/// -- Crash を設定する。-- 敵に当たらないなら設定しない。
+		/// -- 必要に応じて Game.I.Shots.Add(shot); する。-- 自弾の追加
+		/// -- 必要に応じて DeadFlag に true を設定する。(または false を返す) -- 自弾(自分自身)の削除
+		/// ---- 呼び出し関係がややこしくなりそうなので Kill, Killed は呼び出さないこと。
+		/// ---- 自弾(自分以外)を削除するには otherShot.DeadFlag = true; する。
 		/// </summary>
 		/// <returns>列挙：この自弾は生存しているか</returns>
 		protected abstract IEnumerable<bool> E_Draw();

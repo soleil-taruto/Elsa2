@@ -101,10 +101,13 @@ namespace Charlotte.Games.Enemies
 		/// <summary>
 		/// 現在のフレームにおける描画を行う。
 		/// するべきこと：
-		/// -- 行動
+		/// -- 行動・移動
 		/// -- 描画
-		/// -- Crash を設定する。
-		/// -- 必要に応じて DeadFlag を設定する。
+		/// -- Crash を設定する。-- プレイヤーに当たらないなら設定しない。
+		/// -- 必要に応じて Game.I.Enemies.Add(enemy); する。-- 敵の追加
+		/// -- 必要に応じて DeadFlag に true を設定する。(または false を返す) -- 敵(自分自身)の削除
+		/// ---- 呼び出し関係がややこしくなりそうなので Kill, Killed は呼び出さないこと。
+		/// ---- 敵(自分以外)を削除するには otherEnemy.DeadFlag = true; する。
 		/// </summary>
 		/// <returns>列挙：この敵は生存しているか</returns>
 		protected abstract IEnumerable<bool> E_Draw();
