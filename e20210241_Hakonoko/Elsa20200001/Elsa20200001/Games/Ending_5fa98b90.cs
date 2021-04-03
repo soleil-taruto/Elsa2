@@ -14,7 +14,7 @@ namespace Charlotte.Games
 			// TODO: 背景
 			// TODO: BGM
 
-			// _#Include_Resource
+			// _#Include_Resource // for t20201023_GitHubRepositoriesSolve
 
 			yield return 240;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(50, 200, "\u751f\u9084\u3057\u305f\u30a2\u30bf\u30b7\u306e\u4e16\u754c\u306b\u306f\u8272\u304c\u306a\u304b\u3063\u305f\u3002", 1200)));
