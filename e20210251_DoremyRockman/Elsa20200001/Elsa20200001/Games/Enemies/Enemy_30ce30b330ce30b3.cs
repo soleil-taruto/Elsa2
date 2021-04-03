@@ -78,7 +78,7 @@ namespace Charlotte.Games.Enemies
 
 						DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 						DDPrint.SetBorder(new I3Color(0, 0, 0));
-						DDPrint.Print("[ノコ◆コ_" + this.HP + "_" + (this.端から落ちない ? 1 : 0) + "]");
+						DDPrint.Print("[\u30ce\u30b3\u25c6\u30b3_" + this.HP + "_" + (this.\u7aef\u304b\u3089\u843d\u3061\u306a\u3044 ? 1 : 0) + "]");
 						DDPrint.Reset();
 					}
 

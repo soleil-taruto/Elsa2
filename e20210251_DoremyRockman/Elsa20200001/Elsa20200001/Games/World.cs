@@ -44,7 +44,7 @@ namespace Charlotte.Games
 					if (this.MapNameTableRows[y][x] == mapName)
 						return new I2Point(x, y);
 
-			throw new DDError("そんなマップありません。" + mapName);
+			throw new DDError("\u305d\u3093\u306a\u30de\u30c3\u30d7\u3042\u308a\u307e\u305b\u3093\u3002" + mapName);
 		}
 
 		public string GetCurrMapName()
@@ -71,7 +71,7 @@ namespace Charlotte.Games
 				this.MapNameTableRows.Length <= y ||
 				this.MapNameTableRows[y].Length <= x
 				)
-				throw new DDError("移動先にマップはありません。");
+				throw new DDError("\u79fb\u52d5\u5148\u306b\u30de\u30c3\u30d7\u306f\u3042\u308a\u307e\u305b\u3093\u3002");
 
 			this.CurrPoint.X = x;
 			this.CurrPoint.Y = y;

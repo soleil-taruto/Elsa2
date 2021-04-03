@@ -53,7 +53,7 @@ namespace Charlotte.Games
 			int index = this.GetSurfaceIndex(instanceName, -1);
 
 			if (index == -1)
-				throw new DDError("存在しないインスタンス名：" + instanceName);
+				throw new DDError("\u5b58\u5728\u3057\u306a\u3044\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u540d\uff1a" + instanceName);
 
 			return index;
 		}

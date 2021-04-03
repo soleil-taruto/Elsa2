@@ -23,8 +23,8 @@ namespace Charlotte.Games.Walls
 				//case "B0003": wall = new Wall_Simple(Ground.I.Picture.Wall_B0003); break;
 				case "Dark": wall = new Wall_Dark(); break;
 				case "None": wall = new Wall_None(); break;
-				case "東方風": wall = new Wall_東方風(); break;
-				case "ロックマン風": wall = new Wall_ロックマン風(); break;
+				case "\u6771\u65b9\u98a8": wall = new Wall_\u6771\u65b9\u98a8(); break;
+				case "\u30ed\u30c3\u30af\u30de\u30f3\u98a8": wall = new Wall_\u30ed\u30c3\u30af\u30de\u30f3\u98a8(); break;
 
 				// 新しい壁紙をここへ追加..
 

@@ -379,20 +379,20 @@ namespace Charlotte.Games
 
 			string[] items = Ground.I.SaveDataSlots.Select(v => v.GameStatus == null ?
 				"----" :
-				"[" + v.TimeStamp + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
+				"[" + v.TimeStamp + "]\u3000" + v.Description).Concat(new string[] { "\u623b\u308b" }).ToArray();
 
 			int selectIndex = 0;
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(18, 18, 32, 24, "ロード", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(18, 18, 32, 24, "\u30ed\u30fc\u30c9", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
 					if (Ground.I.SaveDataSlots[selectIndex].GameStatus != null)
 					{
 						if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
-							.Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
+							.Perform("\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u30ed\u30fc\u30c9\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
 						{
 							saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
 							break;

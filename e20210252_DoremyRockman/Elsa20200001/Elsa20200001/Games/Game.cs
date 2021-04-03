@@ -1423,16 +1423,16 @@ namespace Charlotte.Games
 					80,
 					50,
 					24,
-					"ＥＱＵＩＰＭＥＮＴメニュー(仮)",
+					"\uff25\uff31\uff35\uff29\uff30\uff2d\uff25\uff2e\uff34\u30e1\u30cb\u30e5\u30fc(\u4eee)",
 					new string[]
 					{
-						"通常武器",
-						"跳ねる陰陽玉",
-						"ハンマー陰陽玉",
-						"ＡｉｒＳｈｏｏｔｅｒ",
-						"ＭａｇｎｅｔＡｉｒ",
-						"システムメニュー",
-						"戻る",
+						"\u901a\u5e38\u6b66\u5668",
+						"\u8df3\u306d\u308b\u9670\u967d\u7389",
+						"\u30cf\u30f3\u30de\u30fc\u9670\u967d\u7389",
+						"\uff21\uff49\uff52\uff33\uff48\uff4f\uff4f\uff54\uff45\uff52",
+						"\uff2d\uff41\uff47\uff4e\uff45\uff54\uff21\uff49\uff52",
+						"\u30b7\u30b9\u30c6\u30e0\u30e1\u30cb\u30e5\u30fc",
+						"\u623b\u308b",
 					},
 					selectIndex,
 					true
@@ -1517,12 +1517,12 @@ namespace Charlotte.Games
 					180,
 					50,
 					24,
-					"システムメニュー",
+					"\u30b7\u30b9\u30c6\u30e0\u30e1\u30cb\u30e5\u30fc",
 					new string[]
 					{
-						"設定",
-						"タイトルに戻る",
-						"ゲームに戻る",
+						"\u8a2d\u5b9a",
+						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
+						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
 					},
 					selectIndex,
 					true
@@ -1549,7 +1549,7 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("\u30bf\u30a4\u30c8\u30eb\u753b\u9762\u306b\u623b\u308a\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
 						{
 							this.Pause_ReturnToTitleMenu = true;
 							goto endLoop;
@@ -1601,13 +1601,13 @@ namespace Charlotte.Games
 					50,
 					50,
 					24,
-					"デバッグ用メニュー",
+					"\u30c7\u30d0\u30c3\u30b0\u7528\u30e1\u30cb\u30e5\u30fc",
 					new string[]
 					{
-						"キャラクタ切り替え [ 現在のキャラクタ：---- ]",
-						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
-						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
-						"ゲームに戻る",
+						"\u30ad\u30e3\u30e9\u30af\u30bf\u5207\u308a\u66ff\u3048 [ \u73fe\u5728\u306e\u30ad\u30e3\u30e9\u30af\u30bf\uff1a---- ]",
+						"\u30c7\u30d0\u30c3\u30b0\u5f37\u5236\u9045\u5ef6 [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + DDEngine.SlowdownLevel + " ]",
+						"\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + this.\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a + " ]",
+						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
 					},
 					selectIndex,
 					true

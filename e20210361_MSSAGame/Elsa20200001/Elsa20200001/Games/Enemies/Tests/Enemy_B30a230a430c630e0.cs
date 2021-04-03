@@ -18,9 +18,9 @@ namespace Charlotte.Games.Enemies.Tests
 
 		public static string[] 効用_e_Names = new string[]
 		{
-			"ファイアボール",
-			"レーザー",
-			"波動ビーム",
+			"\u30d5\u30a1\u30a4\u30a2\u30dc\u30fc\u30eb",
+			"\u30ec\u30fc\u30b6\u30fc",
+			"\u6ce2\u52d5\u30d3\u30fc\u30e0",
 		};
 
 		private 効用_e 効用;
@@ -49,8 +49,8 @@ namespace Charlotte.Games.Enemies.Tests
 
 					DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
-					DDPrint.PrintLine("アイテム");
-					DDPrint.PrintLine("効用：" + 効用_e_Names[(int)this.効用]);
+					DDPrint.PrintLine("\u30a2\u30a4\u30c6\u30e0");
+					DDPrint.PrintLine("\u52b9\u7528\uff1a" + \u52b9\u7528_e_Names[(int)this.\u52b9\u7528]);
 					DDPrint.Reset();
 
 					// 当たり判定無し

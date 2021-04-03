@@ -148,9 +148,9 @@ namespace Charlotte.Games
 				// セーブしたら戻ってくるので、毎回更新する。
 				string[] items = Ground.I.SaveDataSlots.Select(v => v.GameStatus == null ?
 					"----" :
-					"[" + v.TimeStamp + "]　" + v.Description).Concat(new string[] { "戻る" }).ToArray();
+					"[" + v.TimeStamp + "]\u3000" + v.Description).Concat(new string[] { "\u623b\u308b" }).ToArray();
 
-				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "セーブ", items, selectIndex);
+				selectIndex = simpleMenu.Perform(18, 18, 32, 24, "\u30bb\u30fc\u30d6", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
@@ -163,13 +163,13 @@ namespace Charlotte.Games
 					}
 					.Perform(
 						Ground.I.SaveDataSlots[selectIndex].GameStatus != null ?
-						"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
-						"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
+						"\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u4e0a\u66f8\u304d\u3057\u307e\u3059\u3002" :
+						"\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306b\u30bb\u30fc\u30d6\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
 					{
 						Ground.P_SaveDataSlot saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
 
 						saveDataSlot.TimeStamp = DateTime.Now.ToString("yyyy/MM/dd (ddd) HH:mm:ss");
-						saveDataSlot.Description = "＠～＠～＠";
+						saveDataSlot.Description = "\uff20\uff5e\uff20\uff5e\uff20";
 						saveDataSlot.MapName = GameCommon.GetMapName(Game.I.Map.MapFile, "Tests\\t0001");
 						saveDataSlot.GameStatus = gameStatus;
 					}

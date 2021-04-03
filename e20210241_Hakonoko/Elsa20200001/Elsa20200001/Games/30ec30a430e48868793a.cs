@@ -40,7 +40,7 @@ namespace Charlotte.Games
 						DDConsts.Screen_W / 2 + xBure,
 						DDConsts.Screen_H / 2 + yBure - 50,
 						"LAYER " + layerNo,
-						DDFontUtils.GetFont("03焚火-Regular", 100)
+						DDFontUtils.GetFont("03\u711a\u706b-Regular", 100)
 						);
 #else
 					using (tmpScreen.Section())

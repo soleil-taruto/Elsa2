@@ -83,7 +83,7 @@ namespace Charlotte.Games.Enemies.Tests
 						(int)this.Y - DDGround.ICamera.Y - 46,
 						20
 						);
-					DDPrint.PrintLine("敵(仮)");
+					DDPrint.PrintLine("\u6575(\u4eee)");
 					DDPrint.PrintLine("HP:" + this.HP);
 					DDPrint.Reset();
 

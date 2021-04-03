@@ -18,9 +18,9 @@ namespace Charlotte.Games.Enemies.Tests
 
 		public static string[] 効用_e_Names = new string[]
 		{
-			"★★★ 残 機 追 加 ★★★",
-			"☆☆☆ ボ ム 追 加 ☆☆☆",
-			"武器パワーアップ",
+			"\u2605\u2605\u2605 \u6b8b \u6a5f \u8ffd \u52a0 \u2605\u2605\u2605",
+			"\u2606\u2606\u2606 \u30dc \u30e0 \u8ffd \u52a0 \u2606\u2606\u2606",
+			"\u6b66\u5668\u30d1\u30ef\u30fc\u30a2\u30c3\u30d7",
 		};
 
 		private 効用_e 効用;
@@ -52,8 +52,8 @@ namespace Charlotte.Games.Enemies.Tests
 
 				DDPrint.SetDebug((int)this.X, (int)this.Y);
 				DDPrint.SetBorder(new I3Color(0, 0, 0));
-				DDPrint.PrintLine("アイテム");
-				DDPrint.PrintLine("効用：" + 効用_e_Names[(int)this.効用]);
+				DDPrint.PrintLine("\u30a2\u30a4\u30c6\u30e0");
+				DDPrint.PrintLine("\u52b9\u7528\uff1a" + \u52b9\u7528_e_Names[(int)this.\u52b9\u7528]);
 				DDPrint.Reset();
 
 				// 当たり判定無し

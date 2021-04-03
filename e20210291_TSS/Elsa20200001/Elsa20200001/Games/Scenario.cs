@@ -106,7 +106,7 @@ namespace Charlotte.Games
 				}
 				else if (page == null)
 				{
-					throw new DDError("シナリオの先頭は /xxx でなければなりません。");
+					throw new DDError("\u30b7\u30ca\u30ea\u30aa\u306e\u5148\u982d\u306f /xxx \u3067\u306a\u3051\u308c\u3070\u306a\u308a\u307e\u305b\u3093\u3002");
 				}
 				else if (line[0] == '!') // ? コマンド
 				{
@@ -146,7 +146,7 @@ namespace Charlotte.Games
 			byte[] fileData;
 
 			{
-				const string DEVENV_SCENARIO_DIR = "シナリオデータ";
+				const string DEVENV_SCENARIO_DIR = "\u30b7\u30ca\u30ea\u30aa\u30c7\u30fc\u30bf";
 				const string DEVENV_SCENARIO_SUFFIX = ".txt";
 
 				if (Directory.Exists(DEVENV_SCENARIO_DIR))

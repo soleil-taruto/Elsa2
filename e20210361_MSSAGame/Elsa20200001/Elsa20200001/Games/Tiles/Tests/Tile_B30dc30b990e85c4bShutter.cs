@@ -22,7 +22,7 @@ namespace Charlotte.Games.Tiles.Tests
 
 			DDPrint.SetBorder(new I3Color(0, 0, 0));
 			DDPrint.SetDebug((int)x, (int)y);
-			DDPrint.Print("扉");
+			DDPrint.Print("\u6249");
 			DDPrint.Reset();
 		}
 	}

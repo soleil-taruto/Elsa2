@@ -32,7 +32,7 @@ namespace Charlotte.Tests.Games
 			// ---- choose one ----
 
 			//name = GameConsts.FIRST_SCENARIO_NAME;
-			name = "テスト0001";
+			name = "\u30c6\u30b9\u30c80001";
 			//name = "テスト0002";
 
 			// ----

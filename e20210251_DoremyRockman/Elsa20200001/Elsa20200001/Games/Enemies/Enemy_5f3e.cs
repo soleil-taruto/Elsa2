@@ -58,7 +58,7 @@ namespace Charlotte.Games.Enemies
 
 						DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 						DDPrint.SetBorder(new I3Color(0, 0, 0));
-						DDPrint.Print("[敵弾]");
+						DDPrint.Print("[\u6575\u5f3e]");
 						DDPrint.Reset();
 					}
 

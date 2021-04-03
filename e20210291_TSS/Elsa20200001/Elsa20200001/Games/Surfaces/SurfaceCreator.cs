@@ -30,11 +30,11 @@ namespace Charlotte.Games.Surfaces
 			new Info("Select", () => new Surface_Select(_tn, _in)),
 			new Info("System", () => new Surface_System(_tn, _in)),
 			new Info("SystemButtons", () => new Surface_SystemButtons(_tn, _in)),
-			new Info("エフェクト", () => new Surface_エフェクト(_tn, _in)),
-			new Info("キャラクタ", () => new Surface_キャラクタ(_tn, _in)),
-			new Info("スクリーン", () => new Surface_スクリーン(_tn, _in)),
-			new Info("音楽", () => new Surface_音楽(_tn, _in)),
-			new Info("効果音", () => new Surface_効果音(_tn, _in)),
+			new Info("\u30a8\u30d5\u30a7\u30af\u30c8", () => new Surface_\u30a8\u30d5\u30a7\u30af\u30c8(_tn, _in)),
+			new Info("\u30ad\u30e3\u30e9\u30af\u30bf", () => new Surface_\u30ad\u30e3\u30e9\u30af\u30bf(_tn, _in)),
+			new Info("\u30b9\u30af\u30ea\u30fc\u30f3", () => new Surface_\u30b9\u30af\u30ea\u30fc\u30f3(_tn, _in)),
+			new Info("\u97f3\u697d", () => new Surface_\u97f3\u697d(_tn, _in)),
+			new Info("\u52b9\u679c\u97f3", () => new Surface_\u52b9\u679c\u97f3(_tn, _in)),
 
 			// 新しいサーフェスをここへ追加..
 		};
@@ -44,7 +44,7 @@ namespace Charlotte.Games.Surfaces
 			int index = SCommon.IndexOf(Infos, v => v.TypeName == typeName);
 
 			if (index == -1)
-				throw new DDError("不明なタイプ名：" + typeName);
+				throw new DDError("\u4e0d\u660e\u306a\u30bf\u30a4\u30d7\u540d\uff1a" + typeName);
 
 			_tn = typeName;
 			_in = instanceName;

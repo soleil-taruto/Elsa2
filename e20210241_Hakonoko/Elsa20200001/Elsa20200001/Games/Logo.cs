@@ -33,7 +33,7 @@ namespace Charlotte.Games
 					int sec = endFrame - DDEngine.ProcFrame;
 
 					DDPrint.SetPrint(40, DDConsts.Screen_H - 32, 16, 18);
-					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (sec / 60.0).ToString("F1") + " 秒で消えます)");
+					DDPrint.Print("\u3053\u308c\u306f\u30af\u30ed\u30fc\u30ba\u30c9\u30c6\u30b9\u30c8\u7248\u3067\u3059\u3002\u4eee\u30ea\u30bd\u30fc\u30b9\u30fb\u5b9f\u88c5\u3055\u308c\u3066\u3044\u306a\u3044\u6a5f\u80fd\u3092\u542b\u307f\u307e\u3059\u3002(\u3042\u3068 " + (sec / 60.0).ToString("F1") + " \u79d2\u3067\u6d88\u3048\u307e\u3059)");
 
 					return 0 < sec;
 				});

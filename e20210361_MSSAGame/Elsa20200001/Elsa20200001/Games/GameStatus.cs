@@ -79,8 +79,8 @@ namespace Charlotte.Games
 			dest.Add("" + this.StartPointDirection);
 			dest.Add("" + (this.StartFacingLeft ? 1 : 0));
 			dest.Add("" + this.ExitDirection);
-			dest.Add("" + (int)this.Start_武器);
-			dest.Add("" + (this.神奈子を倒した ? 1 : 0));
+			dest.Add("" + (int)this.Start_\u6b66\u5668);
+			dest.Add("" + (this.\u795e\u5948\u5b50\u3092\u5012\u3057\u305f ? 1 : 0));
 
 			// ★★★ シリアライズ_ここまで ★★★
 

@@ -932,7 +932,7 @@ namespace Charlotte.Games
 						{
 							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
-							DDPrint.Print("セーブしました...");
+							DDPrint.Print("\u30bb\u30fc\u30d6\u3057\u307e\u3057\u305f...");
 							DDPrint.Reset();
 
 							return DDEngine.ProcFrame < endFrame;
@@ -951,7 +951,7 @@ namespace Charlotte.Games
 						{
 							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
-							DDPrint.Print("ロードしました...");
+							DDPrint.Print("\u30ed\u30fc\u30c9\u3057\u307e\u3057\u305f...");
 							DDPrint.Reset();
 
 							return DDEngine.ProcFrame < endFrame;
@@ -1132,12 +1132,12 @@ namespace Charlotte.Games
 					180,
 					50,
 					24,
-					"ＰＡＵＳＥ",
+					"\uff30\uff21\uff35\uff33\uff25",
 					new string[]
 					{
-						"設定",
-						"タイトルに戻る",
-						"ゲームに戻る",
+						"\u8a2d\u5b9a",
+						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
+						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
 					},
 					selectIndex,
 					true,
@@ -1165,7 +1165,7 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("\u30bf\u30a4\u30c8\u30eb\u753b\u9762\u306b\u623b\u308a\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
 						{
 							this.Pause_ReturnToTitleMenu = true;
 							goto endLoop;
@@ -1215,20 +1215,20 @@ namespace Charlotte.Games
 				if (this.Status.東方キャラ選択中)
 					現在のキャラクタ = ResourcePicture2.Player_e_Names[(int)this.Status.東方キャラ];
 				else
-					現在のキャラクタ = "標準(Actor83)";
+					\u73fe\u5728\u306e\u30ad\u30e3\u30e9\u30af\u30bf = "\u6a19\u6e96(Actor83)";
 
 				selectIndex = simpleMenu.Perform(
 					40,
 					40,
 					40,
 					24,
-					"デバッグ用メニュー",
+					"\u30c7\u30d0\u30c3\u30b0\u7528\u30e1\u30cb\u30e5\u30fc",
 					new string[]
 					{
-						"キャラクタ切り替え [ 現在のキャラクタ：" + 現在のキャラクタ + " ]",
-						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
-						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
-						"ゲームに戻る",
+						"\u30ad\u30e3\u30e9\u30af\u30bf\u5207\u308a\u66ff\u3048 [ \u73fe\u5728\u306e\u30ad\u30e3\u30e9\u30af\u30bf\uff1a" + \u73fe\u5728\u306e\u30ad\u30e3\u30e9\u30af\u30bf + " ]",
+						"\u30c7\u30d0\u30c3\u30b0\u5f37\u5236\u9045\u5ef6 [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + DDEngine.SlowdownLevel + " ]",
+						"\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + this.\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a + " ]",
+						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
 					},
 					selectIndex,
 					true,

@@ -353,7 +353,7 @@ namespace Charlotte.Games
 			{
 				string[] items = Enumerable.Range(1, SCommon.ToRange(Ground.I.ReachedStageIndex, 1, 9))
 					.Select(stageIndex => "LAYER " + (10 - stageIndex))
-					.Concat(new string[] { "戻る" })
+					.Concat(new string[] { "\u623b\u308b" })
 					.ToArray();
 
 				{
@@ -361,7 +361,7 @@ namespace Charlotte.Games
 					int ITEMS_H = items.Length * Y_STEP + 24;
 					int Y = (DDConsts.Screen_H - ITEMS_H) / 2;
 
-					selectIndex = this.SimpleMenu.Perform("レイヤーセレクト", items, selectIndex, false, 380, Y, Y_STEP);
+					selectIndex = this.SimpleMenu.Perform("\u30ec\u30a4\u30e4\u30fc\u30bb\u30ec\u30af\u30c8", items, selectIndex, false, 380, Y, Y_STEP);
 				}
 
 				if (selectIndex == items.Length - 1) // ? 戻る
@@ -401,13 +401,13 @@ namespace Charlotte.Games
 
 			string[] items = new string[]
 			{
-				"ゲームパッドのボタン設定",
-				"キーボードのキー設定",
-				"ウィンドウサイズ変更",
-				"ＢＧＭ音量",
-				"ＳＥ音量",
-				"スナップショット・ストック数",
-				"戻る",
+				"\u30b2\u30fc\u30e0\u30d1\u30c3\u30c9\u306e\u30dc\u30bf\u30f3\u8a2d\u5b9a",
+				"\u30ad\u30fc\u30dc\u30fc\u30c9\u306e\u30ad\u30fc\u8a2d\u5b9a",
+				"\u30a6\u30a3\u30f3\u30c9\u30a6\u30b5\u30a4\u30ba\u5909\u66f4",
+				"\uff22\uff27\uff2d\u97f3\u91cf",
+				"\uff33\uff25\u97f3\u91cf",
+				"\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u30fb\u30b9\u30c8\u30c3\u30af\u6570",
+				"\u623b\u308b",
 			};
 
 			DDSE[] seSamples = new DDSE[]
@@ -419,7 +419,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform("設定", items, selectIndex, false, 282, 48, 60);
+				selectIndex = this.SimpleMenu.Perform("\u8a2d\u5b9a", items, selectIndex, false, 282, 48, 60);
 
 				switch (selectIndex)
 				{
@@ -436,7 +436,7 @@ namespace Charlotte.Games
 						break;
 
 					case 3:
-						this.SimpleMenu.VolumeConfig("ＢＧＭ音量", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
+						this.SimpleMenu.VolumeConfig("\uff22\uff27\uff2d\u97f3\u91cf", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.MusicVolume = volume;
 							DDMusicUtils.UpdateVolume();
@@ -446,7 +446,7 @@ namespace Charlotte.Games
 						break;
 
 					case 4:
-						this.SimpleMenu.VolumeConfig("ＳＥ音量", DDGround.SEVolume, 0, 100, 1, 10, volume =>
+						this.SimpleMenu.VolumeConfig("\uff33\uff25\u97f3\u91cf", DDGround.SEVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.SEVolume = volume;
 							//DDSEUtils.UpdateVolume(); // old
@@ -487,11 +487,11 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				string[] items = Enumerable.Range(Consts.START_SNAPSHOT_COUNT_MIN, Consts.START_SNAPSHOT_COUNT_MAX - Consts.START_SNAPSHOT_COUNT_MIN + 1)
-					.Select(v => (v == Ground.I.StartSnapshotCount ? "*" : " ") + " " + v + (v == Consts.START_SNAPSHOT_COUNT_DEF ? " (デフォルト)" : ""))
-					.Concat(new string[] { "戻る" })
+					.Select(v => (v == Ground.I.StartSnapshotCount ? "*" : " ") + " " + v + (v == Consts.START_SNAPSHOT_COUNT_DEF ? " (\u30c7\u30d5\u30a9\u30eb\u30c8)" : ""))
+					.Concat(new string[] { "\u623b\u308b" })
 					.ToArray();
 
-				selectIndex = this.SimpleMenu.Perform("スナップショット・ストック数(リスポーン地点設置回数)の設定", items, selectIndex, false, 132, 20, 34);
+				selectIndex = this.SimpleMenu.Perform("\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u30fb\u30b9\u30c8\u30c3\u30af\u6570(\u30ea\u30b9\u30dd\u30fc\u30f3\u5730\u70b9\u8a2d\u7f6e\u56de\u6570)\u306e\u8a2d\u5b9a", items, selectIndex, false, 132, 20, 34);
 
 				if (selectIndex == items.Length - 1) // ? 戻る
 					break;

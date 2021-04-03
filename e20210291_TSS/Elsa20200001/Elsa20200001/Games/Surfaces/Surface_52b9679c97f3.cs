@@ -26,7 +26,7 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			if (command == "再生")
+			if (command == "\u518d\u751f")
 			{
 				this.Act.AddOnce(() => DDCCResource.GetSE(arguments[c++]).Play());
 			}

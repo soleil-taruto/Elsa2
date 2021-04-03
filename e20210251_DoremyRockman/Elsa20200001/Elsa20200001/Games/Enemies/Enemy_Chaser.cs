@@ -47,7 +47,7 @@ namespace Charlotte.Games.Enemies
 
 						DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 						DDPrint.SetBorder(new I3Color(0, 0, 0));
-						DDPrint.Print("[チェーサー_" + this.HP + "]");
+						DDPrint.Print("[\u30c1\u30a7\u30fc\u30b5\u30fc_" + this.HP + "]");
 						DDPrint.Reset();
 					}
 

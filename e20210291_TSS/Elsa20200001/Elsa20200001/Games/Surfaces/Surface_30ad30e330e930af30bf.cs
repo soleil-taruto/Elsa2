@@ -58,23 +58,23 @@ namespace Charlotte.Games.Surfaces
 			{
 				this.Act.AddOnce(() => this.Zoom = double.Parse(arguments[c++]));
 			}
-			else if (command == "待ち")
+			else if (command == "\u5f85\u3061")
 			{
 				this.Act.Add(SCommon.Supplier(this.待ち(int.Parse(arguments[c++]))));
 			}
-			else if (command == "フェードイン")
+			else if (command == "\u30d5\u30a7\u30fc\u30c9\u30a4\u30f3")
 			{
 				this.Act.Add(SCommon.Supplier(this.フェードイン()));
 			}
-			else if (command == "フェードアウト")
+			else if (command == "\u30d5\u30a7\u30fc\u30c9\u30a2\u30a6\u30c8")
 			{
 				this.Act.Add(SCommon.Supplier(this.フェードアウト()));
 			}
-			else if (command == "モード変更")
+			else if (command == "\u30e2\u30fc\u30c9\u5909\u66f4")
 			{
 				this.Act.Add(SCommon.Supplier(this.モード変更(arguments[c++])));
 			}
-			else if (command == "スライド")
+			else if (command == "\u30b9\u30e9\u30a4\u30c9")
 			{
 				double x = double.Parse(arguments[c++]);
 				double y = double.Parse(arguments[c++]);

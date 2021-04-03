@@ -49,8 +49,8 @@ namespace Charlotte.Games.Enemies.Tests
 						(int)this.Y - DDGround.ICamera.Y - 10,
 						20
 						);
-					DDPrint.PrintLine("敵(仮)");
-					DDPrint.PrintLine("[無害]");
+					DDPrint.PrintLine("\u6575(\u4eee)");
+					DDPrint.PrintLine("[\u7121\u5bb3]");
 					DDPrint.PrintLine("DIST=" + distance.ToString("F3"));
 					DDPrint.Reset();
 

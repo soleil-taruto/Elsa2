@@ -125,11 +125,11 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			if (command == "画像")
+			if (command == "\u753b\u50cf")
 			{
 				this.Act.AddOnce(() => this.Layers.Add(new LayerInfo() { ImageFile = arguments[c++] }));
 			}
-			else if (command == "スライド")
+			else if (command == "\u30b9\u30e9\u30a4\u30c9")
 			{
 				if (arguments.Length == 1)
 				{
@@ -148,7 +148,7 @@ namespace Charlotte.Games.Surfaces
 					throw new DDError();
 				}
 			}
-			else if (command == "画像フェードイン")
+			else if (command == "\u753b\u50cf\u30d5\u30a7\u30fc\u30c9\u30a4\u30f3")
 			{
 				if (arguments.Length == 1)
 				{
@@ -173,7 +173,7 @@ namespace Charlotte.Games.Surfaces
 					throw new DDError();
 				}
 			}
-			else if (command == "フェードアウト")
+			else if (command == "\u30d5\u30a7\u30fc\u30c9\u30a2\u30a6\u30c8")
 			{
 				this.Act.Add(SCommon.Supplier(this.フェードアウト()));
 			}

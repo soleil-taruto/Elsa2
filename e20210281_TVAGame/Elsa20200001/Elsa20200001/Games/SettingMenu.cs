@@ -39,17 +39,17 @@ namespace Charlotte.Games
 			{
 				string[] items = new string[]
 				{
-					"ゲームパッドのボタン設定",
-					"キーボードのキー設定",
-					"ウィンドウサイズ変更",
-					"ＢＧＭ音量",
-					"ＳＥ音量",
-					"ノベルパートのメッセージ表示速度",
-					"高速ボタンをリバース [ " + (Ground.I.FastReverseMode ? "リバース" : "無効(デフォルト)" ) + " ]",
-					"戻る",
+					"\u30b2\u30fc\u30e0\u30d1\u30c3\u30c9\u306e\u30dc\u30bf\u30f3\u8a2d\u5b9a",
+					"\u30ad\u30fc\u30dc\u30fc\u30c9\u306e\u30ad\u30fc\u8a2d\u5b9a",
+					"\u30a6\u30a3\u30f3\u30c9\u30a6\u30b5\u30a4\u30ba\u5909\u66f4",
+					"\uff22\uff27\uff2d\u97f3\u91cf",
+					"\uff33\uff25\u97f3\u91cf",
+					"\u30ce\u30d9\u30eb\u30d1\u30fc\u30c8\u306e\u30e1\u30c3\u30bb\u30fc\u30b8\u8868\u793a\u901f\u5ea6",
+					"\u9ad8\u901f\u30dc\u30bf\u30f3\u3092\u30ea\u30d0\u30fc\u30b9 [ " + (Ground.I.FastReverseMode ? "\u30ea\u30d0\u30fc\u30b9" : "\u7121\u52b9(\u30c7\u30d5\u30a9\u30eb\u30c8)" ) + " ]",
+					"\u623b\u308b",
 				};
 
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 18, "設定", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 18, "\u8a2d\u5b9a", items, selectIndex);
 
 				this.SetDeepConfigEntered(true);
 
@@ -68,7 +68,7 @@ namespace Charlotte.Games
 						break;
 
 					case 3:
-						this.SimpleMenu.VolumeConfig("ＢＧＭ音量", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
+						this.SimpleMenu.VolumeConfig("\uff22\uff27\uff2d\u97f3\u91cf", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.MusicVolume = volume;
 							DDMusicUtils.UpdateVolume();
@@ -78,7 +78,7 @@ namespace Charlotte.Games
 						break;
 
 					case 4:
-						this.SimpleMenu.VolumeConfig("ＳＥ音量", DDGround.SEVolume, 0, 100, 1, 10, volume =>
+						this.SimpleMenu.VolumeConfig("\uff33\uff25\u97f3\u91cf", DDGround.SEVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.SEVolume = volume;
 							//DDSEUtils.UpdateVolume(); // old
@@ -96,7 +96,7 @@ namespace Charlotte.Games
 
 					case 5:
 						this.SimpleMenu.IntVolumeConfig(
-							"ノベルパートのメッセージ表示速度",
+							"\u30ce\u30d9\u30eb\u30d1\u30fc\u30c8\u306e\u30e1\u30c3\u30bb\u30fc\u30b8\u8868\u793a\u901f\u5ea6",
 							Ground.I.NovelMessageSpeed,
 							NovelConsts.MESSAGE_SPEED_MIN,
 							NovelConsts.MESSAGE_SPEED_MAX,

@@ -83,10 +83,10 @@ namespace Charlotte.Games
 			dest.Add("" + this.StartPointDirection);
 			dest.Add("" + this.StartFaceDirection);
 			dest.Add("" + this.ExitDirection);
-			dest.Add("" + (int)this.Start選択武器);
-			dest.Add("" + (this.東方キャラ選択中 ? 1 : 0));
-			dest.Add("" + (int)this.東方キャラ);
-			dest.Add("" + (this.神奈子を倒した ? 1 : 0));
+			dest.Add("" + (int)this.Start\u9078\u629e\u6b66\u5668);
+			dest.Add("" + (this.\u6771\u65b9\u30ad\u30e3\u30e9\u9078\u629e\u4e2d ? 1 : 0));
+			dest.Add("" + (int)this.\u6771\u65b9\u30ad\u30e3\u30e9);
+			dest.Add("" + (this.\u795e\u5948\u5b50\u3092\u5012\u3057\u305f ? 1 : 0));
 
 			// ★★★ シリアライズ_ここまで ★★★
 

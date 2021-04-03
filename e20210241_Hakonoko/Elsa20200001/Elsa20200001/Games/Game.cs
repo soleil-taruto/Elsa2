@@ -502,7 +502,7 @@ namespace Charlotte.Games
 							drawScreenSize.W - 35,
 							drawScreenSize.H - 50,
 							this.SnapshotCount.ToString("D2"),
-							DDFontUtils.GetFont("03焚火-Regular", 50)
+							DDFontUtils.GetFont("03\u711a\u706b-Regular", 50)
 							);
 					};
 
@@ -1202,7 +1202,7 @@ namespace Charlotte.Games
 						{
 							DDPrint.SetPrint(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
-							DDPrint.Print("セーブしました...");
+							DDPrint.Print("\u30bb\u30fc\u30d6\u3057\u307e\u3057\u305f...");
 							DDPrint.Reset();
 
 							return DDEngine.ProcFrame < endFrame;
@@ -1221,7 +1221,7 @@ namespace Charlotte.Games
 						{
 							DDPrint.SetPrint(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
-							DDPrint.Print("ロードしました...");
+							DDPrint.Print("\u30ed\u30fc\u30c9\u3057\u307e\u3057\u305f...");
 							DDPrint.Reset();
 
 							return DDEngine.ProcFrame < endFrame;
@@ -1476,14 +1476,14 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"ＰＡＵＳＥ",
+					"\uff30\uff21\uff35\uff33\uff25",
 					new string[]
 					{
 						Game.I.FinalZone == null ?
-							"このステージの最初からやり直す" :
-							"－－－－－－－－－－－－－－－",
-						"タイトルに戻る",
-						"ゲームに戻る",
+							"\u3053\u306e\u30b9\u30c6\u30fc\u30b8\u306e\u6700\u521d\u304b\u3089\u3084\u308a\u76f4\u3059" :
+							"\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d\uff0d",
+						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
+						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
 					},
 					selectIndex,
 					true,
@@ -1549,15 +1549,15 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"デバッグ用メニュー",
+					"\u30c7\u30d0\u30c3\u30b0\u7528\u30e1\u30cb\u30e5\u30fc",
 					new string[]
 					{
 						"----",
-						"強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
-						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
-						"このステージの最初からやり直す",
-						"タイトルに戻る",
-						"ゲームに戻る",
+						"\u5f37\u5236\u9045\u5ef6 [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + DDEngine.SlowdownLevel + " ]",
+						"\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + this.\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a + " ]",
+						"\u3053\u306e\u30b9\u30c6\u30fc\u30b8\u306e\u6700\u521d\u304b\u3089\u3084\u308a\u76f4\u3059",
+						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
+						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
 					},
 					selectIndex,
 					true,

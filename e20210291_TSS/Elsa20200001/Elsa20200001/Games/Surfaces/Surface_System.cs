@@ -30,7 +30,7 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			if (command == "Swap") // 即時
+			if (command == "Swap") // \u5373\u6642
 			{
 				string name1 = arguments[c++];
 				string name2 = arguments[c++];
@@ -43,7 +43,7 @@ namespace Charlotte.Games.Surfaces
 						surface.InstanceName = name1;
 				}
 			}
-			else if (command == "WhileAct") // 即時
+			else if (command == "WhileAct") // \u5373\u6642
 			{
 				while (Game.I.Status.Surfaces.Any(v => v.Act.Count != 0))
 				{
@@ -52,7 +52,7 @@ namespace Charlotte.Games.Surfaces
 				}
 				DDEngine.FreezeInput(GameConsts.NEXT_PAGE_INPUT_INTERVAL);
 			}
-			else if (command == "WhileActOrInput") // 即時
+			else if (command == "WhileActOrInput") // \u5373\u6642
 			{
 				while (Game.I.Status.Surfaces.Any(v => v.Act.Count != 0))
 				{

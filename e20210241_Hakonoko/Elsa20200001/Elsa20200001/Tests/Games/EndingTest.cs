@@ -23,7 +23,7 @@ namespace Charlotte.Tests.Games
 		{
 			using (new Novel())
 			{
-				Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
+				Novel.I.Status.Scenario = new Scenario("\u30a8\u30f3\u30c7\u30a3\u30f3\u30b0_\u5fa9\u8b90");
 				Novel.I.Perform();
 
 				if (Novel.I.会話スキップした)

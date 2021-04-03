@@ -40,10 +40,10 @@ namespace Charlotte.Games.Tiles
 		private static TileInfo[] Tiles = new TileInfo[]
 		{
 			new TileInfo(GameConsts.TILE_NONE, () => new Tile_None()),
-			new TileInfo("ブロック01", () => new Tile_B0001()),
-			new TileInfo("ブロック02", () => new Tile_B0002()),
-			new TileInfo("ブロック03", () => new Tile_B0003()),
-			new TileInfo("ブロック04", () => new Tile_B0004()),
+			new TileInfo("\u30d6\u30ed\u30c3\u30af01", () => new Tile_B0001()),
+			new TileInfo("\u30d6\u30ed\u30c3\u30af02", () => new Tile_B0002()),
+			new TileInfo("\u30d6\u30ed\u30c3\u30af03", () => new Tile_B0003()),
+			new TileInfo("\u30d6\u30ed\u30c3\u30af04", () => new Tile_B0004()),
 
 			// 新しいタイルをここへ追加..
 		};

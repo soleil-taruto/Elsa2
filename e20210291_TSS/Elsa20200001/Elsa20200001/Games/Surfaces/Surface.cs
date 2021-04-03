@@ -53,7 +53,7 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			if (command == "位置")
+			if (command == "\u4f4d\u7f6e")
 			{
 				if (arguments.Length == 3)
 				{
@@ -93,11 +93,11 @@ namespace Charlotte.Games.Surfaces
 			{
 				this.Act.AddOnce(() => this.DeadFlag = true);
 			}
-			else if (command == "Flush") // 即時
+			else if (command == "Flush") // \u5373\u6642
 			{
 				this.Act.Flush();
 			}
-			else if (command == "Sleep") // 描画せずに待つ
+			else if (command == "Sleep") // \u63cf\u753b\u305b\u305a\u306b\u5f85\u3064
 			{
 				int frame = int.Parse(arguments[c++]);
 
@@ -108,7 +108,7 @@ namespace Charlotte.Games.Surfaces
 
 				this.Act.Add(() => DDEngine.ProcFrame < endFrame && !Act.IsFlush);
 			}
-			else if (command == "Keep") // 描画しながら待つ
+			else if (command == "Keep") // \u63cf\u753b\u3057\u306a\u304c\u3089\u5f85\u3064
 			{
 				int frame = int.Parse(arguments[c++]);
 

@@ -130,11 +130,11 @@ namespace Charlotte.Games
 
 				this.DrawTabTitles(false);
 
-				this.DrawPrompt(100, 250, "画面モード");
-				this.DrawPrompt(100, 380, "ＢＧＭ音量");
-				this.DrawPrompt(100, 510, "ＳＥ音量");
-				this.DrawPrompt(100, 640, "メッセージ表示速度");
-				this.DrawPrompt(100, 770, "メッセージウィンドウ透明度");
+				this.DrawPrompt(100, 250, "\u753b\u9762\u30e2\u30fc\u30c9");
+				this.DrawPrompt(100, 380, "\uff22\uff27\uff2d\u97f3\u91cf");
+				this.DrawPrompt(100, 510, "\uff33\uff25\u97f3\u91cf");
+				this.DrawPrompt(100, 640, "\u30e1\u30c3\u30bb\u30fc\u30b8\u8868\u793a\u901f\u5ea6");
+				this.DrawPrompt(100, 770, "\u30e1\u30c3\u30bb\u30fc\u30b8\u30a6\u30a3\u30f3\u30c9\u30a6\u900f\u660e\u5ea6");
 
 				bool fullScreenFlag =
 					DDGround.RealScreen_W == DDGround.MonitorRect.W &&
@@ -142,12 +142,12 @@ namespace Charlotte.Games
 
 				this.DrawButton(1100, 280, Ground.I.Picture.SettingButton_フルスクリーン, fullScreenFlag);
 				this.DrawButton(1550, 280, Ground.I.Picture.SettingButton_ウィンドウ, !fullScreenFlag);
-				this.DrawTrackBar(1325, 410, "小", "大", DDGround.MusicVolume, volume =>
+				this.DrawTrackBar(1325, 410, "\u5c0f", "\u5927", DDGround.MusicVolume, volume =>
 				{
 					DDGround.MusicVolume = volume;
 					DDMusicUtils.UpdateVolume();
 				});
-				this.DrawTrackBar(1325, 540, "小", "大", DDGround.SEVolume, volume =>
+				this.DrawTrackBar(1325, 540, "\u5c0f", "\u5927", DDGround.SEVolume, volume =>
 				{
 					DDGround.SEVolume = volume;
 					//DDSEUtils.UpdateVolume(); // v_20210215 -- メソッド終了時に全て更新する。
@@ -159,13 +159,13 @@ namespace Charlotte.Games
 				{
 					DDUtils.Random.ChooseOne(seSamples).Play();
 				});
-				this.DrawTrackBar(1325, 670, "遅い", "速い",
+				this.DrawTrackBar(1325, 670, "\u9045\u3044", "\u901f\u3044",
 					DDUtils.RateAToB(GameConsts.MESSAGE_SPEED_MIN, GameConsts.MESSAGE_SPEED_MAX, Ground.I.MessageSpeed),
 					value => Ground.I.MessageSpeed = SCommon.ToInt(
 						DDUtils.AToBRate(GameConsts.MESSAGE_SPEED_MIN, GameConsts.MESSAGE_SPEED_MAX, value)
 						)
 					);
-				this.DrawTrackBar(1325, 800, "透明", "不透明",
+				this.DrawTrackBar(1325, 800, "\u900f\u660e", "\u4e0d\u900f\u660e",
 					DDUtils.RateAToB(0, 100, Ground.I.MessageWindow_A_Pct),
 					value => Ground.I.MessageWindow_A_Pct = SCommon.ToInt(
 						DDUtils.AToBRate(0, 100, value)
@@ -333,7 +333,7 @@ namespace Charlotte.Games
 
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
 
-				DrawTabTitle(610, 70, "ウィンドウサイズ設定", true);
+				DrawTabTitle(610, 70, "\u30a6\u30a3\u30f3\u30c9\u30a6\u30b5\u30a4\u30ba\u8a2d\u5b9a", true);
 
 				this.DrawButton(300, 300, Ground.I.Picture.SettingButton_960x540, true);
 				this.DrawButton(740, 300, Ground.I.Picture.SettingButton_1080x607, true);
@@ -410,20 +410,20 @@ namespace Charlotte.Games
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
 
 				if (キー設定Flag)
-					DrawTabTitle(610, 70, "キーボードのキー設定", true);
+					DrawTabTitle(610, 70, "\u30ad\u30fc\u30dc\u30fc\u30c9\u306e\u30ad\u30fc\u8a2d\u5b9a", true);
 				else
-					DrawTabTitle(500, 70, "ゲームパッドのボタン設定", true);
+					DrawTabTitle(500, 70, "\u30b2\u30fc\u30e0\u30d1\u30c3\u30c9\u306e\u30dc\u30bf\u30f3\u8a2d\u5b9a", true);
 
 				{
 					int c = 0;
 
-					PrintPadButtonKeySetting(キー設定Flag, c++, "上", DDInput.DIR_8);
-					PrintPadButtonKeySetting(キー設定Flag, c++, "下", DDInput.DIR_2);
-					PrintPadButtonKeySetting(キー設定Flag, c++, "左", DDInput.DIR_4);
-					PrintPadButtonKeySetting(キー設定Flag, c++, "右", DDInput.DIR_6);
-					PrintPadButtonKeySetting(キー設定Flag, c++, "決定", DDInput.A);
-					PrintPadButtonKeySetting(キー設定Flag, c++, "キャンセル", DDInput.B);
-					PrintPadButtonKeySetting(キー設定Flag, c++, "メッセージ・スキップ", DDInput.L);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u4e0a", DDInput.DIR_8);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u4e0b", DDInput.DIR_2);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u5de6", DDInput.DIR_4);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u53f3", DDInput.DIR_6);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u6c7a\u5b9a", DDInput.A);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u30ad\u30e3\u30f3\u30bb\u30eb", DDInput.B);
+					PrintPadButtonKeySetting(\u30ad\u30fc\u8a2d\u5b9aFlag, c++, "\u30e1\u30c3\u30bb\u30fc\u30b8\u30fb\u30b9\u30ad\u30c3\u30d7", DDInput.L);
 				}
 
 				this.DrawUnderButtons();
@@ -461,8 +461,8 @@ namespace Charlotte.Games
 
 		private void DrawTabTitles(bool 拡張設定Flag)
 		{
-			DrawTabTitle(155, 70, "基本設定", !拡張設定Flag);
-			DrawTabTitle(660, 70, "拡張設定", 拡張設定Flag);
+			DrawTabTitle(155, 70, "\u57fa\u672c\u8a2d\u5b9a", !\u62e1\u5f35\u8a2d\u5b9aFlag);
+			DrawTabTitle(660, 70, "\u62e1\u5f35\u8a2d\u5b9a", \u62e1\u5f35\u8a2d\u5b9aFlag);
 		}
 
 		private void DrawTabTitle(int x, int y, string line, bool activeFlag)
@@ -471,7 +471,7 @@ namespace Charlotte.Games
 				x,
 				y,
 				line,
-				DDFontUtils.GetFont("Kゴシック", 70),
+				DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 70),
 				false,
 				activeFlag ? new I3Color(100, 255, 255) : new I3Color(150, 150, 150),
 				activeFlag ? new I3Color(50, 100, 100) : new I3Color(100, 100, 100)
@@ -500,7 +500,7 @@ namespace Charlotte.Games
 				x,
 				y,
 				line,
-				DDFontUtils.GetFont("Kゴシック", 50),
+				DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 50),
 				false,
 				new I3Color(255, 255, 255),
 				new I3Color(0, 0, 100)
@@ -620,7 +620,7 @@ namespace Charlotte.Games
 			Func<DDInput.Button, string> getSetting;
 
 			{
-				Func<string, string> w = s => Common.FirstNotEmpty(s, "割り当てナシ");
+				Func<string, string> w = s => Common.FirstNotEmpty(s, "\u5272\u308a\u5f53\u3066\u30ca\u30b7");
 
 				if (キー設定Flag)
 					getSetting = btn => w(string.Join(" , ", btn.KeyIds.Select(keyId => DDSimpleMenu.GetKeyName(keyId))));
@@ -638,8 +638,8 @@ namespace Charlotte.Games
 			DDFontUtils.DrawString(
 				550,
 				y,
-				"「" + title + "」　＝　" + getSetting(button),
-				DDFontUtils.GetFont("Kゴシック", 50),
+				"\u300c" + title + "\u300d\u3000\uff1d\u3000" + getSetting(button),
+				DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 50),
 				false,
 				キー設定Flag ? new I3Color(192, 255, 128) : new I3Color(255, 192, 128),
 				キー設定Flag ? new I3Color(50, 100, 0) : new I3Color(100, 50, 0)
@@ -666,15 +666,15 @@ namespace Charlotte.Games
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
 
 				if (キー設定Flag)
-					DrawTabTitle(480, 70, "キーボードのキー設定 / 変更", true);
+					DrawTabTitle(480, 70, "\u30ad\u30fc\u30dc\u30fc\u30c9\u306e\u30ad\u30fc\u8a2d\u5b9a / \u5909\u66f4", true);
 				else
-					DrawTabTitle(400, 70, "ゲームパッドのボタン設定 / 変更", true);
+					DrawTabTitle(400, 70, "\u30b2\u30fc\u30e0\u30d1\u30c3\u30c9\u306e\u30dc\u30bf\u30f3\u8a2d\u5b9a / \u5909\u66f4", true);
 
 				DDFontUtils.DrawString(
 					100,
 					400,
-					"「" + title + "」に割り当てる" + (キー設定Flag ? "キー" : "ボタン") + "を押して下さい。(複数可)",
-					DDFontUtils.GetFont("Kゴシック", 50),
+					"\u300c" + title + "\u300d\u306b\u5272\u308a\u5f53\u3066\u308b" + (\u30ad\u30fc\u8a2d\u5b9aFlag ? "\u30ad\u30fc" : "\u30dc\u30bf\u30f3") + "\u3092\u62bc\u3057\u3066\u4e0b\u3055\u3044\u3002(\u8907\u6570\u53ef)",
+					DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 50),
 					false,
 					new I3Color(255, 255, 255),
 					new I3Color(100, 100, 0)
@@ -682,8 +682,8 @@ namespace Charlotte.Games
 				DDFontUtils.DrawString(
 					100,
 					475,
-					"入力が終わったら「決定」をクリックして下さい。",
-					DDFontUtils.GetFont("Kゴシック", 50),
+					"\u5165\u529b\u304c\u7d42\u308f\u3063\u305f\u3089\u300c\u6c7a\u5b9a\u300d\u3092\u30af\u30ea\u30c3\u30af\u3057\u3066\u4e0b\u3055\u3044\u3002",
+					DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 50),
 					false,
 					new I3Color(255, 255, 255),
 					new I3Color(100, 100, 0)
@@ -691,8 +691,8 @@ namespace Charlotte.Games
 				DDFontUtils.DrawString(
 					100,
 					600,
-					"現在の割り当て：" + getSetting(button),
-					DDFontUtils.GetFont("Kゴシック", 50),
+					"\u73fe\u5728\u306e\u5272\u308a\u5f53\u3066\uff1a" + getSetting(button),
+					DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 50),
 					false,
 					new I3Color(255, 255, 255),
 					new I3Color(100, 0, 100)
