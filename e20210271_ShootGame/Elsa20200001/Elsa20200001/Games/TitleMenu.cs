@@ -287,11 +287,11 @@ namespace Charlotte.Games
 
 			string[] items = new string[]
 			{
-				"\u30b2\u30fc\u30e0\u30b9\u30bf\u30fc\u30c8",
-				"\u30b3\u30f3\u30c6\u30cb\u30e5\u30fc(\u672a\u5b9f\u88c5)",
-				"\u30ce\u30d9\u30eb\u30d1\u30fc\u30c8(\u30c6\u30b9\u30c8)",
-				"\u8a2d\u5b9a",
-				"\u7d42\u4e86",
+				"ゲームスタート",
+				"コンテニュー(未実装)",
+				"ノベルパート(テスト)",
+				"設定",
+				"終了",
 			};
 
 			int selectIndex = 0;
@@ -306,7 +306,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "\u6a2a\u30b7\u30e5\u30fc\u30fb\u30c6\u30b9\u30c8\u30b3\u30fc\u30c9 / \u30bf\u30a4\u30c8\u30eb\u30e1\u30cb\u30e5\u30fc", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横シュー・テストコード / タイトルメニュー", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -333,7 +333,7 @@ namespace Charlotte.Games
 
 							using (new Novel())
 							{
-								Novel.I.Status.Scenario = new Scenario("\u30c6\u30b9\u30c80001");
+								Novel.I.Status.Scenario = new Scenario("テスト0001");
 								Novel.I.Perform();
 							}
 							this.ReturnTitleMenu();

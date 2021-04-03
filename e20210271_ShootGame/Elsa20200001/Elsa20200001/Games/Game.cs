@@ -474,12 +474,12 @@ namespace Charlotte.Games
 					180,
 					50,
 					24,
-					"\u30b7\u30b9\u30c6\u30e0\u30e1\u30cb\u30e5\u30fc",
+					"システムメニュー",
 					new string[]
 					{
-						"\u8a2d\u5b9a",
-						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
-						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
+						"設定",
+						"タイトルに戻る",
+						"ゲームに戻る",
 					},
 					selectIndex,
 					true,
@@ -507,7 +507,7 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("\u30bf\u30a4\u30c8\u30eb\u753b\u9762\u306b\u623b\u308a\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
 						{
 							this.Pause_ReturnToTitleMenu = true;
 							goto endLoop;
@@ -558,13 +558,13 @@ namespace Charlotte.Games
 					40,
 					40,
 					24,
-					"\u30c7\u30d0\u30c3\u30b0\u7528\u30e1\u30cb\u30e5\u30fc",
+					"デバッグ用メニュー",
 					new string[]
 					{
 						"----",
 						"----",
 						"----",
-						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
+						"ゲームに戻る",
 					},
 					selectIndex,
 					true,

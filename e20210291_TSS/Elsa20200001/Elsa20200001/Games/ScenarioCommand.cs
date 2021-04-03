@@ -45,7 +45,7 @@ namespace Charlotte.Games
 			}
 			catch (Exception ex)
 			{
-				ProcMain.WriteLog("\u30b3\u30de\u30f3\u30c9\u306e\u5b9f\u884c\u4e2d\u306b\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f\u3002\u30a8\u30e9\u30fc\u306b\u306a\u3063\u305f\u30c8\u30fc\u30af\u30f3\u5217\u306f\u4ee5\u4e0b\u306e\u3068\u304a\u308a\u3067\u3059\u3002");
+				ProcMain.WriteLog("コマンドの実行中にエラーが発生しました。エラーになったトークン列は以下のとおりです。");
 
 				foreach (string token in this.Tokens)
 					ProcMain.WriteLog(token);
@@ -53,7 +53,7 @@ namespace Charlotte.Games
 				if (DDConfig.LOG_ENABLED)
 					throw;
 
-				ProcMain.WriteLog("\u30b2\u30fc\u30e0\u3092\u7d9a\u884c\u3057\u307e\u3059\u3002" + ex);
+				ProcMain.WriteLog("ゲームを続行します。" + ex);
 			}
 		}
 	}

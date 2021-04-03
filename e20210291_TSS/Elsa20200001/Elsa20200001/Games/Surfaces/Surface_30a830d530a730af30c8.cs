@@ -31,7 +31,7 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			if (command == "\u8ffd\u52a0")
+			if (command == "追加")
 			{
 				string name = arguments[c++];
 				string[] effArgs = arguments.Skip(c).ToArray();

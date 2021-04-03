@@ -45,22 +45,22 @@ namespace Charlotte.Games.Enemies
 
 		private static EnemyInfo[] Tiles = new EnemyInfo[]
 		{
-			new EnemyInfo(GameConsts.ENEMY_NONE, () => { throw new DDError("\u6575\u300c\u7121\u300d\u3092\u751f\u6210\u3057\u3088\u3046\u3068\u3057\u307e\u3057\u305f\u3002"); }),
-			new EnemyInfo("\u30b9\u30bf\u30fc\u30c8\u5730\u70b9", () => new Enemy_\u30b9\u30bf\u30fc\u30c8\u5730\u70b9(X, Y, 5)),
-			new EnemyInfo("\u4e0a\u304b\u3089\u5165\u5834", () => new Enemy_\u30b9\u30bf\u30fc\u30c8\u5730\u70b9(X, Y, 8)),
-			new EnemyInfo("\u4e0b\u304b\u3089\u5165\u5834", () => new Enemy_\u30b9\u30bf\u30fc\u30c8\u5730\u70b9(X, Y, 2)),
-			new EnemyInfo("\u5de6\u304b\u3089\u5165\u5834", () => new Enemy_\u30b9\u30bf\u30fc\u30c8\u5730\u70b9(X, Y, 4)),
-			new EnemyInfo("\u53f3\u304b\u3089\u5165\u5834", () => new Enemy_\u30b9\u30bf\u30fc\u30c8\u5730\u70b9(X, Y, 6)),
-			new EnemyInfo("\u30ed\u30fc\u30c9\u5730\u70b9", () => new Enemy_\u30b9\u30bf\u30fc\u30c8\u5730\u70b9(X, Y, 101)),
-			new EnemyInfo("\u30bb\u30fc\u30d6\u5730\u70b9", () => new Enemy_B\u30bb\u30fc\u30d6\u5730\u70b9(X, Y)),
-			new EnemyInfo("\u30a2\u30a4\u30c6\u30e0_0001", () => new Enemy_B\u30a2\u30a4\u30c6\u30e0(X, Y, Enemy_B\u30a2\u30a4\u30c6\u30e0.\u52b9\u7528_e.TEST_0001)),
-			new EnemyInfo("\u30a2\u30a4\u30c6\u30e0_0002", () => new Enemy_B\u30a2\u30a4\u30c6\u30e0(X, Y, Enemy_B\u30a2\u30a4\u30c6\u30e0.\u52b9\u7528_e.TEST_0002)),
-			new EnemyInfo("\u30a2\u30a4\u30c6\u30e0_0003", () => new Enemy_B\u30a2\u30a4\u30c6\u30e0(X, Y, Enemy_B\u30a2\u30a4\u30c6\u30e0.\u52b9\u7528_e.TEST_0003)),
-			new EnemyInfo("\u657501", () => new Enemy_B0001(X, Y)),
-			new EnemyInfo("\u657502", () => new Enemy_B0002(X, Y)),
-			new EnemyInfo("\u657503", () => new Enemy_B0003(X, Y)),
-			new EnemyInfo("\u795e\u5948\u5b50", () => new Enemy_B\u795e\u5948\u5b50(X, Y)),
-			new EnemyInfo("\u30a4\u30d9\u30f3\u30c80001", () => new Enemy_B\u30a4\u30d9\u30f3\u30c80001(X, Y)),
+			new EnemyInfo(GameConsts.ENEMY_NONE, () => { throw new DDError("敵「無」を生成しようとしました。"); }),
+			new EnemyInfo("スタート地点", () => new Enemy_スタート地点(X, Y, 5)),
+			new EnemyInfo("上から入場", () => new Enemy_スタート地点(X, Y, 8)),
+			new EnemyInfo("下から入場", () => new Enemy_スタート地点(X, Y, 2)),
+			new EnemyInfo("左から入場", () => new Enemy_スタート地点(X, Y, 4)),
+			new EnemyInfo("右から入場", () => new Enemy_スタート地点(X, Y, 6)),
+			new EnemyInfo("ロード地点", () => new Enemy_スタート地点(X, Y, 101)),
+			new EnemyInfo("セーブ地点", () => new Enemy_Bセーブ地点(X, Y)),
+			new EnemyInfo("アイテム_0001", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0001)),
+			new EnemyInfo("アイテム_0002", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0002)),
+			new EnemyInfo("アイテム_0003", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0003)),
+			new EnemyInfo("敵01", () => new Enemy_B0001(X, Y)),
+			new EnemyInfo("敵02", () => new Enemy_B0002(X, Y)),
+			new EnemyInfo("敵03", () => new Enemy_B0003(X, Y)),
+			new EnemyInfo("神奈子", () => new Enemy_B神奈子(X, Y)),
+			new EnemyInfo("イベント0001", () => new Enemy_Bイベント0001(X, Y)),
 
 			// 新しい敵をここへ追加..
 		};

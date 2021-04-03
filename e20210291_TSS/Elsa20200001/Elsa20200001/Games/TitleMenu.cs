@@ -329,19 +329,19 @@ namespace Charlotte.Games
 			string[] items = Ground.I.SaveDataSlots.Select(v =>
 				v.SavedTime.Year == 1 ?
 				"----" :
-				"[" + v.SavedTime.ToString() + "]").Concat(new string[] { "\u623b\u308b" }).ToArray();
+				"[" + v.SavedTime.ToString() + "]").Concat(new string[] { "戻る" }).ToArray();
 
 			int selectIndex = 0;
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform("\u30b3\u30f3\u30c6\u30cb\u30e5\u30fc", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform("コンテニュー", items, selectIndex);
 
 				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
 				{
 					if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
 					{
-						if (new Confirm().Perform("\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u30ed\u30fc\u30c9\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+						if (new Confirm().Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
 						{
 							saveDataSlot = Ground.I.SaveDataSlots[selectIndex];
 							break;
@@ -365,14 +365,14 @@ namespace Charlotte.Games
 
 			string[] items = new string[]
 			{
-				"\u30b2\u30fc\u30e0\u30d1\u30c3\u30c9\u306e\u30dc\u30bf\u30f3\u8a2d\u5b9a",
-				"\u30ad\u30fc\u30dc\u30fc\u30c9\u306e\u30ad\u30fc\u8a2d\u5b9a",
-				"\u30a6\u30a3\u30f3\u30c9\u30a6\u30b5\u30a4\u30ba\u5909\u66f4",
-				"\uff22\uff27\uff2d\u97f3\u91cf",
-				"\uff33\uff25\u97f3\u91cf",
-				"\u30e1\u30c3\u30bb\u30fc\u30b8\u8868\u793a\u901f\u5ea6",
-				"\u30e1\u30c3\u30bb\u30fc\u30b8\u30a6\u30a3\u30f3\u30c9\u30a6\u4e0d\u900f\u660e\u5ea6",
-				"\u623b\u308b",
+				"ゲームパッドのボタン設定",
+				"キーボードのキー設定",
+				"ウィンドウサイズ変更",
+				"ＢＧＭ音量",
+				"ＳＥ音量",
+				"メッセージ表示速度",
+				"メッセージウィンドウ不透明度",
+				"戻る",
 			};
 
 			DDSE[] seSamples = new DDSE[]
@@ -384,7 +384,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform("\u8a2d\u5b9a\u30e1\u30cb\u30e5\u30fc", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform("設定メニュー", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -401,7 +401,7 @@ namespace Charlotte.Games
 						break;
 
 					case 3:
-						this.SimpleMenu.VolumeConfig("\uff22\uff27\uff2d\u97f3\u91cf", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
+						this.SimpleMenu.VolumeConfig("ＢＧＭ音量", DDGround.MusicVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.MusicVolume = volume;
 							DDMusicUtils.UpdateVolume();
@@ -411,7 +411,7 @@ namespace Charlotte.Games
 						break;
 
 					case 4:
-						this.SimpleMenu.VolumeConfig("\uff33\uff25\u97f3\u91cf", DDGround.SEVolume, 0, 100, 1, 10, volume =>
+						this.SimpleMenu.VolumeConfig("ＳＥ音量", DDGround.SEVolume, 0, 100, 1, 10, volume =>
 						{
 							DDGround.SEVolume = volume;
 							//DDSEUtils.UpdateVolume(); // old
@@ -429,7 +429,7 @@ namespace Charlotte.Games
 
 					case 5:
 						this.SimpleMenu.IntVolumeConfig(
-							"\u30e1\u30c3\u30bb\u30fc\u30b8\u8868\u793a\u901f\u5ea6",
+							"メッセージ表示速度",
 							Ground.I.MessageSpeed,
 							GameConsts.MESSAGE_SPEED_MIN,
 							GameConsts.MESSAGE_SPEED_MAX,
@@ -442,7 +442,7 @@ namespace Charlotte.Games
 
 					case 6:
 						this.SimpleMenu.IntVolumeConfig(
-							"\u30e1\u30c3\u30bb\u30fc\u30b8\u30a6\u30a3\u30f3\u30c9\u30a6\u4e0d\u900f\u660e\u5ea6",
+							"メッセージウィンドウ不透明度",
 							Ground.I.MessageWindow_A_Pct,
 							0,
 							100,

@@ -98,8 +98,8 @@ namespace Charlotte.Games
 							}
 							.Perform(
 								sdSlot.SerializedGameStatus != null ?
-								"\u30b9\u30ed\u30c3\u30c8 " + (this.SelectedSaveDataSlotIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u4e0a\u66f8\u304d\u3057\u307e\u3059\u3002" :
-								"\u30b9\u30ed\u30c3\u30c8 " + (this.SelectedSaveDataSlotIndex + 1) + " \u306b\u30bb\u30fc\u30d6\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+								"スロット " + (this.SelectedSaveDataSlotIndex + 1) + " のデータを上書きします。" :
+								"スロット " + (this.SelectedSaveDataSlotIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
 							{
 								sdSlot.SerializedGameStatus = Game.I.Status.Serialize();
 								sdSlot.SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
@@ -111,7 +111,7 @@ namespace Charlotte.Games
 							if (sdSlot.SerializedGameStatus != null) // ロードする。
 							{
 								if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
-									.Perform("\u30b9\u30ed\u30c3\u30c8 " + (this.SelectedSaveDataSlotIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u30ed\u30fc\u30c9\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+									.Perform("スロット " + (this.SelectedSaveDataSlotIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
 								{
 									ret = sdSlot;
 									break;
@@ -134,7 +134,7 @@ namespace Charlotte.Games
 
 				DDDraw.DrawSimple(Ground.I.Picture.詳細設定枠, 0, 0);
 
-				DrawTabTitle(855, 70, saveMode ? "\u30bb\u30fc\u30d6" : "\u30ed\u30fc\u30c9", true);
+				DrawTabTitle(855, 70, saveMode ? "セーブ" : "ロード", true);
 
 				int selSDSlotIndex = -1;
 				int sdSlotIndex = this.PageIndex * 10;
@@ -206,7 +206,7 @@ namespace Charlotte.Games
 				x,
 				y,
 				line,
-				DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 70),
+				DDFontUtils.GetFont("Kゴシック", 70),
 				false,
 				activeFlag ? new I3Color(100, 255, 255) : new I3Color(150, 150, 150),
 				activeFlag ? new I3Color(50, 100, 100) : new I3Color(100, 100, 100)

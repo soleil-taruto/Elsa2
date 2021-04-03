@@ -948,7 +948,7 @@ namespace Charlotte.Games
 						{
 							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
-							DDPrint.Print("\u30bb\u30fc\u30d6\u3057\u307e\u3057\u305f...");
+							DDPrint.Print("セーブしました...");
 							DDPrint.Reset();
 
 							return DDEngine.ProcFrame < endFrame;
@@ -967,7 +967,7 @@ namespace Charlotte.Games
 						{
 							DDPrint.SetDebug(0, 16);
 							DDPrint.SetBorder(new I3Color(0, 0, 0));
-							DDPrint.Print("\u30ed\u30fc\u30c9\u3057\u307e\u3057\u305f...");
+							DDPrint.Print("ロードしました...");
 							DDPrint.Reset();
 
 							return DDEngine.ProcFrame < endFrame;
@@ -1148,12 +1148,12 @@ namespace Charlotte.Games
 					180,
 					50,
 					24,
-					"\u30b7\u30b9\u30c6\u30e0\u30e1\u30cb\u30e5\u30fc",
+					"システムメニュー",
 					new string[]
 					{
-						"\u8a2d\u5b9a",
-						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
-						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
+						"設定",
+						"タイトルに戻る",
+						"ゲームに戻る",
 					},
 					selectIndex,
 					true
@@ -1180,7 +1180,7 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("\u30bf\u30a4\u30c8\u30eb\u753b\u9762\u306b\u623b\u308a\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+						if (new Confirm() { BorderColor = new I3Color(0, 0, 200), }.Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
 						{
 							this.Pause_ReturnToTitleMenu = true;
 							goto endLoop;
@@ -1230,13 +1230,13 @@ namespace Charlotte.Games
 					40,
 					40,
 					24,
-					"\u30c7\u30d0\u30c3\u30b0\u7528\u30e1\u30cb\u30e5\u30fc",
+					"デバッグ用メニュー",
 					new string[]
 					{
-						"\u88c5\u5099\u3057\u3066\u3044\u308b\u6b66\u5668\u306e\u5207\u308a\u66ff\u3048 [ \u73fe\u5728\u88c5\u5099\u3057\u3066\u3044\u308b\u6b66\u5668\uff1a" + Player.\u6b66\u5668_e_Names[(int)this.Player.\u6b66\u5668] + " ]",
-						"\u5f37\u5236\u9045\u5ef6 [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + DDEngine.SlowdownLevel + " ]",
-						"\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a [ \u73fe\u5728\u306e\u8a2d\u5b9a\uff1a" + this.\u5f53\u305f\u308a\u5224\u5b9a\u8868\u793a + " ]",
-						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
+						"装備している武器の切り替え [ 現在装備している武器：" + Player.武器_e_Names[(int)this.Player.武器] + " ]",
+						"強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
+						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
+						"ゲームに戻る",
 					},
 					selectIndex,
 					true,

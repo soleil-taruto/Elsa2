@@ -32,7 +32,7 @@ namespace Charlotte.Games.Enemies.Tests
 
 					DDPrint.SetDebug((int)this.X - DDGround.ICamera.X, (int)this.Y - DDGround.ICamera.Y);
 					DDPrint.SetBorder(new I3Color(0, 0, 0));
-					DDPrint.PrintLine("\u30a4\u30d9\u30f3\u30c80001");
+					DDPrint.PrintLine("イベント0001");
 					DDPrint.Reset();
 
 					// 当たり判定無し
@@ -68,7 +68,7 @@ namespace Charlotte.Games.Enemies.Tests
 
 			using (new Novel())
 			{
-				Novel.I.Status.Scenario = new Scenario("\u30c6\u30b9\u30c80001");
+				Novel.I.Status.Scenario = new Scenario("テスト0001");
 				//Novel.I.Status.Scenario = new Scenario("イベント0001"); // old
 				Novel.I.Perform();
 

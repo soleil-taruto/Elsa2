@@ -14,6 +14,8 @@ namespace Charlotte.Games
 			// TODO: 背景
 			// TODO: BGM
 
+			// _#Include_Resource
+
 			yield return 240;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(480, 200, "\u7729\u3057\u3044\u5149\u304c\u76ee\u306b\u98db\u3073\u8fbc\u3093\u3067\u304f\u308b\u3002", 800)));
 			yield return 240;

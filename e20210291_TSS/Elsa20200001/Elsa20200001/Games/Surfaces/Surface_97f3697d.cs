@@ -28,7 +28,7 @@ namespace Charlotte.Games.Surfaces
 		{
 			int c = 0;
 
-			if (command == "\u518d\u751f")
+			if (command == "再生")
 			{
 				this.Act.AddOnce(() =>
 				{
@@ -36,7 +36,7 @@ namespace Charlotte.Games.Surfaces
 					this.MusicFileChanged();
 				});
 			}
-			else if (command == "\u505c\u6b62")
+			else if (command == "停止")
 			{
 				this.Act.AddOnce(() =>
 				{

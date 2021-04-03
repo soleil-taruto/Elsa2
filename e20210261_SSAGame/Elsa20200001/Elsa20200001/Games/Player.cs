@@ -26,8 +26,8 @@ namespace Charlotte.Games
 		{
 			return new string[]
 			{
-				"\u56e0\u5e61\u3066\u3090",
-				"\u30c1\u30eb\u30ce",
+				"因幡てゐ",
+				"チルノ",
 			}
 			[(int)chara];
 		}

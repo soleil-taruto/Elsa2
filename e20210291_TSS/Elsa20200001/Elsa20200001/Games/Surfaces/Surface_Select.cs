@@ -23,7 +23,7 @@ namespace Charlotte.Games.Surfaces
 
 		public class OptionInfo
 		{
-			public string Title = "\u3053\u3053\u306b\u9078\u629e\u80a2\u306b\u8868\u793a\u3059\u308b\u6587\u5b57\u5217\u3092\u8a2d\u5b9a\u3057\u307e\u3059\u3002";
+			public string Title = "ここに選択肢に表示する文字列を設定します。";
 			public string ScenarioName = GameConsts.DUMMY_SCENARIO_NAME;
 
 			// <---- prm
@@ -54,7 +54,7 @@ namespace Charlotte.Games.Surfaces
 					this.Options.Count < GameConsts.SELECT_OPTION_MIN ||
 					this.Options.Count > GameConsts.SELECT_OPTION_MAX
 					)
-					throw new DDError("\u9078\u629e\u80a2\u306e\u500b\u6570\u306b\u554f\u984c\u304c\u3042\u308a\u307e\u3059\u3002");
+					throw new DDError("選択肢の個数に問題があります。");
 
 				// ---- 入力ここから
 
@@ -140,7 +140,7 @@ namespace Charlotte.Games.Surfaces
 							 GameConsts.SELECT_FRAME_L + title_x,
 							 GameConsts.SELECT_FRAME_T + GameConsts.SELECT_FRAME_T_STEP * index + title_y,
 							 this.Options[index].Title,
-							 DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 32),
+							 DDFontUtils.GetFont("Kゴシック", 32),
 							 false,
 							 new I3Color(110, 100, 90)
 							 );
@@ -160,14 +160,14 @@ namespace Charlotte.Games.Surfaces
 		{
 			//int c = 0;
 
-			if (command == "\u9078\u629e\u80a2") // \u5373\u6642
+			if (command == "選択肢") // 即時
 			{
 				this.Options.Add(new OptionInfo()
 				{
 					Title = arguments[0],
 				});
 			}
-			else if (command == "\u5206\u5c90\u5148") // \u5373\u6642
+			else if (command == "分岐先") // 即時
 			{
 				this.Options[this.Options.Count - 1].ScenarioName = arguments[0];
 			}

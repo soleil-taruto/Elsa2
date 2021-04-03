@@ -39,11 +39,11 @@ namespace Charlotte.Games.Tiles
 		private static TileInfo[] Tiles = new TileInfo[]
 		{
 			new TileInfo(GameConsts.TILE_NONE, () => new Tile_None()),
-			new TileInfo("\u829d", () => new Tile_Space(Ground.I.Picture2.Tile_A2[0, 0])),
-			new TileInfo("\u6c34", () => new Tile_River(Ground.I.Picture2.Tile_A1[0, 0])),
-			new TileInfo("\u7bb1", () => new Tile_Wall(Ground.I.Picture2.Tile_B[8, 2])),
-			new TileInfo("\u6c34\u8fba", () => new Tile_\u6c34\u8fba(Ground.I.Picture2.MiniTile_A1, 16, 0, 3, 60)),
-			new TileInfo("\u68ee\u6797", () => new Tile_\u68ee\u6797(Ground.I.Picture2.Tile_B, 6, 6, 6, 4, Ground.I.Picture2.Tile_A2[0, 0], Ground.I.Picture2.Tile_B[4, 6])),
+			new TileInfo("芝", () => new Tile_Space(Ground.I.Picture2.Tile_A2[0, 0])),
+			new TileInfo("水", () => new Tile_River(Ground.I.Picture2.Tile_A1[0, 0])),
+			new TileInfo("箱", () => new Tile_Wall(Ground.I.Picture2.Tile_B[8, 2])),
+			new TileInfo("水辺", () => new Tile_水辺(Ground.I.Picture2.MiniTile_A1, 16, 0, 3, 60)),
+			new TileInfo("森林", () => new Tile_森林(Ground.I.Picture2.Tile_B, 6, 6, 6, 4, Ground.I.Picture2.Tile_A2[0, 0], Ground.I.Picture2.Tile_B[4, 6])),
 
 			// 新しいタイルをここへ追加..
 		};

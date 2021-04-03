@@ -30,7 +30,7 @@ namespace Charlotte.Games
 			string[] lines = SCommon.TextToLines(SCommon.ENCODING_SJIS.GetString(DDResource.Load(this.MapFile)));
 			int c = 0;
 
-			lines = lines.Where(line => line != "" && line[0] != ';').ToArray(); // \u7a7a\u884c\u3068\u30b3\u30e1\u30f3\u30c8\u884c\u3092\u9664\u53bb
+			lines = lines.Where(line => line != "" && line[0] != ';').ToArray(); // 空行とコメント行を除去
 
 			int w = int.Parse(lines[c++]);
 			int h = int.Parse(lines[c++]);
@@ -74,7 +74,7 @@ namespace Charlotte.Games
 			this.H = h;
 			this.WallName = Common.GetElement(lines, c++, GameConsts.NAME_DEFAULT);
 			this.MusicName = Common.GetElement(lines, c++, GameConsts.NAME_DEFAULT);
-			this.\u7a74\u306b\u843d\u3061\u305f\u3089\u6b7b\u4ea1 = int.Parse(Common.GetElement(lines, c++, "1")) != 0;
+			this.穴に落ちたら死亡 = int.Parse(Common.GetElement(lines, c++, "1")) != 0;
 		}
 
 		public void Save()
@@ -102,8 +102,8 @@ namespace Charlotte.Games
 			lines.Add("; MusicName");
 			lines.Add(this.MusicName);
 			lines.Add("");
-			lines.Add("; \u7a74\u306b\u843d\u3061\u305f\u3089\u6b7b\u4ea1 (1=\u6709\u52b9, 0=\u7121\u52b9)");
-			lines.Add("" + (this.\u7a74\u306b\u843d\u3061\u305f\u3089\u6b7b\u4ea1 ? 1 : 0));
+			lines.Add("; 穴に落ちたら死亡 (1=有効, 0=無効)");
+			lines.Add("" + (this.穴に落ちたら死亡 ? 1 : 0));
 
 			DDResource.Save(this.MapFile, SCommon.ENCODING_SJIS.GetBytes(SCommon.LinesToText(lines.ToArray())));
 		}

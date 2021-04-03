@@ -29,7 +29,7 @@ namespace Charlotte.Games
 			string[] lines = SCommon.TextToLines(SCommon.ENCODING_SJIS.GetString(DDResource.Load(this.MapFile)));
 			int c = 0;
 
-			lines = lines.Where(line => line != "" && line[0] != ';').ToArray(); // \u7a7a\u884c\u3068\u30b3\u30e1\u30f3\u30c8\u884c\u3092\u9664\u53bb
+			lines = lines.Where(line => line != "" && line[0] != ';').ToArray(); // 空行とコメント行を除去
 
 			int w = int.Parse(lines[c++]);
 			int h = int.Parse(lines[c++]);

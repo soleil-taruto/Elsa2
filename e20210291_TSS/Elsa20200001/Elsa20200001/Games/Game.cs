@@ -384,7 +384,7 @@ namespace Charlotte.Games
 
 					if (0 <= i)
 					{
-						DDFontUtils.DrawString(16, DDConsts.Screen_H - c * 60 - 16, logLines[i], DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 32));
+						DDFontUtils.DrawString(16, DDConsts.Screen_H - c * 60 - 16, logLines[i], DDFontUtils.GetFont("Kゴシック", 32));
 					}
 				}
 				DDEngine.EachFrame();
@@ -506,11 +506,11 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					saveMode ? "\u30bb\u30fc\u30d6\u30e1\u30cb\u30e5\u30fc" : "\u30ed\u30fc\u30c9\u30e1\u30cb\u30e5\u30fc",
+					saveMode ? "セーブメニュー" : "ロードメニュー",
 					Ground.I.SaveDataSlots.Select(saveDataSlot =>
 						saveDataSlot.SavedTime.Year == 1 ?
 						"----" :
-						"[" + saveDataSlot.SavedTime.ToString() + "]").Concat(new string[] { "\u623b\u308b" }).ToArray(),
+						"[" + saveDataSlot.SavedTime.ToString() + "]").Concat(new string[] { "戻る" }).ToArray(),
 					selectIndex
 					);
 
@@ -527,8 +527,8 @@ namespace Charlotte.Games
 						}
 						.Perform(
 							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
-							"\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u4e0a\u66f8\u304d\u3057\u307e\u3059\u3002" :
-							"\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306b\u30bb\u30fc\u30d6\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+							"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
+							"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
 						{
 							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
 							Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
@@ -539,7 +539,7 @@ namespace Charlotte.Games
 						if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
 						{
 							if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
-								.Perform("\u30b9\u30ed\u30c3\u30c8 " + (selectIndex + 1) + " \u306e\u30c7\u30fc\u30bf\u3092\u30ed\u30fc\u30c9\u3057\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+								.Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
 							{
 								this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
 								this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
@@ -599,12 +599,12 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"\u30b7\u30b9\u30c6\u30e0\u30e1\u30cb\u30e5\u30fc",
+					"システムメニュー",
 					new string[]
 					{
-						"\u8a2d\u5b9a",
-						"\u30bf\u30a4\u30c8\u30eb\u306b\u623b\u308b",
-						"\u30b2\u30fc\u30e0\u306b\u623b\u308b",
+						"設定",
+						"タイトルに戻る",
+						"ゲームに戻る",
 					},
 					selectIndex
 					);
@@ -629,7 +629,7 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						if (new Confirm().Perform("\u30bf\u30a4\u30c8\u30eb\u753b\u9762\u306b\u623b\u308a\u307e\u3059\u3002", "\u306f\u3044", "\u3044\u3044\u3048") == 0)
+						if (new Confirm().Perform("タイトル画面に戻ります。", "はい", "いいえ") == 0)
 						{
 							this.SystemMenu_ReturnToTitleMenu = true;
 							goto endLoop;

@@ -36,12 +36,12 @@ namespace Charlotte.Games
 
 			string[] items = new string[]
 			{
-				"\u958b\u767a\u30c7\u30d0\u30c3\u30b0\u7528_\u30ef\u30fc\u30eb\u30c9\u30bb\u30ec\u30af\u30c8",
-				"\u30b2\u30fc\u30e0\u30b9\u30bf\u30fc\u30c8",
-				"\u30b3\u30f3\u30c6\u30cb\u30e5\u30fc(\u672a\u5b9f\u88c5)",
-				"\u30ce\u30d9\u30eb\u30d1\u30fc\u30c8(\u30c6\u30b9\u30c8)",
-				"\u8a2d\u5b9a",
-				"\u7d42\u4e86",
+				"開発デバッグ用_ワールドセレクト",
+				"ゲームスタート",
+				"コンテニュー(未実装)",
+				"ノベルパート(テスト)",
+				"設定",
+				"終了",
 			};
 
 			int selectIndex = 0;
@@ -59,7 +59,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "\u30c9\u30ec\u30df\u30fc\u30fb\u30ed\u30c3\u30af\u30de\u30f3 / \u30bf\u30a4\u30c8\u30eb\u30e1\u30cb\u30e5\u30fc(\u4eee)", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
 
 				switch (selectIndex)
 				{
@@ -89,7 +89,7 @@ namespace Charlotte.Games
 
 							using (new Novel())
 							{
-								Novel.I.Status.Scenario = new Scenario("\u30c6\u30b9\u30c80001");
+								Novel.I.Status.Scenario = new Scenario("テスト0001");
 								Novel.I.Perform();
 							}
 							this.ReturnTitleMenu();
@@ -139,14 +139,14 @@ namespace Charlotte.Games
 				this.ReturnTitleMenu();
 			};
 
-			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "\u958b\u767a\u30c7\u30d0\u30c3\u30b0\u7528_\u30ef\u30fc\u30eb\u30c9\u30bb\u30ec\u30af\u30c8", new string[]
+			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用_ワールドセレクト", new string[]
 			{
 				"Stage_0001_v001",
 				"Stage_Reimu_v001",
 				"Stage_Sanae_v001",
-				"w0001(\u30c6\u30b9\u30c8\u7528)",
-				"w1001(\u30c6\u30b9\u30c8\u7528)",
-				"\u623b\u308b",
+				"w0001(テスト用)",
+				"w1001(テスト用)",
+				"戻る",
 			},
 			0
 			);
