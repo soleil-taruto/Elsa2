@@ -1225,7 +1225,7 @@ namespace Charlotte.Games
 					"デバッグ用メニュー",
 					new string[]
 					{
-						"キャラクタ切り替え [ 現在のキャラクタ：" + 現在のキャラクタ + " ]",
+						"キャラクタ切り替え [ 現在のキャラクタ：" + 現在のキャラクタ + " ] (Lホールド=戻る)",
 						"デバッグ強制遅延 [ 現在の設定：" + DDEngine.SlowdownLevel + " ]",
 						"当たり判定表示 [ 現在の設定：" + this.当たり判定表示 + " ]",
 						"ゲームに戻る",
@@ -1238,26 +1238,44 @@ namespace Charlotte.Games
 				switch (selectIndex)
 				{
 					case 0:
-						if (this.Status.東方キャラ選択中)
 						{
-							int chara = (int)this.Status.東方キャラ;
+							bool backMode;
 
-							chara++;
-
-							if (chara < ResourcePicture2.Player_e_Length)
 							{
-								this.Status.東方キャラ = (ResourcePicture2.Player_e)chara;
+								int bk_freezeInputFrame = DDEngine.FreezeInputFrame;
+								DDEngine.FreezeInputFrame = 0;
+								backMode = 1 <= DDInput.L.GetInput();
+								DDEngine.FreezeInputFrame = bk_freezeInputFrame;
+							}
+
+							if (this.Status.東方キャラ選択中)
+							{
+								int chara = (int)this.Status.東方キャラ;
+
+								if (backMode)
+									chara--;
+								else
+									chara++;
+
+								if (0 <= chara && chara < ResourcePicture2.Player_e_Length)
+								{
+									this.Status.東方キャラ = (ResourcePicture2.Player_e)chara;
+								}
+								else
+								{
+									this.Status.東方キャラ選択中 = false;
+									this.Status.東方キャラ = ResourcePicture2.Player_e.Alice; // 適当なキャラを設定しておく
+								}
 							}
 							else
 							{
-								this.Status.東方キャラ選択中 = false;
-								this.Status.東方キャラ = ResourcePicture2.Player_e.Alice; // 適当なキャラを設定しておく
+								this.Status.東方キャラ選択中 = true;
+
+								if (backMode)
+									this.Status.東方キャラ = (ResourcePicture2.Player_e)(ResourcePicture2.Player_e_Length - 1); // 最後のキャラ
+								else
+									this.Status.東方キャラ = (ResourcePicture2.Player_e)0; // 最初のキャラ
 							}
-						}
-						else
-						{
-							this.Status.東方キャラ選択中 = true;
-							this.Status.東方キャラ = ResourcePicture2.Player_e.Alice; // 最初のキャラ
 						}
 						break;
 

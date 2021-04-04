@@ -299,9 +299,6 @@ namespace Charlotte.Games
 			this.SimpleMenu = new DDSimpleMenu();
 
 			this.SimpleMenu.BorderColor = new I3Color(0, 64, 128);
-			//this.SimpleMenu.WallColor = new I3Color(60, 120, 130);
-			//this.SimpleMenu.WallPicture = Ground.I.Picture.P_TITLE_WALL;
-			//this.SimpleMenu.WallCurtain = -0.8;
 			this.SimpleMenu.WallDrawer = this.背景.Execute;
 
 			for (; ; )

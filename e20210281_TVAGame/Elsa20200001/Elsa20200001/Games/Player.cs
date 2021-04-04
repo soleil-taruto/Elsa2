@@ -54,7 +54,7 @@ namespace Charlotte.Games
 			{
 				picture = Ground.I.Picture2.GetPlayer(Game.I.Status.東方キャラ).GetPicture(this.FaceDirection, koma);
 
-				// ダメージ中等差し替え ...
+				// ---- ダメージ中等差し替え ----
 
 				if (1 <= this.DeadFrame)
 				{
@@ -67,6 +67,18 @@ namespace Charlotte.Games
 					DDDraw.SetTaskList(DDGround.EL);
 					DDDraw.SetAlpha(0.5);
 				}
+
+				// ----
+
+				DDDraw.SetMosaic();
+				DDDraw.DrawBegin(
+					picture,
+					(int)this.X - DDGround.ICamera.X,
+					(int)this.Y - DDGround.ICamera.Y - 12.0
+					);
+				DDDraw.DrawZoom(2.0);
+				DDDraw.DrawEnd();
+				DDDraw.Reset();
 			}
 			else
 			{
@@ -88,7 +100,7 @@ namespace Charlotte.Games
 
 				picture = info.Pic[koma, info.Y];
 
-				// ダメージ中等差し替え ...
+				// ---- ダメージ中等差し替え ----
 
 				if (1 <= this.DeadFrame)
 				{
@@ -99,14 +111,16 @@ namespace Charlotte.Games
 					DDDraw.SetTaskList(DDGround.EL);
 					DDDraw.SetAlpha(0.5);
 				}
-			}
 
-			DDDraw.DrawCenter(
-				picture,
-				(int)this.X - DDGround.ICamera.X,
-				(int)this.Y - DDGround.ICamera.Y
-				);
-			DDDraw.Reset();
+				// ----
+
+				DDDraw.DrawCenter(
+					picture,
+					(int)this.X - DDGround.ICamera.X,
+					(int)this.Y - DDGround.ICamera.Y
+					);
+				DDDraw.Reset();
+			}
 		}
 
 		private bool Attack_Wave_左回転Sw = false;
