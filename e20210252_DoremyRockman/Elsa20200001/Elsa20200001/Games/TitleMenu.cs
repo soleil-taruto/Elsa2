@@ -88,7 +88,15 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						// TODO
+						{
+							this.LeaveTitleMenu();
+
+							using (new GameProgressMaster())
+							{
+								GameProgressMaster.I.Perform_コンテニュー();
+							}
+							this.ReturnTitleMenu();
+						}
 						break;
 
 					case 2:

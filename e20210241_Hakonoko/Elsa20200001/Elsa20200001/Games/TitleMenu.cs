@@ -266,7 +266,7 @@ namespace Charlotte.Games
 				this.TopMenu.SelectIndex += TopMenuTask.ITEM_NUM;
 				this.TopMenu.SelectIndex %= TopMenuTask.ITEM_NUM;
 
-				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1)
+				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // (開発デバッグ用)ロック解除
 				{
 					Ground.I.ReachedStageIndex = 10;
 				}
@@ -275,6 +275,11 @@ namespace Charlotte.Games
 					switch (this.TopMenu.SelectIndex)
 					{
 						case 0:
+							if (DDConfig.LOG_ENABLED && 1 <= DDInput.DIR_6.GetInput())
+							{
+								//this.CheatMainMenu(); // 未設置
+							}
+							else
 							{
 								this.LeaveTitleMenu();
 
@@ -499,6 +504,11 @@ namespace Charlotte.Games
 				Ground.I.StartSnapshotCount = selectIndex;
 			}
 			DDEngine.FreezeInput();
+		}
+
+		private void CheatMainMenu()
+		{
+			// 未設置
 		}
 
 		private void LeaveTitleMenu()

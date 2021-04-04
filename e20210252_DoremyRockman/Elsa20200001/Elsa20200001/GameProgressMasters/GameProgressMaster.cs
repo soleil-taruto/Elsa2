@@ -39,5 +39,16 @@ namespace Charlotte.GameProgressMasters
 				WorldGameMaster.I.Perform();
 			}
 		}
+
+		public void Perform_コンテニュー()
+		{
+			// zantei zantei zantei
+			// zantei zantei zantei
+			// zantei zantei zantei
+
+			// TODO
+			// TODO
+			// TODO
+		}
 	}
 }

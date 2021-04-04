@@ -72,7 +72,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "MSSAGame(仮)", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横スクロール アクション ゲーム(仮)", items, selectIndex);
 
 				bool cheatFlag;
 

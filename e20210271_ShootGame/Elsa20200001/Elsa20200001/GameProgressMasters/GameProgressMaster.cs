@@ -36,5 +36,18 @@ namespace Charlotte.GameProgressMasters
 				Game.I.Perform();
 			}
 		}
+
+		public void Perform_コンテニュー()
+		{
+			// zantei zantei zantei
+			// zantei zantei zantei
+			// zantei zantei zantei
+
+			using (new Game())
+			{
+				Game.I.Script = new Script_Bステージ0001(); // 仮？
+				Game.I.Perform();
+			}
+		}
 	}
 }
