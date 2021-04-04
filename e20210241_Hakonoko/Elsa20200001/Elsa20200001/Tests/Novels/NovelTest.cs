@@ -40,9 +40,9 @@ namespace Charlotte.Tests.Novels
 			//name = "ステージ0003";
 			//name = "ステージ0004";
 			//name = "ステージ0005";
-			//name = "ステージ0006";
+			name = "ステージ0006";
 			//name = "ステージ0007";
-			name = "ステージ0008";
+			//name = "ステージ0008";
 			//name = "ステージ0009";
 
 			// ----
