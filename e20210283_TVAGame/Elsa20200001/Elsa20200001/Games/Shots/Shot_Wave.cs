@@ -45,7 +45,7 @@ namespace Charlotte.Games.Shots
 				this.X = ctrx + xadd;
 				this.Y = ctry + yadd;
 
-				DDDraw.DrawBegin(Ground.I.Picture2.IconSet[2, 35], this.X - DDGround.ICamera.X, this.Y - DDGround.ICamera.Y);
+				DDDraw.DrawBegin(Ground.I.Picture.Dummy, this.X - DDGround.ICamera.X, this.Y - DDGround.ICamera.Y);
 				DDDraw.DrawRotate(frame / 2.0);
 				DDDraw.DrawEnd();
 

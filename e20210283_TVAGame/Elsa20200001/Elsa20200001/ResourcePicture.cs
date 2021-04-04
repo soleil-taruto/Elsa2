@@ -20,15 +20,6 @@ namespace Charlotte
 		public DDPicture Title = DDPictureLoaders.Standard(@"dat\Claris_Resource\Actor83_1.png");
 		public DDPicture TitleMenuItem = DDPictureLoaders.Standard(@"dat\Claris_Resource\TitleMenuItem.png");
 
-		public DDPicture Player_00 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\$Actor83.png");
-		public DDPicture Player_01 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\$Actor83_1.png");
-		public DDPicture Player_02 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\$Actor83_2.png");
-		public DDPicture Player_03 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\$Actor83_3.png");
-		public DDPicture Player_05 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\$Actor83_5.png");
-		public DDPicture PlayerFace_00 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\Actor83.png");
-		public DDPicture PlayerFace_01 = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\Actor83_ex.png");
-		public DDPicture PlayerRaf = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\Actor83\Actor83_raf.jpg");
-
 		public DDPicture Player_Alice = DDPictureLoaders.Standard(@"dat\フリー素材\点睛集積\thv8_alice2_2.png");
 		public DDPicture Player_高麗野あうん = DDPictureLoaders.Standard(@"dat\フリー素材\点睛集積\thv8_aunn.png");
 		public DDPicture Player_赤蛮奇_体 = DDPictureLoaders.Standard(@"dat\フリー素材\点睛集積\thv8_banki.png");
@@ -89,8 +80,6 @@ namespace Charlotte
 		public DDPicture Tile_C = DDPictureLoaders.Standard(@"dat\Claris_Resource\FSM\vx_map\TileC.png");
 		public DDPicture Tile_D = DDPictureLoaders.Standard(@"dat\Claris_Resource\FSM\vx_map\TileD.png");
 		public DDPicture Tile_E = DDPictureLoaders.Standard(@"dat\Claris_Resource\FSM\vx_map\TileE.png");
-
-		public DDPicture IconSet = DDPictureLoaders.Standard(@"dat\Claris_Resource\usui\IconSet.png");
 
 		public DDPicture Enemy_神奈子 = DDPictureLoaders.Standard(@"dat\フリー素材\きつね仮\yukkuri-kanako.png");
 

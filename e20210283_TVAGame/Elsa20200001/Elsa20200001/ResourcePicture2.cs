@@ -14,14 +14,6 @@ namespace Charlotte
 
 		public DDPicture[,] TitleMenuItem = DDDerivations.GetAnimation(Ground.I.Picture.TitleMenuItem, 0, 0, 180, 50);
 
-		public DDPicture[,] Player_00 = DDDerivations.GetAnimation(Ground.I.Picture.Player_00, 0, 0, 32, 32);
-		public DDPicture[,] Player_01 = DDDerivations.GetAnimation(Ground.I.Picture.Player_01, 0, 0, 32, 32);
-		public DDPicture[,] Player_02 = DDDerivations.GetAnimation(Ground.I.Picture.Player_02, 0, 0, 32, 32);
-		public DDPicture[,] Player_03 = DDDerivations.GetAnimation(Ground.I.Picture.Player_03, 0, 0, 32, 32);
-		public DDPicture[,] Player_05 = DDDerivations.GetAnimation(Ground.I.Picture.Player_05, 0, 0, 32, 32);
-		public DDPicture[,] PlayerFace_00 = DDDerivations.GetAnimation(Ground.I.Picture.PlayerFace_00, 0, 0, 96, 96);
-		public DDPicture[,] PlayerFace_01 = DDDerivations.GetAnimation(Ground.I.Picture.PlayerFace_01, 0, 0, 96, 96);
-
 		#region Players
 
 		public const int Player_e_Length = 50; // Player_e の項目数と一致すること
@@ -249,8 +241,6 @@ namespace Charlotte
 		public DDPicture[,] MiniTile_C = DDDerivations.GetAnimation(Ground.I.Picture.Tile_C, 0, 0, GameConsts.MINI_TILE_W, GameConsts.MINI_TILE_H);
 		public DDPicture[,] MiniTile_D = DDDerivations.GetAnimation(Ground.I.Picture.Tile_D, 0, 0, GameConsts.MINI_TILE_W, GameConsts.MINI_TILE_H);
 		public DDPicture[,] MiniTile_E = DDDerivations.GetAnimation(Ground.I.Picture.Tile_E, 0, 0, GameConsts.MINI_TILE_W, GameConsts.MINI_TILE_H);
-
-		public DDPicture[,] IconSet = DDDerivations.GetAnimation(Ground.I.Picture.IconSet, 0, 0, 24, 24);
 
 		public DDPicture[] Enemy_神奈子 = DDDerivations.GetAnimation_YX(Ground.I.Picture.Enemy_神奈子, 0, 0, 250, 250).ToArray();
 	}
