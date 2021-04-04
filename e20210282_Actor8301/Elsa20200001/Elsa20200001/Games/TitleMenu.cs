@@ -274,6 +274,11 @@ namespace Charlotte.Games
 					switch (this.TopMenu.SelectIndex)
 					{
 						case 0:
+							if (DDConfig.LOG_ENABLED && 1 <= DDInput.DIR_6.GetInput())
+							{
+								this.CheatMainMenu();
+							}
+							else
 							{
 								this.LeaveTitleMenu();
 
@@ -354,6 +359,45 @@ namespace Charlotte.Games
 			}
 
 			DDEngine.FreezeInput();
+		}
+
+		private void CheatMainMenu()
+		{
+			for (; ; )
+			{
+				int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用メニュー", new string[]
+				{
+					"スタート",
+					"戻る",
+				},
+				0
+				);
+
+				switch (selectIndex)
+				{
+					case 0:
+						{
+							this.LeaveTitleMenu();
+
+							using (new WorldGameMaster())
+							{
+								WorldGameMaster.I.World = new World("Start");
+								WorldGameMaster.I.Status = new GameStatus();
+								WorldGameMaster.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 1:
+						goto endMenu;
+
+					default:
+						throw new DDError();
+				}
+			}
+		endMenu:
+			;
 		}
 
 		private Ground.P_SaveDataSlot LoadGame() // ret: null == キャンセル, ret.GameStatus を使用する際は GetClone を忘れずに！

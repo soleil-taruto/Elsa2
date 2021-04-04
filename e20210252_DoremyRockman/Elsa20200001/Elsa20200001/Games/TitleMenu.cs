@@ -36,10 +36,8 @@ namespace Charlotte.Games
 
 			string[] items = new string[]
 			{
-				"開発デバッグ用_ワールドセレクト",
 				"ゲームスタート",
-				"コンテニュー(未実装)",
-				"ノベルパート(テスト)",
+				"コンテニュー",
 				"設定",
 				"終了",
 			};
@@ -61,13 +59,23 @@ namespace Charlotte.Games
 			{
 				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
 
+				bool cheatFlag;
+
+				{
+					int bk_freezeInputFrame = DDEngine.FreezeInputFrame;
+					DDEngine.FreezeInputFrame = 0;
+					cheatFlag = 1 <= DDInput.DIR_6.GetInput();
+					DDEngine.FreezeInputFrame = bk_freezeInputFrame;
+				}
+
 				switch (selectIndex)
 				{
 					case 0:
-						this.Debug_SelectWorld();
-						break;
-
-					case 1:
+						if (DDConfig.LOG_ENABLED && cheatFlag)
+						{
+							this.CheatMainMenu();
+						}
+						else
 						{
 							this.LeaveTitleMenu();
 
@@ -79,24 +87,11 @@ namespace Charlotte.Games
 						}
 						break;
 
-					case 2:
+					case 1:
 						// TODO
 						break;
 
-					case 3:
-						{
-							this.LeaveTitleMenu();
-
-							using (new Novel())
-							{
-								Novel.I.Status.Scenario = new Scenario("テスト0001");
-								Novel.I.Perform();
-							}
-							this.ReturnTitleMenu();
-						}
-						break;
-
-					case 4:
+					case 2:
 						using (new SettingMenu())
 						{
 							SettingMenu.I.SimpleMenu = this.SimpleMenu;
@@ -104,7 +99,7 @@ namespace Charlotte.Games
 						}
 						break;
 
-					case 5:
+					case 3:
 						goto endMenu;
 
 					default:
@@ -124,7 +119,7 @@ namespace Charlotte.Games
 			DDEngine.FreezeInput();
 		}
 
-		private void Debug_SelectWorld()
+		private void CheatMainMenu()
 		{
 			Action<string> a_gameStart = startMapName =>
 			{
@@ -139,46 +134,65 @@ namespace Charlotte.Games
 				this.ReturnTitleMenu();
 			};
 
-			int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用_ワールドセレクト", new string[]
+			for (; ; )
 			{
-				"Stage_0001_v001",
-				"Stage_Reimu_v001",
-				"Stage_Sanae_v001",
-				"w0001(テスト用)",
-				"w1001(テスト用)",
-				"戻る",
-			},
-			0
-			);
+				int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用メニュー", new string[]
+				{
+					"Stage_0001_v001",
+					"Stage_Reimu_v001",
+					"Stage_Sanae_v001",
+					"w0001(テスト用)",
+					"w1001(テスト用)",
+					"ノベルパートテスト",
+					"戻る",
+				},
+				0
+				);
 
-			switch (selectIndex)
-			{
-				case 0:
-					a_gameStart("Stage_0001_v001\\t1001");
-					break;
+				switch (selectIndex)
+				{
+					case 0:
+						a_gameStart("Stage_0001_v001\\t1001");
+						break;
 
-				case 1:
-					a_gameStart("Stage_Reimu_v001\\Start");
-					break;
+					case 1:
+						a_gameStart("Stage_Reimu_v001\\Start");
+						break;
 
-				case 2:
-					a_gameStart("Stage_Sanae_v001\\Start");
-					break;
+					case 2:
+						a_gameStart("Stage_Sanae_v001\\Start");
+						break;
 
-				case 3:
-					a_gameStart("w0001\\t0001");
-					break;
+					case 3:
+						a_gameStart("w0001\\t0001");
+						break;
 
-				case 4:
-					a_gameStart("w1001\\t1001");
-					break;
+					case 4:
+						a_gameStart("w1001\\t1001");
+						break;
 
-				case 5:
-					break;
+					case 5:
+						{
+							this.LeaveTitleMenu();
 
-				default:
-					throw new DDError();
+							using (new Novel())
+							{
+								Novel.I.Status.Scenario = new Scenario("テスト0001");
+								Novel.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 6:
+						goto endMenu;
+
+					default:
+						throw new DDError();
+				}
 			}
+		endMenu:
+			;
 		}
 
 		private void LeaveTitleMenu()

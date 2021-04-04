@@ -229,6 +229,11 @@ namespace Charlotte.Games
 					switch (this.TopMenu.SelectIndex)
 					{
 						case 0:
+							if (DDConfig.LOG_ENABLED && 1 <= DDInput.DIR_6.GetInput())
+							{
+								this.CheatMainMenu();
+							}
+							else
 							{
 								this.LeaveTitleMenu();
 
@@ -462,6 +467,44 @@ namespace Charlotte.Games
 			}
 		endMenu:
 			DDEngine.FreezeInput();
+		}
+
+		private void CheatMainMenu()
+		{
+			for (; ; )
+			{
+				int selectIndex = this.SimpleMenu.Perform("開発デバッグ用メニュー", new string[]
+				{
+					"スタート",
+					"戻る",
+				},
+				0
+				);
+
+				switch (selectIndex)
+				{
+					case 0:
+						{
+							this.LeaveTitleMenu();
+
+							using (new Game())
+							{
+								Game.I.Status.Scenario = new Scenario(GameConsts.FIRST_SCENARIO_NAME);
+								Game.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 1:
+						goto endMenu;
+
+					default:
+						throw new DDError();
+				}
+			}
+		endMenu:
+			;
 		}
 
 		private void LeaveTitleMenu()

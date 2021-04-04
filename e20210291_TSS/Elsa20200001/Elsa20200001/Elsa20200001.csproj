@@ -77,6 +77,7 @@
     <Compile Include="GameCommons\DDHashedResource.cs" />
     <Compile Include="GameCommons\DDTask.cs" />
     <Compile Include="GameCommons\DDTouch.cs" />
+    <Compile Include="GameProgressMasters\GameProgressMaster.cs" />
     <Compile Include="Games\Confirm.cs" />
     <Compile Include="Games\GameCommon.cs" />
     <Compile Include="Commons\ArgsReader.cs" />

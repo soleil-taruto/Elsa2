@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
+using Charlotte.GameProgressMasters;
 using Charlotte.Games.Scripts;
 using Charlotte.Games.Scripts.Tests;
 using Charlotte.Novels;
@@ -288,8 +289,7 @@ namespace Charlotte.Games
 			string[] items = new string[]
 			{
 				"ゲームスタート",
-				"コンテニュー(未実装)",
-				"ノベルパート(テスト)",
+				"コンテニュー",
 				"設定",
 				"終了",
 			};
@@ -303,18 +303,31 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横シュー・テストコード / タイトルメニュー", items, selectIndex);
+				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "シューティング ゲーム(仮)", items, selectIndex);
+
+				bool cheatFlag;
+
+				{
+					int bk_freezeInputFrame = DDEngine.FreezeInputFrame;
+					DDEngine.FreezeInputFrame = 0;
+					cheatFlag = 1 <= DDInput.DIR_6.GetInput();
+					DDEngine.FreezeInputFrame = bk_freezeInputFrame;
+				}
 
 				switch (selectIndex)
 				{
 					case 0:
+						if (DDConfig.LOG_ENABLED && cheatFlag)
+						{
+							this.CheatMainMenu();
+						}
+						else
 						{
 							this.LeaveTitleMenu();
 
-							using (new Game())
+							using (new GameProgressMaster())
 							{
-								Game.I.Script = new Script_Bステージ0001(); // 仮？
-								Game.I.Perform();
+								GameProgressMaster.I.Perform();
 							}
 							this.ReturnTitleMenu();
 						}
@@ -325,19 +338,6 @@ namespace Charlotte.Games
 						break;
 
 					case 2:
-						{
-							this.LeaveTitleMenu();
-
-							using (new Novel())
-							{
-								Novel.I.Status.Scenario = new Scenario("テスト0001");
-								Novel.I.Perform();
-							}
-							this.ReturnTitleMenu();
-						}
-						break;
-
-					case 3:
 						using (new SettingMenu()
 						{
 							SimpleMenu = this.SimpleMenu,
@@ -347,7 +347,7 @@ namespace Charlotte.Games
 						}
 						break;
 
-					case 4:
+					case 3:
 						goto endMenu;
 
 					default:
@@ -365,6 +365,58 @@ namespace Charlotte.Games
 			}
 
 			DDEngine.FreezeInput();
+		}
+
+		private void CheatMainMenu()
+		{
+			for (; ; )
+			{
+				int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用メニュー", new string[]
+				{
+					"スタート_Bステージ0001",
+					"ノベルパート_テスト0001",
+					"戻る",
+				},
+				0
+				);
+
+				switch (selectIndex)
+				{
+					case 0:
+						{
+							this.LeaveTitleMenu();
+
+							using (new Game())
+							{
+								Game.I.Script = new Script_Bステージ0001(); // 仮？
+								Game.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 1:
+						{
+							this.LeaveTitleMenu();
+
+							using (new Novel())
+							{
+								Novel.I.Status.Scenario = new Scenario("テスト0001");
+								Novel.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 2:
+						goto endMenu;
+
+					default:
+						throw new DDError();
+				}
+			}
+		endMenu:
+			;
 		}
 
 		private void LeaveTitleMenu()

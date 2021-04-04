@@ -74,9 +74,23 @@ namespace Charlotte.Games
 			{
 				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "MSSAGame(仮)", items, selectIndex);
 
+				bool cheatFlag;
+
+				{
+					int bk_freezeInputFrame = DDEngine.FreezeInputFrame;
+					DDEngine.FreezeInputFrame = 0;
+					cheatFlag = 1 <= DDInput.DIR_6.GetInput();
+					DDEngine.FreezeInputFrame = bk_freezeInputFrame;
+				}
+
 				switch (selectIndex)
 				{
 					case 0:
+						if (DDConfig.LOG_ENABLED && cheatFlag)
+						{
+							this.CheatMainMenu();
+						}
+						else
 						{
 							this.LeaveTitleMenu();
 
@@ -191,6 +205,45 @@ namespace Charlotte.Games
 			DDEngine.FreezeInput();
 
 			return saveDataSlot;
+		}
+
+		private void CheatMainMenu()
+		{
+			for (; ; )
+			{
+				int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用メニュー", new string[]
+				{
+					"スタート",
+					"戻る",
+				},
+				0
+				);
+
+				switch (selectIndex)
+				{
+					case 0:
+						{
+							this.LeaveTitleMenu();
+
+							using (new WorldGameMaster())
+							{
+								WorldGameMaster.I.World = new World("Start");
+								WorldGameMaster.I.Status = new GameStatus();
+								WorldGameMaster.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 1:
+						goto endMenu;
+
+					default:
+						throw new DDError();
+				}
+			}
+		endMenu:
+			;
 		}
 
 		private void LeaveTitleMenu()
