@@ -48,79 +48,33 @@ namespace Charlotte.Games
 					koma = 1;
 			}
 
-			DDPicture picture;
+			DDPicture picture = Ground.I.Picture2.GetPlayer(Game.I.Status.Chara).GetPicture(this.FaceDirection, koma);
 
-			if (Game.I.Status.東方キャラ選択中)
+			// ---- ダメージ中等差し替え ----
+
+			if (1 <= this.DeadFrame)
 			{
-				picture = Ground.I.Picture2.GetPlayer(Game.I.Status.東方キャラ).GetPicture(this.FaceDirection, koma);
-
-				// ---- ダメージ中等差し替え ----
-
-				if (1 <= this.DeadFrame)
-				{
-					DDDraw.SetTaskList(DDGround.EL);
-					DDDraw.SetBright(1.0, 0.3, 0.3);
-					DDDraw.SetAlpha(0.7);
-				}
-				else if (1 <= this.DamageFrame || 1 <= this.InvincibleFrame)
-				{
-					DDDraw.SetTaskList(DDGround.EL);
-					DDDraw.SetAlpha(0.5);
-				}
-
-				// ----
-
-				DDDraw.SetMosaic();
-				DDDraw.DrawBegin(
-					picture,
-					(int)this.X - DDGround.ICamera.X,
-					(int)this.Y - DDGround.ICamera.Y - 12.0
-					);
-				DDDraw.DrawZoom(2.0);
-				DDDraw.DrawEnd();
-				DDDraw.Reset();
+				DDDraw.SetTaskList(DDGround.EL);
+				DDDraw.SetBright(1.0, 0.3, 0.3);
+				DDDraw.SetAlpha(0.7);
 			}
-			else
+			else if (1 <= this.DamageFrame || 1 <= this.InvincibleFrame)
 			{
-				var infos = new[]
-				{
-					null,
-					new { Pic = Ground.I.Picture2.Player_05, Y = 0 }, // 1 (左下向き)
-					new { Pic = Ground.I.Picture2.Player_00, Y = 0 }, // 2 (下向き)
-					new { Pic = Ground.I.Picture2.Player_05, Y = 2 }, // 3 (右下向き)
-					new { Pic = Ground.I.Picture2.Player_00, Y = 1 }, // 4 (左向き)
-					null,
-					new { Pic = Ground.I.Picture2.Player_00, Y = 2 }, // 6 (右向き)
-					new { Pic = Ground.I.Picture2.Player_05, Y = 1 }, // 7 (左上向き)
-					new { Pic = Ground.I.Picture2.Player_00, Y = 3 }, // 8 (上向き)
-					new { Pic = Ground.I.Picture2.Player_05, Y = 3 }, // 9 (右上向き)
-				};
-
-				var info = infos[this.FaceDirection];
-
-				picture = info.Pic[koma, info.Y];
-
-				// ---- ダメージ中等差し替え ----
-
-				if (1 <= this.DeadFrame)
-				{
-					picture = Ground.I.Picture2.Player_02[0, 3];
-				}
-				else if (1 <= this.DamageFrame || 1 <= this.InvincibleFrame)
-				{
-					DDDraw.SetTaskList(DDGround.EL);
-					DDDraw.SetAlpha(0.5);
-				}
-
-				// ----
-
-				DDDraw.DrawCenter(
-					picture,
-					(int)this.X - DDGround.ICamera.X,
-					(int)this.Y - DDGround.ICamera.Y
-					);
-				DDDraw.Reset();
+				DDDraw.SetTaskList(DDGround.EL);
+				DDDraw.SetAlpha(0.5);
 			}
+
+			// ----
+
+			DDDraw.SetMosaic();
+			DDDraw.DrawBegin(
+				picture,
+				(int)this.X - DDGround.ICamera.X,
+				(int)this.Y - DDGround.ICamera.Y - 12.0
+				);
+			DDDraw.DrawZoom(2.0);
+			DDDraw.DrawEnd();
+			DDDraw.Reset();
 		}
 
 		private bool Attack_Wave_左回転Sw = false;

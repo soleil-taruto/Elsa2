@@ -58,9 +58,7 @@ namespace Charlotte.Games
 		public int ExitDirection = 5;
 
 		public Player.武器_e Start選択武器 = Player.武器_e.NORMAL;
-
-		public bool 東方キャラ選択中 = false;
-		public ResourcePicture2.Player_e 東方キャラ = ResourcePicture2.Player_e.Alice;
+		public ResourcePicture2.Player_e Chara = ResourcePicture2.Player_e.Alice;
 
 		// ---- game_進行・インベントリ ----
 
@@ -84,8 +82,7 @@ namespace Charlotte.Games
 			dest.Add("" + this.StartFaceDirection);
 			dest.Add("" + this.ExitDirection);
 			dest.Add("" + (int)this.Start選択武器);
-			dest.Add("" + (this.東方キャラ選択中 ? 1 : 0));
-			dest.Add("" + (int)this.東方キャラ);
+			dest.Add("" + (int)this.Chara);
 			dest.Add("" + (this.神奈子を倒した ? 1 : 0));
 
 			// ★★★ シリアライズ_ここまで ★★★
@@ -106,8 +103,7 @@ namespace Charlotte.Games
 			this.StartFaceDirection = int.Parse(lines[c++]);
 			this.ExitDirection = int.Parse(lines[c++]);
 			this.Start選択武器 = (Player.武器_e)int.Parse(lines[c++]);
-			this.東方キャラ選択中 = int.Parse(lines[c++]) != 0;
-			this.東方キャラ = (ResourcePicture2.Player_e)int.Parse(lines[c++]);
+			this.Chara = (ResourcePicture2.Player_e)int.Parse(lines[c++]);
 			this.神奈子を倒した = int.Parse(lines[c++]) != 0;
 
 			// ★★★ デシリアライズ_ここまで ★★★

@@ -1210,12 +1210,7 @@ namespace Charlotte.Games
 
 			for (; ; )
 			{
-				string 現在のキャラクタ;
-
-				if (this.Status.東方キャラ選択中)
-					現在のキャラクタ = ResourcePicture2.Player_e_Names[(int)this.Status.東方キャラ];
-				else
-					現在のキャラクタ = "標準(Actor83)";
+				string 現在のキャラクタ = ResourcePicture2.Player_e_Names[(int)this.Status.Chara];
 
 				selectIndex = simpleMenu.Perform(
 					40,
@@ -1248,34 +1243,17 @@ namespace Charlotte.Games
 								DDEngine.FreezeInputFrame = bk_freezeInputFrame;
 							}
 
-							if (this.Status.東方キャラ選択中)
-							{
-								int chara = (int)this.Status.東方キャラ;
+							int chara = (int)this.Status.Chara;
 
-								if (backMode)
-									chara--;
-								else
-									chara++;
-
-								if (0 <= chara && chara < ResourcePicture2.Player_e_Length)
-								{
-									this.Status.東方キャラ = (ResourcePicture2.Player_e)chara;
-								}
-								else
-								{
-									this.Status.東方キャラ選択中 = false;
-									this.Status.東方キャラ = ResourcePicture2.Player_e.Alice; // 適当なキャラを設定しておく
-								}
-							}
+							if (backMode)
+								chara--;
 							else
-							{
-								this.Status.東方キャラ選択中 = true;
+								chara++;
 
-								if (backMode)
-									this.Status.東方キャラ = (ResourcePicture2.Player_e)(ResourcePicture2.Player_e_Length - 1); // 最後のキャラ
-								else
-									this.Status.東方キャラ = (ResourcePicture2.Player_e)0; // 最初のキャラ
-							}
+							chara += ResourcePicture2.Player_e_Length;
+							chara %= ResourcePicture2.Player_e_Length;
+
+							this.Status.Chara = (ResourcePicture2.Player_e)chara;
 						}
 						break;
 
