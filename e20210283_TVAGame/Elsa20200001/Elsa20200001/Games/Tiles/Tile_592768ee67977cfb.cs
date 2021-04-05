@@ -174,7 +174,7 @@ namespace Charlotte.Games.Tiles
 						bool inner_左列 = this.MapTablePoint.X % 2 == 0;
 						bool inner_上段 = this.MapTablePoint.Y % 2 == 0;
 
-						if (!inner_左列 && !inner_上段)
+						if (!inner_左列 && !inner_上段) // 右下のみ描画する。-- マップは左上から描画するので、右下で描画しないと他のセルに上書きされる。
 						{
 							DDDraw.SetMosaic();
 							DDDraw.DrawBegin(picture, this.DrawPoint.X - GameConsts.TILE_W / 2, this.DrawPoint.Y - GameConsts.TILE_H / 2);
@@ -193,20 +193,12 @@ namespace Charlotte.Games.Tiles
 				int l = (this.MapTablePoint.X / 2 + rel_l) * 2;
 				int t = (this.MapTablePoint.Y / 2 + rel_t) * 2;
 
-				return
-					this.IsFriend2x2(l + 0, t + 0) &&
-					this.IsFriend2x2(l + 0, t + 2) &&
-					this.IsFriend2x2(l + 2, t + 0) &&
-					this.IsFriend2x2(l + 2, t + 2);
-			}
+				for (int x = 0; x < 4; x++)
+					for (int y = 0; y < 4; y++)
+						if (!this.IsFriend(l + x, t + y))
+							return false;
 
-			private bool IsFriend2x2(int l, int t)
-			{
-				return
-					this.IsFriend(l + 0, t + 0) &&
-					this.IsFriend(l + 0, t + 1) &&
-					this.IsFriend(l + 1, t + 0) &&
-					this.IsFriend(l + 1, t + 1);
+				return true;
 			}
 
 			private bool IsFriend(int x, int y)

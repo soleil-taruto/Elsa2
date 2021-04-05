@@ -80,6 +80,7 @@ namespace Charlotte
 		public DDPicture Tile_C = DDPictureLoaders.Standard(@"dat\Claris_Resource\FSM\vx_map\TileC.png");
 		public DDPicture Tile_D = DDPictureLoaders.Standard(@"dat\Claris_Resource\FSM\vx_map\TileD.png");
 		public DDPicture Tile_E = DDPictureLoaders.Standard(@"dat\Claris_Resource\FSM\vx_map\TileE.png");
+		public DDPicture Tile_Dummy = DDPictureLoaders.Standard(@"dat\Tile\DummyTile.png");
 
 		public DDPicture Enemy_神奈子 = DDPictureLoaders.Standard(@"dat\フリー素材\きつね仮\yukkuri-kanako.png");
 
