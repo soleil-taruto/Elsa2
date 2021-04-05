@@ -7,12 +7,12 @@ using Charlotte.GameCommons;
 
 namespace Charlotte.Games.Tiles
 {
-	public abstract class Tile_森林系 : Tile
+	public abstract class Tile_大森林系 : Tile
 	{
 		private DrawTask _draw;
 
 		/// <summary>
-		/// 森林系のタイルを生成する。
+		/// 森林系のタイル(2x2倍)を生成する。
 		/// </summary>
 		/// <param name="pictbl">画像テーブル(画像はタイル(32x32)であること)</param>
 		/// <param name="密集_l">「密集」画像の左上(X-座標)</param>
@@ -21,7 +21,7 @@ namespace Charlotte.Games.Tiles
 		/// <param name="単独_t">「単独」画像の左上(Y-座標)</param>
 		/// <param name="groundPicture">地面の画像</param>
 		/// <param name="単独セルPicture">密集・単独を使用出来ないマップセル用の画像</param>
-		public Tile_森林系(DDPicture[,] pictbl, int 密集_l, int 密集_t, int 単独_l, int 単独_t, DDPicture groundPicture, DDPicture 単独セルPicture)
+		public Tile_大森林系(DDPicture[,] pictbl, int 密集_l, int 密集_t, int 単独_l, int 単独_t, DDPicture groundPicture, DDPicture 単独セルPicture)
 		{
 			_draw = new DrawTask()
 			{
@@ -70,8 +70,8 @@ namespace Charlotte.Games.Tiles
 				for (; ; )
 				{
 					// 密集画像テーブルの位置
-					bool 左列 = this.MapTablePoint.X % 2 == 0;
-					bool 上段 = this.MapTablePoint.Y % 2 == 0;
+					bool 左列 = this.MapTablePoint.X / 2 % 2 == 0;
+					bool 上段 = this.MapTablePoint.Y / 2 % 2 == 0;
 
 					DDPicture picture;
 
@@ -80,8 +80,8 @@ namespace Charlotte.Games.Tiles
 					{
 						if (上段) // 左上
 						{
-							bool m左下 = this.IsFriend2x2(this.MapTablePoint.X - 1, this.MapTablePoint.Y - 0);
-							bool m右上 = this.IsFriend2x2(this.MapTablePoint.X - 0, this.MapTablePoint.Y - 1);
+							bool m左下 = this.IsFriend4x4(-1, 0);
+							bool m右上 = this.IsFriend4x4(0, -1);
 
 							if (m左下)
 							{
@@ -95,13 +95,13 @@ namespace Charlotte.Games.Tiles
 								if (m右上)
 									picture = this.PictureTable[this.単独_L + 0, this.単独_T + 1];
 								else
-									picture = this.単独セルPicture;
+									picture = null;
 							}
 						}
 						else // 左下
 						{
-							bool m左上 = this.IsFriend2x2(this.MapTablePoint.X - 1, this.MapTablePoint.Y - 1);
-							bool m右下 = this.IsFriend2x2(this.MapTablePoint.X - 0, this.MapTablePoint.Y - 0);
+							bool m左上 = this.IsFriend4x4(-1, -1);
+							bool m右下 = this.IsFriend4x4(0, 0);
 
 							if (m左上)
 							{
@@ -115,7 +115,7 @@ namespace Charlotte.Games.Tiles
 								if (m右下)
 									picture = this.PictureTable[this.単独_L + 0, this.単独_T + 0];
 								else
-									picture = this.単独セルPicture;
+									picture = null;
 							}
 						}
 					}
@@ -123,8 +123,8 @@ namespace Charlotte.Games.Tiles
 					{
 						if (上段) // 右上
 						{
-							bool m左上 = this.IsFriend2x2(this.MapTablePoint.X - 1, this.MapTablePoint.Y - 1);
-							bool m右下 = this.IsFriend2x2(this.MapTablePoint.X - 0, this.MapTablePoint.Y - 0);
+							bool m左上 = this.IsFriend4x4(-1, -1);
+							bool m右下 = this.IsFriend4x4(0, 0);
 
 							if (m左上)
 							{
@@ -138,13 +138,13 @@ namespace Charlotte.Games.Tiles
 								if (m右下)
 									picture = this.PictureTable[this.単独_L + 0, this.単独_T + 0];
 								else
-									picture = this.単独セルPicture;
+									picture = null;
 							}
 						}
 						else // 右下
 						{
-							bool m左下 = this.IsFriend2x2(this.MapTablePoint.X - 1, this.MapTablePoint.Y - 0);
-							bool m右上 = this.IsFriend2x2(this.MapTablePoint.X - 0, this.MapTablePoint.Y - 1);
+							bool m左下 = this.IsFriend4x4(-1, 0);
+							bool m右上 = this.IsFriend4x4(0, -1);
 
 							if (m左下)
 							{
@@ -158,16 +158,46 @@ namespace Charlotte.Games.Tiles
 								if (m右上)
 									picture = this.PictureTable[this.単独_L + 0, this.単独_T + 1];
 								else
-									picture = this.単独セルPicture;
+									picture = null;
 							}
 						}
 					}
 
 					DDDraw.DrawCenter(this.GroundPicture, this.DrawPoint.X, this.DrawPoint.Y);
-					DDDraw.DrawCenter(picture, this.DrawPoint.X, this.DrawPoint.Y);
+
+					if (picture == null)
+					{
+						DDDraw.DrawCenter(this.単独セルPicture, this.DrawPoint.X, this.DrawPoint.Y);
+					}
+					else
+					{
+						bool inner_左列 = this.MapTablePoint.X % 2 == 0;
+						bool inner_上段 = this.MapTablePoint.Y % 2 == 0;
+
+						if (!inner_左列 && !inner_上段)
+						{
+							DDDraw.SetMosaic();
+							DDDraw.DrawBegin(picture, this.DrawPoint.X - GameConsts.TILE_W / 2, this.DrawPoint.Y - GameConsts.TILE_H / 2);
+							DDDraw.DrawZoom(2.0);
+							DDDraw.DrawEnd();
+							DDDraw.Reset();
+						}
+					}
 
 					yield return true;
 				}
+			}
+
+			private bool IsFriend4x4(int rel_l, int rel_t)
+			{
+				int l = (this.MapTablePoint.X / 2 + rel_l) * 2;
+				int t = (this.MapTablePoint.Y / 2 + rel_t) * 2;
+
+				return
+					this.IsFriend2x2(l + 0, t + 0) &&
+					this.IsFriend2x2(l + 0, t + 2) &&
+					this.IsFriend2x2(l + 2, t + 0) &&
+					this.IsFriend2x2(l + 2, t + 2);
 			}
 
 			private bool IsFriend2x2(int l, int t)

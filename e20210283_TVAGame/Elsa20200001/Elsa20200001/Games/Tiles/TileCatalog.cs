@@ -44,6 +44,7 @@ namespace Charlotte.Games.Tiles
 			new TileInfo("箱", () => new Tile_Wall(Ground.I.Picture2.Tile_B[8, 2])),
 			new TileInfo("水辺", () => new Tile_水辺(Ground.I.Picture2.MiniTile_A1, 16, 0, 3, 60)),
 			new TileInfo("森林", () => new Tile_森林(Ground.I.Picture2.Tile_B, 6, 6, 6, 4, Ground.I.Picture2.Tile_A2[0, 0], Ground.I.Picture2.Tile_B[4, 6])),
+			new TileInfo("大森林", () => new Tile_大森林(Ground.I.Picture2.Tile_B, 6, 6, 6, 4, Ground.I.Picture2.Tile_A2[0, 0], Ground.I.Picture2.Tile_B[4, 6])),
 
 			// 新しいタイルをここへ追加..
 		};
