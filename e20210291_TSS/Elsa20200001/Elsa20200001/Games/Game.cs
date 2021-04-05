@@ -430,7 +430,6 @@ namespace Charlotte.Games
 		/// </summary>
 		private void SaveMenu()
 		{
-#if true
 			using (new SaveOrLoadMenu())
 			{
 				SaveOrLoadMenu.I.Save(() =>
@@ -446,9 +445,6 @@ namespace Charlotte.Games
 				});
 			}
 			DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP);
-#else // old
-			this.P_SaveOrLoadMenu(true);
-#endif
 		}
 
 		/// <summary>
@@ -456,7 +452,6 @@ namespace Charlotte.Games
 		/// </summary>
 		private void LoadMenu()
 		{
-#if true
 			using (new SaveOrLoadMenu())
 			{
 				SaveDataSlot sdSlot = SaveOrLoadMenu.I.Load(() =>
@@ -480,83 +475,6 @@ namespace Charlotte.Games
 					this.DispPageEndedCount = 0;
 					this.DispFastMode = false;
 				}
-			}
-			DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP);
-#else // old
-			this.P_SaveOrLoadMenu(false);
-#endif
-		}
-
-		/// <summary>
-		/// ゲーム中のセーブ・ロード画面
-		/// </summary>
-		/// <param name="saveMode">セーブモードであるか</param>
-		private void P_SaveOrLoadMenu(bool saveMode)
-		{
-			DDSimpleMenu simpleMenu = new DDSimpleMenu()
-			{
-				Color = new I3Color(255, 255, 255),
-				BorderColor = saveMode ? new I3Color(192, 0, 0) : new I3Color(0, 0, 192),
-				WallPicture = Ground.I.Picture.Title, // 仮
-				WallCurtain = -0.5,
-			};
-
-			int selectIndex = 0;
-
-			for (; ; )
-			{
-				selectIndex = simpleMenu.Perform(
-					saveMode ? "セーブメニュー" : "ロードメニュー",
-					Ground.I.SaveDataSlots.Select(saveDataSlot =>
-						saveDataSlot.SavedTime.Year == 1 ?
-						"----" :
-						"[" + saveDataSlot.SavedTime.ToString() + "]").Concat(new string[] { "戻る" }).ToArray(),
-					selectIndex
-					);
-
-				if (selectIndex < Consts.SAVE_DATA_SLOT_NUM)
-				{
-					if (saveMode) // ? セーブモード
-					{
-						if (new Confirm()
-						{
-							BorderColor =
-								Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
-								new I3Color(255, 0, 0) :
-								new I3Color(200, 100, 50)
-						}
-						.Perform(
-							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null ?
-							"スロット " + (selectIndex + 1) + " のデータを上書きします。" :
-							"スロット " + (selectIndex + 1) + " にセーブします。", "はい", "いいえ") == 0)
-						{
-							Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus = this.Status.Serialize();
-							Ground.I.SaveDataSlots[selectIndex].SavedTime = new SCommon.SimpleDateTime(SCommon.TimeStampToSec.ToSec(DateTime.Now));
-						}
-					}
-					else // ? ロードモード
-					{
-						if (Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus != null) // ロードする。
-						{
-							if (new Confirm() { BorderColor = new I3Color(50, 100, 200) }
-								.Perform("スロット " + (selectIndex + 1) + " のデータをロードします。", "はい", "いいえ") == 0)
-							{
-								this.Status = GameStatus.Deserialize(Ground.I.SaveDataSlots[selectIndex].SerializedGameStatus);
-								this.CurrPage = this.Status.Scenario.Pages[this.Status.CurrPageIndex];
-								this.DispSubtitleCharCount = 0;
-								this.DispCharCount = 0;
-								this.DispPageEndedCount = 0;
-								this.DispFastMode = false;
-								break;
-							}
-						}
-					}
-				}
-				else // [戻る]
-				{
-					break;
-				}
-				//DDEngine.EachFrame(); // 不要
 			}
 			DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP);
 		}

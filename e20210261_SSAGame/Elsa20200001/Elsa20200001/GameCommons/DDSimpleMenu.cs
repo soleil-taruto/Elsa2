@@ -26,30 +26,6 @@ namespace Charlotte.GameCommons
 			this.MouseUsable = mouseUsable;
 		}
 
-#if false // old -- サンプルとして残す。
-		private void DrawWallPicture()
-		{
-			DDDraw.DrawRect(
-				this.WallPicture,
-				DDUtils.AdjustRectExterior(this.WallPicture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
-				);
-		}
-
-		public void DrawWall()
-		{
-			DDCurtain.DrawCurtain();
-
-			if (this.WallColor != null)
-				DX.DrawBox(0, 0, DDConsts.Screen_W, DDConsts.Screen_H, DDUtils.GetColor(this.WallColor.Value), 1);
-
-			if (this.WallPicture != null)
-			{
-				DrawWallPicture();
-				DDCurtain.DrawCurtain(this.WallCurtain);
-			}
-		}
-#endif
-
 		private void ResetPrint()
 		{
 			DDPrint.Reset();
