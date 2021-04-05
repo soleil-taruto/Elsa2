@@ -187,6 +187,7 @@
     <Compile Include="Games\Tiles\Tile_森林系.cs" />
     <Compile Include="Games\Tiles\Tile_水辺.cs" />
     <Compile Include="Games\Tiles\Tile_水辺系.cs" />
+    <Compile Include="Games\Tiles\Tile_大森林系.cs" />
     <Compile Include="Games\WorldGameMaster.cs" />
     <Compile Include="Games\Player.cs" />
     <Compile Include="Games\Shots\Shot.cs" />
