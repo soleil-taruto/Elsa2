@@ -11,10 +11,7 @@ namespace Charlotte.GameCommons
 	{
 		public I3Color? Color = null;
 		public I3Color? BorderColor = null;
-		//public I3Color? WallColor = null;
-		//public DDPicture WallPicture = null;
-		//public double WallCurtain = 0.0; // -1.0 ～ 1.0
-		public Action WallDrawer = null;
+		public Action WallDrawer;
 		public int X = 32;
 		public int Y = 32;
 		public int YStep = 64;
@@ -30,30 +27,6 @@ namespace Charlotte.GameCommons
 		public DDSimpleMenu(bool mouseUsable)
 		{
 			this.MouseUsable = mouseUsable;
-		}
-
-		//private void DrawWallPicture()
-		//{
-		//    DDDraw.DrawRect(
-		//        this.WallPicture,
-		//        DDUtils.AdjustRectExterior(this.WallPicture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
-		//        );
-		//}
-
-		public void DrawWall()
-		{
-			//DDCurtain.DrawCurtain();
-
-			//if (this.WallColor != null)
-			//    DX.DrawBox(0, 0, DDConsts.Screen_W, DDConsts.Screen_H, DDUtils.GetColor(this.WallColor.Value), 1);
-
-			//if (this.WallPicture != null)
-			//{
-			//    DrawWallPicture();
-			//    DDCurtain.DrawCurtain(this.WallCurtain);
-			//}
-			if (this.WallDrawer != null)
-				this.WallDrawer();
 		}
 
 		public int Perform(string title, string[] items, int selectIndex)
@@ -121,7 +94,7 @@ namespace Charlotte.GameCommons
 					DDMouse.PosChanged();
 				}
 
-				this.DrawWall();
+				this.WallDrawer();
 
 				if (this.Color != null)
 					DDPrint.SetColor(this.Color.Value);
@@ -453,7 +426,7 @@ namespace Charlotte.GameCommons
 						}
 					endInput:
 
-						this.DrawWall();
+						this.WallDrawer();
 
 						if (this.Color != null)
 							DDPrint.SetColor(this.Color.Value);
@@ -531,7 +504,7 @@ namespace Charlotte.GameCommons
 						}
 					endInput:
 
-						this.DrawWall();
+						this.WallDrawer();
 
 						if (this.Color != null)
 							DDPrint.SetColor(this.Color.Value);
@@ -729,7 +702,7 @@ namespace Charlotte.GameCommons
 					pulse();
 				}
 
-				this.DrawWall();
+				this.WallDrawer();
 
 				if (this.Color != null)
 					DDPrint.SetColor(this.Color.Value);

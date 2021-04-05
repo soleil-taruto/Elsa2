@@ -318,7 +318,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 			DDEngine.FreezeInput();
@@ -514,7 +514,7 @@ namespace Charlotte.Games
 
 			foreach (DDScene scene in DDSceneUtils.Create(40))
 			{
-				this.SimpleMenu.DrawWall();
+				this.SimpleMenu.WallDrawer();
 				DDEngine.EachFrame();
 			}
 
