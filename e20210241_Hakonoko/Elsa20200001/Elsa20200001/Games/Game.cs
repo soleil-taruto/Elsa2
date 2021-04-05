@@ -1452,8 +1452,6 @@ namespace Charlotte.Games
 			{
 				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 64, 128),
-				//WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				//WallCurtain = -0.5,
 				WallDrawer = () =>
 				{
 					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
@@ -1534,8 +1532,11 @@ namespace Charlotte.Games
 			{
 				Color = new I3Color(255, 255, 255),
 				BorderColor = new I3Color(0, 128, 64),
-				WallPicture = DDGround.KeptMainScreen.ToPicture(),
-				WallCurtain = -0.5,
+				WallDrawer = () =>
+				{
+					DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
+					DDCurtain.DrawCurtain(-0.5);
+				},
 			};
 
 			DDEngine.FreezeInput();

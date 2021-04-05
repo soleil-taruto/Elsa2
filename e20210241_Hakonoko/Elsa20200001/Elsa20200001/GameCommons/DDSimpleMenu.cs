@@ -11,8 +11,8 @@ namespace Charlotte.GameCommons
 	{
 		public I3Color? Color = null;
 		public I3Color? BorderColor = null;
-		public I3Color? WallColor = null;
-		public DDPicture WallPicture = null;
+		//public I3Color? WallColor = null;
+		//public DDPicture WallPicture = null;
 		public double WallCurtain = 0.0; // -1.0 ～ 1.0
 		public Action WallDrawer = null;
 
@@ -29,26 +29,26 @@ namespace Charlotte.GameCommons
 			this.MouseUsable = mouseUsable;
 		}
 
-		private void DrawWallPicture()
-		{
-			DDDraw.DrawRect(
-				this.WallPicture,
-				DDUtils.AdjustRectExterior(this.WallPicture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
-				);
-		}
+		//private void DrawWallPicture()
+		//{
+		//    DDDraw.DrawRect(
+		//        this.WallPicture,
+		//        DDUtils.AdjustRectExterior(this.WallPicture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+		//        );
+		//}
 
 		public void DrawWall()
 		{
-			DDCurtain.DrawCurtain();
+			//DDCurtain.DrawCurtain();
 
-			if (this.WallColor != null)
-				DX.DrawBox(0, 0, DDConsts.Screen_W, DDConsts.Screen_H, DDUtils.GetColor(this.WallColor.Value), 1);
+			//if (this.WallColor != null)
+			//    DX.DrawBox(0, 0, DDConsts.Screen_W, DDConsts.Screen_H, DDUtils.GetColor(this.WallColor.Value), 1);
 
-			if (this.WallPicture != null)
-			{
-				DrawWallPicture();
-				DDCurtain.DrawCurtain(this.WallCurtain);
-			}
+			//if (this.WallPicture != null)
+			//{
+			//    DrawWallPicture();
+			//    DDCurtain.DrawCurtain(this.WallCurtain);
+			//}
 			if (this.WallDrawer != null)
 				this.WallDrawer();
 		}
