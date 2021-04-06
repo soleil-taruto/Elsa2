@@ -6,6 +6,7 @@ using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.GameProgressMasters;
 using DxLibDLL;
+using Charlotte.Novels;
 
 namespace Charlotte.Games
 {
@@ -274,7 +275,9 @@ namespace Charlotte.Games
 						case 0:
 							if (DDConfig.LOG_ENABLED && 1 <= DDInput.DIR_6.GetInput())
 							{
-								//this.CheatMainMenu(); // 未設置
+								this.DrawWall.TopMenuLeaved = true;
+								this.CheatMainMenu();
+								this.DrawWall.TopMenuLeaved = false;
 							}
 							else
 							{
@@ -505,7 +508,44 @@ namespace Charlotte.Games
 
 		private void CheatMainMenu()
 		{
-			// 未設置
+			for (; ; )
+			{
+				int selectIndex = this.SimpleMenu.Perform("開発デバッグ用メニュー", new string[]
+				{
+					"ノベルパート_エンディング_復讐",
+					"戻る",
+				},
+				0,
+				false,
+				40,
+				40,
+				24
+				);
+
+				switch (selectIndex)
+				{
+					case 0:
+						{
+							this.LeaveTitleMenu();
+
+							using (new Novel())
+							{
+								Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
+								Novel.I.Perform();
+							}
+							this.ReturnTitleMenu();
+						}
+						break;
+
+					case 1:
+						goto endMenu;
+
+					default:
+						throw new DDError();
+				}
+			}
+		endMenu:
+			;
 		}
 
 		private void LeaveTitleMenu()

@@ -6,10 +6,6 @@ using Charlotte.GameCommons;
 
 namespace Charlotte.Games
 {
-	/// <summary>
-	/// ノベルパート前の箱から出るモーション
-	/// ノベルパートに組み込んだため、廃止
-	/// </summary>
 	public static class 箱から出る
 	{
 		public class Cancelled : Exception
@@ -37,13 +33,13 @@ namespace Charlotte.Games
 				foreach (DDScene scene in DDSceneUtils.Create(30))
 				{
 					double x = DDConsts.Screen_W / 2;
-					double y = DDConsts.Screen_H - Ground.I.Picture.箱から出る_箱0001.Get_H() / 2;
+					double y = DDConsts.Screen_H / 2;
 
 					//double buruSpan = 20.0 * (1.0 - scene.Rate) + 10.0;
 					double buruSpan = 30.0 * (1.0 - scene.Rate);
 					double xBuru = DDUtils.Random.Real() * buruSpan - buruSpan / 2;
-					double yBuru = DDUtils.Random.Real() * buruSpan;
-					double z = 1.0 + 0.2 * (1.0 - scene.Rate);
+					double yBuru = DDUtils.Random.Real() * buruSpan - buruSpan / 2;
+					double z = 1.0 + 0.1 * (1.0 - scene.Rate);
 
 					DDDraw.DrawSimple(Ground.I.Picture.箱から出る_背景, 0, 0);
 					DDDraw.DrawBegin(Ground.I.Picture.箱から出る_箱0001, x + xBuru, y + yBuru);
@@ -53,18 +49,24 @@ namespace Charlotte.Games
 					P_EachFrame();
 				}
 			}
-			foreach (DDScene scene in DDSceneUtils.Create(50))
+			foreach (DDScene scene in DDSceneUtils.Create(80))
 			{
-				if (scene.Numer == 30)
+				if (scene.Numer == 60)
 					DDCurtain.SetCurtain(20, -1.0);
 
 				double x = DDConsts.Screen_W / 2;
-				double y = DDConsts.Screen_H - Ground.I.Picture.箱から出る_箱0002.Get_H() / 2;
+				double y = DDConsts.Screen_H / 2 - 10.0;
 
-				double zure = scene.Rate * 10.0;
-				double xZure = zure;
+				double zure;
+
+				if (scene.Numer < 2)
+					zure = (1.0 - scene.Numer / 2.0) * 20.0;
+				else
+					zure = scene.Rate * 20.0;
+
+				double xZure = 0.0;
 				double yZure = zure;
-				double z = 1.0 + 0.1 * (1.0 - scene.Rate);
+				double z = 1.0;
 
 				DDDraw.DrawSimple(Ground.I.Picture.箱から出る_背景, 0, 0);
 				DDDraw.DrawBegin(Ground.I.Picture.箱から出る_箱0002, x + xZure, y + yZure);

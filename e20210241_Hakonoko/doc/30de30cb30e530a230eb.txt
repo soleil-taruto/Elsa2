@@ -34,35 +34,34 @@
 
 ■制作協力（敬称略）
 
-　●シナリオ
+　あらい
 
-　　eiji
+　　グラフィック
+
+　eiji
+
+　　シナリオ
 
 
 ■素材（敬称略）
 
-　●画像
+　ICOON MONO
+　https://icooon-mono.com/
 
-　　フキダシデザイン
-　　https://fukidesign.com/e0165/
+　ケイ
+　https://k-gothic-font.hatenablog.com/
 
-　　ICOON MONO
-　　https://icooon-mono.com/
+　小森平
+　https://taira-komori.jpn.org/
 
-　●効果音
+　フォントグラフィック
+　https://fontgraphic.jp/
 
-　　小森平
-　　https://taira-komori.jpn.org/
+　フキダシデザイン
+　https://fukidesign.com/e0165/
 
-　●フォント
-
-　　(K ゴシック)
-　　ケイ
-　　https://k-gothic-font.hatenablog.com/
-
-　　(焚火フォント)
-　　フォントグラフィック
-　　https://fontgraphic.jp/
+　MODI工場
+　http://modi.jpn.org/font_komorebi-gothic.php
 
 
 ■このゲームの製作者
