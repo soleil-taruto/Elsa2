@@ -508,36 +508,54 @@ namespace Charlotte.Games
 
 		private void CheatMainMenu()
 		{
+			Action<string> a_novelTest = scenarioName =>
+			{
+				this.LeaveTitleMenu();
+
+				using (new Novel())
+				{
+					Novel.I.Status.Scenario = new Scenario(scenarioName);
+					Novel.I.Perform();
+				}
+				this.ReturnTitleMenu();
+			};
+
 			for (; ; )
 			{
 				int selectIndex = this.SimpleMenu.Perform("開発デバッグ用メニュー", new string[]
 				{
 					"ノベルパート_エンディング_復讐",
+					"ノベルパート_ステージ0001",
+					"ノベルパート_ステージ0003_箱の思い終わり",
+					"ノベルパート_ステージ0007_少女の思い終わり",
 					"戻る",
 				},
 				0,
 				false,
 				40,
 				40,
-				24
+				30
 				);
 
 				switch (selectIndex)
 				{
 					case 0:
-						{
-							this.LeaveTitleMenu();
-
-							using (new Novel())
-							{
-								Novel.I.Status.Scenario = new Scenario("エンディング_復讐");
-								Novel.I.Perform();
-							}
-							this.ReturnTitleMenu();
-						}
+						a_novelTest("エンディング_復讐");
 						break;
 
 					case 1:
+						a_novelTest("ステージ0001");
+						break;
+
+					case 2:
+						a_novelTest("ステージ0003");
+						break;
+
+					case 3:
+						a_novelTest("ステージ0007");
+						break;
+
+					case 4:
 						goto endMenu;
 
 					default:
