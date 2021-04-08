@@ -701,10 +701,19 @@ namespace Charlotte.Games
 
 								if (enemy.防御中)
 								{
-									shot.DeadFlag = true;
-									DDGround.EL.Add(SCommon.Supplier(Effects.自弾跳ね返し(shot)));
-
-									continue; // この自弾は消滅した(跳ね返した)ので、次の弾の判定へ移る。
+									if (shot.敵を貫通する == Shot.敵を貫通する_e.する)
+									{
+										// TODO: 攻撃が効かない音
+									}
+									else
+									{
+										// 自弾を跳ね返す。
+										{
+											shot.DeadFlag = true;
+											DDGround.EL.Add(SCommon.Supplier(Effects.自弾跳ね返し(shot)));
+										}
+									}
+									continue; // この自弾の攻撃は無効なので、次の弾の判定へ移る。
 								}
 								enemy.HP -= shot.AttackPoint;
 
