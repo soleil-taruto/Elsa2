@@ -246,7 +246,7 @@ namespace Charlotte.Games
 
 			DDEngine.FreezeInput();
 
-			//Ground.I.Music.Title.Play();
+			Ground.I.Music.Title.Play();
 
 			this.SimpleMenu = new DDSimpleMenu();
 
@@ -582,7 +582,7 @@ namespace Charlotte.Games
 
 		private void ReturnTitleMenu()
 		{
-			//Ground.I.Music.Title.Play();
+			Ground.I.Music.Title.Play();
 
 			DDCurtain.SetCurtain();
 

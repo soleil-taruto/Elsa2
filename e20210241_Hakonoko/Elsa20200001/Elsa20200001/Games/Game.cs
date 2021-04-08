@@ -277,6 +277,11 @@ namespace Charlotte.Games
 							this.Player.JumpFrame = 1;
 					}
 
+					if (this.Player.JumpFrame == 1) // ? ジャンプ開始
+					{
+						Ground.I.SE.Jump.Play();
+					}
+
 					if (camSlide)
 					{
 						if (DDInput.DIR_4.IsPound())

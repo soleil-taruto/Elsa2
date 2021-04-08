@@ -103,6 +103,12 @@ namespace Charlotte.Games
 				}
 			}
 
+			// アプリ固有 >
+
+			Ground.I.Music.Title.Play(); // ここで再生
+
+			// < アプリ固有
+
 			foreach (DDScene scene in DDSceneUtils.Create(60))
 			{
 				DDCurtain.DrawCurtain();
