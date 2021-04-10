@@ -1,0 +1,76 @@
+﻿===============================================================================
+
+　Hakonoko / version $version$
+　　　　　　　　　　　　　　　　　　　　　　　　　　(C) 2021 cerulean.charlotte
+
+===============================================================================
+
+
+■起動方法
+
+　Game.exe を実行して下さい。
+
+
+■操作方法
+
+　左右キー　横移動
+　下キー　　箱と同じ幅の狭い穴や地面の縁から下に降りる
+
+　Z　　ジャンプ / 決定
+　X　　低速移動 / キャンセル
+　C　　リスポーン地点設置
+　D　　画面スライド / 既読スキップ
+　F　　強制リスポーン
+
+　SPACE　　ポーズ / ポーズ解除
+
+　エスケープキーを押すと、いつでも終了できます。
+
+
+　★ゲームパッドの使用をおすすめします。
+
+　　タイトルメニューの 設定 > パッドのボタン設定 よりボタン配置を変更できます。
+
+
+■制作協力（敬称略）
+
+　あらい
+
+　　グラフィック
+
+　eiji
+
+　　シナリオ
+
+
+■素材（敬称略）
+
+　ICOON MONO
+　https://icooon-mono.com/
+
+　ケイ
+　https://k-gothic-font.hatenablog.com/
+
+　小森平
+　https://taira-komori.jpn.org/
+
+　フォントグラフィック
+　https://fontgraphic.jp/
+
+　フキダシデザイン
+　https://fukidesign.com/e0165/
+
+　MODI工場
+　http://modi.jpn.org/font_komorebi-gothic.php
+
+　夜野ムクロジ
+　https://nightmare0music.tumblr.com/
+
+
+■このゲームの製作者
+
+　cerulean.charlotte
+　https://github.com/soleil-taruto
+
+　連絡先 -> cerulean.charlottes@gmail.com
+
