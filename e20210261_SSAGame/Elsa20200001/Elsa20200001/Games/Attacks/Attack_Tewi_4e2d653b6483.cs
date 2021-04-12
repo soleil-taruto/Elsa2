@@ -25,7 +25,7 @@ namespace Charlotte.Games.Attacks
 				if (Ground.I.Picture2.Tewi_中攻撃.Length <= koma)
 					break;
 
-				double x = Game.I.Player.X + 20;
+				double x = Game.I.Player.X + 20 * (Game.I.Player.FacingLeft ? -1.0 : 1.0);
 				double y = Game.I.Player.Y - 16;
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 				bool facingLeft = Game.I.Player.FacingLeft;

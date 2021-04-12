@@ -17,6 +17,7 @@ namespace Charlotte.Games.Attacks
 		protected override IEnumerable<bool> E_Draw()
 		{
 			int zureX = 0;
+			int zureY = -16;
 
 			for (int frame = 0; ; frame++)
 			{
@@ -34,7 +35,7 @@ namespace Charlotte.Games.Attacks
 				}
 
 				double x = Game.I.Player.X + zureX * (Game.I.Player.FacingLeft ? -1.0 : 1.0);
-				double y = Game.I.Player.Y - 16;
+				double y = Game.I.Player.Y + zureY;
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 				bool facingLeft = Game.I.Player.FacingLeft;
 
