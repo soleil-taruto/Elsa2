@@ -13,10 +13,11 @@ namespace Charlotte.Games
 		public string MapFile;
 		public Design Design;
 
-		public Map(string mapFile, Design design)
+		public Map(string mapFile, Design design, uint seed)
 		{
 			this.MapFile = mapFile;
 			this.Design = design;
+			DDUtils.Random = new DDRandom(seed);
 			this.Load();
 		}
 

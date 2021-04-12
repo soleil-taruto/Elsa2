@@ -50,7 +50,7 @@ namespace Charlotte.GameProgressMasters
 
 		private Func<Map>[] MapLoaders = new Func<Map>[]
 		{
-			() => new Map(@"res\Map\0000.bmp", new Design_0000()),
+			() => new Map(@"res\Map\0000.bmp", new Design_0000(), 0),
 			() => new Map(@"res\Map\0001.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0101,
 				Ground.I.Picture.WallPicture_0102,
@@ -68,7 +68,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				1
+				),
 			() => new Map(@"res\Map\0002.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0201,
 				Ground.I.Picture.WallPicture_0202,
@@ -86,7 +88,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				2 + 102
+				),
 			() => new Map(@"res\Map\0003.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0301,
 				Ground.I.Picture.WallPicture_0302,
@@ -104,7 +108,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				3
+				),
 			() => new Map(@"res\Map\0004.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0401,
 				Ground.I.Picture.WallPicture_0402,
@@ -122,7 +128,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				4
+				),
 			() => new Map(@"res\Map\0005.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0501,
 				Ground.I.Picture.WallPicture_0502,
@@ -140,7 +148,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				5
+				),
 			() => new Map(@"res\Map\0006.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0601,
 				Ground.I.Picture.WallPicture_0602,
@@ -158,7 +168,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				6
+				),
 			() => new Map(@"res\Map\0007.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0701,
 				Ground.I.Picture.WallPicture_0702,
@@ -176,7 +188,9 @@ namespace Charlotte.GameProgressMasters
 				1.0,
 				false,
 				instance => { }
-				)),
+				),
+				7
+				),
 			() => new Map(@"res\Map\0008.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0801,
 				Ground.I.Picture.WallPicture_0802,
@@ -194,7 +208,9 @@ namespace Charlotte.GameProgressMasters
 				0.9,
 				true,
 				instance => { }
-				)),
+				),
+				8
+				),
 			() => new Map(@"res\Map\0009.bmp", new Design_0001(
 				Ground.I.Picture.WallPicture_0901,
 				Ground.I.Picture.WallPicture_0902,
@@ -215,7 +231,9 @@ namespace Charlotte.GameProgressMasters
 				{
 					instance.CookieAxisColor = new I3Color(0, 0, 0);
 				}
-				)),
+				),
+				9
+				),
 		};
 
 		private Func<Scenario>[] ScenarioLoaders = new Func<Scenario>[]
