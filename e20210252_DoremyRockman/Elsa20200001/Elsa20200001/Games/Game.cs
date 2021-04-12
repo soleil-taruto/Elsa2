@@ -106,7 +106,7 @@ namespace Charlotte.Games
 
 			DDEngine.FreezeInput();
 
-			bool jumpLock = false; // ? ジャンプ・ロック // ジャンプしたらボタン離すまでロックする。
+			bool jumpLock = false; // ? ジャンプ・ロック // ジャンプしたらボタンを離すまでロックする。
 
 			for (this.Frame = 0; ; this.Frame++)
 			{

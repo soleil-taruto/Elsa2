@@ -124,7 +124,7 @@ namespace Charlotte.Games
 			Func<bool> f_ゴミ回収 = SCommon.Supplier(this.E_ゴミ回収());
 
 			bool goalFlag = false; // ? ゴールした。
-			bool jumpLock = false; // ? ジャンプ・ロック // ジャンプしたらボタン離すまでロックする。
+			bool jumpLock = false; // ? ジャンプ・ロック // ジャンプしたらボタンを離すまでロックする。
 
 			this.Respawn();
 
