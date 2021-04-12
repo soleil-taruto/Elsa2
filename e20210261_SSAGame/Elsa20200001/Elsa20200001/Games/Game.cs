@@ -93,6 +93,8 @@ namespace Charlotte.Games
 
 			DDEngine.FreezeInput();
 
+			bool jumpLock = false; // ? ジャンプ・ロック // ジャンプしたらボタン離すまでロックする。
+
 			for (this.Frame = 0; ; this.Frame++)
 			{
 				if (
@@ -210,6 +212,9 @@ namespace Charlotte.Games
 
 					this.Player.MoveSlow = move && slow;
 
+					if (jump == 0)
+						jumpLock = false;
+
 					if (1 <= this.Player.JumpFrame)
 					{
 						if (1 <= jump)
@@ -236,7 +241,7 @@ namespace Charlotte.Games
 
 						if (this.Player.AirborneFrame < 入力猶予時間) // ? 接地状態からのジャンプが可能な状態
 						{
-							if (1 <= jump && jump < 事前入力時間)
+							if (1 <= jump && jump < 事前入力時間 && !jumpLock)
 							{
 								// ★ ジャンプを開始した。
 
@@ -244,6 +249,8 @@ namespace Charlotte.Games
 								this.Player.JumpCount = 1;
 
 								this.Player.YSpeed = GameConsts.PLAYER_ジャンプ初速度;
+
+								jumpLock = true;
 							}
 							else
 							{
@@ -256,7 +263,7 @@ namespace Charlotte.Games
 							if (this.Player.JumpCount < 1)
 								this.Player.JumpCount = 1;
 
-							if (1 <= jump && jump < 事前入力時間 && this.Player.JumpCount < GameConsts.JUMP_MAX)
+							if (1 <= jump && jump < 事前入力時間 && this.Player.JumpCount < GameConsts.JUMP_MAX && !jumpLock)
 							{
 								// ★ 空中(n-段)ジャンプを開始した。
 
@@ -266,12 +273,19 @@ namespace Charlotte.Games
 								this.Player.YSpeed = GameConsts.PLAYER_ジャンプ初速度;
 
 								DDGround.EL.Add(SCommon.Supplier(Effects.空中ジャンプの足場(this.Player.X, this.Player.Y + 48)));
+
+								jumpLock = true;
 							}
 							else
 							{
 								// noop
 							}
 						}
+					}
+
+					if (this.Player.JumpFrame == 1) // ? ジャンプ開始
+					{
+						Ground.I.SE.Coin01.Play(); // test test test test test
 					}
 
 					if (camSlide)

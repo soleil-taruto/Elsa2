@@ -17,6 +17,8 @@ namespace Charlotte
 			new DDSE(@"dat\Game\小森平\sfxrse\01pickup\coin04.mp3"),
 		};
 
+		public DDSE Coin01 = new DDSE(@"dat\Game\小森平\sfxrse\01pickup\coin01.mp3"); // test test test test test
+
 		public ResourceSE()
 		{
 			//this.Dummy.Volume = 0.1; // 非推奨
