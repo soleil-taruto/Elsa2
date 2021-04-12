@@ -124,6 +124,7 @@ namespace Charlotte.Games
 			Func<bool> f_ゴミ回収 = SCommon.Supplier(this.E_ゴミ回収());
 
 			bool goalFlag = false; // ? ゴールした。
+			bool jumpLock = false; // ? ジャンプ・ロック // ジャンプしたらボタン離すまでロックする。
 
 			this.Respawn();
 
@@ -256,6 +257,9 @@ namespace Charlotte.Games
 
 					this.Player.MoveSlow = plMove != 0 && slow;
 
+					if (jump == 0)
+						jumpLock = false;
+
 					if (1 <= this.Player.JumpFrame)
 					{
 						const int JUMP_FRAME_MAX = 22;
@@ -273,8 +277,11 @@ namespace Charlotte.Games
 						const int 事前入力時間 = 10;
 						const int 入力猶予時間 = 5;
 
-						if (1 <= jump && jump < 事前入力時間 && this.Player.AirborneFrame < 入力猶予時間)
+						if (1 <= jump && jump < 事前入力時間 && this.Player.AirborneFrame < 入力猶予時間 && !jumpLock)
+						{
 							this.Player.JumpFrame = 1;
+							jumpLock = true;
+						}
 					}
 
 					if (this.Player.JumpFrame == 1) // ? ジャンプ開始
