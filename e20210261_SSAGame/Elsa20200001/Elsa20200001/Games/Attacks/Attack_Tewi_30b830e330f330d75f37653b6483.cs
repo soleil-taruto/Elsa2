@@ -22,8 +22,12 @@ namespace Charlotte.Games.Attacks
 					break;
 
 				//int koma = frame;
-				//int koma = frame / 2;
-				int koma = frame / 3;
+				int koma = frame / 2;
+				//int koma = frame / 3;
+
+				koma += 2; // 最初の2コマを飛ばす。
+				if (8 <= koma) koma -= 2; // koma == 6, 7 の 2 回目
+				if (8 <= koma) koma -= 2; // koma == 6, 7 の 3 回目
 
 				if (Ground.I.Picture2.Tewi_ジャンプ強攻撃.Length <= koma)
 					break;

@@ -16,6 +16,8 @@ namespace Charlotte.Games.Attacks
 
 		protected override IEnumerable<bool> E_Draw()
 		{
+			int zureX = 0;
+
 			for (int frame = 0; ; frame++)
 			{
 				//int koma = frame;
@@ -25,12 +27,18 @@ namespace Charlotte.Games.Attacks
 				if (Ground.I.Picture2.Tewi_しゃがみ強攻撃.Length <= koma)
 					break;
 
-				double x = Game.I.Player.X + 24 * (Game.I.Player.FacingLeft ? -1.0 : 1.0);
+				if (frame == 5 * 3)
+				{
+					Game.I.Player.X += 54 * (Game.I.Player.FacingLeft ? -1.0 : 1.0);
+					zureX = 16;
+				}
+
+				double x = Game.I.Player.X + zureX * (Game.I.Player.FacingLeft ? -1.0 : 1.0);
 				double y = Game.I.Player.Y - 16;
 				double xZoom = Game.I.Player.FacingLeft ? -1.0 : 1.0;
 				bool facingLeft = Game.I.Player.FacingLeft;
 
-				if (frame == 6 * 4)
+				if (frame == 6 * 3)
 				{
 					// TODO: 当たり判定設定
 				}
