@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DxLibDLL;
+using Charlotte.Commons;
 
 namespace Charlotte.GameCommons
 {
@@ -56,7 +57,7 @@ namespace Charlotte.GameCommons
 					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, fileData.Length));
 
 					if (handle == -1) // ? 失敗
-						throw new DDError();
+						throw new DDError(SCommon.Hex.ToString(SCommon.GetSHA512(fileData)));
 
 					this.Handles[0] = handle;
 				}
