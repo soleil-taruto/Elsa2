@@ -16,7 +16,7 @@ namespace Charlotte.Games
 		/// </summary>
 		/// <param name="stageNo">ステージ番号</param>
 		/// <param name="themeColor">このステージの印象的な色</param>
-		public static void Perform(int stageNo, I3Color themeColor)
+		public static void Perform(int stageNo, I3Color themeColor, DDMusic music)
 		{
 			int layerNo = 10 - stageNo;
 
@@ -27,6 +27,9 @@ namespace Charlotte.Games
 			{
 				foreach (DDScene scene in DDSceneUtils.Create(210))
 				{
+					if (scene.Numer == 30)
+						music.Play();
+
 					if (scene.Numer + 30 == scene.Denom)
 						DDCurtain.SetCurtain(30, -1.0);
 

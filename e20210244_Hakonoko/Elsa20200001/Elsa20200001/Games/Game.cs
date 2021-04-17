@@ -118,7 +118,7 @@ namespace Charlotte.Games
 
 			DDEngine.FreezeInput();
 
-			// TODO: 音楽
+			// 音楽 --> GameProgressMaster.Perform() で再生・停止している。
 
 			Func<bool> f_reorderEnemies = SCommon.Supplier(this.E_ReorderEnemies());
 			Func<bool> f_ゴミ回収 = SCommon.Supplier(this.E_ゴミ回収());

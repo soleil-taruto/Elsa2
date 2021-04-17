@@ -250,16 +250,34 @@ namespace Charlotte.GameProgressMasters
 			() => new Scenario(@"ステージ0009"),
 		};
 
+		private DDMusic[] FloorMusics = new DDMusic[]
+		{
+			Ground.I.Music.Dummy,
+			Ground.I.Music.Floor_01,
+			Ground.I.Music.Floor_02,
+			Ground.I.Music.Floor_03,
+			Ground.I.Music.Floor_04,
+			Ground.I.Music.Floor_05,
+			Ground.I.Music.Floor_06,
+			Ground.I.Music.Floor_07,
+			Ground.I.Music.Floor_08,
+			Ground.I.Music.Floor_09,
+		};
+
 		public void Perform()
 		{
 			for (int index = this.StartStageIndex; ; index++)
 			{
-				if (!DDConfig.LOG_ENABLED) // zantei zantei zantei test test test 開発デバッグ中は抑止
+				//this.FloorMusics[index].Play(); // フロアＢＧＭ再生 moved --> レイヤ表示.Perform
+
+				//if (!DDConfig.LOG_ENABLED) // zantei zantei zantei test test test 開発デバッグ中は抑止
 				{
-					レイヤ表示.Perform(index, this.ThemeColors[index]);
+					レイヤ表示.Perform(index, this.ThemeColors[index], this.FloorMusics[index]);
 				}
 
 				Game.EndStatus_e endStatus;
+
+				this.FloorMusics[index].Play(); // フロアＢＧＭ再生(念のため)
 
 				using (new Game())
 				{
@@ -270,6 +288,8 @@ namespace Charlotte.GameProgressMasters
 					if (endStatus == Game.EndStatus_e.ReturnToTitleMenu)
 						break;
 				}
+
+				DDMusicUtils.Fade(); // フロアＢＧＭ停止
 
 #if true
 				int reachedStageIndexNew = index + 1;
