@@ -15,6 +15,7 @@ namespace Charlotte.GameCommons
 		private int[] Handles = null; // null == Unloaded
 
 		public Action PostLoaded = () => { };
+		public List<Action> PostLoaded2 = new List<Action>();
 
 		public DDSound(string file, int handleCount)
 			: this(() => DDResource.Load(file), handleCount)
@@ -83,6 +84,9 @@ namespace Charlotte.GameCommons
 				}
 
 				this.PostLoaded();
+
+				foreach (Action routine in this.PostLoaded2)
+					routine();
 			}
 			return this.Handles[handleIndex];
 		}
