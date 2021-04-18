@@ -244,10 +244,10 @@ namespace Charlotte.GameCommons
 
 		public static void PostSetScreenSize(int w, int h)
 		{
-			if (DDGround.MonitorRect.W == w && DDGround.MonitorRect.H == h)
-			{
-				SetScreenPosition(DDGround.MonitorRect.L, DDGround.MonitorRect.T);
-			}
+			SetScreenPosition(
+				DDGround.MonitorRect.L + (DDGround.MonitorRect.W - w) / 2,
+				DDGround.MonitorRect.T + (DDGround.MonitorRect.H - h) / 2
+				);
 		}
 
 		public static void SetScreenPosition(int l, int t)
