@@ -8,26 +8,27 @@ namespace Charlotte.GameCommons
 {
 	public class DDMusic
 	{
+		public bool Globally;
+		public bool Locally { get { return !this.Globally; } }
 		public DDSound Sound;
 		public double Volume = 0.5; // 0.0 ～ 1.0
 
-		public DDMusic(string file)
-			: this(new DDSound(file, 1))
+		public DDMusic(bool globally, string file)
+			: this(globally, new DDSound(file, 1))
 		{ }
 
-		public DDMusic(Func<byte[]> getFileData)
-			: this(new DDSound(getFileData, 1))
+		public DDMusic(bool globally, Func<byte[]> getFileData)
+			: this(globally, new DDSound(getFileData, 1))
 		{ }
 
-		public DDMusic(DDSound sound_binding)
+		public DDMusic(bool globally, DDSound sound_binding)
 		{
+			this.Globally = globally;
 			this.Sound = sound_binding;
 			this.Sound.PostLoaded = () => DDSoundUtils.SetVolume(this.Sound.GetHandle(0), 0.0); // ロードしたらミュートしておく。
 
 			DDMusicUtils.Add(this);
 		}
-
-		// memo: ループ開始・終了位置を探すツール --> C:\Dev\wb\t20201022_SoundLoop
 
 		/// <summary>
 		/// ループを設定する。

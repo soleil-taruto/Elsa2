@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Charlotte.Commons;
 using DxLibDLL;
+using Charlotte.Commons;
 
 namespace Charlotte.GameCommons
 {
@@ -67,7 +67,7 @@ namespace Charlotte.GameCommons
 #endif
 
 					if (handle == -1) // ? 失敗
-						throw new DDError();
+						throw new DDError("Sound File SHA-512: " + SCommon.Hex.ToString(SCommon.GetSHA512(fileData)));
 
 					this.Handles[0] = handle;
 				}
