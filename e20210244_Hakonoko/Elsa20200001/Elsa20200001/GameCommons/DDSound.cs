@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DxLibDLL;
 using Charlotte.Commons;
+using System.IO;
 
 namespace Charlotte.GameCommons
 {
@@ -54,7 +55,16 @@ namespace Charlotte.GameCommons
 					byte[] fileData = this.Func_GetFileData();
 					int handle = -1;
 
-					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, fileData.Length));
+#if true
+					using (WorkingDir wd = new WorkingDir())
+					{
+						string file = wd.MakePath();
+						File.WriteAllBytes(file, fileData);
+						handle = DX.LoadSoundMem(file);
+					}
+#else
+					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, fileData.Length)); // メモリ爆食いして落ちる。@ 2021.4.18
+#endif
 
 					if (handle == -1) // ? 失敗
 						throw new DDError(SCommon.Hex.ToString(SCommon.GetSHA512(fileData)));
