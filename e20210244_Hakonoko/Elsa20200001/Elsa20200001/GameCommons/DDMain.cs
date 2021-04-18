@@ -128,11 +128,10 @@ namespace Charlotte.GameCommons
 				int p2;
 				int p3;
 				int p4;
-				//int p5; // for newer version
-				//int p6; // for newer version
+				int p5;
+				int p6;
 
-				DX.GetDefaultState(out w, out h, out p1, out p2, out l, out t, out p3, out p4);
-				//DX.GetDefaultState(out w, out h, out p1, out p2, out l, out t, out p3, out p4, out p5, out p6); // for newer version
+				DX.GetDefaultState(out w, out h, out p1, out p2, out l, out t, out p3, out p4, out p5, out p6);
 
 				if (
 					w < 1 || SCommon.IMAX < w ||
@@ -300,6 +299,7 @@ namespace Charlotte.GameCommons
 			DDPictureUtils.UnloadAll();
 			DDSubScreenUtils.UnloadAll();
 			DDFontUtils.UnloadAll();
+			//DDSoundUtils.UnloadAll(); // 不要
 
 			if (DX.SetGraphMode(w, h, 32) != DX.DX_CHANGESCREEN_OK)
 				throw new DDError();

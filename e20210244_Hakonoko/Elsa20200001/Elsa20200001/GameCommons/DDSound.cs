@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using DxLibDLL;
 using Charlotte.Commons;
-using System.IO;
 
 namespace Charlotte.GameCommons
 {
@@ -63,11 +63,11 @@ namespace Charlotte.GameCommons
 						handle = DX.LoadSoundMem(file);
 					}
 #else
-					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, fileData.Length)); // メモリ爆食いして落ちる。@ 2021.4.18
+					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, (ulong)fileData.Length)); // DxLibDotNet3_22c で正常に動作しない。@ 2021.4.18
 #endif
 
 					if (handle == -1) // ? 失敗
-						throw new DDError(SCommon.Hex.ToString(SCommon.GetSHA512(fileData)));
+						throw new DDError("Sound File SHA-512: " + SCommon.Hex.ToString(SCommon.GetSHA512(fileData)));
 
 					this.Handles[0] = handle;
 				}
