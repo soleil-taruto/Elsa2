@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using Charlotte.Commons;
 using DxLibDLL;
 
 namespace Charlotte.GameCommons
@@ -53,7 +55,16 @@ namespace Charlotte.GameCommons
 					byte[] fileData = this.Func_GetFileData();
 					int handle = -1;
 
-					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, fileData.Length));
+#if true
+					using (WorkingDir wd = new WorkingDir())
+					{
+						string file = wd.MakePath();
+						File.WriteAllBytes(file, fileData);
+						handle = DX.LoadSoundMem(file);
+					}
+#else
+					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, (ulong)fileData.Length)); // DxLibDotNet3_22c で正常に動作しない。@ 2021.4.18
+#endif
 
 					if (handle == -1) // ? 失敗
 						throw new DDError();
