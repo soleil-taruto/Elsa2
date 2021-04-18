@@ -61,6 +61,7 @@ namespace Charlotte.GameCommons
 
 						case PlayInfo.Command_e.STOP:
 							DDSoundUtils.Stop(info.Music.Sound.GetHandle(0));
+							DDMusicUtils.UnloadLocally();
 							break;
 
 						default:
@@ -180,6 +181,13 @@ namespace Charlotte.GameCommons
 		{
 			foreach (DDMusic music in Musics)
 				music.Sound.Unload();
+		}
+
+		public static void UnloadLocally()
+		{
+			foreach (DDMusic music in Musics)
+				if (music.Locally)
+					music.Sound.Unload();
 		}
 	}
 }

@@ -83,7 +83,8 @@ namespace Charlotte.GameCommons
 		public static void AddAllMusic()
 		{
 			foreach (DDMusic music in DDMusicUtils.Musics)
-				Add(music);
+				if (music.Globally)
+					Add(music);
 		}
 
 		/// <summary>
