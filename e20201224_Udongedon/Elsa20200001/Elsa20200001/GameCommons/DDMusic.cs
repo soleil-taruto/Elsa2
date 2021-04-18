@@ -31,16 +31,25 @@ namespace Charlotte.GameCommons
 
 		/// <summary>
 		/// ループを設定する。
+		/// ハンドルのロード前に呼び出すこと。
 		/// </summary>
-		/// <param name="loopStart">ループ開始位置(サンプリング値)</param>
-		/// <param name="loopLength">ループの長さ(サンプリング値)</param>
+		/// <param name="loopStart">ループ開始位置(サンプル位置)</param>
+		/// <param name="loopLength">ループの長さ(サンプル位置)</param>
 		/// <returns>このインスタンス</returns>
-		public DDMusic SetLoop(int loopStart, int loopLength)
+		public DDMusic SetLoopByStEnd(int loopStart, int loopEnd)
 		{
-			DX.SetLoopSamplePosSoundMem(loopStart, this.Sound.GetHandle(0)); // ループ開始位置
-			DX.SetLoopStartSamplePosSoundMem(loopStart + loopLength, this.Sound.GetHandle(0)); // ループ終了位置
+			this.Sound.PostLoaded2.Add(() =>
+			{
+				DX.SetLoopSamplePosSoundMem(loopStart, this.Sound.GetHandle(0)); // ループ開始位置
+				DX.SetLoopStartSamplePosSoundMem(loopEnd, this.Sound.GetHandle(0)); // ループ終了位置
+			});
 
 			return this;
+		}
+
+		public DDMusic SetLoopByStLength(int loopStart, int loopLength)
+		{
+			return this.SetLoopByStEnd(loopStart, loopStart + loopLength);
 		}
 
 		public void Play(bool once = false, bool resume = false, double volume = 1.0, int fadeFrameMax = 30)
