@@ -18,9 +18,9 @@ namespace Charlotte
 
 		// memo: ループ開始・終了位置を探すツール --> C:\Dev\wb\t20201022_SoundLoop
 
-		public DDMusic Boss_01 = new DDMusic(false, @"dat\ユーフルカ\Battle-Vampire_loop\Battle-Vampire_loop.ogg").SetLoop(241468, 4205876);
-		public DDMusic Boss_02 = new DDMusic(false, @"dat\ユーフルカ\Battle-Conflict_loop\Battle-Conflict_loop.ogg").SetLoop(281888, 3704134);
-		public DDMusic Boss_03 = new DDMusic(false, @"dat\ユーフルカ\Battle-rapier_loop\Battle-rapier_loop.ogg").SetLoop(422312, 2767055);
+		public DDMusic Boss_01 = new DDMusic(false, @"dat\ユーフルカ\Battle-Vampire_loop\Battle-Vampire_loop.ogg").SetLoopByStLength(241468, 4205876);
+		public DDMusic Boss_02 = new DDMusic(false, @"dat\ユーフルカ\Battle-Conflict_loop\Battle-Conflict_loop.ogg").SetLoopByStLength(281888, 3704134);
+		public DDMusic Boss_03 = new DDMusic(false, @"dat\ユーフルカ\Battle-rapier_loop\Battle-rapier_loop.ogg").SetLoopByStLength(422312, 2767055);
 
 		public ResourceMusic()
 		{
