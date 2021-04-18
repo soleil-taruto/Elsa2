@@ -35,6 +35,8 @@ namespace Charlotte.GameCommons
 		/// <returns>このインスタンス</returns>
 		public DDMusic SetLoop(int loopStart, int loopLength)
 		{
+			// BUG: 再ロードで設定喪失
+
 			DX.SetLoopSamplePosSoundMem(loopStart, this.Sound.GetHandle(0)); // ループ開始位置
 			DX.SetLoopStartSamplePosSoundMem(loopStart + loopLength, this.Sound.GetHandle(0)); // ループ終了位置
 
