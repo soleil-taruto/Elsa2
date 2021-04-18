@@ -256,7 +256,7 @@ namespace Charlotte.Games
 
 						if (this.Player.AirborneFrame < 入力猶予時間) // ? 接地状態からのジャンプが可能な状態
 						{
-							if (1 <= jump && jump < 事前入力時間)
+							if (1 <= jump && jump < 事前入力時間 && !jumpLock)
 							{
 								if (
 									under &&
@@ -291,7 +291,7 @@ namespace Charlotte.Games
 							if (this.Player.JumpCount < 1)
 								this.Player.JumpCount = 1;
 
-							if (1 <= jump && jump < 事前入力時間 && this.Player.JumpCount < GameConsts.JUMP_MAX)
+							if (1 <= jump && jump < 事前入力時間 && this.Player.JumpCount < GameConsts.JUMP_MAX && !jumpLock)
 							{
 								// ★ 空中(n-段)ジャンプを開始した。
 
