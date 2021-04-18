@@ -223,6 +223,8 @@ namespace Charlotte.GameCommons
 
 		public static void ApplyScreenSize(int w, int h)
 		{
+			LiteStatusDlg.StartDisplay("スクリーンサイズを調整しています...");
+
 			bool mdm = DDUtils.GetMouseDispMode();
 
 			//DDDerivationUtils.UnloadAll(); // moved -> DDPictureUtils.UnloadAll
@@ -240,14 +242,19 @@ namespace Charlotte.GameCommons
 			DDUtils.SetMouseDispMode(mdm);
 
 			DDTouch.Touch();
+
+			LiteStatusDlg.EndDisplay();
 		}
 
 		public static void PostSetScreenSize(int w, int h)
 		{
-			SetScreenPosition(
-				DDGround.MonitorRect.L + (DDGround.MonitorRect.W - w) / 2,
-				DDGround.MonitorRect.T + (DDGround.MonitorRect.H - h) / 2
-				);
+			int l = DDGround.MonitorRect.L + (DDGround.MonitorRect.W - w) / 2;
+			int t = DDGround.MonitorRect.T + (DDGround.MonitorRect.H - h) / 2;
+
+			l = Math.Max(l, 0);
+			t = Math.Max(t, 0);
+
+			SetScreenPosition(l, t);
 		}
 
 		public static void SetScreenPosition(int l, int t)
