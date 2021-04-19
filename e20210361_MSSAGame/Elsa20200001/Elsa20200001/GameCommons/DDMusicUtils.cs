@@ -61,7 +61,13 @@ namespace Charlotte.GameCommons
 
 						case PlayInfo.Command_e.STOP:
 							DDSoundUtils.Stop(info.Music.Sound.GetHandle(0));
+
+#if true // 再生していたローカルBGMのみ解放する。
+							if (info.Music.Locally)
+								info.Music.Sound.Unload();
+#else // 全てのローカルBGMを解放する。
 							DDMusicUtils.UnloadLocally();
+#endif
 							break;
 
 						default:
