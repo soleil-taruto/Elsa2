@@ -42,6 +42,7 @@ namespace Charlotte.GameCommons
 			//Ground.EL.ExecuteAllTask();
 
 			DDGround.EL.ExecuteAllTask();
+			DDGround.SystemTasks.ExecuteAllTask();
 			DispDebug();
 			DDMouse.PosChanged_Delay();
 			DDCurtain.EachFrame();

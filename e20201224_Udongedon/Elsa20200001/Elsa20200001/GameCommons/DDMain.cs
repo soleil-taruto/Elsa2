@@ -243,7 +243,7 @@ namespace Charlotte.GameCommons
 
 			DDTouch.Touch();
 
-			LiteStatusDlg.EndDisplay();
+			LiteStatusDlg.EndDisplayDelay();
 		}
 
 		public static void PostSetScreenSize(int w, int h)

@@ -18,23 +18,40 @@ namespace Charlotte
 		{
 			EndDisplay();
 
-			// REVIEW: サブスレッドから呼び出される。BeginInvoke しなくて良いのか。
+			MainWin.I.BeginInvoke((MethodInvoker)delegate
+			{
+				Dlg = new LiteStatusDlg();
+				Dlg.Prm_StatusMessage = message;
+				Dlg.Show();
+			});
+		}
 
-			Dlg = new LiteStatusDlg();
-			Dlg.Prm_StatusMessage = message;
-			Dlg.Show();
+		public static void EndDisplayDelay()
+		{
+			const int DELAY_FRAME = 30;
+			int endFrame = DDEngine.ProcFrame + DELAY_FRAME;
+
+			DDGround.SystemTasks.Add(() =>
+			{
+				if (DDEngine.ProcFrame < endFrame)
+					return true;
+
+				EndDisplay();
+				return false;
+			});
 		}
 
 		public static void EndDisplay()
 		{
-			// REVIEW: サブスレッドから呼び出される。BeginInvoke しなくて良いのか。
-
-			if (Dlg != null)
+			MainWin.I.BeginInvoke((MethodInvoker)delegate
 			{
-				Dlg.Close();
-				Dlg.Dispose(); // 2bs
-				Dlg = null;
-			}
+				if (Dlg != null)
+				{
+					Dlg.Close();
+					Dlg.Dispose(); // 2bs
+					Dlg = null;
+				}
+			});
 		}
 
 		private string Prm_StatusMessage;
