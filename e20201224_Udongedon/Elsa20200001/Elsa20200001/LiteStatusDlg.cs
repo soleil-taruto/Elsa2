@@ -76,6 +76,9 @@ namespace Charlotte
 		public LiteStatusDlg()
 		{
 			InitializeComponent();
+
+			this.BackColor = Color.FromArgb(0, 64, 64);
+			this.FormBorderStyle = FormBorderStyle.None;
 		}
 
 		private void LiteStatusDlg_Load(object sender, EventArgs e)
