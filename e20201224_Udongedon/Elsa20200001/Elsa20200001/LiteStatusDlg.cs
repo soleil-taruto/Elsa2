@@ -77,10 +77,14 @@ namespace Charlotte
 		{
 			InitializeComponent();
 
-			this.BackColor = Color.FromArgb(0, 64, 64);
-			this.FormBorderStyle = FormBorderStyle.None;
-			this.StatusMessage.Font = new Font("メイリオ", 48f);
-			this.StatusMessage.ForeColor = Color.White;
+			this.BackColor = Color.FromArgb(0, 64, 64); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+			this.FormBorderStyle = FormBorderStyle.None; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+			this.StatusMessage
+				.Font = new Font( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+					"メイリオ",
+					48f); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+			this.StatusMessage
+				.ForeColor = Color.White; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 		}
 
 		private void LiteStatusDlg_Load(object sender, EventArgs e)
@@ -94,12 +98,24 @@ namespace Charlotte
 
 			const int MARGIN = 30;
 
-			this.Width = DDGround.MonitorRect.W;
-			this.Height = MARGIN + this.StatusMessage.Height + MARGIN;
-			this.Left = DDGround.MonitorRect.L;
-			this.Top = (DDGround.MonitorRect.H - this.Height) / 2;
-			this.StatusMessage.Left = (this.Width - this.StatusMessage.Width) / 2;
-			this.StatusMessage.Top = MARGIN;
+			this.Width = // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				DDGround.MonitorRect.W;
+			this.Height = // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				MARGIN + this.StatusMessage
+				.Height + // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				MARGIN;
+			this.Left = // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				DDGround.MonitorRect.L;
+			this.Top = // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				(DDGround.MonitorRect.H -
+				this.Height) / 2; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+			this.StatusMessage
+				.Left = (this.Width - this // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				.StatusMessage
+				.Width) / 2; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+			this.StatusMessage
+				.Top = // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+					MARGIN;
 		}
 
 		private void LiteStatusDlg_FormClosing(object sender, FormClosingEventArgs e)
