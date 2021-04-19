@@ -13,6 +13,7 @@ namespace Charlotte.GameCommons
 
 		/// <summary>
 		/// -1 == デフォルト, { 0, 1, 2, ... } == { 最初のモニタ, 2番目のモニタ, 3番目のモニタ, ... }
+		/// ★この設定は無効になりました。常に -1 を指定して下さい。
 		/// </summary>
 		public static int DisplayIndex = -1;
 

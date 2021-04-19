@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Security.Permissions;
 using System.Windows.Forms;
 using Charlotte.GameCommons;
 
@@ -12,6 +13,22 @@ namespace Charlotte
 {
 	public partial class LiteStatusDlg : Form
 	{
+		#region ALT_F4 抑止
+
+		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+		protected override void WndProc(ref Message m)
+		{
+			const int WM_SYSCOMMAND = 0x112;
+			const long SC_CLOSE = 0xF060L;
+
+			if (m.Msg == WM_SYSCOMMAND && (m.WParam.ToInt64() & 0xFFF0L) == SC_CLOSE)
+				return;
+
+			base.WndProc(ref m);
+		}
+
+		#endregion
+
 		private static LiteStatusDlg Dlg = null;
 
 		public static void StartDisplay(string message)
