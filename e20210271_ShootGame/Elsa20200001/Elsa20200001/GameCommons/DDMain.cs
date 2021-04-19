@@ -315,11 +315,13 @@ namespace Charlotte.GameCommons
 		{
 			if (DDConfig.DisplayIndex == -2)
 			{
+				// 注意：DDGround.MonitorRect.L_T は -1 以下の場合もある。
+
 				int l = (DDGround.MonitorRect.W - w) / 2;
 				int t = (DDGround.MonitorRect.H - h) / 2;
 
-				//l = Math.Max(0, l);
-				//t = Math.Max(0, t);
+				l = Math.Max(0, l);
+				t = Math.Max(0, t);
 
 				SetScreenPosition(DDGround.MonitorRect.L + l, DDGround.MonitorRect.T + t);
 			}
