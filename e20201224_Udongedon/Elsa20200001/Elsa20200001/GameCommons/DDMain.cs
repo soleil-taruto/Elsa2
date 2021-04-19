@@ -55,6 +55,27 @@ namespace Charlotte.GameCommons
 
 			DDSaveData.Load();
 
+			{
+				I2Point mousePt = DDWin32.GetMousePosition();
+				I4Rect[] monitors = DDWin32.GetAllMonitor();
+				I4Rect activeMonitor = monitors[0]; // マウス位置のモニタを特定出来ない場合のモニタ
+
+				foreach (I4Rect monitor in monitors)
+				{
+					if (
+						monitor.L <= mousePt.X && mousePt.X < monitor.R &&
+						monitor.T <= mousePt.Y && mousePt.Y < monitor.B
+						)
+					{
+						activeMonitor = monitor;
+						break;
+					}
+				}
+				DDGround.MonitorRect = activeMonitor;
+			}
+
+			LiteStatusDlg.StartDisplay("ゲームを起動しています...");
+
 			// DxLib >
 
 			if (DDConfig.LOG_ENABLED)
@@ -99,6 +120,9 @@ namespace Charlotte.GameCommons
 			DDGround.LastMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 			DDGround.KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 
+#if true
+			// moved
+#else // old
 			{
 				int l;
 				int t;
@@ -123,6 +147,7 @@ namespace Charlotte.GameCommons
 
 				DDGround.MonitorRect = new I4Rect(l, t, w, h);
 			}
+#endif
 
 			PostSetScreenSize(DDGround.RealScreen_W, DDGround.RealScreen_H);
 
@@ -144,6 +169,8 @@ namespace Charlotte.GameCommons
 			{
 				DDSaveData.Save();
 			});
+
+			LiteStatusDlg.EndDisplayDelay();
 		}
 
 		public static void GameEnd(List<Exception> errors)

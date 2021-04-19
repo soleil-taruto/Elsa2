@@ -14,7 +14,7 @@ namespace Charlotte.GameCommons
 		/// <summary>
 		/// -1 == デフォルト, { 0, 1, 2, ... } == { 最初のモニタ, 2番目のモニタ, 3番目のモニタ, ... }
 		/// </summary>
-		public static int DisplayIndex = 1;
+		public static int DisplayIndex = -1;
 
 		public static string LogFile = @"C:\tmp\Game.log";
 		public static int LogCountMax = SCommon.IMAX;
