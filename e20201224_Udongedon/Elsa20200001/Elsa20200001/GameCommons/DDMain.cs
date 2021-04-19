@@ -275,13 +275,15 @@ namespace Charlotte.GameCommons
 
 		public static void PostSetScreenSize(int w, int h)
 		{
-			int l = DDGround.MonitorRect.L + (DDGround.MonitorRect.W - w) / 2;
-			int t = DDGround.MonitorRect.T + (DDGround.MonitorRect.H - h) / 2;
+			// 注意：DDGround.MonitorRect.L_T は -1 以下の場合もある。
+
+			int l = (DDGround.MonitorRect.W - w) / 2;
+			int t = (DDGround.MonitorRect.H - h) / 2;
 
 			l = Math.Max(l, 0);
 			t = Math.Max(t, 0);
 
-			SetScreenPosition(l, t);
+			SetScreenPosition(DDGround.MonitorRect.L + l, DDGround.MonitorRect.T + t);
 		}
 
 		public static void SetScreenPosition(int l, int t)
