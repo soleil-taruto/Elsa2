@@ -95,8 +95,9 @@ namespace Charlotte.GameCommons
 
 			DX.SetWindowIconHandle(GetAppIcon()); // ウィンドウ左上のアイコン
 
-			if (DDConfig.DisplayIndex != -1)
-				DX.SetUseDirectDrawDeviceIndex(DDConfig.DisplayIndex);
+			// 廃止
+			//if (DDConfig.DisplayIndex != -1)
+			//    DX.SetUseDirectDrawDeviceIndex(DDConfig.DisplayIndex);
 
 			if (DX.DxLib_Init() != 0) // ? 失敗
 				throw new DDError();
@@ -120,9 +121,7 @@ namespace Charlotte.GameCommons
 			DDGround.LastMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 			DDGround.KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 
-#if true
-			// moved
-#else // old
+#if false // old
 			{
 				int l;
 				int t;

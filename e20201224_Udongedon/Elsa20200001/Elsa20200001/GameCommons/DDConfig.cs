@@ -13,9 +13,8 @@ namespace Charlotte.GameCommons
 
 		/// <summary>
 		/// -1 == デフォルト, { 0, 1, 2, ... } == { 最初のモニタ, 2番目のモニタ, 3番目のモニタ, ... }
-		/// ★この設定は無効になりました。常に -1 を指定して下さい。
 		/// </summary>
-		public static int DisplayIndex = -1;
+		//public static int DisplayIndex = -1; // 廃止
 
 		public static string LogFile = @"C:\tmp\Game.log";
 		public static int LogCountMax = SCommon.IMAX;
@@ -44,7 +43,7 @@ namespace Charlotte.GameCommons
 
 			// 設定項目 >
 
-			DisplayIndex = int.Parse(lines[c++]);
+			//DisplayIndex = int.Parse(lines[c++]); // 廃止
 			LogFile = lines[c++];
 			LogCountMax = int.Parse(lines[c++]);
 			LOG_ENABLED = int.Parse(lines[c++]) != 0;
