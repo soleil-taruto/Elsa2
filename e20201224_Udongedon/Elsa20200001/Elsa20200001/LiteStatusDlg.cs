@@ -79,6 +79,8 @@ namespace Charlotte
 
 			this.BackColor = Color.FromArgb(0, 64, 64);
 			this.FormBorderStyle = FormBorderStyle.None;
+			this.StatusMessage.Font = new Font("メイリオ", 48f);
+			this.StatusMessage.ForeColor = Color.White;
 		}
 
 		private void LiteStatusDlg_Load(object sender, EventArgs e)

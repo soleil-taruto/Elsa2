@@ -35,23 +35,21 @@
 			// StatusMessage
 			// 
 			this.StatusMessage.AutoSize = true;
-			this.StatusMessage.Font = new System.Drawing.Font("メイリオ", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.StatusMessage.ForeColor = System.Drawing.Color.White;
 			this.StatusMessage.Location = new System.Drawing.Point(11, 9);
 			this.StatusMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.StatusMessage.Name = "StatusMessage";
-			this.StatusMessage.Size = new System.Drawing.Size(505, 96);
+			this.StatusMessage.Size = new System.Drawing.Size(23, 12);
 			this.StatusMessage.TabIndex = 0;
-			this.StatusMessage.Text = "StatusMessage";
+			this.StatusMessage.Text = "---";
 			// 
 			// LiteStatusDlg
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(584, 161);
+			this.ClientSize = new System.Drawing.Size(284, 261);
 			this.Controls.Add(this.StatusMessage);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Location = new System.Drawing.Point(0, -300);
+			this.Location = new System.Drawing.Point(-400, -400);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "LiteStatusDlg";
