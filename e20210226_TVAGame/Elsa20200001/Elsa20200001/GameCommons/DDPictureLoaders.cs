@@ -6,8 +6,6 @@ using Charlotte.Commons;
 
 namespace Charlotte.GameCommons
 {
-	// sync > @ DDPictureLoaders
-
 	/// <summary>
 	/// ここで取得した DDPicture は Unload する必要あり
 	/// 必要なし -> DDPictureLoader2
@@ -486,6 +484,4 @@ namespace Charlotte.GameCommons
 				);
 		}
 	}
-
-	// < sync
 }
