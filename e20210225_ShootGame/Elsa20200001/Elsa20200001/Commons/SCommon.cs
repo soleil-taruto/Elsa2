@@ -199,8 +199,6 @@ namespace Charlotte.Commons
 			return dest.ToArray();
 		}
 
-		// sync > @ Serializer
-
 		public class Serializer
 		{
 			public static Serializer I = new Serializer();
@@ -243,8 +241,6 @@ namespace Charlotte.Commons
 				return Encoding.UTF8.GetString(SCommon.Base64.I.Decode(encodedString));
 			}
 		}
-
-		// < sync
 
 		public static Dictionary<string, V> CreateDictionary<V>()
 		{
