@@ -504,8 +504,6 @@ namespace Charlotte.GameCommons
 			return 0;
 		}
 
-		// sync > @ Scripter
-
 		public static Func<bool> Scripter(IEnumerable<int> script)
 		{
 			return SCommon.Supplier(E_Scripter(SCommon.Supplier(script)));
@@ -530,8 +528,6 @@ namespace Charlotte.GameCommons
 					yield return true;
 			}
 		}
-
-		// < sync
 
 		/// <summary>
 		/// 指定値をラジアンに変換する。
