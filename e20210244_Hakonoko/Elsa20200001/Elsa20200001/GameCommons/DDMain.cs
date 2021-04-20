@@ -55,7 +55,9 @@ namespace Charlotte.GameCommons
 
 			DDSaveData.Load();
 
-			if (DDConfig.DisplayIndex == -2)
+			Action showStartupMessage = () => LiteStatusDlg.StartDisplay("ゲームを起動しています...");
+
+			if (DDConfig.DisplayIndex == -2) // *** DDGround.MonitorRect 初期化 (DisplayIndex == -2 の場合)
 			{
 				I2Point mousePt = DDWin32.GetMousePosition();
 				I4Rect[] monitors = DDWin32.GetAllMonitor();
@@ -74,7 +76,7 @@ namespace Charlotte.GameCommons
 				}
 				DDGround.MonitorRect = activeMonitor;
 
-				LiteStatusDlg.StartDisplay("ゲームを起動しています...");
+				showStartupMessage();
 			}
 
 			// DxLib >
@@ -121,7 +123,7 @@ namespace Charlotte.GameCommons
 			DDGround.LastMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 			DDGround.KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 
-			if (DDConfig.DisplayIndex != -2)
+			if (DDConfig.DisplayIndex != -2) // *** DDGround.MonitorRect 初期化 (DisplayIndex != -2 の場合)
 			{
 				int l;
 				int t;
@@ -146,7 +148,7 @@ namespace Charlotte.GameCommons
 
 				DDGround.MonitorRect = new I4Rect(l, t, w, h);
 
-				LiteStatusDlg.StartDisplay("ゲームを起動しています...");
+				showStartupMessage();
 			}
 
 			PostSetScreenSize(DDGround.RealScreen_W, DDGround.RealScreen_H);
