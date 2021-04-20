@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 
-// ^ sync @ DDPictureLoaders
-
 namespace Charlotte.GameCommons
 {
 	// sync > @ DDPictureLoaders
