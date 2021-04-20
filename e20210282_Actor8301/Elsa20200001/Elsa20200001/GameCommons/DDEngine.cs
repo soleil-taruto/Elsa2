@@ -58,8 +58,6 @@ namespace Charlotte.GameCommons
 
 			DDSubScreenUtils.ChangeDrawScreen(DX.DX_SCREEN_BACK);
 
-			// sync > @ 20210321_DrawScreen_Mosaic
-
 			if (DDGround.RealScreenDraw_W == -1)
 			{
 				bool mosaicFlag =
@@ -99,8 +97,6 @@ namespace Charlotte.GameCommons
 				if (mosaicFlag)
 					DX.SetDrawMode(DDConsts.DEFAULT_DX_DRAWMODE); // restore
 			}
-
-			// < sync
 
 			GC.Collect(0);
 
