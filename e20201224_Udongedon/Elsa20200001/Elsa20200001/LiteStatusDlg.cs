@@ -65,7 +65,7 @@ namespace Charlotte
 				if (Dlg != null)
 				{
 					Dlg.Close();
-					Dlg.Dispose(); // 2bs
+					Dlg.Dispose(); // 2bs -- .Show() の場合は Dispose 不要である。
 					Dlg = null;
 				}
 			});
@@ -77,12 +77,22 @@ namespace Charlotte
 		{
 			InitializeComponent();
 
+			float fontSize;
+
+			if (
+				DDGround.MonitorRect.W < 1920 ||
+				DDGround.MonitorRect.H < 1080
+				)
+				fontSize = 24f;
+			else
+				fontSize = 48f;
+
 			this.BackColor = Color.FromArgb(0, 64, 64); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 			this.FormBorderStyle = FormBorderStyle.None; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 			this.StatusMessage
 				.Font = new Font( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 					"メイリオ",
-					48f); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+					fontSize); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 			this.StatusMessage
 				.ForeColor = Color.White; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 		}

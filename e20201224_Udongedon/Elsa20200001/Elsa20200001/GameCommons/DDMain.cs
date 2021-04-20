@@ -249,7 +249,7 @@ namespace Charlotte.GameCommons
 
 		public static void ApplyScreenSize(int w, int h)
 		{
-			LiteStatusDlg.StartDisplay("スクリーンサイズを調整しています...");
+			LiteStatusDlg.StartDisplay("ゲーム画面の位置とサイズを調整しています...");
 
 			bool mdm = DDUtils.GetMouseDispMode();
 
