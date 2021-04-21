@@ -97,11 +97,11 @@ namespace Charlotte.Games
 			{
 				DDPicture picture = Ground.I.Picture.TitleMenuItems[selfIndex];
 
-				const double ITEM_UNSEL_X = 120.0;
+				const double ITEM_UNSEL_X = 160.0;
 				const double ITEM_UNSEL_A = 0.5;
-				const double ITEM_SEL_X = 140.0;
+				const double ITEM_SEL_X = 180.0;
 				const double ITEM_SEL_A = 1.0;
-				const double ITEM_Y = 300.0;
+				const double ITEM_Y = 320.0;
 				const double ITEM_Y_STEP = 50.0;
 
 				double x = ITEM_SEL_X;
