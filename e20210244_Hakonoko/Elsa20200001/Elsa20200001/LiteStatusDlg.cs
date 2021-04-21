@@ -87,7 +87,7 @@ namespace Charlotte
 			else
 				fontSize = 48f;
 
-			this.BackColor = Color.FromArgb(40, 45, 50); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+			this.BackColor = Color.FromArgb(50, 50, 50); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 			this.FormBorderStyle = FormBorderStyle.None; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 			this.StatusMessage
 				.Font = new Font( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
