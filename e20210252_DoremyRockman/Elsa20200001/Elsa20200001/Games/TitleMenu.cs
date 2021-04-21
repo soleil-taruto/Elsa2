@@ -23,6 +23,113 @@ namespace Charlotte.Games
 			I = null;
 		}
 
+		#region DrawWall
+
+		private DrawWallTask DrawWall = new DrawWallTask();
+
+		private class DrawWallTask : DDTask
+		{
+			public bool TopMenuLeaved = false;
+
+			public override IEnumerable<bool> E_Task()
+			{
+				DDTaskList el = new DDTaskList();
+
+				//el.Add(SCommon.Supplier(this.Effect_0001(1, 2, 3)));
+				//el.Add(SCommon.Supplier(this.Effect_0001(4, 5, 6)));
+				//el.Add(SCommon.Supplier(this.Effect_0001(7, 8, 9)));
+
+				for (int frame = 0; ; frame++)
+				{
+					DDDraw.SetBright(new I3Color(32, 0, 0));
+					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
+					DDDraw.Reset();
+
+					if (!this.TopMenuLeaved)
+					{
+						DDPrint.SetBorder(new I3Color(128, 0, 0));
+						DDPrint.SetPrint(30, 30, 0, 60);
+						DDPrint.Print("ドレミーロックマン(仮)");
+						DDPrint.Reset();
+					}
+
+					el.ExecuteAllTask_Reverse();
+
+					yield return true;
+				}
+			}
+
+			private IEnumerable<bool> Effect_0001(int dummy_01, int dummy_02, int dummy_03)
+			{
+				for (; ; )
+					yield return true;
+			}
+		}
+
+		#endregion
+
+		#region TopMenu
+
+		private TopMenuTask TopMenu = new TopMenuTask();
+
+		private class TopMenuTask : DDTask
+		{
+			public const int ITEM_NUM = 4;
+			public int SelectIndex = 0;
+
+			public override IEnumerable<bool> E_Task()
+			{
+				Func<bool>[] drawItems = new Func<bool>[ITEM_NUM];
+
+				for (int index = 0; index < ITEM_NUM; index++)
+					drawItems[index] = SCommon.Supplier(this.E_DrawItem(index));
+
+				for (; ; )
+				{
+					for (int index = 0; index < ITEM_NUM; index++)
+						drawItems[index]();
+
+					yield return true;
+				}
+			}
+
+			private IEnumerable<bool> E_DrawItem(int selfIndex)
+			{
+				DDPicture picture = Ground.I.Picture.Dummy;//Ground.I.Picture2.TitleMenuItem[0, selfIndex]; // TODO
+
+				const double ITEM_UNSEL_X = 120.0;
+				const double ITEM_UNSEL_A = 0.5;
+				const double ITEM_SEL_X = 140.0;
+				const double ITEM_SEL_A = 1.0;
+				const double ITEM_Y = 300.0;
+				const double ITEM_Y_STEP = 50.0;
+
+				double x = ITEM_SEL_X;
+				double y = ITEM_Y + selfIndex * ITEM_Y_STEP;
+				double a = ITEM_UNSEL_A;
+				double realX = ITEM_UNSEL_X;
+				double realY = y;
+				double realA = a;
+
+				for (; ; )
+				{
+					x = this.SelectIndex == selfIndex ? ITEM_SEL_X : ITEM_UNSEL_X;
+					a = this.SelectIndex == selfIndex ? ITEM_SEL_A : ITEM_UNSEL_A;
+
+					DDUtils.Approach(ref realX, x, 0.93);
+					DDUtils.Approach(ref realA, a, 0.93);
+
+					DDDraw.SetAlpha(realA);
+					DDDraw.DrawCenter(picture, realX, realY);
+					DDDraw.Reset();
+
+					yield return true;
+				}
+			}
+		}
+
+		#endregion
+
 		private DDSimpleMenu SimpleMenu;
 
 		public void Perform()
@@ -42,23 +149,16 @@ namespace Charlotte.Games
 				"終了",
 			};
 
-			int selectIndex = 0;
-
 			this.SimpleMenu = new DDSimpleMenu()
 			{
 				BorderColor = new I3Color(64, 0, 0),
-				WallDrawer = () =>
-				{
-					DDDraw.SetBright(new I3Color(32, 0, 0));
-					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
-					DDDraw.Reset();
-				},
+				WallDrawer = this.DrawWall.Execute,
 			};
+
+			this.TopMenu.SelectIndex = 0;
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "ドレミー・ロックマン / タイトルメニュー(仮)", items, selectIndex);
-
 				bool cheatFlag;
 
 				{
@@ -68,51 +168,82 @@ namespace Charlotte.Games
 					DDEngine.FreezeInputFrame = bk_freezeInputFrame;
 				}
 
-				switch (selectIndex)
+				if (DDInput.DIR_8.IsPound())
+					this.TopMenu.SelectIndex--;
+
+				if (DDInput.DIR_2.IsPound())
+					this.TopMenu.SelectIndex++;
+
+				this.TopMenu.SelectIndex += TopMenuTask.ITEM_NUM;
+				this.TopMenu.SelectIndex %= TopMenuTask.ITEM_NUM;
+
+				if (DDInput.A.GetInput() == 1) // ? 決定ボタン押下
 				{
-					case 0:
-						if (DDConfig.LOG_ENABLED && cheatFlag)
-						{
-							this.CheatMainMenu();
-						}
-						else
-						{
-							this.LeaveTitleMenu();
-
-							using (new GameProgressMaster())
+					switch (this.TopMenu.SelectIndex)
+					{
+						case 0:
+							if (DDConfig.LOG_ENABLED && cheatFlag)
 							{
-								GameProgressMaster.I.Perform();
+								this.DrawWall.TopMenuLeaved = true;
+								this.CheatMainMenu();
+								this.DrawWall.TopMenuLeaved = false; // restore
 							}
-							this.ReturnTitleMenu();
-						}
-						break;
-
-					case 1:
-						{
-							this.LeaveTitleMenu();
-
-							using (new GameProgressMaster())
+							else
 							{
-								GameProgressMaster.I.Perform_コンテニュー();
+								this.LeaveTitleMenu();
+
+								using (new GameProgressMaster())
+								{
+									GameProgressMaster.I.Perform();
+								}
+								this.ReturnTitleMenu();
 							}
-							this.ReturnTitleMenu();
-						}
-						break;
+							break;
 
-					case 2:
-						using (new SettingMenu())
-						{
-							SettingMenu.I.SimpleMenu = this.SimpleMenu;
-							SettingMenu.I.Perform();
-						}
-						break;
+						case 1:
+							{
+								this.LeaveTitleMenu();
 
-					case 3:
-						goto endMenu;
+								using (new GameProgressMaster())
+								{
+									GameProgressMaster.I.Perform_コンテニュー();
+								}
+								this.ReturnTitleMenu();
+							}
+							break;
 
-					default:
-						throw new DDError();
+						case 2:
+							{
+								this.DrawWall.TopMenuLeaved = true;
+
+								using (new SettingMenu())
+								{
+									SettingMenu.I.SimpleMenu = this.SimpleMenu;
+									SettingMenu.I.Perform();
+								}
+								this.DrawWall.TopMenuLeaved = false; // restore
+							}
+							break;
+
+						case 3:
+							goto endMenu;
+
+						default:
+							throw new DDError();
+					}
 				}
+				if (DDInput.B.GetInput() == 1) // ? キャンセルボタン押下
+				{
+					if (this.TopMenu.SelectIndex == TopMenuTask.ITEM_NUM - 1)
+						break;
+
+					this.TopMenu.SelectIndex = TopMenuTask.ITEM_NUM - 1;
+				}
+
+				this.DrawWall.Execute();
+				this.TopMenu.Execute();
+
+				DDEngine.EachFrame();
 			}
 		endMenu:
 			DDMusicUtils.Fade();
@@ -220,6 +351,9 @@ namespace Charlotte.Games
 		private void ReturnTitleMenu()
 		{
 			Ground.I.Music.Title.Play();
+
+			//DDCurtain.SetCurtain(0, -1.0);
+			DDCurtain.SetCurtain();
 
 			GC.Collect();
 		}

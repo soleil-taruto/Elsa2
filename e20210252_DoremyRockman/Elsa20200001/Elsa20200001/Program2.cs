@@ -101,10 +101,10 @@ namespace Charlotte
 		{
 			// ---- choose one ----
 
-			Main4_Release();
+			//Main4_Release();
 			//new Test0001().Test01();
 			//new DDRandomTest().Test01();
-			//new TitleMenuTest().Test01();
+			new TitleMenuTest().Test01();
 			//new GameTest().Test01();
 			//new GameTest().Test02();
 			//new GameTest().Test03(); // 開始マップ名を選択(当面不使用)

@@ -276,7 +276,9 @@ namespace Charlotte.Games
 						case 0:
 							if (DDConfig.LOG_ENABLED && 1 <= DDInput.DIR_6.GetInput())
 							{
+								this.DrawWall.TopMenuLeaved = true;
 								this.CheatMainMenu();
+								this.DrawWall.TopMenuLeaved = false; // restore
 							}
 							else
 							{
@@ -315,17 +317,19 @@ namespace Charlotte.Games
 							break;
 
 						case 2:
-							this.DrawWall.TopMenuLeaved = true;
+							{
+								this.DrawWall.TopMenuLeaved = true;
 
-							using (new SettingMenu()
-							{
-								SimpleMenu = this.SimpleMenu,
-								SetDeepConfigEntered = flag => this.DrawWall.DeepConfigEntered = flag,
-							})
-							{
-								SettingMenu.I.Perform();
+								using (new SettingMenu()
+								{
+									SimpleMenu = this.SimpleMenu,
+									SetDeepConfigEntered = flag => this.DrawWall.DeepConfigEntered = flag,
+								})
+								{
+									SettingMenu.I.Perform();
+								}
+								this.DrawWall.TopMenuLeaved = false; // restore
 							}
-							this.DrawWall.TopMenuLeaved = false;
 							break;
 
 						case 3:
