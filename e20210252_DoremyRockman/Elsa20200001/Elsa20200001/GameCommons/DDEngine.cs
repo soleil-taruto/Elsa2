@@ -53,6 +53,7 @@ namespace Charlotte.GameCommons
 
 			//DDGround.EL_先行.ExecuteAllTask(); // アプリ固有 -- old
 			DDGround.EL.ExecuteAllTask();
+			DDGround.SystemTasks.ExecuteAllTask();
 			DispDebug();
 			DDMouse.PosChanged_Delay();
 			DDCurtain.EachFrame();

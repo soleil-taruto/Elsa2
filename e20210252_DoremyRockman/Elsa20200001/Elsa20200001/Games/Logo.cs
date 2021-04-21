@@ -32,14 +32,15 @@ namespace Charlotte.Games
 				{
 					int sec = endFrame - DDEngine.ProcFrame;
 
-					DDPrint.SetDebug(180, DDConsts.Screen_H - 32);
+					DDPrint.SetDebug(70, DDConsts.Screen_H - 32);
 					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (sec / 60.0).ToString("F1") + " 秒で消えます)");
 
 					return 0 < sec;
 				});
 			}
 
-			foreach (DDScene scene in DDSceneUtils.Create(30))
+			foreach (DDScene scene in DDSceneUtils.Create(60)) // LiteStatusDlg を閉じるまでの遅延の分(30フレーム)延長
+			//foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
 				DDCurtain.DrawCurtain();
 				DDEngine.EachFrame();
