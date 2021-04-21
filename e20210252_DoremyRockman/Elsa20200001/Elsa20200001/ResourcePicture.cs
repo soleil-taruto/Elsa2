@@ -17,6 +17,13 @@ namespace Charlotte
 		public DDPicture Copyright = DDPictureLoaders.Standard(@"dat\Logo\Copyright.png");
 
 		//public DDPicture Title = DDPictureLoaders.Standard(@"dat\Title.png");
+		public DDPicture[] TitleMenuItems = new DDPicture[]
+		{
+			DDPictureLoaders.Standard(@"dat\Title\ゲームスタート.png"),
+			DDPictureLoaders.Standard(@"dat\Title\コンテニュー.png"),
+			DDPictureLoaders.Standard(@"dat\Title\設定.png"),
+			DDPictureLoaders.Standard(@"dat\Title\終了.png"),
+		};
 
 		private const int CHARA_TIP_EXPNUM = 2;
 

@@ -95,7 +95,7 @@ namespace Charlotte.Games
 
 			private IEnumerable<bool> E_DrawItem(int selfIndex)
 			{
-				DDPicture picture = Ground.I.Picture.Dummy;//Ground.I.Picture2.TitleMenuItem[0, selfIndex]; // TODO
+				DDPicture picture = Ground.I.Picture.TitleMenuItems[selfIndex];
 
 				const double ITEM_UNSEL_X = 120.0;
 				const double ITEM_UNSEL_A = 0.5;
