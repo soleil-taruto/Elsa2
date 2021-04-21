@@ -17,6 +17,13 @@ namespace Charlotte
 		public DDPicture Copyright = DDPictureLoaders.Standard(@"dat\Logo\Copyright.png");
 
 		public DDPicture Title = DDPictureLoaders.Standard(@"dat\run\22350006_big_p12.jpg");
+		public DDPicture[] TitleMenuItems = new DDPicture[]
+		{
+			DDPictureLoaders.Standard(@"dat\Title\ゲームスタート.png"),
+			DDPictureLoaders.Standard(@"dat\Title\コンテニュー.png"),
+			DDPictureLoaders.Standard(@"dat\Title\設定.png"),
+			DDPictureLoaders.Standard(@"dat\Title\終了.png"),
+		};
 
 		public DDPicture Tewi_01 = DDPictureLoaders.BgTrans(@"dat\オオバコ\因幡てゐ\tewi_material01.png");
 		public DDPicture Tewi_02 = DDPictureLoaders.BgTrans(@"dat\オオバコ\因幡てゐ\tewi_material02.png");

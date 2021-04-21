@@ -22,6 +22,118 @@ namespace Charlotte.Games
 			I = null;
 		}
 
+		#region DrawWall
+
+		private DrawWallTask DrawWall = new DrawWallTask();
+
+		private class DrawWallTask : DDTask
+		{
+			public bool TopMenuLeaved = false;
+
+			public override IEnumerable<bool> E_Task()
+			{
+				DDTaskList el = new DDTaskList();
+
+				//el.Add(SCommon.Supplier(this.Effect_0001(1, 2, 3)));
+				//el.Add(SCommon.Supplier(this.Effect_0001(4, 5, 6)));
+				//el.Add(SCommon.Supplier(this.Effect_0001(7, 8, 9)));
+
+				for (int frame = 0; ; frame++)
+				{
+					DDPicture picture = Ground.I.Picture.Title;
+
+					DDDraw.DrawRect(
+						picture,
+						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
+						);
+
+					DDCurtain.DrawCurtain(-0.8);
+
+					if (!this.TopMenuLeaved)
+					{
+						DDPrint.SetBorder(new I3Color(128, 0, 0));
+						DDPrint.SetPrint(75, 110, 0, 60);
+						DDPrint.Print("横スクロール アクション(仮)");
+						DDPrint.Reset();
+					}
+
+					el.ExecuteAllTask_Reverse();
+
+					yield return true;
+				}
+			}
+
+			private IEnumerable<bool> Effect_0001(int dummy_01, int dummy_02, int dummy_03)
+			{
+				for (; ; )
+					yield return true;
+			}
+		}
+
+		#endregion
+
+		#region TopMenu
+
+		private TopMenuTask TopMenu = new TopMenuTask();
+
+		private class TopMenuTask : DDTask
+		{
+			public const int ITEM_NUM = 4;
+			public int SelectIndex = 0;
+
+			public override IEnumerable<bool> E_Task()
+			{
+				Func<bool>[] drawItems = new Func<bool>[ITEM_NUM];
+
+				for (int index = 0; index < ITEM_NUM; index++)
+					drawItems[index] = SCommon.Supplier(this.E_DrawItem(index));
+
+				for (; ; )
+				{
+					for (int index = 0; index < ITEM_NUM; index++)
+						drawItems[index]();
+
+					yield return true;
+				}
+			}
+
+			private IEnumerable<bool> E_DrawItem(int selfIndex)
+			{
+				DDPicture picture = Ground.I.Picture.TitleMenuItems[selfIndex];
+
+				const double ITEM_UNSEL_X = 160.0;
+				const double ITEM_UNSEL_A = 0.5;
+				const double ITEM_SEL_X = 180.0;
+				const double ITEM_SEL_A = 1.0;
+				const double ITEM_Y = 320.0;
+				const double ITEM_Y_STEP = 50.0;
+
+				double x = ITEM_SEL_X;
+				double y = ITEM_Y + selfIndex * ITEM_Y_STEP;
+				double a = ITEM_UNSEL_A;
+				double realX = ITEM_UNSEL_X;
+				double realY = y;
+				double realA = a;
+
+				for (; ; )
+				{
+					x = this.SelectIndex == selfIndex ? ITEM_SEL_X : ITEM_UNSEL_X;
+					a = this.SelectIndex == selfIndex ? ITEM_SEL_A : ITEM_UNSEL_A;
+
+					DDUtils.Approach(ref realX, x, 0.93);
+					DDUtils.Approach(ref realA, a, 0.93);
+
+					DDDraw.SetAlpha(realA);
+					DDDraw.DrawCenter(picture, realX, realY);
+					DDDraw.Reset();
+
+					yield return true;
+				}
+			}
+		}
+
+		#endregion
+
 		private DDSimpleMenu SimpleMenu;
 
 		public void Perform()
@@ -33,36 +145,16 @@ namespace Charlotte.Games
 
 			Ground.I.Music.Title.Play();
 
-			string[] items = new string[]
-			{
-				"ゲームスタート",
-				"コンテニュー",
-				"設定",
-				"終了",
-			};
-
-			int selectIndex = 0;
-
 			this.SimpleMenu = new DDSimpleMenu()
 			{
 				BorderColor = new I3Color(64, 0, 0),
-				WallDrawer = () =>
-				{
-					DDPicture picture = Ground.I.Picture.Title;
-
-					DDDraw.DrawRect(
-						picture,
-						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(0, 0, DDConsts.Screen_W, DDConsts.Screen_H))
-						);
-
-					DDCurtain.DrawCurtain(-0.8);
-				},
+				WallDrawer = this.DrawWall.Execute,
 			};
+
+			this.TopMenu.SelectIndex = 0;
 
 			for (; ; )
 			{
-				selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "横スクロール アクション ゲーム(仮)", items, selectIndex);
-
 				bool cheatFlag;
 
 				{
@@ -72,63 +164,94 @@ namespace Charlotte.Games
 					DDEngine.FreezeInputFrame = bk_freezeInputFrame;
 				}
 
-				switch (selectIndex)
+				if (DDInput.DIR_8.IsPound())
+					this.TopMenu.SelectIndex--;
+
+				if (DDInput.DIR_2.IsPound())
+					this.TopMenu.SelectIndex++;
+
+				this.TopMenu.SelectIndex += TopMenuTask.ITEM_NUM;
+				this.TopMenu.SelectIndex %= TopMenuTask.ITEM_NUM;
+
+				if (DDInput.A.GetInput() == 1) // ? 決定ボタン押下
 				{
-					case 0:
-						if (DDConfig.LOG_ENABLED && cheatFlag)
-						{
-							this.CheatMainMenu();
-						}
-						else
-						{
-							this.LeaveTitleMenu();
-
-							using (new WorldGameMaster())
+					switch (this.TopMenu.SelectIndex)
+					{
+						case 0:
+							if (DDConfig.LOG_ENABLED && cheatFlag)
 							{
-								WorldGameMaster.I.World = new World("Start");
-								WorldGameMaster.I.Status = new GameStatus();
-								WorldGameMaster.I.Perform();
+								this.DrawWall.TopMenuLeaved = true;
+								this.CheatMainMenu();
+								this.DrawWall.TopMenuLeaved = false; // restore
 							}
-							this.ReturnTitleMenu();
-						}
-						break;
-
-					case 1:
-						{
-							Ground.P_SaveDataSlot saveDataSlot = LoadGame();
-
-							if (saveDataSlot != null)
+							else
 							{
 								this.LeaveTitleMenu();
 
 								using (new WorldGameMaster())
 								{
-									WorldGameMaster.I.World = new World(saveDataSlot.MapName);
-									WorldGameMaster.I.Status = saveDataSlot.GameStatus.GetClone();
-									WorldGameMaster.I.Status.StartPointDirection = 101; // スタート地点を「ロード地点」にする。
+									WorldGameMaster.I.World = new World("Start");
+									WorldGameMaster.I.Status = new GameStatus();
 									WorldGameMaster.I.Perform();
 								}
 								this.ReturnTitleMenu();
 							}
-						}
-						break;
+							break;
 
-					case 2:
-						using (new SettingMenu()
-						{
-							SimpleMenu = this.SimpleMenu,
-						})
-						{
-							SettingMenu.I.Perform();
-						}
-						break;
+						case 1:
+							{
+								Ground.P_SaveDataSlot saveDataSlot = LoadGame();
 
-					case 3:
-						goto endMenu;
+								if (saveDataSlot != null)
+								{
+									this.LeaveTitleMenu();
 
-					default:
-						throw new DDError();
+									using (new WorldGameMaster())
+									{
+										WorldGameMaster.I.World = new World(saveDataSlot.MapName);
+										WorldGameMaster.I.Status = saveDataSlot.GameStatus.GetClone();
+										WorldGameMaster.I.Status.StartPointDirection = 101; // スタート地点を「ロード地点」にする。
+										WorldGameMaster.I.Perform();
+									}
+									this.ReturnTitleMenu();
+								}
+							}
+							break;
+
+						case 2:
+							{
+								this.DrawWall.TopMenuLeaved = true;
+
+								using (new SettingMenu()
+								{
+									SimpleMenu = this.SimpleMenu,
+								})
+								{
+									SettingMenu.I.Perform();
+								}
+								this.DrawWall.TopMenuLeaved = false; // restore
+							}
+							break;
+
+						case 3:
+							goto endMenu;
+
+						default:
+							throw new DDError();
+					}
 				}
+				if (DDInput.B.GetInput() == 1) // ? キャンセルボタン押下
+				{
+					if (this.TopMenu.SelectIndex == TopMenuTask.ITEM_NUM - 1)
+						break;
+
+					this.TopMenu.SelectIndex = TopMenuTask.ITEM_NUM - 1;
+				}
+
+				this.DrawWall.Execute();
+				this.TopMenu.Execute();
+
+				DDEngine.EachFrame();
 			}
 		endMenu:
 			DDMusicUtils.Fade();

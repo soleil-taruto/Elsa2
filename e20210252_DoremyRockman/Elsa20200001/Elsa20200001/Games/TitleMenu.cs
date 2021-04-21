@@ -141,14 +141,6 @@ namespace Charlotte.Games
 
 			Ground.I.Music.Title.Play();
 
-			string[] items = new string[]
-			{
-				"ゲームスタート",
-				"コンテニュー",
-				"設定",
-				"終了",
-			};
-
 			this.SimpleMenu = new DDSimpleMenu()
 			{
 				BorderColor = new I3Color(64, 0, 0),
