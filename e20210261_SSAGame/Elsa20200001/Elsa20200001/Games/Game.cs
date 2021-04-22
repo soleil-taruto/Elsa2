@@ -239,7 +239,7 @@ namespace Charlotte.Games
 						const int 事前入力時間 = 5;
 						const int 入力猶予時間 = 10;
 
-						if (this.Player.AirborneFrame < 入力猶予時間) // ? 接地状態からのジャンプが可能な状態
+						if (this.Player.AirborneFrame < 入力猶予時間 && this.Player.JumpCount == 0) // ? 接地状態からのジャンプが可能な状態
 						{
 							if (1 <= jump && jump < 事前入力時間 && !jumpLock)
 							{
@@ -579,7 +579,10 @@ namespace Charlotte.Games
 					}
 
 					if (touchGround)
+					{
+						this.Player.JumpCount = 0;
 						this.Player.AirborneFrame = 0;
+					}
 					else
 						this.Player.AirborneFrame++;
 				}
