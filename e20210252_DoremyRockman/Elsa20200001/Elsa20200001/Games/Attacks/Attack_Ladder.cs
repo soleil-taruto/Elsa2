@@ -93,7 +93,7 @@ namespace Charlotte.Games.Attacks
 				{
 					if (攻撃ボタンを押した瞬間撃つ && DDInput.B.GetInput() == 1)
 					{
-						Game.I.Player.Shot(1);
+						Game.I.Player.Shoot(1);
 						shot = true;
 					}
 					Game.I.Player.ShotChargePCT++;
@@ -107,7 +107,7 @@ namespace Charlotte.Games.Attacks
 
 					if (攻撃ボタンを押した瞬間撃つ ? 2 <= level : 1 <= chargePct)
 					{
-						Game.I.Player.Shot(level);
+						Game.I.Player.Shoot(level);
 						shot = true;
 					}
 				}

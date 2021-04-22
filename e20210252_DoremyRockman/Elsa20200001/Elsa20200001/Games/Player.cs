@@ -177,12 +177,12 @@ namespace Charlotte.Games
 		}
 
 		/// <summary>
-		/// ショット
+		/// 攻撃
 		/// ショットの強さレベル：
 		/// -- 関連：GameCommon.ShotChargePCTToLevel()
 		/// </summary>
 		/// <param name="level">ショットの強さレベル</param>
-		public void Shot(int level)
+		public void Shoot(int level)
 		{
 			switch (Game.I.Status.Equipment)
 			{
