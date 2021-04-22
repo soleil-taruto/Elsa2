@@ -92,7 +92,8 @@ namespace Charlotte
 			this.StatusMessage
 				.Font = new Font( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 					"メイリオ",
-					fontSize); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+					fontSize
+					);
 			this.StatusMessage
 				.ForeColor = Color.White; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 		}
