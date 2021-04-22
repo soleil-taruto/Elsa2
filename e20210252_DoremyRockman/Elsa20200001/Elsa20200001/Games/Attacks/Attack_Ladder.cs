@@ -87,20 +87,20 @@ namespace Charlotte.Games.Attacks
 				}
 
 				bool 攻撃ボタンを押した瞬間撃つ = Ground.I.ショットのタイミング == Ground.ショットのタイミング_e.ショットボタンを押し下げた時;
+				bool shot = false;
 
 				if (1 <= DDInput.B.GetInput())
 				{
 					if (攻撃ボタンを押した瞬間撃つ && DDInput.B.GetInput() == 1)
 					{
 						Game.I.Player.Shot(1);
+						shot = true;
 					}
-					shootingFrame = SHOOTING_FRAME_MAX;
 					Game.I.Player.ShotChargePCT++;
 					DDUtils.Minim(ref Game.I.Player.ShotChargePCT, 100);
 				}
 				else
 				{
-					DDUtils.CountDown(ref shootingFrame);
 					int level = GameCommon.ShotChargePCTToLevel(Game.I.Player.ShotChargePCT);
 					int chargePct = Game.I.Player.ShotChargePCT;
 					Game.I.Player.ShotChargePCT = 0;
@@ -108,8 +108,13 @@ namespace Charlotte.Games.Attacks
 					if (攻撃ボタンを押した瞬間撃つ ? 2 <= level : 1 <= chargePct)
 					{
 						Game.I.Player.Shot(level);
+						shot = true;
 					}
 				}
+				if (shot)
+					shootingFrame = SHOOTING_FRAME_MAX;
+				else
+					DDUtils.CountDown(ref shootingFrame);
 
 				//AttackCommon.ProcPlayer_移動();
 				//AttackCommon.ProcPlayer_Fall();
