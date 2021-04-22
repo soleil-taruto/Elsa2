@@ -281,7 +281,7 @@ namespace Charlotte.Games.Enemies
 			return Ground.I.Picture2.D_TAMA_00[(int)kind][(int)color];
 		}
 
-		public static void Shot(Enemy enemy, int shotType)
+		public static void Shoot(Enemy enemy, int shotType)
 		{
 			if (DDUtils.IsOut(new D2Point(enemy.X, enemy.Y), new D4Rect(0, 0, GameConsts.FIELD_W, GameConsts.FIELD_H))) // ? フィールド外
 				return;

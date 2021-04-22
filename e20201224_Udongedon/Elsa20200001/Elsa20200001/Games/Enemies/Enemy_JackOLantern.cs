@@ -38,7 +38,7 @@ namespace Charlotte.Games.Enemies
 				this.Y += this.YAdd;
 				this.Rot += this.RotAdd;
 
-				EnemyCommon.Shot(this, this.ShotType);
+				EnemyCommon.Shoot(this, this.ShotType);
 
 				int koma = frame / 7;
 				koma %= 2;

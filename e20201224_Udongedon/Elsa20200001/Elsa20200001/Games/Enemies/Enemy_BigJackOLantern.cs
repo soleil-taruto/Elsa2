@@ -47,7 +47,7 @@ namespace Charlotte.Games.Enemies
 				this.X = axisX + Math.Cos(this.Rot) * this.R;
 				this.Y = axisY + Math.Sin(this.Rot) * this.R;
 
-				EnemyCommon.Shot(this, this.ShotType);
+				EnemyCommon.Shoot(this, this.ShotType);
 
 				int koma = frame / 5;
 				koma %= 2;

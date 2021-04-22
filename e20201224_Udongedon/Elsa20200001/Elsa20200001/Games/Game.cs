@@ -351,7 +351,7 @@ namespace Charlotte.Games
 
 				if (this.Input.Shot && this.Player.DeadFrame == 0) // プレイヤーショット
 				{
-					this.Player.Shot();
+					this.Player.Shoot();
 				}
 				if (this.Input.Bomb && this.Player.DeadFrame == 0 && this.Player.BombFrame == 0 && 1 <= this.ZanBomb) // ボム使用
 				{

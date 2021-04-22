@@ -256,7 +256,7 @@ namespace Charlotte.Games
 		/// <summary>
 		/// ショット実行
 		/// </summary>
-		public void Shot()
+		public void Shoot()
 		{
 			double pl_x;
 			double pl_y;

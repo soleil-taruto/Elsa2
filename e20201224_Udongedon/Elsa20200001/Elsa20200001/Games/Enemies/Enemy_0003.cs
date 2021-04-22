@@ -56,7 +56,7 @@ namespace Charlotte.Games.Enemies
 					this.EvacuateXAdd *= ER;
 				}
 
-				EnemyCommon.Shot(this, this.ShotType);
+				EnemyCommon.Shoot(this, this.ShotType);
 
 				yield return EnemyCommon.FairyDraw(this.Fairy);
 			}
