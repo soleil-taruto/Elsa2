@@ -277,8 +277,9 @@ namespace Charlotte.Games
 						const int 事前入力時間 = 10;
 						const int 入力猶予時間 = 5;
 
-						if (1 <= jump && jump < 事前入力時間 && this.Player.AirborneFrame < 入力猶予時間 && !jumpLock)
+						if (1 <= jump && jump < 事前入力時間 && this.Player.AirborneFrame < 入力猶予時間 && this.Player.JumpCount == 0 && !jumpLock)
 						{
+							this.Player.JumpCount = 1;
 							this.Player.JumpFrame = 1;
 							jumpLock = true;
 						}
@@ -432,6 +433,7 @@ namespace Charlotte.Games
 
 					if (自機位置調整.Touch == 自機位置調整.Touch_e.GROUND)
 					{
+						this.Player.JumpCount = 0;
 						this.Player.AirborneFrame = 0;
 						this.Player.YSpeed = Math.Min(0.0, this.Player.YSpeed);
 					}

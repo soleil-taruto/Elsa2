@@ -37,6 +37,7 @@ namespace Charlotte.Games
 		public bool FacingLeft;
 		public int MoveFrame;
 		public bool MoveSlow; // ? 低速移動
+		public int JumpCount;
 		public int JumpFrame;
 		public int AirborneFrame; // 0 == 接地状態, 1～ == 滞空状態
 		public int ShagamiFrame;

@@ -20,6 +20,7 @@ namespace Charlotte.Games
 		public double YSpeed;
 		public int MoveFrame;
 		public bool MoveSlow; // ? 低速移動
+		public int JumpCount;
 		public int JumpFrame;
 		public int AirborneFrame; // 0 == 接地状態, 1～ == 滞空状態
 		public int DeadFrame = 0; // 0 == 無効, 1～ == 死亡中
