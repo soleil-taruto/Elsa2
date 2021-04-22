@@ -225,7 +225,7 @@ namespace Charlotte.Games
 						// 入力猶予 == 落下(地面から離れた)直後の数フレーム間にジャンプボタンを押し始めてもジャンプできるようにする。
 
 						const int 事前入力時間 = 5;
-						const int 入力猶予時間 = 50;
+						const int 入力猶予時間 = 5;
 
 						if (1 <= jump && jump < 事前入力時間 && this.Player.AirborneFrame < 入力猶予時間 && this.Player.JumpCount == 0 && !jumpLock)
 						{

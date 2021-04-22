@@ -264,6 +264,9 @@ namespace Charlotte.Games
 		{
 			Ground.I.Music.Title.Play();
 
+			//DDCurtain.SetCurtain(0, -1.0);
+			DDCurtain.SetCurtain();
+
 			GC.Collect();
 		}
 	}
