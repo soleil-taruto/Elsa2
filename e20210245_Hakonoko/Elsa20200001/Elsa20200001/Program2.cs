@@ -102,14 +102,14 @@ namespace Charlotte
 		{
 			// ---- choose one ----
 
-			//Main4_Release();
+			Main4_Release();
 			//new Test0001().Test01(); // NG !!!
 			//new Test0001().Test02(); // NG !!!
 			//new Test0001().Test03(); // NG !!!
 			//new Test0001().Test04();
 			//new Test0001().Test05();
 			//new TitleMenuTest().Test01();
-			new GameMasterTest().Test01(); // 開始ステージを選択
+			//new GameMasterTest().Test01(); // 開始ステージを選択
 			//new NovelTest().Test01();
 			//new NovelTest().Test02();
 			//new NovelTest().Test03(); // 開始シナリオを選択
