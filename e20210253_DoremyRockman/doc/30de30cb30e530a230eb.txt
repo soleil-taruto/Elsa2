@@ -1,0 +1,62 @@
+﻿===============================================================================
+
+　DoremyRockman / version $version$
+　　　　　　　　　　　　　　　　　　　　　　　　　　(C) 202x cerulean.charlotte
+
+===============================================================================
+
+
+■起動方法
+
+　Game.exe を実行して下さい。
+
+
+■操作方法
+
+　カーソル
+
+　Z　　ジャンプ / 決定
+　X　　攻撃 / キャンセル
+　D　　画面スライド
+
+　SPACE　　ポーズ / ポーズ解除
+
+　エスケープキーを押すと、いつでも終了できます。
+
+
+　★ゲームパッドの使用をおすすめします。
+
+
+■制作協力
+
+　●グラフィック
+
+　　フランツ カフカ
+
+
+■素材（敬称略）
+
+　●音楽
+
+　　ユーフルカ
+　　https://wingless-seraph.net/
+
+　●効果音
+
+　　小森平
+　　http://taira-komori.jpn.org/
+
+　●フォント
+
+　　(K ゴシック)
+　　ケイ
+　　https://k-gothic-font.hatenablog.com/
+
+
+■このゲームの製作者
+
+　cerulean.charlotte
+　https://github.com/soleil-taruto
+
+　連絡先 -> cerulean.charlottes@gmail.com
+
