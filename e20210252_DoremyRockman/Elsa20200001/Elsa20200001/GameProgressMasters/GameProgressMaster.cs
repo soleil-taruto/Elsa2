@@ -27,17 +27,21 @@ namespace Charlotte.GameProgressMasters
 			// zantei zantei zantei
 			// zantei zantei zantei
 
-			using (new Novel())
-			{
-				Novel.I.Status.Scenario = new Scenario("101_ゲームスタート");
-				Novel.I.Perform();
-			}
-			using (new WorldGameMaster())
-			{
-				WorldGameMaster.I.World = new World("w0001\\t0001"); // 仮？
-				WorldGameMaster.I.Status = new GameStatus();
-				WorldGameMaster.I.Perform();
-			}
+			// TODO
+			// TODO
+			// TODO
+
+			//using (new Novel())
+			//{
+			//    Novel.I.Status.Scenario = new Scenario("101_ゲームスタート");
+			//    Novel.I.Perform();
+			//}
+			//using (new WorldGameMaster())
+			//{
+			//    WorldGameMaster.I.World = new World("w0001\\t0001"); // 仮？
+			//    WorldGameMaster.I.Status = new GameStatus();
+			//    WorldGameMaster.I.Perform();
+			//}
 		}
 
 		public void Perform_コンテニュー()
