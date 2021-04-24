@@ -349,7 +349,7 @@ namespace Charlotte.Games
 
 				// ----
 
-				if (this.Input.Shoot && this.Player.DeadFrame == 0) // プレイヤーショット
+				if (this.Input.Shoot && this.Player.DeadFrame == 0) // プレイヤー攻撃
 				{
 					this.Player.Shoot();
 				}
