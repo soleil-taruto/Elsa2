@@ -56,7 +56,7 @@ namespace Charlotte.Games
 			public bool Dir6;
 			public bool Dir8;
 			public bool Slow;
-			public bool Shot;
+			public bool Shoot;
 			public bool Bomb;
 		}
 
@@ -145,7 +145,7 @@ namespace Charlotte.Games
 					this.Input.Dir6 = 1 <= DDInput.DIR_6.GetInput();
 					this.Input.Dir8 = 1 <= DDInput.DIR_8.GetInput();
 					this.Input.Slow = 1 <= DDInput.A.GetInput();
-					this.Input.Shot = 1 <= DDInput.B.GetInput();
+					this.Input.Shoot = 1 <= DDInput.B.GetInput();
 					this.Input.Bomb = 1 <= DDInput.C.GetInput();
 				}
 
@@ -328,28 +328,28 @@ namespace Charlotte.Games
 					this.Player.SlowFrame--;
 				}
 
-				if (this.Input.Shot)
+				if (this.Input.Shoot)
 				{
-					DDUtils.Maxim(ref this.Player.ShotFrame, 0);
-					this.Player.ShotFrame++;
+					DDUtils.Maxim(ref this.Player.ShootFrame, 0);
+					this.Player.ShootFrame++;
 				}
 				else
 				{
-					DDUtils.Minim(ref this.Player.ShotFrame, 0);
-					this.Player.ShotFrame--;
+					DDUtils.Minim(ref this.Player.ShootFrame, 0);
+					this.Player.ShootFrame--;
 				}
 
 				DDUtils.Approach(ref this.Player.SlowRate, this.Player.SlowFrame < 0 ? 0.0 : 1.0, 0.85);
-				DDUtils.Approach(ref this.Player.ShotRate, this.Player.ShotFrame < 0 ? 0.0 : 1.0, 0.85);
+				DDUtils.Approach(ref this.Player.ShootRate, this.Player.ShootFrame < 0 ? 0.0 : 1.0, 0.85);
 
-				if (this.LastInput.Shot && this.Input.Shot && SCommon.IsRange(this.Player.SlowFrame, -1, 1)) // ? ショット中に低速・高速を切り替えた。
+				if (this.LastInput.Shoot && this.Input.Shoot && SCommon.IsRange(this.Player.SlowFrame, -1, 1)) // ? ショット中に低速・高速を切り替えた。
 				{
-					this.Player.ShotRate = 0.0;
+					this.Player.ShootRate = 0.0;
 				}
 
 				// ----
 
-				if (this.Input.Shot && this.Player.DeadFrame == 0) // プレイヤーショット
+				if (this.Input.Shoot && this.Player.DeadFrame == 0) // プレイヤーショット
 				{
 					this.Player.Shoot();
 				}

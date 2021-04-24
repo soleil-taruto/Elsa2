@@ -34,9 +34,9 @@ namespace Charlotte.Games
 		public double XMoveRate; // 左移動中 <-- 0.0 ～ 1.0 --> 右移動中
 		public double YMoveRate; // 上移動中 <-- 0.0 ～ 1.0 --> 下移動中
 		public int SlowFrame; // ～(-1) == 高速移動中, 0 == 初期値, 1～ == 低速移動中
-		public int ShotFrame; // ～(-1) == 無ショット, 0 == 初期値, 1～ == ショット中
+		public int ShootFrame; // ～(-1) == 攻撃休止中, 0 == 初期値, 1～ == 攻撃中
 		public double SlowRate; // 高速移動中 <-- 0.0 ～ 1.0 --> 低速移動中
-		public double ShotRate; // 無ショット <-- 0.0 ～ 1.0 --> ショット中, パワーアップ時 0.0 にリセットする。
+		public double ShootRate; // 攻撃休止中 <-- 0.0 ～ 1.0 --> 攻撃中, パワーアップ時 0.0 にリセットする。
 		public int Power; // 0 ～ PLAYERPOWER_MAX
 		public int BornFrame; // 0 == 無効, 1～ == 登場中
 		public int DeadFrame; // 0 == 無効, 1～ == 死亡中
@@ -71,9 +71,9 @@ namespace Charlotte.Games
 			this.XMoveRate = 0.0;
 			this.YMoveRate = 0.0;
 			this.SlowFrame = 0;
-			this.ShotFrame = 0;
+			this.ShootFrame = 0;
 			this.SlowRate = 0.0;
-			this.ShotRate = 0.0;
+			this.ShootRate = 0.0;
 
 			if (死亡した)
 			{
@@ -154,9 +154,9 @@ namespace Charlotte.Games
 							DDDraw.DrawEnd();
 							DDDraw.Reset();
 						}
-						if (-20 < this.ShotFrame) // ? ショット中(余韻アリ)
+						if (-20 < this.ShootFrame) // ? ショット中(余韻アリ)
 						{
-							double r = this.ShotRate;
+							double r = this.ShootRate;
 
 							if (0 < this.SlowFrame) // 低速
 							{

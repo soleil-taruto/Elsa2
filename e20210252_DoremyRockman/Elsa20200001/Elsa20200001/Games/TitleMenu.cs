@@ -270,10 +270,8 @@ namespace Charlotte.Games
 				int selectIndex = this.SimpleMenu.Perform(40, 40, 40, 24, "開発デバッグ用メニュー", new string[]
 				{
 					"Stage_0001_v001",
-					"Stage_Reimu_v001",
-					"Stage_Sanae_v001",
-					"w0001(テスト用)",
-					"w1001(テスト用)",
+					"Stage_0002_v001",
+					"Stage_0003_v001",
 					"ノベルパートテスト",
 					"戻る",
 				},
@@ -287,22 +285,14 @@ namespace Charlotte.Games
 						break;
 
 					case 1:
-						a_gameStart("Stage_Reimu_v001\\Start");
+						a_gameStart("Stage_0002_v001\\t1001");
 						break;
 
 					case 2:
-						a_gameStart("Stage_Sanae_v001\\Start");
+						a_gameStart("Stage_0003_v001\\t1001");
 						break;
 
 					case 3:
-						a_gameStart("w0001\\t0001");
-						break;
-
-					case 4:
-						a_gameStart("w1001\\t1001");
-						break;
-
-					case 5:
 						{
 							this.LeaveTitleMenu();
 
@@ -315,7 +305,7 @@ namespace Charlotte.Games
 						}
 						break;
 
-					case 6:
+					case 4:
 						goto endMenu;
 
 					default:
