@@ -21,13 +21,20 @@ namespace Charlotte.Games.Attacks
 				if (DDInput.A.GetInput() == 1) // ? ジャンプ押下
 					break;
 
-				//int koma = frame;
-				int koma = frame / 2;
+				int koma = frame;
+				//int koma = frame / 2;
 				//int koma = frame / 3;
 
 				koma += 2; // 最初の2コマを飛ばす。
+				if (6 <= koma) // koma == 6 以降は(1コマ/2フレーム)
+				{
+					koma -= 6;
+					koma /= 2;
+					koma += 6;
+				}
 				if (8 <= koma) koma -= 2; // koma == 6, 7 の 2 回目
 				if (8 <= koma) koma -= 2; // koma == 6, 7 の 3 回目
+				if (8 <= koma) koma -= 2; // koma == 6, 7 の 4 回目
 
 				if (Ground.I.Picture2.Tewi_ジャンプ強攻撃.Length <= koma)
 					break;
