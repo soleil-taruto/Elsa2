@@ -268,6 +268,8 @@ namespace Charlotte.GameProgressMasters
 		{
 			for (int stageIndex = this.StartStageIndex; ; stageIndex++)
 			{
+				Ground.I.CurrStageIndex = stageIndex;
+
 				//this.FloorMusics[stageIndex].Play(); // フロアＢＧＭ再生 moved --> レイヤ表示.Perform
 
 				//if (!DDConfig.LOG_ENABLED) // zantei zantei zantei test test test 開発デバッグ中は抑止
@@ -309,7 +311,7 @@ namespace Charlotte.GameProgressMasters
 				{
 					if (endStatus == Game.EndStatus_e.NextStage)
 					{
-						箱から出る.Perform(stageIndex);
+						箱から出る.Perform();
 
 						using (new Novel())
 						{

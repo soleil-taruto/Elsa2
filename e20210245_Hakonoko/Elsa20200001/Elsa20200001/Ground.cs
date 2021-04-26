@@ -40,5 +40,7 @@ namespace Charlotte
 		public int StartSnapshotCount = Consts.START_SNAPSHOT_COUNT_DEF;
 
 		public bool 会話スキップ抑止 = false;
+
+		public int CurrStageIndex = 1; // 0～9
 	}
 }

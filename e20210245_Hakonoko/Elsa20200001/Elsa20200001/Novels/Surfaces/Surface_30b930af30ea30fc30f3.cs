@@ -55,7 +55,11 @@ namespace Charlotte.Novels.Surfaces
 		{
 			int c = 0;
 
-			if (command == "画像")
+			if (command == "レイヤ毎の背景")
+			{
+				this.Act.AddOnce(() => this.ImageFile = @"dat\背景\Novel_背景_Floor" + Ground.I.CurrStageIndex + ".png");
+			}
+			else if (command == "画像")
 			{
 				this.Act.AddOnce(() => this.ImageFile = arguments[c++]);
 			}

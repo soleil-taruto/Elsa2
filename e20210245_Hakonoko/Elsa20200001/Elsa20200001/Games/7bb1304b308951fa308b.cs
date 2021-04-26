@@ -15,14 +15,14 @@ namespace Charlotte.Games
 		/// <summary>
 		/// throws Cancelled
 		/// </summary>
-		public static void Perform(int stageIndex)
+		public static void Perform()
 		{
 			DDUtils.SetMouseDispMode(true);
 
 			DDCurtain.SetCurtain(0, -1.0);
 			DDCurtain.SetCurtain(10);
 
-			DDPicture wallPicture = GameProgressMaster.Get箱から出る背景(stageIndex);
+			DDPicture wallPicture = GameProgressMaster.Get箱から出る背景(Ground.I.CurrStageIndex);
 
 			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{

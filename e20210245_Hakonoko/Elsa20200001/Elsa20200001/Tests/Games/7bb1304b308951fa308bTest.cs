@@ -10,7 +10,7 @@ namespace Charlotte.Tests.Games
 	{
 		public void Test01()
 		{
-			箱から出る.Perform(1);
+			箱から出る.Perform();
 		}
 	}
 }
