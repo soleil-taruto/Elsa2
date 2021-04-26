@@ -15,7 +15,7 @@ namespace Charlotte.Tests
 		{
 			// G,B がほぼ同じなのでバリエーション出ない。
 
-			DDPicture picture = DDCCResource.GetPicture(@"dat\Novel\_背景.png");
+			DDPicture picture = DDCCResource.GetPicture(@"dat\Novel\背景.png");
 
 			DDSubScreen rgb = new DDSubScreen(picture.Get_W(), picture.Get_H());
 			DDSubScreen rbg = new DDSubScreen(picture.Get_W(), picture.Get_H());
@@ -58,7 +58,7 @@ namespace Charlotte.Tests
 
 		public void Test02()
 		{
-			DDPicture picture = DDCCResource.GetPicture(@"dat\Novel\_背景.png");
+			DDPicture picture = DDCCResource.GetPicture(@"dat\Novel\背景.png");
 
 			DDSubScreen s000 = new DDSubScreen(picture.Get_W(), picture.Get_H());
 			DDSubScreen s001 = new DDSubScreen(picture.Get_W(), picture.Get_H());
@@ -107,7 +107,7 @@ namespace Charlotte.Tests
 
 		public void Test03()
 		{
-			DDPicture picture = DDCCResource.GetPicture(@"dat\箱から出る\_背景.png");
+			DDPicture picture = DDCCResource.GetPicture(@"dat\箱から出る\背景.png");
 
 			DDSubScreen s000 = new DDSubScreen(picture.Get_W(), picture.Get_H());
 			DDSubScreen s001 = new DDSubScreen(picture.Get_W(), picture.Get_H());
