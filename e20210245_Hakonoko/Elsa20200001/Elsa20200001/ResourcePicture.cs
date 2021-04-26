@@ -26,11 +26,11 @@ namespace Charlotte
 			DDPictureLoaders.Standard(@"dat\タイトルメニュー項目_終了.png"),
 		};
 
-		public DDPicture 箱から出る_背景 = DDPictureLoaders.Standard(@"dat\箱から出る\背景.png");
+		//public DDPicture 箱から出る_背景 = DDPictureLoaders.Standard(@"dat\箱から出る\_背景.png");
 		public DDPicture 箱から出る_箱0001 = DDPictureLoaders.Standard(@"dat\箱から出る\箱0001.png");
 		public DDPicture 箱から出る_箱0002 = DDPictureLoaders.Standard(@"dat\箱から出る\箱0002.png");
 
-		//public DDPicture Novel_背景 = DDPictureLoaders.Standard(@"dat\Novel\背景.png");
+		//public DDPicture Novel_背景 = DDPictureLoaders.Standard(@"dat\Novel\_背景.png");
 		public DDPicture Novel_吹き出し = DDPictureLoaders.Standard(@"dat\Novel\フキダシデザイン\e0165_1.png");
 		public DDPicture Novel_吹き出しThink = DDPictureLoaders.Standard(@"dat\Novel\フキダシデザイン\e0347_1.png");
 		public DDPicture Novel_箱 = DDPictureLoaders.Standard(@"dat\Novel\箱.png");

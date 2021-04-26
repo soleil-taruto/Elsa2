@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Charlotte.GameCommons;
+using Charlotte.GameProgressMasters;
 
 namespace Charlotte.Games
 {
@@ -14,16 +15,18 @@ namespace Charlotte.Games
 		/// <summary>
 		/// throws Cancelled
 		/// </summary>
-		public static void Perform()
+		public static void Perform(int stageIndex)
 		{
 			DDUtils.SetMouseDispMode(true);
 
 			DDCurtain.SetCurtain(0, -1.0);
 			DDCurtain.SetCurtain(10);
 
+			DDPicture wallPicture = GameProgressMaster.Get箱から出る背景(stageIndex);
+
 			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
-				DDDraw.DrawSimple(Ground.I.Picture.箱から出る_背景, 0, 0);
+				DDDraw.DrawSimple(wallPicture, 0, 0);
 				DDDraw.DrawCenter(Ground.I.Picture.箱から出る_箱0001, DDConsts.Screen_W / 2, DDConsts.Screen_H - Ground.I.Picture.箱から出る_箱0001.Get_H() / 2);
 
 				P_EachFrame();
@@ -41,7 +44,7 @@ namespace Charlotte.Games
 					double yBuru = DDUtils.Random.Real() * buruSpan - buruSpan / 2;
 					double z = 1.0 + 0.1 * (1.0 - scene.Rate);
 
-					DDDraw.DrawSimple(Ground.I.Picture.箱から出る_背景, 0, 0);
+					DDDraw.DrawSimple(wallPicture, 0, 0);
 					DDDraw.DrawBegin(Ground.I.Picture.箱から出る_箱0001, x + xBuru, y + yBuru);
 					DDDraw.DrawZoom(z);
 					DDDraw.DrawEnd();
@@ -68,7 +71,7 @@ namespace Charlotte.Games
 				double yZure = zure;
 				double z = 1.0;
 
-				DDDraw.DrawSimple(Ground.I.Picture.箱から出る_背景, 0, 0);
+				DDDraw.DrawSimple(wallPicture, 0, 0);
 				DDDraw.DrawBegin(Ground.I.Picture.箱から出る_箱0002, x + xZure, y + yZure);
 				DDDraw.DrawZoom(z);
 				DDDraw.DrawEnd();

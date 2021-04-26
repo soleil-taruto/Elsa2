@@ -266,22 +266,22 @@ namespace Charlotte.GameProgressMasters
 
 		public void Perform()
 		{
-			for (int index = this.StartStageIndex; ; index++)
+			for (int stageIndex = this.StartStageIndex; ; stageIndex++)
 			{
-				//this.FloorMusics[index].Play(); // フロアＢＧＭ再生 moved --> レイヤ表示.Perform
+				//this.FloorMusics[stageIndex].Play(); // フロアＢＧＭ再生 moved --> レイヤ表示.Perform
 
 				//if (!DDConfig.LOG_ENABLED) // zantei zantei zantei test test test 開発デバッグ中は抑止
 				{
-					レイヤ表示.Perform(index, this.ThemeColors[index], this.FloorMusics[index]);
+					レイヤ表示.Perform(stageIndex, this.ThemeColors[stageIndex], this.FloorMusics[stageIndex]);
 				}
 
 				Game.EndStatus_e endStatus;
 
-				this.FloorMusics[index].Play(); // フロアＢＧＭ再生(念のため)
+				this.FloorMusics[stageIndex].Play(); // フロアＢＧＭ再生(念のため)
 
 				using (new Game())
 				{
-					Game.I.Map = this.MapLoaders[index]();
+					Game.I.Map = this.MapLoaders[stageIndex]();
 					Game.I.Perform();
 					endStatus = Game.I.EndStatus;
 
@@ -292,7 +292,7 @@ namespace Charlotte.GameProgressMasters
 				DDMusicUtils.Fade(); // フロアＢＧＭ停止
 
 #if true
-				int reachedStageIndexNew = index + 1;
+				int reachedStageIndexNew = stageIndex + 1;
 				bool 初見 = false;
 
 				if (Ground.I.ReachedStageIndex < reachedStageIndexNew)
@@ -302,18 +302,18 @@ namespace Charlotte.GameProgressMasters
 				}
 				Ground.I.会話スキップ抑止 = 初見;
 #else // old
-				DDUtils.Maxim(ref Ground.I.ReachedStageIndex, index + 1);
+				DDUtils.Maxim(ref Ground.I.ReachedStageIndex, stageIndex + 1);
 #endif
 
 				try
 				{
 					if (endStatus == Game.EndStatus_e.NextStage)
 					{
-						箱から出る.Perform();
+						箱から出る.Perform(stageIndex);
 
 						using (new Novel())
 						{
-							Novel.I.Status.Scenario = ScenarioLoaders[index]();
+							Novel.I.Status.Scenario = ScenarioLoaders[stageIndex]();
 							Novel.I.Perform();
 						}
 					}
@@ -378,6 +378,16 @@ namespace Charlotte.GameProgressMasters
 		public Map GetFinalMap()
 		{
 			return this.MapLoaders[FINAL_STAGE_INDEX]();
+		}
+
+		public static DDPicture Get箱から出る背景(int stageIndex)
+		{
+			return DDCCResource.GetPicture(@"dat\背景\箱から出る_背景_Floor" + stageIndex + ".png");
+		}
+
+		public static DDPicture Getノベルパートの背景(int stageIndex)
+		{
+			return DDCCResource.GetPicture(@"dat\背景\Novel_背景_Floor" + stageIndex + ".png");
 		}
 	}
 }
