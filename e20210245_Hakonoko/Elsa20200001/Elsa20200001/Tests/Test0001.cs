@@ -5,6 +5,7 @@ using System.Text;
 using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
+using Charlotte.GameProgressMasters;
 
 namespace Charlotte.Tests
 {
