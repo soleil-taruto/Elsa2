@@ -387,9 +387,10 @@ namespace Charlotte.GameProgressMasters
 			return DDCCResource.GetPicture(@"dat\背景\箱から出る_背景_Floor" + stageIndex + ".png");
 		}
 
-		public static DDPicture Getノベルパートの背景(int stageIndex)
-		{
-			return DDCCResource.GetPicture(@"dat\背景\Novel_背景_Floor" + stageIndex + ".png");
-		}
+		// 廃止
+		//public static DDPicture Getノベルパートの背景(int stageIndex)
+		//{
+		//    return DDCCResource.GetPicture(@"dat\背景\Novel_背景_Floor" + stageIndex + ".png");
+		//}
 	}
 }
