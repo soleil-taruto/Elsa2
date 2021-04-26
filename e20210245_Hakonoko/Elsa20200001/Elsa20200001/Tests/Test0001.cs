@@ -104,6 +104,55 @@ namespace Charlotte.Tests
 			}
 		}
 
+		public void Test03()
+		{
+			DDPicture picture = DDCCResource.GetPicture(@"dat\箱から出る\背景.png");
+
+			DDSubScreen s000 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s001 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s010 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s011 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s100 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s101 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s110 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+			DDSubScreen s111 = new DDSubScreen(picture.Get_W(), picture.Get_H());
+
+			Draw(picture, "BBB", s000);
+			Draw(picture, "BBR", s001);
+			Draw(picture, "BRB", s010);
+			Draw(picture, "BRR", s011);
+			Draw(picture, "RBB", s100);
+			Draw(picture, "RBR", s101);
+			Draw(picture, "RRB", s110);
+			Draw(picture, "RRR", s111);
+
+			DDSubScreen[] screens = new DDSubScreen[]
+			{
+				s000,
+				s001,
+				s010,
+				s011,
+				s100,
+				s101,
+				s110,
+				s111,
+			};
+
+			int displayIndex = 0;
+
+			for (; ; )
+			{
+				if (DDInput.DIR_8.IsPound()) displayIndex--;
+				if (DDInput.DIR_2.IsPound()) displayIndex++;
+				displayIndex += screens.Length;
+				displayIndex %= screens.Length;
+
+				DDDraw.DrawSimple(screens[displayIndex].ToPicture(), 0, 0);
+
+				DDEngine.EachFrame();
+			}
+		}
+
 		private void Draw(DDPicture src, string colorOrder, DDSubScreen dest)
 		{
 			Func<char, int> a_charToBlend = chr =>
