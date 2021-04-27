@@ -13,7 +13,7 @@ namespace Charlotte
 		public DDMusic Title = new DDMusic(true, @"dat\夜野ムクロジ\komore-bi.mp3");
 		public DDMusic Novel = new DDMusic(true, @"dat\夜野ムクロジ\si-piano.mp3");
 		public DDMusic Ending_死亡 = new DDMusic(true, @"dat\夜野ムクロジ\sito-sito.mp3");
-		public DDMusic Ending_生還 = new DDMusic(true, @"dat\夜野ムクロジ\sito-sito.mp3"); // TODO
+		public DDMusic Ending_生還 = new DDMusic(true, @"dat\甘茶の音楽工房\seijakunohoshizora.mp3");
 		public DDMusic Ending_復讐 = new DDMusic(true, @"dat\ユーフルカ\Horror-ginen_loop.ogg");
 		public DDMusic Music_0001 = new DDMusic(true, @"dat\夜野ムクロジ\yu-rei.mp3");
 
