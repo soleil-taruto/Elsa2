@@ -207,6 +207,7 @@ namespace Charlotte.Games
 					{
 						this.TakeSnapshot();
 
+						Ground.I.SE.Snapshot.Play();
 						//波紋効果.Add(this.Player.X, this.Player.Y); // old
 						SnapshotEffects.Perform();
 					}
@@ -585,6 +586,7 @@ namespace Charlotte.Games
 						)
 					{
 						goalFlag = true;
+						Ground.I.SE.Goal.Play();
 						DDEngine.EachFrame(); // ゴールした瞬間を描画する。
 						break; // 当たり判定まで進んでしまうと死亡判定と競合しそうなので、ここで break してしまう。
 					}
@@ -910,6 +912,8 @@ namespace Charlotte.Games
 				this.Dead_Respawn = false;
 			}
 
+			Ground.I.SE.Miss.Play();
+
 			DDMain.KeepMainScreen();
 
 			foreach (DDScene scene in DDSceneUtils.Create(30))
@@ -944,6 +948,11 @@ namespace Charlotte.Games
 			if (this.FinalZone == null)
 			{
 				波紋効果.Add(this.Player.X, this.Player.Y);
+				Ground.I.SE.Death.Play();
+			}
+			else
+			{
+				// TODO ???
 			}
 		}
 
@@ -1012,6 +1021,7 @@ namespace Charlotte.Games
 			this.ReloadEnemies();
 
 			波紋効果.Add(this.Player.X, this.Player.Y);
+			Ground.I.SE.Reborn.Play();
 		}
 
 		/// <summary>
@@ -1038,6 +1048,7 @@ namespace Charlotte.Games
 			this.Enemies = new DDList<Enemy>(ss.Enemies.Select(enemy => enemy.GetClone()).ToList());
 
 			波紋効果.Add(this.Player.X, this.Player.Y);
+			Ground.I.SE.Reborn.Play();
 		}
 
 		private void RespawnCommon()
