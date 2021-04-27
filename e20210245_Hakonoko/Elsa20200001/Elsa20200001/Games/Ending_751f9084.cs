@@ -12,7 +12,8 @@ namespace Charlotte.Games
 		protected override IEnumerable<int> Script()
 		{
 			// TODO: 背景
-			// TODO: BGM
+
+			Ground.I.Music.Ending_生還.Play();
 
 			// _#Include_Resource // for t20201023_GitHubRepositoriesSolve
 
