@@ -41,6 +41,6 @@ namespace Charlotte
 
 		public bool 会話スキップ抑止 = false;
 
-		public int CurrStageIndex = 1; // 0～9
+		public int CurrStageIndex = 1; // 値域：0～9, 特定のステージに居ない時は値域内の適当な値になっている。
 	}
 }

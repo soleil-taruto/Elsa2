@@ -179,10 +179,27 @@ namespace Charlotte.Games
 					this.ReloadEnemies();
 					this.Frame = 0;
 				}
+#if true // test test test test test
+				if (DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // 強制クリア(デバッグ用)
+#else
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // 強制クリア(デバッグ用)
+#endif
 				{
-					goalFlag = true;
-					break;
+					if (Ground.I.CurrStageIndex == GameProgressMaster.FINAL_STAGE_INDEX)
+					{
+						if (this.Player.Y < 2900)
+						{
+							波紋効果.Clear();
+
+							this.Player.X = 3150;
+							this.Player.Y = 3000;
+						}
+					}
+					else
+					{
+						goalFlag = true;
+						break;
+					}
 				}
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_W) == 1) // 色調整(デバッグ用)
 				{
@@ -920,7 +937,7 @@ namespace Charlotte.Games
 			{
 				DDDraw.DrawSimple(DDGround.KeptMainScreen.ToPicture(), 0, 0);
 
-				DDDraw.SetAlpha(0.2);
+				DDDraw.SetAlpha(0.3);
 				DDDraw.SetBright(1.0, 0.0, 0.0);
 				DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, 0, DDConsts.Screen_W, DDConsts.Screen_H);
 				DDDraw.Reset();

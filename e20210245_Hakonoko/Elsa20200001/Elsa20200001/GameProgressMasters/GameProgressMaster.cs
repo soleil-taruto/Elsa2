@@ -370,7 +370,7 @@ namespace Charlotte.GameProgressMasters
 			}
 		}
 
-		private const int FINAL_STAGE_INDEX = 9;
+		public const int FINAL_STAGE_INDEX = 9;
 
 		public Scenario GetFinalScenario()
 		{

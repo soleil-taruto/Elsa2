@@ -73,10 +73,13 @@ namespace Charlotte
 						波紋効果.Count,
 						Game.I == null ? "-" : "" + Game.I.SnapshotCount,
 						Game.I == null ? "-" : "" + Game.I.タイル接近_敵描画_Points.Count,
-						"会ス抑=" + (Ground.I.会話スキップ抑止 ? 1 : 0),
+						"会ス" + (Ground.I.会話スキップ抑止 ? "抑" : "可"),
 
 						Game.I == null ? "-" : "" + Game.I.行き先案内_Crashed_Start方面,
 						Game.I == null ? "-" : "" + Game.I.行き先案内_Crashed_Goal方面,
+
+						Game.I == null ? "-" : "" + Game.I.Player.X.ToString("F1"),
+						Game.I == null ? "-" : "" + Game.I.Player.Y.ToString("F1"),
 
 						// デバッグ表示する情報をここへ追加..
 

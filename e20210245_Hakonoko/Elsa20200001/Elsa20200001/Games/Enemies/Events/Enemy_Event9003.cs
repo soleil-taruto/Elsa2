@@ -45,6 +45,8 @@ namespace Charlotte.Games.Enemies.Events
 					Game.I.Map.Design = new Design_0002();
 
 					DDGround.EL.Add(SCommon.Supplier(this.E_フラッシュ()));
+
+					DDMusicUtils.Stop();
 				}
 			}
 		}
