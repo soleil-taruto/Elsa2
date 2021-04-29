@@ -18,7 +18,7 @@ namespace Charlotte.Games.Shots
 		private int Order;
 
 		public Shot_AirShooter(double x, double y, bool facingLeft, int order, int level)
-			: base(x, y, facingLeft, LevelToAttackPoint(level), true, 敵を貫通する_e.しない)
+			: base(x, y, facingLeft, LevelToAttackPoint(level), true, false)
 		{
 			this.Level = level;
 			this.Order = order;

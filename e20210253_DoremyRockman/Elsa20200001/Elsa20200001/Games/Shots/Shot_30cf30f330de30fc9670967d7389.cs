@@ -12,7 +12,7 @@ namespace Charlotte.Games.Shots
 		private int Level;
 
 		public Shot_ハンマー陰陽玉(double x, double y, bool facingLeft, int level)
-			: base(x, y, facingLeft, LevelToAttackPoint(level), true, 敵を貫通する_e.する)
+			: base(x, y, facingLeft, LevelToAttackPoint(level), true, true)
 		{
 			this.Level = level;
 		}

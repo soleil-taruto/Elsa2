@@ -718,7 +718,7 @@ namespace Charlotte.Games
 
 								if (enemy.防御中)
 								{
-									if (shot.敵を貫通する == Shot.敵を貫通する_e.する)
+									if (shot.敵を貫通する)
 									{
 										// TODO: 攻撃が効かない音
 									}
@@ -732,29 +732,17 @@ namespace Charlotte.Games
 									}
 									continue; // この自弾の攻撃は無効なので、次の弾の判定へ移る。
 								}
+
 								enemy.HP -= shot.AttackPoint;
 
-								switch (shot.敵を貫通する)
+								if (!shot.敵を貫通する) // 自弾の攻撃力と敵のHPを相殺
 								{
-									case Shot.敵を貫通する_e.しない:
+									if (0 <= enemy.HP) // ? 丁度削りきった || 削りきれなかった -> 攻撃力を使い果たしたので、ショットは消滅
 										shot.Kill();
-										break;
-
-									case Shot.敵を貫通する_e.する:
-										break;
-
-									case Shot.敵を貫通する_e.相殺:
-										{
-											if (0 <= enemy.HP)
-												shot.Kill();
-											else
-												shot.AttackPoint = -enemy.HP;
-										}
-										break;
-
-									default:
-										throw null; // never
+									else
+										shot.AttackPoint = -enemy.HP; // 過剰に削った分を残りの攻撃力として反映
 								}
+
 								if (1 <= enemy.HP) // ? まだ生存している。
 								{
 									enemy.Damaged(shot);

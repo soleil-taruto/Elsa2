@@ -12,7 +12,7 @@ namespace Charlotte.Games.Shots
 		private int Level;
 
 		public Shot_跳ねる陰陽玉(double x, double y, bool facingLeft, int level)
-			: base(x, y, facingLeft, LevelToAttackPoint(level), true, 敵を貫通する_e.相殺) // 自力で壁から跳ねるので、壁貫通にしておく。
+			: base(x, y, facingLeft, LevelToAttackPoint(level), true, false) // 自力で壁から跳ねるので、壁貫通にしておく。
 		{
 			this.Level = level;
 		}

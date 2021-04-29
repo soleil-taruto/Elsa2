@@ -13,7 +13,7 @@ namespace Charlotte.Games.Shots
 		private int Level;
 
 		public Shot_MagnetAir(double x, double y, bool facingLeft, int level)
-			: base(x, y, facingLeft, LevelToAttackPoint(level), false, 敵を貫通する_e.しない)
+			: base(x, y, facingLeft, LevelToAttackPoint(level), false, false)
 		{
 			this.Level = level;
 		}

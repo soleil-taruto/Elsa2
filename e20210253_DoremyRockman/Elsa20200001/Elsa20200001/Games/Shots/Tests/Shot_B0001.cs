@@ -13,7 +13,7 @@ namespace Charlotte.Games.Shots
 	public class Shot_B0001 : Shot
 	{
 		public Shot_B0001(double x, double y, bool facingLeft)
-			: base(x, y, facingLeft, 1, false, 敵を貫通する_e.しない)
+			: base(x, y, facingLeft, 1, false, false)
 		{ }
 
 		protected override IEnumerable<bool> E_Draw()
