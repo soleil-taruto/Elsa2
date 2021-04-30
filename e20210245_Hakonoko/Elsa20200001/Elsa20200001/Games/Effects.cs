@@ -63,6 +63,15 @@ namespace Charlotte.Games
 			}
 		}
 
+		public static IEnumerable<bool> Heavyフラッシュ()
+		{
+			foreach (DDScene scene in DDSceneUtils.Create(120))
+			{
+				DDCurtain.DrawCurtain(1.0 - scene.Rate);
+				yield return true;
+			}
+		}
+
 		public static IEnumerable<bool> 行き先案内(int cycle, double rotAdd, int maxDistance, bool 正しいルート)
 		{
 			double rot = DDUtils.ToAngle(DDEngine.ProcFrame, cycle);

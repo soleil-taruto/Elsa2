@@ -21,7 +21,7 @@ namespace Charlotte.Games.Enemies.Events
 				if (Game.I.FinalZone.OH_Event9003B.Once())
 				{
 					Game.I.Map.Design = new Design_0003();
-					DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
+					DDGround.EL.Add(SCommon.Supplier(Effects.Heavyフラッシュ()));
 
 					Ground.I.Music.地鳴り.Play();
 				}
