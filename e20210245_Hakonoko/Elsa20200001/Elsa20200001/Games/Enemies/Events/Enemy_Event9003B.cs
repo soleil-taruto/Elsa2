@@ -22,6 +22,8 @@ namespace Charlotte.Games.Enemies.Events
 				{
 					Game.I.Map.Design = new Design_0003();
 					DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
+
+					Ground.I.Music.地鳴り.Play();
 				}
 			}
 		}

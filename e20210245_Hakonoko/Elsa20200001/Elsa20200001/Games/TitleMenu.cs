@@ -266,7 +266,11 @@ namespace Charlotte.Games
 
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // (開発デバッグ用)ロック解除
 				{
-					Ground.I.ReachedStageIndex = 10;
+					Ground.I.ReachedStageIndex = 9;
+				}
+				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_W) == 1) // (開発デバッグ用)地鳴りテスト
+				{
+					Ground.I.Music.地鳴り.Play();
 				}
 				if (DDInput.A.GetInput() == 1) // ? 決定ボタン押下
 				{

@@ -28,6 +28,8 @@ namespace Charlotte
 		public DDMusic Floor_09 = new DDMusic(false, @"dat\ユーフルカ\Horror-naraku_loop.ogg").SetLoopByStLength(974485, 1940413);
 		public DDMusic FinalZone = new DDMusic(false, @"dat\ユーフルカ\Horror-NeverLookBack_loop.ogg").SetLoopByStLength(456198, 3097689);
 
+		public DDMusic 地鳴り = new DDMusic(true, @"dat\DovaSyndrome\ゴゴゴ_激しい地鳴り音.mp3").SetLoopByStEnd(44100 + 12345, 44100 * 18 + 12345);
+
 		public ResourceMusic()
 		{
 			//this.Dummy.Volume = 0.1; // 非推奨

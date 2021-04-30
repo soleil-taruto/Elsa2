@@ -228,6 +228,10 @@ namespace Charlotte.Games
 						//波紋効果.Add(this.Player.X, this.Player.Y); // old
 						SnapshotEffects.Perform();
 					}
+					else
+					{
+						this.スナップショットを阻止した();
+					}
 				}
 
 				int plMove = 0; // プレイヤー移動 { -1, 0, 1 } == { 左, 移動ナシ, 右 }
@@ -969,7 +973,7 @@ namespace Charlotte.Games
 			}
 			else
 			{
-				// TODO ???
+				// noop
 			}
 		}
 
@@ -985,7 +989,12 @@ namespace Charlotte.Games
 
 		private void リスポーンを阻止した()
 		{
-			// TODO: SE など
+			Ground.I.SE.拒否.Play();
+		}
+
+		private void スナップショットを阻止した()
+		{
+			Ground.I.SE.拒否.Play();
 		}
 
 		private void Respawn()
