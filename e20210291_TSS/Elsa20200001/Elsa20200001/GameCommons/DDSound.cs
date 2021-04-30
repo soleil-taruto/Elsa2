@@ -56,7 +56,7 @@ namespace Charlotte.GameCommons
 					byte[] fileData = this.Func_GetFileData();
 					int handle = -1;
 
-#if true
+#if false // SetLoop*SamplePosSoundMem が正常に動作しない。@ 2021.4.30
 					using (WorkingDir wd = new WorkingDir())
 					{
 						string file = wd.MakePath();
@@ -64,7 +64,7 @@ namespace Charlotte.GameCommons
 						handle = DX.LoadSoundMem(file);
 					}
 #else
-					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, (ulong)fileData.Length)); // DxLibDotNet3_22c で正常に動作しない。@ 2021.4.18
+					DDSystem.PinOn(fileData, p => handle = DX.LoadSoundMemByMemImage(p, fileData.Length)); // DxLibDotNet3_22c で正常に動作しない。@ 2021.4.18
 #endif
 
 					if (handle == -1) // ? 失敗
