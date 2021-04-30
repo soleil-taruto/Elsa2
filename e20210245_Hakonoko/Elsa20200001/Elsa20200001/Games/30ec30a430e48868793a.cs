@@ -28,8 +28,10 @@ namespace Charlotte.Games
 				foreach (DDScene scene in DDSceneUtils.Create(210))
 				{
 					if (scene.Numer == 30)
+					{
+						DDPictureUtils.UnloadLocally();
 						music.Play();
-
+					}
 					if (scene.Numer + 30 == scene.Denom)
 						DDCurtain.SetCurtain(30, -1.0);
 

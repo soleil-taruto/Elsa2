@@ -73,7 +73,8 @@ namespace Charlotte.GameCommons
 		public static void AddAllPicture()
 		{
 			foreach (DDPicture picture in DDPictureUtils.Pictures.Concat(DDDerivationUtils.Derivations))
-				Add(picture);
+				if (picture.Globally)
+					Add(picture);
 		}
 
 		/// <summary>
