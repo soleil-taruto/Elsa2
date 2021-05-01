@@ -27,7 +27,8 @@ namespace Charlotte.GameCommons
 			switch (DX.CheckSoundMem(handle))
 			{
 				case 1: // ? 再生中
-					//ProcMain.WriteLog("再生中の曲を再生しようとした。");
+					//throw new DDError("再生中の音を再生しようとした。");
+					ProcMain.WriteLog("再生中の音を再生しようとした。");
 					return;
 
 				case 0: // ? 再生されていない。
