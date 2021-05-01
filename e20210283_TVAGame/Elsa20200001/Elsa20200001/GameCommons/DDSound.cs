@@ -11,20 +11,25 @@ namespace Charlotte.GameCommons
 	public class DDSound
 	{
 		private Func<byte[]> Func_GetFileData;
-		private int HandleCount;
 		private int[] Handles = null; // null == Unloaded
 
-		public Action PostLoaded = () => { };
-		public List<Action> PostLoaded2 = new List<Action>();
+		public int HandleCount
+		{
+			get
+			{
+				return this.Handles == null ? 0 : this.Handles.Length;
+			}
+		}
 
-		public DDSound(string file, int handleCount)
-			: this(() => DDResource.Load(file), handleCount)
+		public List<Action<int>> PostLoadeds = new List<Action<int>>();
+
+		public DDSound(string file)
+			: this(() => DDResource.Load(file))
 		{ }
 
-		public DDSound(Func<byte[]> getFileData, int handleCount)
+		public DDSound(Func<byte[]> getFileData)
 		{
 			this.Func_GetFileData = getFileData;
-			this.HandleCount = handleCount;
 
 			DDSoundUtils.Add(this);
 		}
@@ -50,7 +55,7 @@ namespace Charlotte.GameCommons
 		{
 			if (this.Handles == null)
 			{
-				this.Handles = new int[this.HandleCount];
+				this.Handles = new int[1];
 
 				{
 					byte[] fileData = this.Func_GetFileData();
@@ -73,47 +78,38 @@ namespace Charlotte.GameCommons
 					this.Handles[0] = handle;
 				}
 
-				for (int index = 1; index < this.HandleCount; index++)
-				{
-					int handle = DX.DuplicateSoundMem(this.Handles[0]);
-
-					if (handle == -1) // ? 失敗
-						throw new DDError();
-
-					this.Handles[index] = handle;
-				}
-
-				this.PostLoaded();
-
-				foreach (Action routine in this.PostLoaded2)
-					routine();
+				foreach (Action<int> routine in this.PostLoadeds)
+					routine(this.Handles[0]);
 			}
 			return this.Handles[handleIndex];
 		}
 
-		private static bool IsPlaying(int handle)
+		public void Extend()
 		{
-			switch (DX.CheckSoundMem(handle))
-			{
-				case 1: // ? 再生中
-					return true;
+			int handle = DX.DuplicateSoundMem(this.GetHandle(0));
 
-				case 0: // ? 停止
-					return false;
+			if (handle == -1) // ? 失敗
+				throw new DDError();
 
-				default:
-					throw new DDError();
-			}
+			foreach (Action<int> routine in this.PostLoadeds)
+				routine(handle);
+
+			this.Handles = this.Handles.Concat(new int[] { handle }).ToArray();
 		}
 
 		public bool IsPlaying()
 		{
 			if (this.Handles != null)
 				for (int index = 0; index < this.HandleCount; index++)
-					if (IsPlaying(this.Handles[index]))
+					if (DDSoundUtils.IsPlaying(this.Handles[index]))
 						return true;
 
 			return false;
+		}
+
+		public int[] GetHandles()
+		{
+			return this.Handles == null ? new int[0] : this.Handles;
 		}
 	}
 }

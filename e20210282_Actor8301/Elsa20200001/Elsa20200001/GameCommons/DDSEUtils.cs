@@ -46,12 +46,26 @@ namespace Charlotte.GameCommons
 					switch (info.AlterCommand)
 					{
 						case PlayInfo.AlterCommand_e.NORMAL:
-							info.SE.HandleIndex %= DDSE.HANDLE_COUNT;
-							DDSoundUtils.Play(info.SE.Sound.GetHandle(info.SE.HandleIndex++));
+							info.SE.HandleIndex++;
+							info.SE.HandleIndex %= info.SE.Sound.HandleCount;
+
+							if (DDSoundUtils.IsPlaying(info.SE.Sound.GetHandle(info.SE.HandleIndex)))
+							{
+								for (info.SE.HandleIndex = 0; info.SE.HandleIndex < info.SE.Sound.HandleCount; info.SE.HandleIndex++)
+									if (!DDSoundUtils.IsPlaying(info.SE.Sound.GetHandle(info.SE.HandleIndex)))
+										goto foundNotPlaying;
+
+								//info.SE.HandleIndex = info.SE.Sound.HandleCount;
+								info.SE.Sound.Extend();
+
+								//ProcMain.WriteLog("音を拡張しました。" + info.SE.Sound.HandleCount);
+							}
+						foundNotPlaying:
+							DDSoundUtils.Play(info.SE.Sound.GetHandle(info.SE.HandleIndex));
 							break;
 
 						case PlayInfo.AlterCommand_e.STOP:
-							for (int index = 0; index < DDSE.HANDLE_COUNT; index++)
+							for (int index = 0; index < info.SE.Sound.HandleCount; index++)
 							{
 								DDSoundUtils.Stop(info.SE.Sound.GetHandle(index));
 							}
