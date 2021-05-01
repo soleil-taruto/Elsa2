@@ -45,23 +45,6 @@ namespace Charlotte
 				// < アプリ固有
 			}
 
-			#region Charge To DDTouch
-
-			// DDCCResource 等のための Touch
-			//DDTouch.Add(TitleMenu.TouchWallDrawerResources);
-
-			// 個別に設定
-			//DDTouch.Add(Ground.I.Picture.XXX);
-			//DDTouch.Add(Ground.I.Music.XXX);
-			//DDTouch.Add(Ground.I.SE.XXX);
-
-			// 全部設定
-			//DDTouch.AddAllPicture();
-			//DDTouch.AddAllMusic();
-			//DDTouch.AddAllSE();
-
-			#endregion
-
 			//DDTouch.Touch(); // moved -> Logo
 
 			if (DDConfig.LOG_ENABLED)
