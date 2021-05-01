@@ -23,7 +23,7 @@ namespace Charlotte.GameCommons
 		public static DDMusic GetMusic(string file)
 		{
 			if (!MusicCache.ContainsKey(file))
-				MusicCache.Add(file, new DDMusic(false, file));
+				MusicCache.Add(file, new DDMusic(file));
 
 			return MusicCache[file];
 		}
@@ -39,7 +39,7 @@ namespace Charlotte.GameCommons
 		}
 
 		// ====
-		// ここから開放
+		// ここから開放(キャッシュを空にする)
 		// ====
 
 		public static void ClearPicture()

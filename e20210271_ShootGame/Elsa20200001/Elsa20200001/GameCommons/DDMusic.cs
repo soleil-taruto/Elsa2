@@ -8,22 +8,21 @@ namespace Charlotte.GameCommons
 {
 	public class DDMusic
 	{
-		public bool Globally;
+		public bool Globally = false;
 		public bool Locally { get { return !this.Globally; } }
 		public DDSound Sound;
 		public double Volume = 0.5; // 0.0 ～ 1.0
 
-		public DDMusic(bool globally, string file)
-			: this(globally, new DDSound(file, 1))
+		public DDMusic(string file)
+			: this(new DDSound(file, 1))
 		{ }
 
-		public DDMusic(bool globally, Func<byte[]> getFileData)
-			: this(globally, new DDSound(getFileData, 1))
+		public DDMusic(Func<byte[]> getFileData)
+			: this(new DDSound(getFileData, 1))
 		{ }
 
-		public DDMusic(bool globally, DDSound sound_binding)
+		public DDMusic(DDSound sound_binding)
 		{
-			this.Globally = globally;
 			this.Sound = sound_binding;
 			this.Sound.PostLoaded = () => DDSoundUtils.SetVolume(this.Sound.GetHandle(0), 0.0); // ロードしたらミュートしておく。
 
@@ -31,8 +30,23 @@ namespace Charlotte.GameCommons
 		}
 
 		/// <summary>
+		/// グローバル化する。
+		/// 初期化時に呼び出すこと。
+		/// -- 例：DDMusic xxx = new DDMusic("xxx.mp3").SetGlobally();
+		/// </summary>
+		/// <returns>このインスタンス</returns>
+		public DDMusic SetGlobally()
+		{
+			this.Globally = true;
+			return this;
+		}
+
+		/// <summary>
 		/// ループを設定する。
+		/// 初期化時に呼び出すこと。
 		/// ハンドルのロード前に呼び出すこと。
+		/// -- 例：DDMusic xxx = new DDMusic("xxx.mp3").SetLoopByStEnd(st, ed);
+		/// -- 例：DDMusic xxx = new DDMusic("xxx.mp3").SetGlobally().SetLoopByStEnd(st, ed);
 		/// </summary>
 		/// <param name="loopStart">ループ開始位置(サンプル位置)</param>
 		/// <param name="loopLength">ループの長さ(サンプル位置)</param>
