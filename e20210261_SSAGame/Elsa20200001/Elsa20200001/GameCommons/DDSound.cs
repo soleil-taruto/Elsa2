@@ -11,7 +11,7 @@ namespace Charlotte.GameCommons
 	public class DDSound
 	{
 		private Func<byte[]> Func_GetFileData;
-		private int HandleCount;
+		public int HandleCount;
 		private int[] Handles = null; // null == Unloaded
 
 		public Action PostLoaded = () => { };
@@ -21,10 +21,10 @@ namespace Charlotte.GameCommons
 			: this(() => DDResource.Load(file), handleCount)
 		{ }
 
-		public DDSound(Func<byte[]> getFileData, int handleCount)
+		public DDSound(Func<byte[]> getFileData, int initHandleCount)
 		{
 			this.Func_GetFileData = getFileData;
-			this.HandleCount = handleCount;
+			this.HandleCount = initHandleCount;
 
 			DDSoundUtils.Add(this);
 		}
@@ -89,6 +89,17 @@ namespace Charlotte.GameCommons
 					routine();
 			}
 			return this.Handles[handleIndex];
+		}
+
+		public void Duplicate()
+		{
+			int handle = DX.DuplicateSoundMem(this.Handles[0]);
+
+			if (handle == -1) // ? 失敗
+				throw new DDError();
+
+			this.HandleCount++;
+			this.Handles = this.Handles.Concat(new int[] { handle }).ToArray();
 		}
 
 		private static bool IsPlaying(int handle)

@@ -7,7 +7,7 @@ namespace Charlotte.GameCommons
 {
 	public class DDSE
 	{
-		public const int HANDLE_COUNT = 4;
+		public const int INIT_HANDLE_COUNT = 4;
 
 		public bool Globally = true;
 		public bool Locally { get { return !this.Globally; } }
@@ -16,11 +16,11 @@ namespace Charlotte.GameCommons
 		public int HandleIndex = 0;
 
 		public DDSE(string file)
-			: this(new DDSound(file, HANDLE_COUNT))
+			: this(new DDSound(file, INIT_HANDLE_COUNT))
 		{ }
 
 		public DDSE(Func<byte[]> getFileData)
-			: this(new DDSound(getFileData, HANDLE_COUNT))
+			: this(new DDSound(getFileData, INIT_HANDLE_COUNT))
 		{ }
 
 		public DDSE(DDSound sound_binding)
@@ -77,7 +77,7 @@ namespace Charlotte.GameCommons
 		{
 			double mixedVolume = DDSoundUtils.MixVolume(DDGround.SEVolume, this.Volume);
 
-			for (int index = 0; index < HANDLE_COUNT; index++)
+			for (int index = 0; index < INIT_HANDLE_COUNT; index++)
 				DDSoundUtils.SetVolume(this.Sound.GetHandle(index), mixedVolume);
 		}
 
