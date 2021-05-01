@@ -7,8 +7,6 @@ namespace Charlotte.GameCommons
 {
 	public class DDSE
 	{
-		public const int INIT_HANDLE_COUNT = 4;
-
 		public bool Globally = true;
 		public bool Locally { get { return !this.Globally; } }
 		public DDSound Sound;
@@ -16,17 +14,17 @@ namespace Charlotte.GameCommons
 		public int HandleIndex = 0;
 
 		public DDSE(string file)
-			: this(new DDSound(file, INIT_HANDLE_COUNT))
+			: this(new DDSound(file))
 		{ }
 
 		public DDSE(Func<byte[]> getFileData)
-			: this(new DDSound(getFileData, INIT_HANDLE_COUNT))
+			: this(new DDSound(getFileData))
 		{ }
 
 		public DDSE(DDSound sound_binding)
 		{
 			this.Sound = sound_binding;
-			this.Sound.PostLoaded = this.UpdateVolume_NoCheck;
+			this.Sound.PostLoadeds.Add(this.UpdateVolume_Handle);
 
 			DDSEUtils.Add(this);
 		}
@@ -69,16 +67,20 @@ namespace Charlotte.GameCommons
 
 		public void UpdateVolume()
 		{
-			if (this.Sound.IsLoaded())
-				this.UpdateVolume_NoCheck();
+			this.UpdateVolume_Handles(this.Sound.GetHandles());
 		}
 
-		public void UpdateVolume_NoCheck()
+		public void UpdateVolume_Handle(int handle)
+		{
+			this.UpdateVolume_Handles(new int[] { handle });
+		}
+
+		public void UpdateVolume_Handles(int[] handles)
 		{
 			double mixedVolume = DDSoundUtils.MixVolume(DDGround.SEVolume, this.Volume);
 
-			for (int index = 0; index < INIT_HANDLE_COUNT; index++)
-				DDSoundUtils.SetVolume(this.Sound.GetHandle(index), mixedVolume);
+			foreach (int handle in handles)
+				DDSoundUtils.SetVolume(handle, mixedVolume);
 		}
 
 		public void Touch()

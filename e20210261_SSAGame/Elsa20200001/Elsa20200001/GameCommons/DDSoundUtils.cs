@@ -44,7 +44,20 @@ namespace Charlotte.GameCommons
 
 		public static bool IsPlaying(int handle)
 		{
-			return DX.CheckSoundMem(handle) == 1;
+			switch (DX.CheckSoundMem(handle))
+			{
+				case 1: // ? 再生中
+					return true;
+
+				case 0: // ? 停止
+					return false;
+
+				case -1: // ? エラー
+					throw new DDError();
+
+				default: // ? 不明
+					throw new DDError();
+			}
 		}
 
 		public static void Stop(int handle)
