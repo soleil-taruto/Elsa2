@@ -17,7 +17,7 @@ namespace Charlotte.GameCommons
 		{
 			get
 			{
-				return this.Handles == null ? 0 : this.Handles.Length;
+				return this.Handles == null ? 1 : this.Handles.Length;
 			}
 		}
 
