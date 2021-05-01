@@ -59,7 +59,7 @@ namespace Charlotte.GameCommons
 								//info.SE.HandleIndex = info.SE.Sound.HandleCount;
 								info.SE.Sound.Extend();
 
-								ProcMain.WriteLog("音を拡張しました。" + info.SE.Sound.HandleCount);
+								//ProcMain.WriteLog("音を拡張しました。" + info.SE.Sound.HandleCount);
 							}
 						foundNotPlaying:
 							DDSoundUtils.Play(info.SE.Sound.GetHandle(info.SE.HandleIndex));
