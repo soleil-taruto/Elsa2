@@ -29,7 +29,7 @@ namespace Charlotte.Games
 				{
 					if (scene.Numer == 30)
 					{
-						DDPictureUtils.UnloadLocally();
+						DDTouch.Touch();
 						music.Play();
 					}
 					if (scene.Numer + 30 == scene.Denom)

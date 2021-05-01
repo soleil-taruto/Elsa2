@@ -7,8 +7,10 @@ namespace Charlotte.GameCommons
 {
 	public class DDSE
 	{
-		public const int HANDLE_COUNT = 64;
+		public const int HANDLE_COUNT = 4;
 
+		public bool Globally = true;
+		public bool Locally { get { return !this.Globally; } }
 		public DDSound Sound;
 		public double Volume = 0.5; // 0.0 ～ 1.0
 		public int HandleIndex = 0;
@@ -27,6 +29,18 @@ namespace Charlotte.GameCommons
 			this.Sound.PostLoaded = this.UpdateVolume_NoCheck;
 
 			DDSEUtils.Add(this);
+		}
+
+		/// <summary>
+		/// ローカル化する。
+		/// 初期化時に呼び出すこと。
+		/// -- 例：DDSE xxx = new DDSE("xxx.mp3").SetLocally();
+		/// </summary>
+		/// <returns>このインスタンス</returns>
+		public DDSE SetLocally()
+		{
+			this.Globally = false;
+			return this;
 		}
 
 		public void Play(bool once = true)

@@ -23,7 +23,7 @@ namespace Charlotte.GameCommons
 		public static DDMusic GetMusic(string file)
 		{
 			if (!MusicCache.ContainsKey(file))
-				MusicCache.Add(file, new DDMusic(file).SetLocally());
+				MusicCache.Add(file, new DDMusic(file).SetGlobally());
 
 			return MusicCache[file];
 		}

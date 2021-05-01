@@ -7,7 +7,7 @@ namespace Charlotte.GameCommons
 {
 	public class DDSE
 	{
-		public const int HANDLE_COUNT = 64;
+		public const int HANDLE_COUNT = 4;
 
 		public DDSound Sound;
 		public double Volume = 0.5; // 0.0 ～ 1.0

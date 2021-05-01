@@ -179,7 +179,7 @@ namespace Charlotte.Games
 					this.ReloadEnemies();
 					this.Frame = 0;
 				}
-#if true // test test test test test // 開発中限定
+#if true // test test test test test // 開発中限定 // TODO TODO TODO TODO TODO
 				if (DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // 強制クリア(デバッグ用)
 #else
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // 強制クリア(デバッグ用)

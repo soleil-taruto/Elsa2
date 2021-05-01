@@ -8,7 +8,7 @@ namespace Charlotte.GameCommons
 {
 	public class DDMusic
 	{
-		public bool Globally = true;
+		public bool Globally = false;
 		public bool Locally { get { return !this.Globally; } }
 		public DDSound Sound;
 		public double Volume = 0.5; // 0.0 ～ 1.0
@@ -30,13 +30,14 @@ namespace Charlotte.GameCommons
 		}
 
 		/// <summary>
-		/// ローカル化する。
+		/// グローバル化する。
 		/// 初期化時に呼び出すこと。
+		/// -- 例：DDMusic xxx = new DDMusic("xxx.mp3").SetGlobally();
 		/// </summary>
 		/// <returns>このインスタンス</returns>
-		public DDMusic SetLocally()
+		public DDMusic SetGlobally()
 		{
-			this.Globally = false;
+			this.Globally = true;
 			return this;
 		}
 
@@ -44,6 +45,8 @@ namespace Charlotte.GameCommons
 		/// ループを設定する。
 		/// 初期化時に呼び出すこと。
 		/// ハンドルのロード前に呼び出すこと。
+		/// -- 例：DDMusic xxx = new DDMusic("xxx.mp3").SetLoopByStEnd(st, ed);
+		/// -- 例：DDMusic xxx = new DDMusic("xxx.mp3").SetGlobally().SetLoopByStEnd(st, ed);
 		/// </summary>
 		/// <param name="loopStart">ループ開始位置(サンプル位置)</param>
 		/// <param name="loopLength">ループの長さ(サンプル位置)</param>

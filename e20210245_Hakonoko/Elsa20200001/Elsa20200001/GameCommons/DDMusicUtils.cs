@@ -61,13 +61,6 @@ namespace Charlotte.GameCommons
 
 						case PlayInfo.Command_e.STOP:
 							DDSoundUtils.Stop(info.Music.Sound.GetHandle(0));
-
-#if true // 再生していたローカルBGMのみ解放する。
-							if (info.Music.Locally)
-								info.Music.Sound.Unload();
-#else // 全てのローカルBGMを解放する。
-							DDMusicUtils.UnloadLocally();
-#endif
 							break;
 
 						default:
@@ -189,11 +182,22 @@ namespace Charlotte.GameCommons
 				music.Sound.Unload();
 		}
 
+		/// <summary>
+		/// クリア対象の音楽は停止していること。
+		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
+		/// </summary>
 		public static void UnloadLocally()
 		{
 			foreach (DDMusic music in Musics)
 				if (music.Locally)
 					music.Sound.Unload();
+		}
+
+		public static void TouchGlobally()
+		{
+			foreach (DDMusic music in Musics)
+				if (music.Globally)
+					music.Sound.GetHandle(0);
 		}
 	}
 }
