@@ -50,7 +50,7 @@ namespace Charlotte.GameCommons
 		/// <param name="music">音楽リソース</param>
 		public static void Add(DDMusic music)
 		{
-			Add(() => music.Sound.GetHandle(0));
+			Add(() => music.Touch());
 		}
 
 		/// <summary>
@@ -59,11 +59,7 @@ namespace Charlotte.GameCommons
 		/// <param name="se">効果音リソース</param>
 		public static void Add(DDSE se)
 		{
-			Add(() =>
-			{
-				for (int index = 0; index < DDSE.HANDLE_COUNT; index++)
-					se.Sound.GetHandle(index);
-			});
+			Add(() => se.Touch());
 		}
 
 		/// <summary>

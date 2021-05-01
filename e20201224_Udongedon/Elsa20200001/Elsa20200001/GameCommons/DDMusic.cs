@@ -12,17 +12,17 @@ namespace Charlotte.GameCommons
 		public double Volume = 0.5; // 0.0 ～ 1.0
 
 		public DDMusic(string file)
-			: this(new DDSound(file, 1))
+			: this(new DDSound(file))
 		{ }
 
 		public DDMusic(Func<byte[]> getFileData)
-			: this(new DDSound(getFileData, 1))
+			: this(new DDSound(getFileData))
 		{ }
 
 		public DDMusic(DDSound sound_binding)
 		{
 			this.Sound = sound_binding;
-			this.Sound.PostLoaded = () => DDSoundUtils.SetVolume(this.Sound.GetHandle(0), 0.0); // ロードしたらミュートしておく。
+			this.Sound.PostLoadeds.Add(handle => DDSoundUtils.SetVolume(handle, 0.0)); // ロードしたらミュートしておく。
 
 			DDMusicUtils.Add(this);
 		}
@@ -38,10 +38,10 @@ namespace Charlotte.GameCommons
 		/// <returns>このインスタンス</returns>
 		public DDMusic SetLoopByStEnd(int loopStart, int loopEnd)
 		{
-			this.Sound.PostLoaded2.Add(() =>
+			this.Sound.PostLoadeds.Add(handle =>
 			{
-				DX.SetLoopSamplePosSoundMem(loopStart, this.Sound.GetHandle(0)); // ループ開始位置
-				DX.SetLoopStartSamplePosSoundMem(loopEnd, this.Sound.GetHandle(0)); // ループ終了位置
+				DX.SetLoopSamplePosSoundMem(loopStart, handle); // ループ開始位置
+				DX.SetLoopStartSamplePosSoundMem(loopEnd, handle); // ループ終了位置
 			});
 
 			return this;
