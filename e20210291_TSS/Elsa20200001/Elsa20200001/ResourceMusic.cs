@@ -8,9 +8,9 @@ namespace Charlotte
 {
 	public class ResourceMusic
 	{
-		public DDMusic Dummy = new DDMusic(true, @"dat\General\muon.wav");
+		public DDMusic Dummy = new DDMusic(@"dat\General\muon.wav");
 
-		public DDMusic Title = new DDMusic(true, @"dat\フリー素材\ajapa\TheLabyrinth.mp3");
+		public DDMusic Title = new DDMusic(@"dat\フリー素材\ajapa\TheLabyrinth.mp3");
 
 		public ResourceMusic()
 		{
