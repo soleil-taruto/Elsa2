@@ -109,5 +109,23 @@ namespace Charlotte.GameCommons
 			foreach (DDSE se in SEList)
 				se.Sound.Unload();
 		}
+
+		/// <summary>
+		/// クリア対象の効果音は停止していること。
+		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
+		/// </summary>
+		public static void UnloadLocally()
+		{
+			foreach (DDSE se in SEList)
+				if (se.Locally)
+					se.Sound.Unload();
+		}
+
+		public static void TouchGlobally()
+		{
+			foreach (DDSE se in SEList)
+				if (se.Globally)
+					se.Sound.GetHandle(0);
+		}
 	}
 }
