@@ -45,7 +45,7 @@ namespace Charlotte
 
 		public static void EndDisplayDelay()
 		{
-			const int DELAY_FRAME = 30;
+			int DELAY_FRAME = DDConfig.LOG_ENABLED ? 0 : 30;
 			int endFrame = DDEngine.ProcFrame + DELAY_FRAME;
 
 			DDGround.SystemTasks.Add(() =>
