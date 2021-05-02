@@ -54,6 +54,7 @@ namespace Charlotte.GameCommons
 
 		public void Play(bool once = false, bool resume = false, double volume = 1.0, int fadeFrameMax = 30)
 		{
+			this.Touch(); // 再生までタイムラグがある。再生時にラグらないよう、ここでロードしておく
 			DDMusicUtils.Play(this, once, resume, volume, fadeFrameMax);
 		}
 
