@@ -71,5 +71,24 @@ namespace Charlotte.GameCommons
 			return new Size(w, h);
 		}
 #endif
+
+		public static void DrawDummyScreenAll()
+		{
+			DDPicture picture = Ground.I.Picture.DummyScreen;
+
+			foreach (DDSubScreen subScreen in SubScreens)
+			{
+				//if (subScreen.WasLoaded)
+				{
+					using (subScreen.Section())
+					{
+						DDDraw.DrawRect(
+							picture,
+							DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(new D2Point(0, 0), subScreen.GetSize().ToD2Size()))
+							);
+					}
+				}
+			}
+		}
 	}
 }

@@ -303,6 +303,7 @@ namespace Charlotte.GameCommons
 			DDUtils.SetMouseDispMode(mdm);
 
 			DDTouch.Touch(); // 曲・SEを解放しないので、ここで呼んでも良い。
+			DDSubScreenUtils.DrawDummyScreenAll();
 
 			LiteStatusDlg.EndDisplayDelay();
 		}
