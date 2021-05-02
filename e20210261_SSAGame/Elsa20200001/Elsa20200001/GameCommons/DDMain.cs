@@ -55,6 +55,30 @@ namespace Charlotte.GameCommons
 
 			DDSaveData.Load();
 
+			Action showStartupMessage = () => LiteStatusDlg.StartDisplay("ゲームを起動しています...");
+
+			if (DDConfig.DisplayIndex == -2) // *** DDGround.MonitorRect 初期化 (DisplayIndex == -2 の場合)
+			{
+				I2Point mousePt = DDWin32.GetMousePosition();
+				I4Rect[] monitors = DDWin32.GetAllMonitor();
+				I4Rect activeMonitor = monitors[0]; // マウス位置のモニタを特定出来ない場合のモニタ
+
+				foreach (I4Rect monitor in monitors)
+				{
+					if (
+						monitor.L <= mousePt.X && mousePt.X < monitor.R &&
+						monitor.T <= mousePt.Y && mousePt.Y < monitor.B
+						)
+					{
+						activeMonitor = monitor;
+						break;
+					}
+				}
+				DDGround.MonitorRect = activeMonitor;
+
+				showStartupMessage();
+			}
+
 			// DxLib >
 
 			if (DDConfig.LOG_ENABLED)
@@ -99,26 +123,7 @@ namespace Charlotte.GameCommons
 			DDGround.LastMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 			DDGround.KeptMainScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H);
 
-			if (DDConfig.DisplayIndex == -2)
-			{
-				I2Point mousePt = DDWin32.GetMousePosition();
-				I4Rect[] monitors = DDWin32.GetAllMonitor();
-				I4Rect activeMonitor = monitors[0]; // マウス位置のモニタを特定出来ない場合のモニタ
-
-				foreach (I4Rect monitor in monitors)
-				{
-					if (
-						monitor.L <= mousePt.X && mousePt.X < monitor.R &&
-						monitor.T <= mousePt.Y && mousePt.Y < monitor.B
-						)
-					{
-						activeMonitor = monitor;
-						break;
-					}
-				}
-				DDGround.MonitorRect = activeMonitor;
-			}
-			else
+			if (DDConfig.DisplayIndex != -2) // *** DDGround.MonitorRect 初期化 (DisplayIndex != -2 の場合)
 			{
 				int l;
 				int t;
@@ -143,6 +148,8 @@ namespace Charlotte.GameCommons
 					throw new DDError();
 
 				DDGround.MonitorRect = new I4Rect(l, t, w, h);
+
+				showStartupMessage();
 			}
 
 			PostSetScreenSize(DDGround.RealScreen_W, DDGround.RealScreen_H);
@@ -166,6 +173,8 @@ namespace Charlotte.GameCommons
 			{
 				DDSaveData.Save();
 			});
+
+			LiteStatusDlg.EndDisplayDelay();
 		}
 
 		public static void GameEnd(List<Exception> errors)
@@ -292,6 +301,8 @@ namespace Charlotte.GameCommons
 
 		private static void P2_SetScreenSize(int w, int h)
 		{
+			LiteStatusDlg.StartDisplay("ゲーム画面の位置とサイズを調整しています...");
+
 			bool mdm = DDUtils.GetMouseDispMode();
 
 			//DDDerivationUtils.UnloadAll(); // moved -> DDPictureUtils.UnloadAll
@@ -311,6 +322,8 @@ namespace Charlotte.GameCommons
 			DDPictureUtils.TouchGlobally();
 			//DDTouch.Touch(); // 再生中の曲を解放してはならない。
 			DDSubScreenUtils.DrawDummyScreenAll();
+
+			LiteStatusDlg.EndDisplayDelay();
 		}
 
 		private static void PostSetScreenSize(int w, int h)
