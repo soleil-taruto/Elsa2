@@ -152,6 +152,12 @@
     <Compile Include="Games\Act.cs" />
     <Compile Include="Games\Game.cs" />
     <Compile Include="Games\GameConsts.cs" />
+    <Compile Include="LiteStatusDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiteStatusDlg.designer.cs">
+      <DependentUpon>LiteStatusDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="SaveDataSlot.cs" />
     <Compile Include="Games\GameStatus.cs" />
     <Compile Include="Games\SaveOrLoadMenu.cs" />
@@ -192,6 +198,9 @@
     <Compile Include="Tests\Games\SettingMenuTest.cs" />
     <Compile Include="Tests\Games\TitleMenuTest.cs" />
     <Compile Include="Tests\Test0001.cs" />
+    <EmbeddedResource Include="LiteStatusDlg.resx">
+      <DependentUpon>LiteStatusDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWin.resx">
       <DependentUpon>MainWin.cs</DependentUpon>
       <SubType>Designer</SubType>

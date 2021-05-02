@@ -39,7 +39,8 @@ namespace Charlotte.Games
 				});
 			}
 
-			foreach (DDScene scene in DDSceneUtils.Create(30))
+			foreach (DDScene scene in DDSceneUtils.Create(60)) // LiteStatusDlg を閉じるまでの遅延の分(30フレーム)延長
+			//foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
 				DDCurtain.DrawCurtain();
 				DDEngine.EachFrame();

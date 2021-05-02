@@ -11,6 +11,7 @@ namespace Charlotte.GameCommons
 	public static class DDGround
 	{
 		public static DDTaskList EL = new DDTaskList();
+		public static DDTaskList SystemTasks = new DDTaskList();
 		public static int PrimaryPadId = -1; // -1 == 未設定
 		public static DDSubScreen MainScreen;
 		public static DDSubScreen LastMainScreen;
