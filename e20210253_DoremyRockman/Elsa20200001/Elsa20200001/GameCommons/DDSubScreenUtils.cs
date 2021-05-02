@@ -25,8 +25,19 @@ namespace Charlotte.GameCommons
 
 		public static void UnloadAll()
 		{
+#if true
+			UnloadAll(subScreen => true);
+#else // old same
 			foreach (DDSubScreen subScreen in SubScreens)
 				subScreen.Unload();
+#endif
+		}
+
+		public static void UnloadAll(Predicate<DDSubScreen> match)
+		{
+			foreach (DDSubScreen subScreen in SubScreens)
+				if (match(subScreen))
+					subScreen.Unload();
 		}
 
 		//public static int CurrDrawScreenHandle = DX.DX_SCREEN_BACK; // 廃止
@@ -58,12 +69,15 @@ namespace Charlotte.GameCommons
 
 			foreach (DDSubScreen subScreen in SubScreens)
 			{
-				using (subScreen.Section())
+				if (subScreen.IsLoaded())
 				{
-					DDDraw.DrawRect(
-						picture,
-						DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(new D2Point(0, 0), subScreen.GetSize().ToD2Size()))
-						);
+					using (subScreen.Section())
+					{
+						DDDraw.DrawRect(
+							picture,
+							DDUtils.AdjustRectExterior(picture.GetSize().ToD2Size(), new D4Rect(new D2Point(0, 0), subScreen.GetSize().ToD2Size()))
+							);
+					}
 				}
 			}
 		}

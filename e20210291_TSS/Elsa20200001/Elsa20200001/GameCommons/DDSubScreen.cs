@@ -52,6 +52,11 @@ namespace Charlotte.GameCommons
 			}
 		}
 
+		public bool IsLoaded()
+		{
+			return this.Handle != -1;
+		}
+
 		public int GetHandle()
 		{
 			if (this.Handle == -1)
