@@ -210,6 +210,12 @@
     <Compile Include="LevelEditors\LevelEditorDlg.Designer.cs">
       <DependentUpon>LevelEditorDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="LiteStatusDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiteStatusDlg.designer.cs">
+      <DependentUpon>LiteStatusDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +255,9 @@
     <Compile Include="Tests\Test0001.cs" />
     <EmbeddedResource Include="LevelEditors\LevelEditorDlg.resx">
       <DependentUpon>LevelEditorDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LiteStatusDlg.resx">
+      <DependentUpon>LiteStatusDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWin.resx">
       <DependentUpon>MainWin.cs</DependentUpon>
