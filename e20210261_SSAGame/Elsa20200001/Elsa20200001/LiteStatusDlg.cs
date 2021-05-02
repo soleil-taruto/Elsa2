@@ -45,24 +45,17 @@ namespace Charlotte
 
 		public static void EndDisplayDelay()
 		{
-			if (DDConfig.LOG_ENABLED)
+			int DELAY_FRAME = DDConfig.LOG_ENABLED ? 0 : 30;
+			int endFrame = DDEngine.ProcFrame + DELAY_FRAME;
+
+			DDGround.SystemTasks.Add(() =>
 			{
+				if (DDEngine.ProcFrame < endFrame)
+					return true;
+
 				EndDisplay();
-			}
-			else
-			{
-				const int DELAY_FRAME = 30;
-				int endFrame = DDEngine.ProcFrame + DELAY_FRAME;
-
-				DDGround.SystemTasks.Add(() =>
-				{
-					if (DDEngine.ProcFrame < endFrame)
-						return true;
-
-					EndDisplay();
-					return false;
-				});
-			}
+				return false;
+			});
 		}
 
 		public static void EndDisplay()
