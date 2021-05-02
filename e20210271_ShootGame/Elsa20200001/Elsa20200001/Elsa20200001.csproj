@@ -188,6 +188,12 @@
     <Compile Include="Games\Walls\Tests\Wall_B0004.cs" />
     <Compile Include="Games\Walls\Wall_Dark.cs" />
     <Compile Include="Ground.cs" />
+    <Compile Include="LiteStatusDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiteStatusDlg.designer.cs">
+      <DependentUpon>LiteStatusDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,9 @@
     <Compile Include="Tests\Games\TitleMenuTest.cs" />
     <Compile Include="Tests\Novels\NovelTest.cs" />
     <Compile Include="Tests\Test0001.cs" />
+    <EmbeddedResource Include="LiteStatusDlg.resx">
+      <DependentUpon>LiteStatusDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWin.resx">
       <DependentUpon>MainWin.cs</DependentUpon>
     </EmbeddedResource>
