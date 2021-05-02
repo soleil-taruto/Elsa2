@@ -321,7 +321,7 @@ namespace Charlotte.GameCommons
 
 			DDUtils.SetMouseDispMode(mdm);
 
-			DDTouch.Touch();
+			//DDTouch.Touch(); // 再生中の曲を解放してはならない。
 			DDSubScreenUtils.DrawDummyScreenAll();
 
 			LiteStatusDlg.EndDisplayDelay();
