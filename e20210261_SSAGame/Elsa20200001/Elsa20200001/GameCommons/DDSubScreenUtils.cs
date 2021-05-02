@@ -69,7 +69,7 @@ namespace Charlotte.GameCommons
 
 			foreach (DDSubScreen subScreen in SubScreens)
 			{
-				if (subScreen.IsLoaded())
+				if (subScreen.WasLoaded)
 				{
 					using (subScreen.Section())
 					{

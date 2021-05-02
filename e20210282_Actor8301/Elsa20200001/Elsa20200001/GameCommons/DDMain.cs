@@ -294,6 +294,9 @@ namespace Charlotte.GameCommons
 		{
 			bool mdm = DDUtils.GetMouseDispMode();
 
+			foreach (DDSubScreen subScreen in DDSubScreenUtils.SubScreens)
+				subScreen.WasLoaded = subScreen.IsLoaded();
+
 			//DDDerivationUtils.UnloadAll(); // moved -> DDPictureUtils.UnloadAll
 			DDPictureUtils.UnloadAll();
 			DDSubScreenUtils.UnloadAll();
