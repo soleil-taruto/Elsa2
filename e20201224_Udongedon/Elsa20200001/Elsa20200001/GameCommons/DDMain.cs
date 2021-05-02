@@ -236,9 +236,44 @@ namespace Charlotte.GameCommons
 				DDGround.RealScreen_W = w;
 				DDGround.RealScreen_H = h;
 
+				UpdateActiveScreen();
+
 				ApplyScreenSize();
 
 				PostSetScreenSize(w, h);
+			}
+		}
+
+		private static void UpdateActiveScreen()
+		{
+			I2Point screenCenter;
+
+			{
+				DDWin32.POINT p;
+
+				p.X = 0;
+				p.Y = 0;
+
+				DDWin32.ClientToScreen(DDWin32.GetMainWindowHandle(), out p);
+
+				int l = p.X;
+				int t = p.Y;
+				int w = DDGround.RealScreen_W;
+				int h = DDGround.RealScreen_H;
+
+				screenCenter = new I2Point(l + w / 2, t + h / 2);
+			}
+
+			foreach (I4Rect monitor in DDWin32.GetAllMonitor())
+			{
+				if (
+					monitor.L <= screenCenter.X && screenCenter.X < monitor.R &&
+					monitor.T <= screenCenter.Y && screenCenter.Y < monitor.B
+					)
+				{
+					DDGround.MonitorRect = monitor;
+					break;
+				}
 			}
 		}
 
@@ -267,7 +302,7 @@ namespace Charlotte.GameCommons
 
 			DDUtils.SetMouseDispMode(mdm);
 
-			DDTouch.Touch();
+			DDTouch.Touch(); // 曲・SEを解放しないので、ここで呼んでも良い。
 
 			LiteStatusDlg.EndDisplayDelay();
 		}
