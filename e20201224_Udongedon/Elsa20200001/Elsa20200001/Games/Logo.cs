@@ -24,7 +24,7 @@ namespace Charlotte.Games
 
 		public void Perform()
 		{
-			if (DDConfig.LOG_ENABLED)
+			if (DDConfig.LOG_ENABLED) // 開発・デバッグ_モードであることを表示
 			{
 #if true
 				DDGround.EL.Keep(300, () =>
@@ -33,7 +33,7 @@ namespace Charlotte.Games
 					DDPrint.PrintLine("デバッグモードが有効になりました。");
 					DDPrint.PrintLine("★これはクローズドテスト版です。仮リソース・未実装・不完全な機能を含みます。(このメッセージは数秒で消えます)");
 				});
-#else // old same
+#else // old nearly same
 				int endFrame = DDEngine.ProcFrame + 300;
 
 				DDGround.EL.Add(() =>
