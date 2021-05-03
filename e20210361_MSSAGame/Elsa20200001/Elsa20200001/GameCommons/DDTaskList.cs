@@ -38,5 +38,34 @@ namespace Charlotte.GameCommons
 				return this.Tasks.Count;
 			}
 		}
+
+		// ====
+		// ここから便利機能
+		// ====
+
+		public void Delay(int delayFrame, Action routine)
+		{
+			int endFrame = DDEngine.ProcFrame + delayFrame;
+
+			this.Add(() =>
+			{
+				if (DDEngine.ProcFrame < endFrame)
+					return true;
+
+				routine();
+				return false;
+			});
+		}
+
+		public void Keep(int keepFrame, Action routine)
+		{
+			int endFrame = DDEngine.ProcFrame + keepFrame;
+
+			this.Add(() =>
+			{
+				routine();
+				return DDEngine.ProcFrame < endFrame;
+			});
+		}
 	}
 }
