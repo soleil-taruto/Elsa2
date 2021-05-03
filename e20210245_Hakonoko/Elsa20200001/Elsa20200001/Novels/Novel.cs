@@ -111,15 +111,17 @@ namespace Charlotte.Novels
 				}
 
 				// 入力：会話スキップ
-				if (DDInput.L.GetInput() == 1 && !Ground.I.会話スキップ抑止)
+				if (DDInput.L.GetInput() == 1 || this.会話スキップ_Request)
 				{
-					this.会話スキップした = true;
-					break;
-				}
-				if (this.会話スキップ_Request && !Ground.I.会話スキップ抑止)
-				{
-					this.会話スキップした = true;
-					break;
+					if (Ground.I.会話スキップ抑止)
+					{
+						Ground.I.SE.拒否.Play();
+					}
+					else
+					{
+						this.会話スキップした = true;
+						break;
+					}
 				}
 				if (this.会話終了_Request)
 					break;

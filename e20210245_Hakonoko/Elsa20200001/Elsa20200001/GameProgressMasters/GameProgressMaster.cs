@@ -321,6 +321,12 @@ namespace Charlotte.GameProgressMasters
 					}
 					else if (endStatus == Game.EndStatus_e.死亡エンド)
 					{
+						foreach (DDScene scene in DDSceneUtils.Create(180)) // 暗転_時間調整
+						{
+							DDCurtain.DrawCurtain();
+							DDEngine.EachFrame();
+						}
+
 						Ground.I.会話スキップ抑止 = !Ground.I.SawEnding_死亡;
 
 						new Ending_死亡().Perform();
@@ -330,6 +336,12 @@ namespace Charlotte.GameProgressMasters
 					}
 					else if (endStatus == Game.EndStatus_e.生還エンド)
 					{
+						foreach (DDScene scene in DDSceneUtils.Create(300)) // 暗転_時間調整 -- ちょっと長め
+						{
+							DDCurtain.DrawCurtain();
+							DDEngine.EachFrame();
+						}
+
 						Ground.I.会話スキップ抑止 = !Ground.I.SawEnding_生還;
 
 						new Ending_生還().Perform();
@@ -339,6 +351,12 @@ namespace Charlotte.GameProgressMasters
 					}
 					else if (endStatus == Game.EndStatus_e.復讐エンド)
 					{
+						foreach (DDScene scene in DDSceneUtils.Create(180)) // 暗転_時間調整
+						{
+							DDCurtain.DrawCurtain();
+							DDEngine.EachFrame();
+						}
+
 						Ground.I.会話スキップ抑止 = !Ground.I.SawEnding_復讐;
 
 						using (new Novel())

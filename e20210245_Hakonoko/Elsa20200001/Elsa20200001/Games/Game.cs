@@ -528,17 +528,44 @@ namespace Charlotte.Games
 					enemy.Draw();
 				}
 
-				if (this.FinalZone == null && 1 <= Ground.I.StartSnapshotCount) // 右下の残りスナップショット回数 -- 0 なら表示しない
+				if (1 <= Ground.I.StartSnapshotCount) // 右下の残りスナップショット回数 -- 設定 0 なら常に表示しない
 				{
+					Respawnable_e respawnable = this.IsRespawnableStatus();
+
 					Action<I2Size> a_draw = drawScreenSize =>
 					{
+						int dispSnapshotCount = this.SnapshotCount;
+						I3Color dispColor = new I3Color(255, 255, 255);
+
+						switch (respawnable)
+						{
+							case Respawnable_e.普通に可能:
+								break;
+
+							case Respawnable_e.絶対に不可ゾーン突入:
+								return;
+
+							case Respawnable_e.エンディング見たので可能:
+								dispSnapshotCount = 0;
+								break;
+
+							case Respawnable_e.エンディング見てないので不可:
+								dispSnapshotCount = 0;
+								dispColor = new I3Color(255, 0, 0);
+								break;
+						}
+
+						DDDraw.SetBright(dispColor);
 						DDDraw.DrawCenter(Ground.I.Picture.SnapshotIcon, drawScreenSize.W - 92, drawScreenSize.H - 25);
+						DDDraw.Reset();
 
 						DDFontUtils.DrawString_XCenter(
 							drawScreenSize.W - 35,
 							drawScreenSize.H - 50,
-							this.SnapshotCount.ToString("D2"),
-							DDFontUtils.GetFont("03焚火-Regular", 50)
+							dispSnapshotCount.ToString("D2"),
+							DDFontUtils.GetFont("03焚火-Regular", 50),
+							false,
+							dispColor
 							);
 					};
 
@@ -607,6 +634,10 @@ namespace Charlotte.Games
 						)
 					{
 						goalFlag = true;
+
+						if (this.FinalZone != null) // ? 最終ステージ -> 曲を止める。
+							DDMusicUtils.Stop();
+
 						Ground.I.SE.Goal.Play();
 						DDEngine.EachFrame(); // ゴールした瞬間を描画する。
 						break; // 当たり判定まで進んでしまうと死亡判定と競合しそうなので、ここで break してしまう。
@@ -985,6 +1016,33 @@ namespace Charlotte.Games
 					10 <= Ground.I.ReachedStageIndex && // ? 1度はエンディングに到達している。
 					!this.FinalZone.OH_Event9003.Entered
 				);
+		}
+
+		private enum Respawnable_e
+		{
+			普通に可能 = 1,
+			絶対に不可ゾーン突入,
+			エンディング見たので可能,
+			エンディング見てないので不可,
+		}
+
+		/// <summary>
+		/// リスポーン可能状態を返す。
+		/// IsRespawnableの詳細ver
+		/// </summary>
+		/// <returns>リスポーン可能状態</returns>
+		private Respawnable_e IsRespawnableStatus()
+		{
+			if (this.FinalZone == null)
+				return Respawnable_e.普通に可能;
+
+			if (this.FinalZone.OH_Event9003.Entered)
+				return Respawnable_e.絶対に不可ゾーン突入;
+
+			if (10 <= Ground.I.ReachedStageIndex) // ? 1度はエンディングに到達している。
+				return Respawnable_e.エンディング見たので可能;
+
+			return Respawnable_e.エンディング見てないので不可;
 		}
 
 		private void リスポーンを阻止した()
