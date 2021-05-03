@@ -24,18 +24,12 @@ namespace Charlotte.Games
 
 		public void Perform()
 		{
-			// 開発中_暫定
+			if (DDConfig.LOG_ENABLED) // 開発・デバッグ_モードであることを表示
 			{
-				int endFrame = DDEngine.ProcFrame + 300;
-
-				DDGround.EL.Add(() =>
+				DDGround.EL.Keep(300, () =>
 				{
-					int sec = endFrame - DDEngine.ProcFrame;
-
-					DDPrint.SetPrint(180, DDConsts.Screen_H - 32);
-					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (sec / 60.0).ToString("F1") + " 秒で消えます)");
-
-					return 0 < sec;
+					DDPrint.SetPrint(100, DDConsts.Screen_H - 40);
+					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(このメッセージは数秒で消えます)");
 				});
 			}
 
