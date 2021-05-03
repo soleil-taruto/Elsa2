@@ -26,17 +26,25 @@ namespace Charlotte.Games
 		{
 			// 開発中_暫定
 			{
+#if true
+				DDGround.EL.Keep(300, () =>
+				{
+					DDPrint.SetPrint(50, DDConsts.Screen_H - 32, 16, 16);
+					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(このメッセージは数秒で消えます)");
+				});
+#else // old same
 				int endFrame = DDEngine.ProcFrame + 300;
 
 				DDGround.EL.Add(() =>
 				{
-					int sec = endFrame - DDEngine.ProcFrame;
+					int remFrame = endFrame - DDEngine.ProcFrame;
 
 					DDPrint.SetPrint(40, DDConsts.Screen_H - 32, 16, 18);
-					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (sec / 60.0).ToString("F1") + " 秒で消えます)");
+					DDPrint.Print("これはクローズドテスト版です。仮リソース・実装されていない機能を含みます。(あと " + (remFrame / 60.0).ToString("F1") + " 秒で消えます)");
 
-					return 0 < sec;
+					return 0 < remFrame;
 				});
+#endif
 			}
 
 			foreach (DDScene scene in DDSceneUtils.Create(60)) // LiteStatusDlg を閉じるまでの遅延の分(30フレーム)延長
