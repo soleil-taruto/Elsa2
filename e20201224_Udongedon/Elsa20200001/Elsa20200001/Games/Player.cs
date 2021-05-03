@@ -287,38 +287,41 @@ namespace Charlotte.Games
 					{
 						double ZURE = 20;
 
+						// 右上
 						Game.I.Shots.Add(new Shot_Strong(
 							pl_x + ZURE,
 							pl_y - ZURE,
 							(Math.PI / 4.0) * 1
 							));
-#if true // 背後へは撃たない
+						// 左上
+						Game.I.Shots.Add(new Shot_Strong(
+							pl_x - ZURE,
+							pl_y - ZURE,
+							(Math.PI / 4.0) * 7
+							));
+						// 右
 						Game.I.Shots.Add(new Shot_Strong(
 							pl_x + ZURE,
 							pl_y,
 							(Math.PI / 4.0) * 2
 							));
+						// 右
+						Game.I.Shots.Add(new Shot_Strong(
+							pl_x + ZURE,
+							pl_y + ZURE,
+							(Math.PI / 4.0) * 2
+							));
+						// 左
 						Game.I.Shots.Add(new Shot_Strong(
 							pl_x - ZURE,
 							pl_y,
 							(Math.PI / 4.0) * 6
 							));
-#else // 全部斜め
-						Game.I.Shots.Add(new Shot_Strong(
-							pl_x + ZURE,
-							pl_y + ZURE,
-							(Math.PI / 4.0) * 3
-							));
+						// 左
 						Game.I.Shots.Add(new Shot_Strong(
 							pl_x - ZURE,
 							pl_y + ZURE,
-							(Math.PI / 4.0) * 5
-							));
-#endif
-						Game.I.Shots.Add(new Shot_Strong(
-							pl_x - ZURE,
-							pl_y - ZURE,
-							(Math.PI / 4.0) * 7
+							(Math.PI / 4.0) * 6
 							));
 					}
 					break;

@@ -302,7 +302,8 @@ namespace Charlotte.GameCommons
 
 			DDUtils.SetMouseDispMode(mdm);
 
-			DDTouch.Touch(); // 曲・SEを解放しないので、ここで呼んでも良い。
+			DDGround.SystemTasks.Delay(1, DDTouch.Touch); // 曲・SEを解放しないので、ここで呼んでも良い。// ウィンドウ位置調整・初回描画を優先するため、遅延する。
+			//DDTouch.Touch(); // 曲・SEを解放しないので、ここで呼んでも良い。// old
 			DDSubScreenUtils.DrawDummyScreenAll();
 
 			LiteStatusDlg.EndDisplayDelay();
