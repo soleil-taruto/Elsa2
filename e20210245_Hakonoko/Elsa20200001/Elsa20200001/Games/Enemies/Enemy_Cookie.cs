@@ -28,11 +28,15 @@ namespace Charlotte.Games.Enemies
 
 		public override void Draw()
 		{
+			if (Game.I.FreezeEnemy)
+				goto startDraw;
+
 			this.IRot += this.IRotSpeed;
 
 			this.IRot += IROT_360;
 			this.IRot %= IROT_360;
 
+		startDraw:
 			double rot = this.IRot * (Math.PI * 2.0) / IROT_360;
 
 			double x = this.X + Math.Cos(rot) * R;

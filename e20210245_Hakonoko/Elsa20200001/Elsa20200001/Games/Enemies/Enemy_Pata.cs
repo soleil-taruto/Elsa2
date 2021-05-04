@@ -30,6 +30,9 @@ namespace Charlotte.Games.Enemies
 
 		public override void Draw()
 		{
+			if (Game.I.FreezeEnemy)
+				goto startDraw;
+
 			this.X += this.XSpeed;
 			this.Y += this.YSpeed;
 
@@ -101,6 +104,7 @@ namespace Charlotte.Games.Enemies
 			if (yDirSign != 0)
 				this.YSpeed = Math.Abs(this.YSpeed) * yDirSign;
 
+		startDraw:
 			if (!EnemyCommon.IsOutOfScreen_ForDraw(this))
 			{
 				//DDDraw.SetBright(new I3Color(192, 32, 32)); // old

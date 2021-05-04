@@ -10,6 +10,7 @@ namespace Charlotte.Games
 	public class Snapshot
 	{
 		public D2Point PlayerPosition;
+		public D2Point PlayerVelocity;
 		public List<Enemy> Enemies;
 	}
 }

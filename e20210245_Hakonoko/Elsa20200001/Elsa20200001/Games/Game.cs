@@ -391,6 +391,14 @@ namespace Charlotte.Games
 					if (GameConsts.PLAYER_REBORN_FRAME_MAX < frame)
 					{
 						this.Player.RebornFrame = 0;
+
+						//this.FreezeEnemy = false; // このフレームでプレイヤーは移動していない。ここで解除すると敵が1フレーム先に動いてしまう。-> 次フレームで解除
+						DDGround.SystemTasks.Add(() =>
+						{
+							this.FreezeEnemy = false;
+							return false; // 1回だけ
+						});
+
 						goto endReborn;
 					}
 					this.Player.RebornFrame++;
@@ -530,7 +538,7 @@ namespace Charlotte.Games
 
 				if (1 <= Ground.I.StartSnapshotCount) // 右下の残りスナップショット回数 -- 設定 0 なら常に表示しない
 				{
-					Respawnable_e respawnable = this.IsRespawnableStatus();
+					Respawnable_e respawnable = this.GetRespawnableStatus();
 
 					Action<I2Size> a_draw = drawScreenSize =>
 					{
@@ -785,6 +793,8 @@ namespace Charlotte.Games
 		{
 			this.Snapshot = new Snapshot();
 			this.Snapshot.PlayerPosition = new D2Point(this.Player.X, this.Player.Y);
+			this.Snapshot.PlayerVelocity = new D2Point(this.Player.XSpeed, this.Player.YSpeed);
+			// TODO: 他のステータスも保存する必要あり
 			this.Snapshot.Enemies = this.Enemies.Iterate().Select(enemy => enemy.GetClone()).ToList();
 		}
 
@@ -1031,7 +1041,7 @@ namespace Charlotte.Games
 		/// IsRespawnableの詳細ver
 		/// </summary>
 		/// <returns>リスポーン可能状態</returns>
-		private Respawnable_e IsRespawnableStatus()
+		private Respawnable_e GetRespawnableStatus()
 		{
 			if (this.FinalZone == null)
 				return Respawnable_e.普通に可能;
@@ -1119,8 +1129,10 @@ namespace Charlotte.Games
 			this.Player.X = ss.PlayerPosition.X;
 			this.Player.Y = ss.PlayerPosition.Y;
 
-			this.Player.XSpeed = 0.0;
-			this.Player.YSpeed = 0.0;
+			this.Player.XSpeed = ss.PlayerVelocity.X;
+			this.Player.YSpeed = ss.PlayerVelocity.Y;
+
+			// TODO: 他のステータスも復元する必要あり
 
 			this.Player.DeadFrame = 0; // 死亡時の処理から呼び出された場合用
 			this.Player.RebornFrame = 1;
@@ -1130,6 +1142,7 @@ namespace Charlotte.Games
 			this.CamSlideY = 0;
 
 			this.Enemies = new DDList<Enemy>(ss.Enemies.Select(enemy => enemy.GetClone()).ToList());
+			this.FreezeEnemy = true;
 
 			波紋効果.Add(this.Player.X, this.Player.Y);
 			Ground.I.SE.Reborn.Play();
@@ -1457,6 +1470,7 @@ namespace Charlotte.Games
 		}
 
 		public DDList<Enemy> Enemies = new DDList<Enemy>();
+		public bool FreezeEnemy = false;
 
 		private void ReloadEnemies()
 		{
