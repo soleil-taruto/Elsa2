@@ -212,7 +212,7 @@ namespace Charlotte.Novels.Surfaces
 
 		private IEnumerable<bool> モード変更(string modeName)
 		{
-			return this.モード変更(modeName, this.Mirrored);
+			return this.モード変更(modeName, this.Mirrored); // BUG
 		}
 
 		private IEnumerable<bool> モード変更(string modeName, bool mirrored)

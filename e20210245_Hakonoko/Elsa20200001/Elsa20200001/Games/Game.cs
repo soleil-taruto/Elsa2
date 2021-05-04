@@ -391,18 +391,7 @@ namespace Charlotte.Games
 					if (GameConsts.PLAYER_REBORN_FRAME_MAX < frame)
 					{
 						this.Player.RebornFrame = 0;
-
-						// HACK: 状態再現が完全ではない模様...
-#if true
-						DDGround.SystemTasks.Add(() =>
-						{
-							this.FreezeEnemy = false;
-							return false; // 1回だけ
-						});
-#else // old ng
-						this.FreezeEnemy = false; // このフレームでプレイヤーは移動していない。ここで解除すると敵が1フレーム先に動いてしまう。-> 次フレームで解除
-#endif
-
+						DDGround.SystemTasks.Once(() => this.FreezeEnemy = false);
 						goto endReborn;
 					}
 					this.Player.RebornFrame++;
