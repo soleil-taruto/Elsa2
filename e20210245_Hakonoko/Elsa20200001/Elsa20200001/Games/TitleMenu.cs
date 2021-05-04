@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.GameProgressMasters;
-using DxLibDLL;
 using Charlotte.Novels;
 
 namespace Charlotte.Games
@@ -591,6 +591,7 @@ namespace Charlotte.Games
 			//DDCurtain.SetCurtain(0, -1.0);
 			DDCurtain.SetCurtain();
 
+			DDTouch.Touch();
 			GC.Collect();
 		}
 	}
