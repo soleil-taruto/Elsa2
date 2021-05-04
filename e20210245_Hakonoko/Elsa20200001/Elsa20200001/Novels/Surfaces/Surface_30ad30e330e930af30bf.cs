@@ -212,10 +212,10 @@ namespace Charlotte.Novels.Surfaces
 
 		private IEnumerable<bool> モード変更(string modeName)
 		{
-			return this.モード変更(modeName, this.Mirrored); // BUG
+			return this.モード変更(modeName, null); // 最初の yield return を待たずに、この行は評価されることに注意！
 		}
 
-		private IEnumerable<bool> モード変更(string modeName, bool mirrored)
+		private IEnumerable<bool> モード変更(string modeName, bool? mirrored)
 		{
 			int mode = SCommon.IndexOf(this.ImageTable[this.Chara], v => v.Name == modeName);
 
@@ -225,7 +225,7 @@ namespace Charlotte.Novels.Surfaces
 			int currMode = this.Mode;
 			int destMode = mode;
 			bool currMirrored = this.Mirrored;
-			bool destMirrored = mirrored;
+			bool destMirrored = mirrored == null ? this.Mirrored : mirrored.Value;
 
 			foreach (DDScene scene in DDSceneUtils.Create(30))
 			{
