@@ -392,12 +392,16 @@ namespace Charlotte.Games
 					{
 						this.Player.RebornFrame = 0;
 
-						//this.FreezeEnemy = false; // このフレームでプレイヤーは移動していない。ここで解除すると敵が1フレーム先に動いてしまう。-> 次フレームで解除
+						// HACK: 状態再現が完全ではない模様...
+#if true
 						DDGround.SystemTasks.Add(() =>
 						{
 							this.FreezeEnemy = false;
 							return false; // 1回だけ
 						});
+#else // old ng
+						this.FreezeEnemy = false; // このフレームでプレイヤーは移動していない。ここで解除すると敵が1フレーム先に動いてしまう。-> 次フレームで解除
+#endif
 
 						goto endReborn;
 					}
@@ -794,7 +798,14 @@ namespace Charlotte.Games
 			this.Snapshot = new Snapshot();
 			this.Snapshot.PlayerPosition = new D2Point(this.Player.X, this.Player.Y);
 			this.Snapshot.PlayerVelocity = new D2Point(this.Player.XSpeed, this.Player.YSpeed);
-			// TODO: 他のステータスも保存する必要あり
+			this.Snapshot.PlayerOtherStatus = new int[]
+			{
+				this.Player.MoveFrame,
+				this.Player.MoveSlow ? 1 : 0,
+				this.Player.JumpCount,
+				this.Player.JumpFrame,
+				this.Player.AirborneFrame
+			};
 			this.Snapshot.Enemies = this.Enemies.Iterate().Select(enemy => enemy.GetClone()).ToList();
 		}
 
@@ -1132,7 +1143,15 @@ namespace Charlotte.Games
 			this.Player.XSpeed = ss.PlayerVelocity.X;
 			this.Player.YSpeed = ss.PlayerVelocity.Y;
 
-			// TODO: 他のステータスも復元する必要あり
+			{
+				int c = 0;
+
+				this.Player.MoveFrame = ss.PlayerOtherStatus[c++];
+				this.Player.MoveSlow = ss.PlayerOtherStatus[c++] != 0;
+				this.Player.JumpCount = ss.PlayerOtherStatus[c++];
+				this.Player.JumpFrame = ss.PlayerOtherStatus[c++];
+				this.Player.AirborneFrame = ss.PlayerOtherStatus[c++];
+			}
 
 			this.Player.DeadFrame = 0; // 死亡時の処理から呼び出された場合用
 			this.Player.RebornFrame = 1;

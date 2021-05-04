@@ -11,6 +11,7 @@ namespace Charlotte.Games
 	{
 		public D2Point PlayerPosition;
 		public D2Point PlayerVelocity;
+		public int[] PlayerOtherStatus;
 		public List<Enemy> Enemies;
 	}
 }
