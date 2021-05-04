@@ -54,7 +54,7 @@ namespace Charlotte.Games
 
 			yield return 300;
 			BlockCreateRateTarget = 0.0;
-			BlockCreateRateApprRate = 0.98;
+			BlockCreateRateApprRate = 0.985;
 
 			yield return 300;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(400, 250, "\u2026\u2026\u60aa\u304f\u306a\u3044\u7d42\u308f\u308a\u304b\u305f\u3002")));
