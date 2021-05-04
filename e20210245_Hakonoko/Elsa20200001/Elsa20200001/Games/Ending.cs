@@ -20,20 +20,27 @@ namespace Charlotte.Games
 
 			for (int scrfrm = 0; a_script(); scrfrm++)
 			{
-				if (DDInput.L.GetInput() == 1 && 180 < scrfrm && !Ground.I.会話スキップ抑止) // エンディング_スキップ
+				if (DDInput.L.GetInput() == 1) // エンディング_スキップ
 				{
-					DDEngine.EachFrame();
-
-					DDCurtain.SetCurtain(30, -1.0);
-					DDMusicUtils.Fade();
-
-					for (int c = 0; c < 40; c++)
+					if (Ground.I.会話スキップ抑止)
 					{
-						a_script();
-
-						DDEngine.EachFrame();
+						Ground.I.SE.拒否.Play();
 					}
-					break;
+					else if (180 < scrfrm) // 数秒経過するまでスキップさせない。
+					{
+						DDEngine.EachFrame();
+
+						DDCurtain.SetCurtain(30, -1.0);
+						DDMusicUtils.Fade();
+
+						for (int c = 0; c < 40; c++)
+						{
+							a_script();
+
+							DDEngine.EachFrame();
+						}
+						break;
+					}
 				}
 				DDEngine.EachFrame();
 			}
@@ -42,7 +49,7 @@ namespace Charlotte.Games
 			// -- DDCurtain.SetCurtain(30, -1.0);
 			// -- DDMusicUtils.Fade();
 
-			foreach (DDScene scene in DDSceneUtils.Create(60))
+			foreach (DDScene scene in DDSceneUtils.Create(60)) // 暗転_時間調整
 				DDEngine.EachFrame();
 
 			DDGround.EL.Clear();

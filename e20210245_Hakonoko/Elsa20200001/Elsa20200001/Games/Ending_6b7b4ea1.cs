@@ -11,11 +11,25 @@ namespace Charlotte.Games
 	{
 		protected override IEnumerable<int> Script()
 		{
-			// TODO: 背景
-
 			Ground.I.Music.Ending_死亡.Play();
 
+			DDGround.EL.Add(() =>
+			{
+				//DDPrint.SetPrint(0, 16); // test
+				//DDPrint.Print("" + BlockCreateRate); // test
+
+				DDUtils.Approach(ref BlockCreateRate, BlockCreateRateTarget, BlockCreateRateApprRate);
+				return true;
+			});
+
+			DDGround.EL.Add(new DrawWall() { Block_W = 40, Block_H = 100 }.Task);
+			DDGround.EL.Add(new DrawWall() { Block_W = 60, Block_H = 200 }.Task);
+			DDGround.EL.Add(new DrawWall() { Block_W = 80, Block_H = 300 }.Task);
+
 			// _#Include_Resource // for t20201023_GitHubRepositoriesSolve
+
+			BlockCreateRateTarget = 1.0;
+			BlockCreateRateApprRate = 0.999;
 
 			yield return 240;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(50, 200, "\u5451\u307e\u308c\u3066\u3044\u308b\u611f\u899a\u304c\u5206\u304b\u308b\u3002", 800)));
@@ -34,7 +48,11 @@ namespace Charlotte.Games
 			yield return 240;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(150, 350, "\u3051\u3069\u3001\u3053\u308c\u3082\u30a2\u30bf\u30b7\u304c\u671b\u3093\u3067\u3044\u305f\u7d50\u679c\u306e\uff11\u3064\u3002")));
 
-			yield return 600;
+			yield return 300;
+			BlockCreateRateTarget = 0.0;
+			BlockCreateRateApprRate = 0.98;
+
+			yield return 300;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(400, 250, "\u2026\u2026\u60aa\u304f\u306a\u3044\u7d42\u308f\u308a\u304b\u305f\u3002")));
 
 			yield return 800;
@@ -64,6 +82,51 @@ namespace Charlotte.Games
 				DDFontUtils.DrawString(x, y, text, DDFontUtils.GetFont("03\u711a\u706b-Regular", 30), false, color);
 
 				yield return true;
+			}
+		}
+
+		private static double BlockCreateRateTarget = 0.0;
+		private static double BlockCreateRateApprRate = 0.0;
+		private static double BlockCreateRate = 0.0;
+
+		private class DrawWall : DDTask
+		{
+			public int Block_W;
+			public int Block_H;
+
+			// <---- prm
+
+			private DDTaskList EL = new DDTaskList();
+
+			public override IEnumerable<bool> E_Task()
+			{
+				for (int frame = 0; ; frame++)
+				{
+					if (DDUtils.Random.Real() < BlockCreateRate)
+					{
+						this.EL.Add(SCommon.Supplier(this.E_Block()));
+					}
+					this.EL.ExecuteAllTask();
+					yield return true;
+				}
+			}
+
+			private IEnumerable<bool> E_Block()
+			{
+				double x = DDUtils.Random.Real() * DDConsts.Screen_W;
+				double b = DDUtils.Random.Real() * 0.2;
+
+				foreach (DDScene scene in DDSceneUtils.Create(60))
+				{
+					DDDraw.SetAlpha(0.5);
+					DDDraw.SetBright(b, b, b);
+					DDDraw.DrawBegin(Ground.I.Picture.WhiteBox, x, (1.0 - scene.Rate) * (DDConsts.Screen_H + this.Block_H) - (this.Block_H / 2));
+					DDDraw.DrawSetSize(this.Block_W, this.Block_H);
+					DDDraw.DrawEnd();
+					DDDraw.Reset();
+
+					yield return true;
+				}
 			}
 		}
 	}
