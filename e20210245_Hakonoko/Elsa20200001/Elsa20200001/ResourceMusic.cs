@@ -10,12 +10,11 @@ namespace Charlotte
 	{
 		public DDMusic Dummy = new DDMusic(@"dat\General\muon.wav");
 
-		public DDMusic Title = new DDMusic(@"dat\夜野ムクロジ\komore-bi.mp3");
-		public DDMusic Novel = new DDMusic(@"dat\夜野ムクロジ\si-piano.mp3");
-		public DDMusic Ending_死亡 = new DDMusic(@"dat\夜野ムクロジ\sito-sito.mp3");
+		public DDMusic Title = new DDMusic(@"dat\夜野ムクロジ\komore-bi_muon-100-100.mp3");
+		public DDMusic Novel = new DDMusic(@"dat\夜野ムクロジ\si-piano_muon-100-100.mp3");
+		public DDMusic Ending_死亡 = new DDMusic(@"dat\夜野ムクロジ\sito-sito_muon-100-100.mp3");
 		public DDMusic Ending_生還 = new DDMusic(@"dat\甘茶の音楽工房\seijakunohoshizora.mp3");
-		public DDMusic Ending_復讐 = new DDMusic(@"dat\ユーフルカ\Horror-ginen_loop.ogg");
-		public DDMusic Music_0001 = new DDMusic(@"dat\夜野ムクロジ\yu-rei.mp3");
+		public DDMusic Ending_復讐 = new DDMusic(@"dat\ユーフルカ\Horror-ginen_loop.ogg").SetLoopByStLength(475726, 3723406);
 
 		public DDMusic Floor_01 = new DDMusic(@"dat\甘茶の音楽工房\orb1_muon-100-100.mp3");
 		public DDMusic Floor_02 = new DDMusic(@"dat\甘茶の音楽工房\orb2_muon-100-100.mp3");

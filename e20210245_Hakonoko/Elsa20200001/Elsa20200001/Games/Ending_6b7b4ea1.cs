@@ -11,13 +11,17 @@ namespace Charlotte.Games
 	{
 		protected override IEnumerable<int> Script()
 		{
+			// reset
+			{
+				BlockCreateRateTarget = 0.0;
+				BlockCreateRateApprRate = 0.0;
+				BlockCreateRate = 0.0;
+			}
+
 			Ground.I.Music.Ending_死亡.Play();
 
 			DDGround.EL.Add(() =>
 			{
-				//DDPrint.SetPrint(0, 16); // test
-				//DDPrint.Print("" + BlockCreateRate); // test
-
 				DDUtils.Approach(ref BlockCreateRate, BlockCreateRateTarget, BlockCreateRateApprRate);
 				return true;
 			});
