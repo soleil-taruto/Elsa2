@@ -54,12 +54,12 @@ namespace Charlotte.GameCommons
 			Clear(PictureCache, DDPictureUtils.Pictures, picture => picture.Unload());
 		}
 
-#if true
+#if false // 抑止 -- DDSound.IsPlaying 未実装のため
 		public static void ClearMusic()
 		{
 			Clear(MusicCache, DDMusicUtils.Musics, music => music.Sound.Unload(), music => !music.Sound.IsPlaying());
 		}
-#else // old
+#else
 		/// <summary>
 		/// クリア対象の音楽は停止していること。
 		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
@@ -70,12 +70,12 @@ namespace Charlotte.GameCommons
 		}
 #endif
 
-#if true
+#if false // 抑止 -- DDSound.IsPlaying 未実装のため
 		public static void ClearSE()
 		{
 			Clear(SECache, DDSEUtils.SEList, se => se.Sound.Unload(), se => !se.Sound.IsPlaying());
 		}
-#else // old
+#else
 		/// <summary>
 		/// クリア対象の効果音は停止していること。
 		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
