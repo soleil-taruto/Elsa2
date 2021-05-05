@@ -187,6 +187,7 @@
     <Compile Include="Games\Walls\Tests\Wall_B0003.cs" />
     <Compile Include="Games\Walls\Tests\Wall_B0004.cs" />
     <Compile Include="Games\Walls\Wall_Dark.cs" />
+    <Compile Include="Games\ぼかし効果.cs" />
     <Compile Include="Ground.cs" />
     <Compile Include="LiteStatusDlg.cs">
       <SubType>Form</SubType>

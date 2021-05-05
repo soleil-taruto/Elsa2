@@ -201,6 +201,7 @@
     <Compile Include="Games\Walls\WallCreator.cs" />
     <Compile Include="Games\Walls\Wall_Dark.cs" />
     <Compile Include="Games\World.cs" />
+    <Compile Include="Games\ぼかし効果.cs" />
     <Compile Include="Games\壁キャラ処理.cs" />
     <Compile Include="Ground.cs" />
     <Compile Include="LevelEditors\LevelEditor.cs" />
