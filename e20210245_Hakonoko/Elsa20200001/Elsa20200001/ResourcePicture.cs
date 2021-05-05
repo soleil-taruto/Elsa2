@@ -69,8 +69,8 @@ namespace Charlotte
 
 		public DDPicture WallFire = DDPictureLoaders.Standard(@"dat\WallFire.png");
 
-		public DDPicture Ending_生還_背景_01 = DDPictureLoaders.Standard(@"dat\あやえも研究所\hospital10_day by markhillary.png");
-		public DDPicture Ending_生還_背景_02 = DDPictureLoaders.Standard(@"dat\ぱくたそ\Redsugar20207095.png");
+		public DDPicture Ending_生還_背景_01 = DDPictureLoaders.Standard(@"dat\なほ\nc171813.jpg");
+		public DDPicture Ending_生還_背景_02 = DDPictureLoaders.Standard(@"dat\ぱくたそ\BOB96P8110162.png");
 
 		public DDPicture WhiteWall = DDPictureLoaders.Standard(@"dat\WhiteWall.png");
 	}

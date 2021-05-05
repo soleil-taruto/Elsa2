@@ -182,6 +182,7 @@
     <Compile Include="Games\Snapshot.cs" />
     <Compile Include="Games\SnapshotEffects.cs" />
     <Compile Include="Games\TitleMenu.cs" />
+    <Compile Include="Games\ぼかし効果.cs" />
     <Compile Include="Games\レイヤ表示.cs" />
     <Compile Include="Games\白黒効果.cs" />
     <Compile Include="Games\箱から出る.cs" />

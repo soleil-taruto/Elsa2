@@ -53,12 +53,20 @@ namespace Charlotte.Games
 			DDGround.EL.Add(SCommon.Supplier(DrawString(150, 350, "\u3051\u3069\u3001\u3053\u308c\u3082\u30a2\u30bf\u30b7\u304c\u671b\u3093\u3067\u3044\u305f\u7d50\u679c\u306e\uff11\u3064\u3002")));
 
 			BlockCreateRateTarget = 0.0;
-			BlockCreateRateApprRate = 0.993;
+			BlockCreateRateApprRate = 0.995;
 
 			yield return 620;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(400, 250, "\u2026\u2026\u60aa\u304f\u306a\u3044\u7d42\u308f\u308a\u304b\u305f\u3002")));
 
-			yield return 800;
+			BlockCreateRateTarget = 0.0;
+			BlockCreateRateApprRate = 0.98;
+
+			yield return 120;
+
+			BlockCreateRateTarget = 0.0;
+			BlockCreateRateApprRate = 0.92;
+
+			yield return 680;
 			DDCurtain.SetCurtain(30, -1.0);
 			DDMusicUtils.Fade();
 			yield return 40;

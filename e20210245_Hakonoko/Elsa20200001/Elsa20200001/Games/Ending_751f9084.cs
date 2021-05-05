@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
+using DxLibDLL;
 
 namespace Charlotte.Games
 {
@@ -11,6 +12,9 @@ namespace Charlotte.Games
 	{
 		protected override IEnumerable<int> Script()
 		{
+			while (1 <= SubScreens.Count)
+				SCommon.UnaddElement(SubScreens).Dispose();
+
 			Ground.I.Music.Ending_生還.Play();
 
 			DrawWall drawWall = new DrawWall();
@@ -24,7 +28,7 @@ namespace Charlotte.Games
 			yield return 240;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(480, 250, "\u3069\u3046\u3084\u3089\u79c1\u306f\u751f\u6b7b\u306e\u5883\u304b\u3089\u751f\u9084\u3057\u305f\u3089\u3057\u3044\u3002")));
 
-			drawWall.DrawPictures.Add(new DrawWall.DrawPicture() { Picture = Ground.I.Picture.Ending_生還_背景_01 });
+			drawWall.DrawPictures.Add(new DrawWall.DrawPicture() { Picture = Ground.I.Picture.Ending_生還_背景_01, XAdd = -0.03, YAdd = -0.02 });
 
 			yield return 600;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(480, 250, "\u5468\u308a\u306b\u306f\u5b89\u5835\u306e\u8868\u60c5\u3092\u6d6e\u304b\u3079\u305f\u533b\u5e2b\u3068\u770b\u8b77\u5e2b\u304c\u5c45\u308b\u3002", 1000)));
@@ -54,51 +58,77 @@ namespace Charlotte.Games
 			yield return 440;
 			DDGround.EL.Add(SCommon.Supplier(DrawString(480, 330, "\u2026\u2026\u3068\u308a\u3042\u3048\u305a\u3001\u5893\u53c2\u308a\u3068\u9762\u4f1a\u304b\u3089\u59cb\u3081\u3066\u307f\u3088\u3046\u304b\u306a\u3002")));
 
-			yield return 800;
-			DDCurtain.SetCurtain(30, -1.0);
-			DDMusicUtils.Fade();
-			yield return 40;
+			yield return 1200;
+			DDCurtain.SetCurtain(600, -1.0);
+			yield return 300;
+			DDMusicUtils.Fade(300);
+			yield return 330;
 		}
+
+		private static List<DDSubScreen> SubScreens = new List<DDSubScreen>();
 
 		private IEnumerable<bool> DrawString(int x, int y, string text, int frameMax = 600)
 		{
-			D4Rect backRect = new D4Rect(0, y - 4, DDConsts.Screen_W, 36);
+			DDSubScreen subScreenTmp = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H, true);
+			DDSubScreen subScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H, true);
+			SubScreens.Add(subScreenTmp);
+			SubScreens.Add(subScreen);
 
-			foreach (DDScene scene in DDSceneUtils.Create(30))
+			using (subScreenTmp.Section())
 			{
-				DDDraw.SetAlpha(scene.Rate);
-				DDDraw.DrawRect(Ground.I.Picture.WhiteBox, backRect);
+				DX.ClearDrawScreen();
+
+				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30));
+
+				ぼかし効果.Perform(0.01);
+			}
+			using (subScreen.Section())
+			{
+				DX.ClearDrawScreen();
+
+				for (int c = 0; c < 100; c++)
+				{
+					DDDraw.SetBlendAdd(1.0);
+					DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
+					DDDraw.Reset();
+				}
+				ぼかし効果.Perform(0.01);
+			}
+			using (subScreenTmp.Section())
+			{
+				DX.ClearDrawScreen();
+
+				for (int c = 0; c < 100; c++)
+				{
+					DDDraw.SetBlendAdd(1.0);
+					DDDraw.DrawSimple(subScreen.ToPicture(), 0, 0);
+					DDDraw.Reset();
+				}
+				ぼかし効果.Perform(0.01);
+			}
+			using (subScreen.Section())
+			{
+				DX.ClearDrawScreen();
+
+				DDDraw.SetBright(0.0, 0.1, 0.2);
+				DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
 				DDDraw.Reset();
 
-				yield return true;
+				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30));
 			}
 
-			double b = 1.0;
-			double bTarg = 0.0;
+			double a = 0.0;
+			double aTarg = 1.0;
 
 			foreach (DDScene scene in DDSceneUtils.Create(frameMax))
 			{
-				DDDraw.DrawRect(Ground.I.Picture.WhiteBox, backRect);
-
 				if (scene.Numer == scene.Denom - 300)
-					bTarg = 1.0;
+					aTarg = 0.0;
 
-				DDUtils.Approach(ref b, bTarg, 0.985);
+				DDUtils.Approach(ref a, aTarg, 0.985);
 
-				I3Color color = new I3Color(
-					SCommon.ToInt(b * 255),
-					SCommon.ToInt(b * 255),
-					SCommon.ToInt(b * 255)
-					);
-
-				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30), false, color);
-
-				yield return true;
-			}
-			foreach (DDScene scene in DDSceneUtils.Create(30))
-			{
-				DDDraw.SetAlpha(1.0 - scene.Rate);
-				DDDraw.DrawRect(Ground.I.Picture.WhiteBox, backRect);
+				DDDraw.SetAlpha(a);
+				DDDraw.DrawSimple(subScreen.ToPicture(), 0, 0);
 				DDDraw.Reset();
 
 				yield return true;
