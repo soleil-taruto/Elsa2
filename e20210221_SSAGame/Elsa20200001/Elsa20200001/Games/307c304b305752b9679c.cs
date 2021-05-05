@@ -13,7 +13,7 @@ namespace Charlotte.Games
 		public static void Perform(double rate)
 		{
 			DX.GraphFilter(
-				DDGround.MainScreen.GetHandle(),
+				DDSubScreenUtils.CurrDrawScreen.GetHandle(),
 				DX.DX_GRAPH_FILTER_GAUSS,
 				16,
 				SCommon.ToInt(5000.0 * rate)
