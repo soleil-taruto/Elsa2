@@ -13,13 +13,10 @@ namespace Charlotte.GameCommons
 	/// </summary>
 	public static class DDTouch
 	{
-		/// <summary>
-		/// 音楽・SEも解放する。
-		/// -- 音楽・SEの再生中ではないこと。
-		/// </summary>
 		public static void Touch()
 		{
 			UnloadLocally();
+			DDCCResource.ClearAll();
 			DDSubScreenUtils.UnloadAll(subScreen => subScreen != DDGround.MainScreen);
 			DDFontUtils.UnloadAll();
 			TouchGlobally();
@@ -35,8 +32,8 @@ namespace Charlotte.GameCommons
 		private static void UnloadLocally()
 		{
 			DDPictureUtils.UnloadLocally();
-			DDMusicUtils.UnloadLocally();
-			DDSEUtils.UnloadLocally();
+			DDMusicUtils.UnloadLocally(music => !music.Sound.IsPlaying());
+			DDSEUtils.UnloadLocally(se => !se.Sound.IsPlaying());
 		}
 	}
 }
