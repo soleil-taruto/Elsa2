@@ -236,6 +236,7 @@
     <Compile Include="Tests\Games\箱から出るTest.cs" />
     <Compile Include="Tests\Novels\NovelTest.cs" />
     <Compile Include="Tests\Test0001.cs" />
+    <Compile Include="Tests\Test0002.cs" />
     <EmbeddedResource Include="LevelEditors\LevelEditorDlg.resx">
       <DependentUpon>LevelEditorDlg.cs</DependentUpon>
     </EmbeddedResource>
