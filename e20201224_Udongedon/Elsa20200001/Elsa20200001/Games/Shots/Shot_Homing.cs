@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Charlotte.Games.Enemies;
-using Charlotte.GameCommons;
 using Charlotte.Commons;
-using Charlotte.GameCommons.Options;
+using Charlotte.GameCommons;
+using Charlotte.Games.Enemies;
 
 namespace Charlotte.Games.Shots
 {

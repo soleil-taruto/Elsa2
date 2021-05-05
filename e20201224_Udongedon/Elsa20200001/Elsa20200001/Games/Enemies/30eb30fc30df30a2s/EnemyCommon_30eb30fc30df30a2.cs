@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Charlotte.Commons;
 using Charlotte.GameCommons;
 using Charlotte.Games.Shots;
-using Charlotte.GameCommons.Options;
-using Charlotte.Commons;
 
 namespace Charlotte.Games.Enemies.ルーミアs
 {

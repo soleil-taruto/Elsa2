@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Charlotte.GameCommons;
 using Charlotte.Commons;
+using Charlotte.GameCommons;
 using Charlotte.Games.Enemies.鍵山雛s;
 using Charlotte.Games.Shots;
-using Charlotte.GameCommons.Options;
 using Charlotte.Games.Walls;
 
 namespace Charlotte.Games.Enemies.ルーミアs

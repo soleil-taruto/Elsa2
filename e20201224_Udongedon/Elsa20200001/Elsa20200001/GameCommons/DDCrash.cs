@@ -6,7 +6,7 @@ using Charlotte.Commons;
 using Charlotte.Games.Enemies;
 using Charlotte.Games.Shots;
 
-namespace Charlotte.GameCommons.Options
+namespace Charlotte.GameCommons
 {
 	public struct DDCrash
 	{
