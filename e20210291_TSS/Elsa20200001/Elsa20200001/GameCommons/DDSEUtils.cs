@@ -130,8 +130,19 @@ namespace Charlotte.GameCommons
 		/// </summary>
 		public static void UnloadLocally()
 		{
+#if true
+			UnloadLocally(se => true);
+#else // old same
 			foreach (DDSE se in SEList)
 				if (se.Locally)
+					se.Sound.Unload();
+#endif
+		}
+
+		public static void UnloadLocally(Predicate<DDSE> match)
+		{
+			foreach (DDSE se in SEList)
+				if (se.Locally && match(se))
 					se.Sound.Unload();
 		}
 

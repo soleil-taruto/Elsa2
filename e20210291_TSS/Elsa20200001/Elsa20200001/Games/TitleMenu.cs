@@ -523,8 +523,10 @@ namespace Charlotte.Games
 
 		private void ReturnTitleMenu()
 		{
-			DDCurtain.SetCurtain();
+			DDTouch.Touch(); // 曲再生の前に -- .Play() で Touch した曲を解放してしまわないように
 			Ground.I.Music.Title.Play();
+
+			DDCurtain.SetCurtain();
 
 			DDEngine.FreezeInput(GameConsts.LONG_INPUT_SLEEP);
 
