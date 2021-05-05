@@ -57,6 +57,16 @@ namespace Charlotte.Tests
 						DDSoundUtils.Stop(Ground.I.Music.Title.Sound.GetHandle(0));
 						ProcMain.WriteLog("*11 " + Ground.I.Music.Title.Sound.IsLoaded() + ", " + Ground.I.Music.Title.Sound.IsPlaying()); // True, False
 						break;
+
+					case 360:
+						ProcMain.WriteLog("*12 " + Ground.I.SE.Jump.Sound.IsLoaded() + ", " + Ground.I.SE.Jump.Sound.IsPlaying()); // False, False
+						DDSoundUtils.Play(Ground.I.SE.Jump.Sound.GetHandle(0), true, false);
+						ProcMain.WriteLog("*13 " + Ground.I.SE.Jump.Sound.IsLoaded() + ", " + Ground.I.SE.Jump.Sound.IsPlaying()); // True, True
+						break;
+				}
+				if (SCommon.IsRange(frame, 361, 419))
+				{
+					ProcMain.WriteLog("*14 " + Ground.I.SE.Jump.Sound.IsLoaded() + ", " + Ground.I.SE.Jump.Sound.IsPlaying()); // True, True ～ True, False
 				}
 				DDEngine.EachFrame();
 			}
