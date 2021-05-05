@@ -24,7 +24,7 @@ namespace Charlotte.Games
 
 		public void Perform()
 		{
-			// 開発中_暫定
+			if (DDConfig.LOG_ENABLED) // 開発・デバッグ_モードであることを表示
 			{
 #if true
 				DDGround.EL.Keep(300, () =>
