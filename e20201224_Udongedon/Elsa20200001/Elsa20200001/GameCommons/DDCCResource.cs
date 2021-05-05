@@ -109,7 +109,15 @@ namespace Charlotte.GameCommons
 		{
 			foreach (K key in map.Keys.ToArray()) // .ToArray() as shallow copy
 				if (match(map[key]))
-					map.Remove(key);
+					P_Remove(map, key);
+		}
+
+		private static void P_Remove<K, T>(Dictionary<K, T> map, K key)
+		{
+			map
+				.Remove( // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+					key
+					);
 		}
 	}
 }
