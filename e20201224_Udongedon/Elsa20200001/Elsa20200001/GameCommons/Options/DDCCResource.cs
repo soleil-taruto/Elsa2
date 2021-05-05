@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 
-namespace Charlotte.GameCommons
+namespace Charlotte.GameCommons.Options
 {
 	public static class DDCCResource
 	{
