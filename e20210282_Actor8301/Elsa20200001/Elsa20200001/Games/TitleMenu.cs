@@ -460,6 +460,7 @@ namespace Charlotte.Games
 
 		private void ReturnTitleMenu()
 		{
+			DDTouch.Touch(); // 曲再生の前に -- .Play() で Touch した曲を解放してしまわないように
 			Ground.I.Music.Title.Play();
 
 			//DDCurtain.SetCurtain(0, -1.0);
