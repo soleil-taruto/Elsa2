@@ -71,6 +71,7 @@ namespace Charlotte
 
 		public DDPicture Ending_生還_背景_01 = DDPictureLoaders.Standard(@"dat\なほ\nc171813.jpg");
 		public DDPicture Ending_生還_背景_02 = DDPictureLoaders.Standard(@"dat\ぱくたそ\BOB96P8110162.png");
+		public DDPicture Ending_復讐_背景_01 = DDPictureLoaders.Standard(@"dat\ぱくたそ\kazukiphotomon04.png");
 
 		public DDPicture WhiteWall = DDPictureLoaders.Standard(@"dat\WhiteWall.png");
 	}

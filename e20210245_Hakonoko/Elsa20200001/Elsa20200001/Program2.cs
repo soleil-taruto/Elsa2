@@ -100,8 +100,8 @@ namespace Charlotte
 			//new NovelTest().Test03(); // 開始シナリオを選択
 			//new 箱から出るTest().Test01();
 			//new EndingTest().Test_死亡(); // エンディング_死亡
-			new EndingTest().Test_生還(); // エンディング_生還
-			//new EndingTest().Test_復讐(); // エンディング_復讐
+			//new EndingTest().Test_生還(); // エンディング_生還
+			new EndingTest().Test_復讐(); // エンディング_復讐
 
 			// ----
 		}
