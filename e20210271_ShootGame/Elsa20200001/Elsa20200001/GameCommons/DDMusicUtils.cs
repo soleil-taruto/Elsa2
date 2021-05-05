@@ -188,8 +188,19 @@ namespace Charlotte.GameCommons
 		/// </summary>
 		public static void UnloadLocally()
 		{
+#if true
+			UnloadLocally(music => true);
+#else // old same
 			foreach (DDMusic music in Musics)
 				if (music.Locally)
+					music.Sound.Unload();
+#endif
+		}
+
+		public static void UnloadLocally(Predicate<DDMusic> match)
+		{
+			foreach (DDMusic music in Musics)
+				if (music.Locally && match(music))
 					music.Sound.Unload();
 		}
 
