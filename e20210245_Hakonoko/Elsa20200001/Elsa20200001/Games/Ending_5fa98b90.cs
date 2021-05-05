@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
 
@@ -11,9 +12,13 @@ namespace Charlotte.Games
 	{
 		protected override IEnumerable<int> Script()
 		{
-			// TODO: 背景
+			ClearAllSubScreen();
 
 			Ground.I.Music.Ending_復讐.Play();
+
+			DrawWall drawWall = new DrawWall();
+			drawWall.DrawPictures.Add(new DrawWall.DrawPicture() { Picture = Ground.I.Picture.WhiteWall });
+			DDGround.EL.Add(drawWall.Task);
 
 			// _#Include_Resource // for t20201023_GitHubRepositoriesSolve
 
@@ -34,29 +39,131 @@ namespace Charlotte.Games
 			DDCurtain.SetCurtain(30, -1.0);
 			DDMusicUtils.Fade();
 			yield return 40;
+
+			ClearAllSubScreen();
+		}
+
+		private static List<DDSubScreen> SubScreens = new List<DDSubScreen>();
+
+		private static void ClearAllSubScreen()
+		{
+			while (1 <= SubScreens.Count)
+				SCommon.UnaddElement(SubScreens).Dispose();
 		}
 
 		private IEnumerable<bool> DrawString(int x, int y, string text, int frameMax = 600)
 		{
-			double b = 0.0;
-			double bTarg = 1.0;
+			DDSubScreen subScreenTmp = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H, true);
+			DDSubScreen subScreen = new DDSubScreen(DDConsts.Screen_W, DDConsts.Screen_H, true);
+			SubScreens.Add(subScreenTmp);
+			SubScreens.Add(subScreen);
+
+			using (subScreenTmp.Section())
+			{
+				DX.ClearDrawScreen();
+
+				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30));
+
+				ぼかし効果.Perform(0.01);
+			}
+			using (subScreen.Section())
+			{
+				DX.ClearDrawScreen();
+
+				for (int c = 0; c < 100; c++)
+				{
+					DDDraw.SetBlendAdd(1.0);
+					DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
+					DDDraw.Reset();
+				}
+				ぼかし効果.Perform(0.01);
+			}
+			using (subScreenTmp.Section())
+			{
+				DX.ClearDrawScreen();
+
+				for (int c = 0; c < 100; c++)
+				{
+					DDDraw.SetBlendAdd(1.0);
+					DDDraw.DrawSimple(subScreen.ToPicture(), 0, 0);
+					DDDraw.Reset();
+				}
+				ぼかし効果.Perform(0.01);
+			}
+			using (subScreen.Section())
+			{
+				DX.ClearDrawScreen();
+
+				DDDraw.SetBright(0.0, 0.0, 0.0);
+				DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
+				DDDraw.Reset();
+
+				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30));
+			}
+
+			double a = 0.0;
+			double aTarg = 1.0;
 
 			foreach (DDScene scene in DDSceneUtils.Create(frameMax))
 			{
 				if (scene.Numer == scene.Denom - 300)
-					bTarg = 0.0;
+					aTarg = 0.0;
 
-				DDUtils.Approach(ref b, bTarg, 0.99);
+				DDUtils.Approach(ref a, aTarg, 0.985);
 
-				I3Color color = new I3Color(
-					SCommon.ToInt(b * 255),
-					SCommon.ToInt(b * 255),
-					SCommon.ToInt(b * 255)
-					);
-
-				DDFontUtils.DrawString(x, y, text, DDFontUtils.GetFont("03\u711a\u706b-Regular", 30), false, color);
+				DDDraw.SetAlpha(a);
+				DDDraw.DrawSimple(subScreen.ToPicture(), 0, 0);
+				DDDraw.Reset();
 
 				yield return true;
+			}
+		}
+
+		private class DrawWall : DDTask
+		{
+			public List<DrawPicture> DrawPictures = new List<DrawPicture>();
+
+			public override IEnumerable<bool> E_Task()
+			{
+				for (int frame = 0; ; frame++)
+				{
+					if (2 <= this.DrawPictures.Count && 1.0 - SCommon.MICRO < this.DrawPictures[1].A)
+						this.DrawPictures.RemoveAt(0);
+
+					foreach (DrawPicture task in this.DrawPictures)
+						task.Execute();
+
+					yield return true;
+				}
+			}
+
+			public class DrawPicture : DDTask
+			{
+				public DDPicture Picture;
+				public double XAdd = 0.0;
+				public double YAdd = 0.0;
+
+				// <---- prm
+
+				private double X = 0.0;
+				private double Y = 0.0;
+				public double A = 0.0;
+
+				public override IEnumerable<bool> E_Task()
+				{
+					for (int frame = 0; ; frame++)
+					{
+						DDDraw.SetAlpha(this.A);
+						DDDraw.DrawSimple(this.Picture, this.X, this.Y);
+						DDDraw.Reset();
+
+						this.X += this.XAdd;
+						this.Y += this.YAdd;
+						DDUtils.Approach(ref this.A, 1.0, 0.993);
+
+						yield return true;
+					}
+				}
 			}
 		}
 	}

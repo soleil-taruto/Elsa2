@@ -12,8 +12,7 @@ namespace Charlotte.Games
 	{
 		protected override IEnumerable<int> Script()
 		{
-			while (1 <= SubScreens.Count)
-				SCommon.UnaddElement(SubScreens).Dispose();
+			ClearAllSubScreen();
 
 			Ground.I.Music.Ending_生還.Play();
 
@@ -63,9 +62,17 @@ namespace Charlotte.Games
 			yield return 300;
 			DDMusicUtils.Fade(300);
 			yield return 330;
+
+			ClearAllSubScreen();
 		}
 
 		private static List<DDSubScreen> SubScreens = new List<DDSubScreen>();
+
+		private static void ClearAllSubScreen()
+		{
+			while (1 <= SubScreens.Count)
+				SCommon.UnaddElement(SubScreens).Dispose();
+		}
 
 		private IEnumerable<bool> DrawString(int x, int y, string text, int frameMax = 600)
 		{
