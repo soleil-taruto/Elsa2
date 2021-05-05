@@ -42,6 +42,13 @@ namespace Charlotte.GameCommons
 		// ここから開放(キャッシュを空にする)
 		// ====
 
+		public static void ClearAll()
+		{
+			ClearPicture();
+			ClearMusic();
+			ClearSE();
+		}
+
 		public static void ClearPicture()
 		{
 			Clear(PictureCache, DDPictureUtils.Pictures, picture => picture.Unload());

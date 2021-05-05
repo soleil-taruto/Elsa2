@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Charlotte.Commons;
 
-namespace Charlotte.GameCommons.Options
+namespace Charlotte.GameCommons
 {
 	public static class DDCCResource
 	{
@@ -36,6 +36,53 @@ namespace Charlotte.GameCommons.Options
 				SECache.Add(file, new DDSE(file));
 
 			return SECache[file];
+		}
+
+		// ====
+		// ここから開放(キャッシュを空にする)
+		// ====
+
+		public static void ClearAll()
+		{
+			ClearPicture();
+			ClearMusic();
+			ClearSE();
+		}
+
+		public static void ClearPicture()
+		{
+			Clear(PictureCache, DDPictureUtils.Pictures, picture => picture.Unload());
+		}
+
+		/// <summary>
+		/// クリア対象の音楽は停止していること。
+		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
+		/// </summary>
+		public static void ClearMusic()
+		{
+			Clear(MusicCache, DDMusicUtils.Musics, music => music.Sound.Unload());
+		}
+
+		/// <summary>
+		/// クリア対象の効果音は停止していること。
+		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
+		/// </summary>
+		public static void ClearSE()
+		{
+			Clear(SECache, DDSEUtils.SEList, se => se.Sound.Unload());
+		}
+
+		public static void Clear<K, T>(Dictionary<K, T> cache, List<T> store, Action<T> a_unload)
+		{
+			HashSet<T> handles = new HashSet<T>(cache
+				.Values // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				);
+
+			foreach (T handle in handles)
+				a_unload(handle);
+
+			store.RemoveAll(handle => handles.Contains(handle));
+			cache.Clear();
 		}
 	}
 }

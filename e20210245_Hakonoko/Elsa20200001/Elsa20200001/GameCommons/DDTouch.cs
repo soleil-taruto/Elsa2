@@ -20,6 +20,7 @@ namespace Charlotte.GameCommons
 		public static void Touch()
 		{
 			UnloadLocally();
+			DDCCResource.ClearPicture();
 			DDSubScreenUtils.UnloadAll(subScreen => subScreen != DDGround.MainScreen);
 			DDFontUtils.UnloadAll();
 			TouchGlobally();
