@@ -54,6 +54,12 @@ namespace Charlotte.GameCommons
 			Clear(PictureCache, DDPictureUtils.Pictures, picture => picture.Unload());
 		}
 
+#if true
+		public static void ClearMusic()
+		{
+			Clear(MusicCache, DDMusicUtils.Musics, music => music.Sound.Unload(), music => !music.Sound.IsPlaying());
+		}
+#else // old
 		/// <summary>
 		/// クリア対象の音楽は停止していること。
 		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
@@ -62,7 +68,14 @@ namespace Charlotte.GameCommons
 		{
 			Clear(MusicCache, DDMusicUtils.Musics, music => music.Sound.Unload());
 		}
+#endif
 
+#if true
+		public static void ClearSE()
+		{
+			Clear(SECache, DDSEUtils.SEList, se => se.Sound.Unload(), se => !se.Sound.IsPlaying());
+		}
+#else // old
 		/// <summary>
 		/// クリア対象の効果音は停止していること。
 		/// -- 再生中に Unload したらマズいのかどうかは不明。多分マズいだろう。
@@ -71,18 +84,32 @@ namespace Charlotte.GameCommons
 		{
 			Clear(SECache, DDSEUtils.SEList, se => se.Sound.Unload());
 		}
+#endif
 
 		public static void Clear<K, T>(Dictionary<K, T> cache, List<T> store, Action<T> a_unload)
 		{
+			Clear(cache, store, a_unload, handle => true);
+		}
+
+		public static void Clear<K, T>(Dictionary<K, T> cache, List<T> store, Action<T> a_unload, Predicate<T> match)
+		{
 			HashSet<T> handles = new HashSet<T>(cache
 				.Values // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				.Where(handle => match(handle))
 				);
 
 			foreach (T handle in handles)
 				a_unload(handle);
 
 			store.RemoveAll(handle => handles.Contains(handle));
-			cache.Clear();
+			P_RemoveWhereValue(cache, handle => handles.Contains(handle));
+		}
+
+		private static void P_RemoveWhereValue<K, T>(Dictionary<K, T> map, Predicate<T> match)
+		{
+			foreach (K key in map.Keys.ToArray()) // .ToArray() as shallow copy
+				if (match(map[key]))
+					map.Remove(key);
 		}
 	}
 }
