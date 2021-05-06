@@ -365,7 +365,8 @@ namespace Charlotte.GameProgressMasters
 							Novel.I.Perform();
 
 							if (Novel.I.会話スキップした)
-								throw new 箱から出る.Cancelled();
+								//throw new 箱から出る.Cancelled(); // ng -- 次のステージに行こうとしてエラーになる。
+								break;
 						}
 						new Ending_復讐().Perform();
 

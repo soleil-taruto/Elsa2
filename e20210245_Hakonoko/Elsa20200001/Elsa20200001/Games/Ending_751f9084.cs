@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DxLibDLL;
 using Charlotte.Commons;
 using Charlotte.GameCommons;
-using DxLibDLL;
 
 namespace Charlotte.Games
 {
@@ -89,29 +89,21 @@ namespace Charlotte.Games
 
 				ぼかし効果.Perform(0.01);
 			}
-			using (subScreen.Section())
+			for (int c = 0; c < 3; c++)
 			{
-				DX.ClearDrawScreen();
-
-				for (int c = 0; c < 100; c++)
+				using (subScreen.Section())
 				{
-					DDDraw.SetBlendAdd(1.0);
-					DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
-					DDDraw.Reset();
-				}
-				ぼかし効果.Perform(0.01);
-			}
-			using (subScreenTmp.Section())
-			{
-				DX.ClearDrawScreen();
+					DX.ClearDrawScreen();
 
-				for (int c = 0; c < 100; c++)
-				{
-					DDDraw.SetBlendAdd(1.0);
-					DDDraw.DrawSimple(subScreen.ToPicture(), 0, 0);
-					DDDraw.Reset();
+					for (int d = 0; d < 30; d++)
+					{
+						DDDraw.SetBlendAdd(1.0);
+						DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
+						DDDraw.Reset();
+					}
+					ぼかし効果.Perform(0.01);
 				}
-				ぼかし効果.Perform(0.01);
+				SCommon.Swap(ref subScreen, ref subScreenTmp);
 			}
 			using (subScreen.Section())
 			{

@@ -88,7 +88,7 @@ namespace Charlotte
 		{
 			// ---- choose one ----
 
-			Main4_Release();
+			//Main4_Release();
 			//new Test0001().Test01();
 			//new Test0001().Test02();
 			//new Test0001().Test03();
@@ -101,7 +101,7 @@ namespace Charlotte
 			//new 箱から出るTest().Test01();
 			//new EndingTest().Test_死亡(); // エンディング_死亡
 			//new EndingTest().Test_生還(); // エンディング_生還
-			//new EndingTest().Test_復讐(); // エンディング_復讐
+			new EndingTest().Test_復讐(); // エンディング_復讐
 
 			// ----
 		}

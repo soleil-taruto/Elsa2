@@ -27,15 +27,15 @@ namespace Charlotte
 		};
 
 		//public DDPicture 箱から出る_背景 = DDPictureLoaders.Standard(@"dat\箱から出る\背景.png");
-		public DDPicture 箱から出る_箱0001 = DDPictureLoaders.Standard(@"dat\箱から出る\箱0001.png");
-		public DDPicture 箱から出る_箱0002 = DDPictureLoaders.Standard(@"dat\箱から出る\箱0002.png");
+		public DDPicture 箱から出る_箱0001 = DDPictureLoaders.Standard(@"dat\箱から出る\箱0001.png").SetGlobally();
+		public DDPicture 箱から出る_箱0002 = DDPictureLoaders.Standard(@"dat\箱から出る\箱0002.png").SetGlobally();
 
 		//public DDPicture Novel_背景 = DDPictureLoaders.Standard(@"dat\Novel\背景.png");
-		public DDPicture Novel_吹き出し = DDPictureLoaders.Standard(@"dat\Novel\フキダシデザイン\e0165_1.png");
-		public DDPicture Novel_吹き出しThink = DDPictureLoaders.Standard(@"dat\Novel\フキダシデザイン\e0347_1.png");
-		public DDPicture Novel_箱 = DDPictureLoaders.Standard(@"dat\Novel\箱.png");
-		public DDPicture Novel_少女_普 = DDPictureLoaders.Standard(@"dat\Novel\少女_普.png");
-		public DDPicture Novel_少女_怒 = DDPictureLoaders.Standard(@"dat\Novel\少女_怒.png");
+		public DDPicture Novel_吹き出し = DDPictureLoaders.Standard(@"dat\Novel\フキダシデザイン\e0165_1.png").SetGlobally();
+		public DDPicture Novel_吹き出しThink = DDPictureLoaders.Standard(@"dat\Novel\フキダシデザイン\e0347_1.png").SetGlobally();
+		public DDPicture Novel_箱 = DDPictureLoaders.Standard(@"dat\Novel\箱.png").SetGlobally();
+		public DDPicture Novel_少女_普 = DDPictureLoaders.Standard(@"dat\Novel\少女_普.png").SetGlobally();
+		public DDPicture Novel_少女_怒 = DDPictureLoaders.Standard(@"dat\Novel\少女_怒.png").SetGlobally();
 
 		public DDPicture WallPicture_0101 = DDPictureLoaders.Standard(@"dat\WallPicture\WallPicture_0001.png").SetGlobally();
 		public DDPicture WallPicture_0102 = DDPictureLoaders.Standard(@"dat\WallPicture\WallPicture_0002.png").SetGlobally();
@@ -65,14 +65,14 @@ namespace Charlotte
 		public DDPicture WallPicture_0902 = DDPictureLoaders.Standard(@"dat\WallPicture\WallPicture_0026.png").SetGlobally();
 		public DDPicture WallPicture_0903 = DDPictureLoaders.Standard(@"dat\WallPicture\WallPicture_0027.png").SetGlobally();
 
-		public DDPicture SnapshotIcon = DDPictureLoaders.Standard(@"dat\icoon-mono\カメラのアイコン素材 7.png");
+		public DDPicture SnapshotIcon = DDPictureLoaders.Standard(@"dat\icoon-mono\カメラのアイコン素材 7.png").SetGlobally();
 
-		public DDPicture WallFire = DDPictureLoaders.Standard(@"dat\WallFire.png");
+		public DDPicture WallFire = DDPictureLoaders.Standard(@"dat\WallFire.png").SetGlobally();
 
-		public DDPicture Ending_生還_背景_01 = DDPictureLoaders.Standard(@"dat\なほ\nc171813.jpg");
-		public DDPicture Ending_生還_背景_02 = DDPictureLoaders.Standard(@"dat\ぱくたそ\BOB96P8110162.png");
-		public DDPicture Ending_復讐_背景_01 = DDPictureLoaders.Standard(@"dat\ぱくたそ\kazukiphotomon04.png");
+		public DDPicture Ending_生還_背景_01 = DDPictureLoaders.Standard(@"dat\なほ\nc171813.jpg").SetGlobally();
+		public DDPicture Ending_生還_背景_02 = DDPictureLoaders.Standard(@"dat\ぱくたそ\BOB96P8110162.png").SetGlobally();
+		public DDPicture Ending_復讐_背景_01 = DDPictureLoaders.Standard(@"dat\ぱくたそ\kazukiphotomon04.png").SetGlobally();
 
-		public DDPicture WhiteWall = DDPictureLoaders.Standard(@"dat\WhiteWall.png");
+		public DDPicture WhiteWall = DDPictureLoaders.Standard(@"dat\WhiteWall.png").SetGlobally();
 	}
 }

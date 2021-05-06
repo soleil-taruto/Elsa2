@@ -85,33 +85,25 @@ namespace Charlotte.Games
 			{
 				DX.ClearDrawScreen();
 
-				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30));
+				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("03\u711a\u706b-Regular", 30));
 
 				ぼかし効果.Perform(0.01);
 			}
-			using (subScreen.Section())
+			for (int c = 0; c < 4; c++)
 			{
-				DX.ClearDrawScreen();
-
-				for (int c = 0; c < 100; c++)
+				using (subScreen.Section())
 				{
-					DDDraw.SetBlendAdd(1.0);
-					DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
-					DDDraw.Reset();
-				}
-				ぼかし効果.Perform(0.01);
-			}
-			using (subScreenTmp.Section())
-			{
-				DX.ClearDrawScreen();
+					DX.ClearDrawScreen();
 
-				for (int c = 0; c < 100; c++)
-				{
-					DDDraw.SetBlendAdd(1.0);
-					DDDraw.DrawSimple(subScreen.ToPicture(), 0, 0);
-					DDDraw.Reset();
+					for (int d = 0; d < 20; d++)
+					{
+						DDDraw.SetBlendAdd(1.0);
+						DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
+						DDDraw.Reset();
+					}
+					ぼかし効果.Perform(0.01);
 				}
-				ぼかし効果.Perform(0.01);
+				SCommon.Swap(ref subScreen, ref subScreenTmp);
 			}
 			using (subScreen.Section())
 			{
@@ -121,7 +113,7 @@ namespace Charlotte.Games
 				DDDraw.DrawSimple(subScreenTmp.ToPicture(), 0, 0);
 				DDDraw.Reset();
 
-				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("K\u30b4\u30b7\u30c3\u30af", 30), false, color);
+				DDFontUtils.DrawString_XCenter(x, y, text, DDFontUtils.GetFont("03\u711a\u706b-Regular", 30), false, color);
 			}
 
 			double a = 0.0;
