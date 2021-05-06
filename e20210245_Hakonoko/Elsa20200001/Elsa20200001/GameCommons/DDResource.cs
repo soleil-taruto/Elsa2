@@ -9,6 +9,8 @@ namespace Charlotte.GameCommons
 {
 	public static class DDResource
 	{
+		private static WorkingDir WD = new WorkingDir();
+
 		private static bool ReleaseMode = false;
 		private static string ResourceDir;
 
@@ -17,6 +19,7 @@ namespace Charlotte.GameCommons
 			public string ResFile;
 			public long Offset;
 			public int Size;
+			public string CachedFile;
 		}
 
 		private static Dictionary<string, ResInfo> File2ResInfo = SCommon.CreateDictionaryIgnoreCase<ResInfo>();
@@ -88,7 +91,30 @@ namespace Charlotte.GameCommons
 
 		private static byte[] LoadFile(ResInfo resInfo)
 		{
-			return LoadFile(resInfo.ResFile, resInfo.Offset, resInfo.Size);
+			byte[] fileData;
+
+			if (resInfo.CachedFile == null)
+			{
+				fileData = LoadFile(resInfo.ResFile, resInfo.Offset, resInfo.Size);
+
+#if true
+				{
+					Func<string> a_makeLocalName = () => "$" + SCommon.CRandom.GetRange(1, 3);
+					string dir = Path.Combine(WD.GetPath(a_makeLocalName()), a_makeLocalName(), a_makeLocalName(), a_makeLocalName());
+					SCommon.CreateDir(dir);
+					resInfo.CachedFile = Path.Combine(dir, Guid.NewGuid().ToString("B"));
+				}
+#else // シンプル
+				resInfo.CachedFile = WD.MakePath();
+#endif
+
+				File.WriteAllBytes(resInfo.CachedFile, fileData);
+			}
+			else
+			{
+				fileData = File.ReadAllBytes(resInfo.CachedFile);
+			}
+			return fileData;
 		}
 
 		public static byte[] Load(string file)
