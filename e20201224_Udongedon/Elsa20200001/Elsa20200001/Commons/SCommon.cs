@@ -61,11 +61,11 @@ namespace Charlotte.Commons
 			return -1; // not found
 		}
 
-		public static void Swap<T>(T[] arr, int a, int b)
+		public static void Swap<T>(IList<T> list, int a, int b)
 		{
-			T tmp = arr[a];
-			arr[a] = arr[b];
-			arr[b] = tmp;
+			T tmp = list[a];
+			list[a] = list[b];
+			list[b] = tmp;
 		}
 
 		public static byte[] EMPTY_BYTES = new byte[0];
