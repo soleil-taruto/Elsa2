@@ -68,6 +68,13 @@ namespace Charlotte.Commons
 			list[b] = tmp;
 		}
 
+		public static void Swap<T>(ref T a, ref T b)
+		{
+			T tmp = a;
+			a = b;
+			b = tmp;
+		}
+
 		public static byte[] EMPTY_BYTES = new byte[0];
 
 		public static int Comp(byte a, byte b)
@@ -300,6 +307,15 @@ namespace Charlotte.Commons
 			T[] arr = src.ToArray();
 			Array.Sort(arr, comp);
 			return arr;
+		}
+
+		public static T FirstOrDie<T>(IEnumerable<T> src, Predicate<T> match, Func<Exception> getError)
+		{
+			foreach (T element in src)
+				if (match(element))
+					return element;
+
+			throw getError();
 		}
 
 		/// <summary>
@@ -623,6 +639,16 @@ namespace Charlotte.Commons
 		public static long ToRange(long value, long minval, long maxval)
 		{
 			return Math.Max(minval, Math.Min(maxval, value));
+		}
+
+		public static bool IsRange(int value, int minval, int maxval)
+		{
+			return minval <= value && value <= maxval;
+		}
+
+		public static bool IsRange(long value, long minval, long maxval)
+		{
+			return minval <= value && value <= maxval;
 		}
 
 		public static int ToInt(string str, int minval, int maxval, int defval)

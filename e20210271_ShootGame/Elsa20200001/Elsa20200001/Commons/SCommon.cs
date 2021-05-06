@@ -309,6 +309,15 @@ namespace Charlotte.Commons
 			return arr;
 		}
 
+		public static T FirstOrDie<T>(IEnumerable<T> src, Predicate<T> match, Func<Exception> getError)
+		{
+			foreach (T element in src)
+				if (match(element))
+					return element;
+
+			throw getError();
+		}
+
 		/// <summary>
 		/// <para>列挙をゲッターメソッドでラップします。</para>
 		/// <para>例：{ A, B, C } -> 呼び出し毎に右の順で戻り値を返す { A, B, C, default(T), default(T), default(T), ... }</para>

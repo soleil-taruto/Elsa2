@@ -455,6 +455,13 @@ namespace Charlotte.Commons
 			return Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path));
 		}
 
+#if false // not used
+		public static string ChangeRoot(string path, string oldRoot, string rootNew)
+		{
+			return PutYen(rootNew) + ChangeRoot(path, oldRoot);
+		}
+#endif
+
 		public static string ChangeRoot(string path, string oldRoot)
 		{
 			oldRoot = PutYen(oldRoot);
@@ -640,11 +647,6 @@ namespace Charlotte.Commons
 		}
 
 		public static bool IsRange(long value, long minval, long maxval)
-		{
-			return minval <= value && value <= maxval;
-		}
-
-		public static bool IsRange(double value, double minval, double maxval)
 		{
 			return minval <= value && value <= maxval;
 		}
