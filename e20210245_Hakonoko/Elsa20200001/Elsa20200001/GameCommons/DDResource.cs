@@ -89,6 +89,8 @@ namespace Charlotte.GameCommons
 			}
 		}
 
+		private static long CachedFileCounter = 0L;
+
 		private static byte[] LoadFile(ResInfo resInfo)
 		{
 			byte[] fileData;
@@ -102,7 +104,7 @@ namespace Charlotte.GameCommons
 					Func<string> a_makeLocalName = () => "$" + SCommon.CRandom.GetRange(1, 3);
 					string dir = Path.Combine(WD.GetPath(a_makeLocalName()), a_makeLocalName(), a_makeLocalName(), a_makeLocalName());
 					SCommon.CreateDir(dir);
-					resInfo.CachedFile = Path.Combine(dir, Guid.NewGuid().ToString("B"));
+					resInfo.CachedFile = Path.Combine(dir, "$" + CachedFileCounter++);
 				}
 #else // シンプル
 				resInfo.CachedFile = WD.MakePath();
