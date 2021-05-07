@@ -421,7 +421,10 @@ namespace Charlotte.Games
 
 			DDSE[] seSamples = new DDSE[]
 			{
-				Ground.I.SE.Dummy, // TODO
+				Ground.I.SE.Jump,
+				Ground.I.SE.Miss,
+				Ground.I.SE.Death,
+				Ground.I.SE.Snapshot,
 			};
 
 			int selectIndex = 0;

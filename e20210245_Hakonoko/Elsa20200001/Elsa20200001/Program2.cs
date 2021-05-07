@@ -88,12 +88,12 @@ namespace Charlotte
 		{
 			// ---- choose one ----
 
-			//Main4_Release();
+			Main4_Release();
 			//new Test0001().Test01();
 			//new Test0001().Test02();
 			//new Test0001().Test03();
 			//new Test0002().Test01();
-			new TitleMenuTest().Test01();
+			//new TitleMenuTest().Test01();
 			//new GameMasterTest().Test01(); // 開始ステージを選択
 			//new NovelTest().Test01();
 			//new NovelTest().Test02();
