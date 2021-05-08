@@ -81,7 +81,7 @@ namespace Charlotte
 		{
 			// ---- choose one ----
 
-			Main4_Release();
+			//Main4_Release();
 			//new Test0001().Test01();
 			//new DDRandomTest().Test01();
 			//new TitleMenuTest().Test01();
@@ -90,7 +90,7 @@ namespace Charlotte
 			//new GameTest().Test03(); // 開始マップ名を選択(当面不使用)
 			//new WorldGameMasterTest().Test01();
 			//new WorldGameMasterTest().Test02();
-			//new WorldGameMasterTest().Test03(); // 開始マップ名を選択
+			new WorldGameMasterTest().Test03(); // 開始マップ名を選択
 			//new NovelTest().Test01();
 			//new NovelTest().Test02(); // テスト0001
 
