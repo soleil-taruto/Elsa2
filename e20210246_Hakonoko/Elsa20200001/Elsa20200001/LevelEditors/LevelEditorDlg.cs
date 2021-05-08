@@ -48,23 +48,34 @@ namespace Charlotte.LevelEditors
 
 		private void LevelEditorDlg_Shown(object sender, EventArgs e)
 		{
-			this.Kind.Items.Clear();
+			this.KindGroup.Items.Clear();
 
-			foreach (string name in MapCell.Kine_e_Names)
-				this.Kind.Items.Add(name);
+			foreach (LevelEditor.GroupInfo tileGroup in LevelEditor.KindGroups)
+				this.KindGroup.Items.Add(tileGroup.Name);
 
-			this.Kind.SelectedIndex = 0;
-			this.Kind.MaxDropDownItems = this.Kind.Items.Count;
+			this.KindGroup.SelectedIndex = 0;
+			this.KindGroup.MaxDropDownItems = this.KindGroup.Items.Count;
 		}
 
 		public MapCell.Kind_e GetKind()
 		{
-			return (MapCell.Kind_e)this.Kind.SelectedIndex;
+			return (MapCell.Kind_e)LevelEditor.KindGroups[this.KindGroup.SelectedIndex].Members[this.KindMember.SelectedIndex].Index;
 		}
 
 		public void SetKind(MapCell.Kind_e kind)
 		{
-			this.Kind.SelectedIndex = (int)kind;
+			for (int groupIndex = 0; groupIndex < LevelEditor.KindGroups.Count; groupIndex++)
+			{
+				for (int memberIndex = 0; memberIndex < LevelEditor.KindGroups[groupIndex].Members.Count; memberIndex++)
+				{
+					if (LevelEditor.KindGroups[groupIndex].Members[memberIndex].Index == (int)kind)
+					{
+						this.KindGroup.SelectedIndex = groupIndex;
+						this.KindMember.SelectedIndex = memberIndex;
+						return;
+					}
+				}
+			}
 		}
 
 		private void タイルGroup_Enter(object sender, EventArgs e)
@@ -72,7 +83,18 @@ namespace Charlotte.LevelEditors
 			// noop
 		}
 
-		private void Kind_SelectedIndexChanged(object sender, EventArgs e)
+		private void KindGroup_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			this.KindMember.Items.Clear();
+
+			foreach (LevelEditor.GroupInfo.MemberInfo tileMember in LevelEditor.KindGroups[this.KindGroup.SelectedIndex].Members)
+				this.KindMember.Items.Add(tileMember.Name);
+
+			this.KindMember.SelectedIndex = 0;
+			this.KindMember.MaxDropDownItems = this.KindMember.Items.Count;
+		}
+
+		private void KindMember_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// noop
 		}

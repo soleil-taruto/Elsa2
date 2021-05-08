@@ -132,5 +132,94 @@ namespace Charlotte.LevelEditors
 				}
 			}
 		}
+
+		public class GroupInfo
+		{
+			public const string DEFAULT_NAME = "Default";
+
+			public string Name;
+			public List<MemberInfo> Members = new List<MemberInfo>();
+
+			public class MemberInfo
+			{
+				public string Name;
+				public int Index;
+			}
+		}
+
+		#region KindGroups
+
+		private static List<GroupInfo> _kindGroups = null;
+
+		public static List<GroupInfo> KindGroups
+		{
+			get
+			{
+				if (_kindGroups == null)
+					_kindGroups = CreateKindGroups();
+
+				return _kindGroups;
+			}
+		}
+
+		private static List<GroupInfo> CreateKindGroups()
+		{
+			List<GroupInfo> groups = new List<GroupInfo>();
+
+			for (int index = 0; index < MapCell.Kine_e_Names.Length; index++)
+			{
+				string name = MapCell.Kine_e_Names[index];
+
+				{
+					int p = name.IndexOf(':');
+
+					if (p != -1)
+						name = name.Substring(p + 1);
+				}
+
+				string groupName;
+
+				{
+					int p = name.IndexOf('/');
+
+					if (p != -1)
+					{
+						groupName = name.Substring(0, p);
+						name = name.Substring(p + 1);
+					}
+					else
+						groupName = GroupInfo.DEFAULT_NAME;
+				}
+
+				GroupInfo group;
+
+				{
+					int p = SCommon.IndexOf(groups, v => v.Name == groupName);
+
+					if (p != -1)
+					{
+						group = groups[p];
+					}
+					else
+					{
+						group = new GroupInfo()
+						{
+							Name = groupName,
+						};
+
+						groups.Add(group);
+					}
+				}
+
+				group.Members.Add(new GroupInfo.MemberInfo()
+				{
+					Name = name,
+					Index = index,
+				});
+			}
+			return groups;
+		}
+
+		#endregion
 	}
 }
