@@ -44,7 +44,7 @@ namespace Charlotte.Games.Enemies
 		private static double X = 300.0;
 		private static double Y = 300.0;
 
-		private static EnemyInfo[] Tiles = new EnemyInfo[]
+		private static EnemyInfo[] Enemies = new EnemyInfo[]
 		{
 			new EnemyInfo(GameConsts.ENEMY_NONE, () => { throw new DDError("敵「無」を生成しようとしました。"); }),
 			new EnemyInfo("スタート地点", () => new Enemy_スタート地点(X, Y, 5)),
@@ -68,12 +68,12 @@ namespace Charlotte.Games.Enemies
 
 		public static string[] GetNames()
 		{
-			return Tiles.Select(enemy => enemy.Name).ToArray();
+			return Enemies.Select(enemy => enemy.Name).ToArray();
 		}
 
 		public static string[] GetDisplayNames()
 		{
-			return Tiles.Select(enemy => enemy.DisplayName).ToArray();
+			return Enemies.Select(enemy => enemy.DisplayName).ToArray();
 		}
 
 		public static Enemy Create(string name, double x, double y)
@@ -81,7 +81,7 @@ namespace Charlotte.Games.Enemies
 			X = x;
 			Y = y;
 
-			return SCommon.FirstOrDie(Tiles, enemy => enemy.Name == name, () => new DDError(name)).Creator();
+			return SCommon.FirstOrDie(Enemies, enemy => enemy.Name == name, () => new DDError(name)).Creator();
 		}
 	}
 }
