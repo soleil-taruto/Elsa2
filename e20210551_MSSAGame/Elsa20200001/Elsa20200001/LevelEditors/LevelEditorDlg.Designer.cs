@@ -30,12 +30,14 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelEditorDlg));
 			this.タイルGroup = new System.Windows.Forms.GroupBox();
-			this.Tile = new System.Windows.Forms.ComboBox();
+			this.TileGroup = new System.Windows.Forms.ComboBox();
 			this.敵Group = new System.Windows.Forms.GroupBox();
-			this.Enemy = new System.Windows.Forms.ComboBox();
+			this.EnemyGroup = new System.Windows.Forms.ComboBox();
 			this.ShowTile = new System.Windows.Forms.CheckBox();
 			this.ShowEnemy = new System.Windows.Forms.CheckBox();
 			this.TileEnemySw = new System.Windows.Forms.Button();
+			this.TileMember = new System.Windows.Forms.ComboBox();
+			this.EnemyMember = new System.Windows.Forms.ComboBox();
 			this.タイルGroup.SuspendLayout();
 			this.敵Group.SuspendLayout();
 			this.SuspendLayout();
@@ -44,60 +46,62 @@
 			// 
 			this.タイルGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.タイルGroup.Controls.Add(this.Tile);
+			this.タイルGroup.Controls.Add(this.TileMember);
+			this.タイルGroup.Controls.Add(this.TileGroup);
 			this.タイルGroup.Location = new System.Drawing.Point(12, 12);
 			this.タイルGroup.Name = "タイルGroup";
-			this.タイルGroup.Size = new System.Drawing.Size(360, 80);
+			this.タイルGroup.Size = new System.Drawing.Size(360, 120);
 			this.タイルGroup.TabIndex = 0;
 			this.タイルGroup.TabStop = false;
 			this.タイルGroup.Text = "タイル";
 			this.タイルGroup.Enter += new System.EventHandler(this.タイルGroup_Enter);
 			// 
-			// Tile
+			// TileGroup
 			// 
-			this.Tile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.TileGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.Tile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Tile.FormattingEnabled = true;
-			this.Tile.Location = new System.Drawing.Point(6, 26);
-			this.Tile.Name = "Tile";
-			this.Tile.Size = new System.Drawing.Size(348, 28);
-			this.Tile.TabIndex = 0;
-			this.Tile.SelectedIndexChanged += new System.EventHandler(this.Tile_SelectedIndexChanged);
-			this.Tile.Click += new System.EventHandler(this.Tile_Click);
+			this.TileGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.TileGroup.FormattingEnabled = true;
+			this.TileGroup.Location = new System.Drawing.Point(6, 26);
+			this.TileGroup.Name = "TileGroup";
+			this.TileGroup.Size = new System.Drawing.Size(348, 28);
+			this.TileGroup.TabIndex = 0;
+			this.TileGroup.SelectedIndexChanged += new System.EventHandler(this.TileGroup_SelectedIndexChanged);
+			this.TileGroup.Click += new System.EventHandler(this.Tile_Click);
 			// 
 			// 敵Group
 			// 
 			this.敵Group.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.敵Group.Controls.Add(this.Enemy);
-			this.敵Group.Location = new System.Drawing.Point(12, 98);
+			this.敵Group.Controls.Add(this.EnemyMember);
+			this.敵Group.Controls.Add(this.EnemyGroup);
+			this.敵Group.Location = new System.Drawing.Point(12, 138);
 			this.敵Group.Name = "敵Group";
-			this.敵Group.Size = new System.Drawing.Size(360, 80);
+			this.敵Group.Size = new System.Drawing.Size(360, 120);
 			this.敵Group.TabIndex = 1;
 			this.敵Group.TabStop = false;
 			this.敵Group.Text = "敵 / イベントオブジェクト";
 			this.敵Group.Enter += new System.EventHandler(this.敵Group_Enter);
 			// 
-			// Enemy
+			// EnemyGroup
 			// 
-			this.Enemy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.EnemyGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.Enemy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Enemy.FormattingEnabled = true;
-			this.Enemy.Location = new System.Drawing.Point(6, 26);
-			this.Enemy.Name = "Enemy";
-			this.Enemy.Size = new System.Drawing.Size(348, 28);
-			this.Enemy.TabIndex = 0;
-			this.Enemy.SelectedIndexChanged += new System.EventHandler(this.Enemy_SelectedIndexChanged);
-			this.Enemy.Click += new System.EventHandler(this.Enemy_Click);
+			this.EnemyGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.EnemyGroup.FormattingEnabled = true;
+			this.EnemyGroup.Location = new System.Drawing.Point(6, 26);
+			this.EnemyGroup.Name = "EnemyGroup";
+			this.EnemyGroup.Size = new System.Drawing.Size(348, 28);
+			this.EnemyGroup.TabIndex = 0;
+			this.EnemyGroup.SelectedIndexChanged += new System.EventHandler(this.EnemyGroup_SelectedIndexChanged);
+			this.EnemyGroup.Click += new System.EventHandler(this.Enemy_Click);
 			// 
 			// ShowTile
 			// 
 			this.ShowTile.AutoSize = true;
 			this.ShowTile.Checked = true;
 			this.ShowTile.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.ShowTile.Location = new System.Drawing.Point(18, 184);
+			this.ShowTile.Location = new System.Drawing.Point(18, 280);
 			this.ShowTile.Name = "ShowTile";
 			this.ShowTile.Size = new System.Drawing.Size(132, 24);
 			this.ShowTile.TabIndex = 2;
@@ -110,7 +114,7 @@
 			this.ShowEnemy.AutoSize = true;
 			this.ShowEnemy.Checked = true;
 			this.ShowEnemy.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.ShowEnemy.Location = new System.Drawing.Point(18, 214);
+			this.ShowEnemy.Location = new System.Drawing.Point(18, 320);
 			this.ShowEnemy.Name = "ShowEnemy";
 			this.ShowEnemy.Size = new System.Drawing.Size(250, 24);
 			this.ShowEnemy.TabIndex = 3;
@@ -123,19 +127,43 @@
 			this.TileEnemySw.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.TileEnemySw.Location = new System.Drawing.Point(12, 244);
+			this.TileEnemySw.Location = new System.Drawing.Point(12, 359);
 			this.TileEnemySw.Name = "TileEnemySw";
-			this.TileEnemySw.Size = new System.Drawing.Size(360, 55);
+			this.TileEnemySw.Size = new System.Drawing.Size(360, 50);
 			this.TileEnemySw.TabIndex = 4;
 			this.TileEnemySw.Text = "準備しています...";
 			this.TileEnemySw.UseVisualStyleBackColor = true;
 			this.TileEnemySw.Click += new System.EventHandler(this.TileEnemySw_Click);
 			// 
+			// TileMember
+			// 
+			this.TileMember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.TileMember.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.TileMember.FormattingEnabled = true;
+			this.TileMember.Location = new System.Drawing.Point(6, 60);
+			this.TileMember.Name = "TileMember";
+			this.TileMember.Size = new System.Drawing.Size(348, 28);
+			this.TileMember.TabIndex = 1;
+			this.TileMember.SelectedIndexChanged += new System.EventHandler(this.TileMember_SelectedIndexChanged);
+			// 
+			// EnemyMember
+			// 
+			this.EnemyMember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.EnemyMember.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.EnemyMember.FormattingEnabled = true;
+			this.EnemyMember.Location = new System.Drawing.Point(6, 60);
+			this.EnemyMember.Name = "EnemyMember";
+			this.EnemyMember.Size = new System.Drawing.Size(348, 28);
+			this.EnemyMember.TabIndex = 1;
+			this.EnemyMember.SelectedIndexChanged += new System.EventHandler(this.EnemyMember_SelectedIndexChanged);
+			// 
 			// LevelEditorDlg
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(384, 311);
+			this.ClientSize = new System.Drawing.Size(384, 421);
 			this.Controls.Add(this.TileEnemySw);
 			this.Controls.Add(this.ShowEnemy);
 			this.Controls.Add(this.ShowTile);
@@ -163,11 +191,13 @@
 		#endregion
 
 		private System.Windows.Forms.GroupBox タイルGroup;
-		private System.Windows.Forms.ComboBox Tile;
+		private System.Windows.Forms.ComboBox TileGroup;
 		private System.Windows.Forms.GroupBox 敵Group;
-		private System.Windows.Forms.ComboBox Enemy;
+		private System.Windows.Forms.ComboBox EnemyGroup;
 		private System.Windows.Forms.CheckBox ShowTile;
 		private System.Windows.Forms.CheckBox ShowEnemy;
 		private System.Windows.Forms.Button TileEnemySw;
+		private System.Windows.Forms.ComboBox TileMember;
+		private System.Windows.Forms.ComboBox EnemyMember;
 	}
 }
