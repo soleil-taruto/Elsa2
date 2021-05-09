@@ -69,7 +69,9 @@ namespace Charlotte.LevelEditors
 			this.TileEnemySw.Text = TEXT_MODE_TILE;
 		}
 
-		private void P_PostSetItems(ComboBox combo)
+		private void P_PostSetItems(
+			ComboBox // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				combo)
 		{
 			combo.SelectedIndex = 0;
 			combo.MaxDropDownItems = Math.Min(combo.Items.Count, 100);

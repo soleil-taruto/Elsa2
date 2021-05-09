@@ -56,7 +56,9 @@ namespace Charlotte.LevelEditors
 			P_PostSetItems(this.KindGroup);
 		}
 
-		private void P_PostSetItems(ComboBox combo)
+		private void P_PostSetItems(
+			ComboBox // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+				combo)
 		{
 			combo.SelectedIndex = 0;
 			combo.MaxDropDownItems = Math.Min(combo.Items.Count, 100);
