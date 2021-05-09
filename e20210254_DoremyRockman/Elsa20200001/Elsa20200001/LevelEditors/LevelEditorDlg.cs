@@ -67,18 +67,20 @@ namespace Charlotte.LevelEditors
 			foreach (LevelEditor.GroupInfo group in LevelEditor.EnemyGroups)
 				this.EnemyGroup.Items.Add(group.Name);
 
-			this.TileGroup_L.SelectedIndex = 0;
-			this.TileGroup_R.SelectedIndex = 0;
-			this.EnemyGroup.SelectedIndex = 0;
-
-			//this.TileGroup_L.MaxDropDownItems = this.TileGroup_L.Items.Count;
-			//this.TileGroup_R.MaxDropDownItems = this.TileGroup_R.Items.Count;
-			//this.EnemyGroup.MaxDropDownItems = this.EnemyGroup.Items.Count;
+			P_PostSetItems(this.TileGroup_L);
+			P_PostSetItems(this.TileGroup_R);
+			P_PostSetItems(this.EnemyGroup);
 
 			this.SetMode(LevelEditor.Mode_e.TILE);
 
 			this.TileEnemySw
 				.Focus(); // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
+		}
+
+		private void P_PostSetItems(ComboBox combo)
+		{
+			combo.SelectedIndex = 0;
+			combo.MaxDropDownItems = Math.Min(combo.Items.Count, 100);
 		}
 
 		public string GetTile_L()
@@ -246,8 +248,7 @@ namespace Charlotte.LevelEditors
 			foreach (LevelEditor.GroupInfo.MemberInfo member in LevelEditor.TileGroups[this.TileGroup_L.SelectedIndex].Members)
 				this.TileMember_L.Items.Add(member.Name);
 
-			this.TileMember_L.SelectedIndex = 0;
-			//this.TileMember_L.MaxDropDownItems = this.TileMember_L.Items.Count;
+			P_PostSetItems(this.TileMember_L);
 		}
 
 		private void TileMember_L_SelectedIndexChanged(object sender, EventArgs e)
@@ -262,8 +263,7 @@ namespace Charlotte.LevelEditors
 			foreach (LevelEditor.GroupInfo.MemberInfo member in LevelEditor.TileGroups[this.TileGroup_R.SelectedIndex].Members)
 				this.TileMember_R.Items.Add(member.Name);
 
-			this.TileMember_R.SelectedIndex = 0;
-			//this.TileMember_R.MaxDropDownItems = this.TileMember_R.Items.Count;
+			P_PostSetItems(this.TileMember_R);
 		}
 
 		private void TileMember_R_SelectedIndexChanged(object sender, EventArgs e)
@@ -283,8 +283,7 @@ namespace Charlotte.LevelEditors
 			foreach (LevelEditor.GroupInfo.MemberInfo member in LevelEditor.EnemyGroups[this.EnemyGroup.SelectedIndex].Members)
 				this.EnemyMember.Items.Add(member.Name);
 
-			this.EnemyMember.SelectedIndex = 0;
-			//this.EnemyMember.MaxDropDownItems = this.EnemyMember.Items.Count;
+			P_PostSetItems(this.EnemyMember);
 		}
 
 		private void EnemyMember_SelectedIndexChanged(object sender, EventArgs e)
