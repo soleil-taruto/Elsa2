@@ -55,11 +55,6 @@ namespace Charlotte.LevelEditors
 
 		private void LevelEditorDlg_Shown(object sender, EventArgs e)
 		{
-			this.Btn再読み込み
-				.ForeColor = Color.Purple; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-			this.Btn保存
-				.ForeColor = Color.Purple; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-
 			this.TileGroup_L.Items.Clear();
 			this.TileGroup_R.Items.Clear();
 			this.EnemyGroup.Items.Clear();
@@ -237,32 +232,6 @@ namespace Charlotte.LevelEditors
 		private void Enemy_Click(object sender, EventArgs e)
 		{
 			this.SetMode(LevelEditor.Mode_e.ENEMY);
-		}
-
-		private void Btn再読み込み_Click(object sender, EventArgs e)
-		{
-			if (MessageBox.Show(
-				"再読み込みします。",
-				"確認 - 再読み込み",
-				MessageBoxButtons.OKCancel, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-				MessageBoxIcon.Information // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-				)
-				== DialogResult.OK // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-				)
-				Game.I.Map.Load();
-		}
-
-		private void Btn保存_Click(object sender, EventArgs e)
-		{
-			if (MessageBox.Show(
-				"保存します。",
-				"確認 - 保存",
-				MessageBoxButtons.OKCancel, // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-				MessageBoxIcon.Information // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-				)
-				== DialogResult.OK // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
-				)
-				Game.I.Map.Save();
 		}
 
 		private void GroupTile_Enter(object sender, EventArgs e)

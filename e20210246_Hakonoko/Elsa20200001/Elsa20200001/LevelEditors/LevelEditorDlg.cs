@@ -53,8 +53,13 @@ namespace Charlotte.LevelEditors
 			foreach (LevelEditor.GroupInfo tileGroup in LevelEditor.KindGroups)
 				this.KindGroup.Items.Add(tileGroup.Name);
 
-			this.KindGroup.SelectedIndex = 0;
-			this.KindGroup.MaxDropDownItems = this.KindGroup.Items.Count;
+			P_PostSetItems(this.KindGroup);
+		}
+
+		private void P_PostSetItems(ComboBox combo)
+		{
+			combo.SelectedIndex = 0;
+			combo.MaxDropDownItems = Math.Min(combo.Items.Count, 100);
 		}
 
 		public MapCell.Kind_e GetKind()
@@ -90,8 +95,7 @@ namespace Charlotte.LevelEditors
 			foreach (LevelEditor.GroupInfo.MemberInfo tileMember in LevelEditor.KindGroups[this.KindGroup.SelectedIndex].Members)
 				this.KindMember.Items.Add(tileMember.Name);
 
-			this.KindMember.SelectedIndex = 0;
-			this.KindMember.MaxDropDownItems = this.KindMember.Items.Count;
+			P_PostSetItems(this.KindMember);
 		}
 
 		private void KindMember_SelectedIndexChanged(object sender, EventArgs e)

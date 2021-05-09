@@ -1262,6 +1262,45 @@ namespace Charlotte.Games
 					}
 				}
 
+				if (DDKey.GetInput(DX.KEY_INPUT_S) == 1) // S キー --> Save
+				{
+					this.Map.Save();
+
+					// 表示
+					{
+						int endFrame = DDEngine.ProcFrame + 60;
+
+						DDGround.EL.Add(() =>
+						{
+							DDPrint.SetDebug(0, 16);
+							DDPrint.SetBorder(new I3Color(0, 0, 0));
+							DDPrint.Print("セーブしました...");
+							DDPrint.Reset();
+
+							return DDEngine.ProcFrame < endFrame;
+						});
+					}
+				}
+				if (DDKey.GetInput(DX.KEY_INPUT_L) == 1) // L キー --> Load
+				{
+					this.Map.Load();
+
+					// 表示
+					{
+						int endFrame = DDEngine.ProcFrame + 60;
+
+						DDGround.EL.Add(() =>
+						{
+							DDPrint.SetDebug(0, 16);
+							DDPrint.SetBorder(new I3Color(0, 0, 0));
+							DDPrint.Print("ロードしました...");
+							DDPrint.Reset();
+
+							return DDEngine.ProcFrame < endFrame;
+						});
+					}
+				}
+
 				DDCurtain.DrawCurtain();
 
 				if (LevelEditor.Dlg.IsShowTile())
