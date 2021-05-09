@@ -11,6 +11,7 @@ using Charlotte.Commons;
 using Charlotte.Games.Tiles;
 using Charlotte.Games.Enemies;
 using Charlotte.Games;
+using Charlotte.GameCommons;
 
 namespace Charlotte.LevelEditors
 {
@@ -59,21 +60,25 @@ namespace Charlotte.LevelEditors
 			this.Btn保存
 				.ForeColor = Color.Purple; // KeepComment:@^_ConfuserElsa // NoRename:@^_ConfuserElsa
 
-			this.Tile_L.Items.Clear();
-			this.Tile_R.Items.Clear();
-			this.Enemy.Items.Clear();
+			this.TileGroup_L.Items.Clear();
+			this.TileGroup_R.Items.Clear();
+			this.EnemyGroup.Items.Clear();
 
-			foreach (string tileName in TileCatalog.GetDisplayNames())
+			foreach (LevelEditor.GroupInfo group in LevelEditor.TileGroups)
 			{
-				this.Tile_L.Items.Add(tileName);
-				this.Tile_R.Items.Add(tileName);
+				this.TileGroup_L.Items.Add(group.Name);
+				this.TileGroup_R.Items.Add(group.Name);
 			}
-			foreach (string enemyName in EnemyCatalog.GetDisplayNames())
-				this.Enemy.Items.Add(enemyName);
+			foreach (LevelEditor.GroupInfo group in LevelEditor.EnemyGroups)
+				this.EnemyGroup.Items.Add(group.Name);
 
-			this.Tile_L.SelectedIndex = 0;
-			this.Tile_R.SelectedIndex = 0;
-			this.Enemy.SelectedIndex = 0;
+			this.TileGroup_L.SelectedIndex = 0;
+			this.TileGroup_R.SelectedIndex = 0;
+			this.EnemyGroup.SelectedIndex = 0;
+
+			//this.TileGroup_L.MaxDropDownItems = this.TileGroup_L.Items.Count;
+			//this.TileGroup_R.MaxDropDownItems = this.TileGroup_R.Items.Count;
+			//this.EnemyGroup.MaxDropDownItems = this.EnemyGroup.Items.Count;
 
 			this.SetMode(LevelEditor.Mode_e.TILE);
 
@@ -83,47 +88,83 @@ namespace Charlotte.LevelEditors
 
 		public string GetTile_L()
 		{
-			return TileCatalog.GetNames()[this.Tile_L.SelectedIndex];
+			return TileCatalog.GetNames()[LevelEditor.EnemyGroups[this.TileGroup_L.SelectedIndex].Members[this.TileMember_L.SelectedIndex].Index];
 		}
 
 		public string GetTile_R()
 		{
-			return TileCatalog.GetNames()[this.Tile_R.SelectedIndex];
+			return TileCatalog.GetNames()[LevelEditor.EnemyGroups[this.TileGroup_R.SelectedIndex].Members[this.TileMember_R.SelectedIndex].Index];
 		}
 
 		public string GetEnemy()
 		{
-			return EnemyCatalog.GetNames()[this.Enemy.SelectedIndex];
+			return EnemyCatalog.GetNames()[LevelEditor.EnemyGroups[this.EnemyGroup.SelectedIndex].Members[this.EnemyMember.SelectedIndex].Index];
 		}
 
 		public void SetTile_L(string tileName)
 		{
-			int index = SCommon.IndexOf(TileCatalog.GetNames(), tileName);
+			int index = SCommon.IndexOf(TileCatalog.GetNames(), name => name == tileName);
 
 			if (index == -1)
-				index = 0; // 2bs
+				throw new DDError();
 
-			this.Tile_L.SelectedIndex = index;
+			for (int groupIndex = 0; groupIndex < LevelEditor.TileGroups.Count; groupIndex++)
+			{
+				for (int memberIndex = 0; memberIndex < LevelEditor.TileGroups[groupIndex].Members.Count; memberIndex++)
+				{
+					if (LevelEditor.TileGroups[groupIndex].Members[memberIndex].Index == index)
+					{
+						this.TileGroup_L.SelectedIndex = groupIndex;
+						this.TileMember_L.SelectedIndex = memberIndex;
+						return;
+					}
+				}
+			}
+			throw new DDError();
 		}
 
 		public void SetTile_R(string tileName)
 		{
-			int index = SCommon.IndexOf(TileCatalog.GetNames(), tileName);
+			int index = SCommon.IndexOf(TileCatalog.GetNames(), name => name == tileName);
 
 			if (index == -1)
-				index = 0; // 2bs
+				throw new DDError();
 
-			this.Tile_R.SelectedIndex = index;
+			for (int groupIndex = 0; groupIndex < LevelEditor.TileGroups.Count; groupIndex++)
+			{
+				for (int memberIndex = 0; memberIndex < LevelEditor.TileGroups[groupIndex].Members.Count; memberIndex++)
+				{
+					if (LevelEditor.TileGroups[groupIndex].Members[memberIndex].Index == index)
+					{
+						this.TileGroup_R.SelectedIndex = groupIndex;
+						this.TileMember_R.SelectedIndex = memberIndex;
+						return;
+					}
+				}
+			}
+			throw new DDError();
 		}
 
 		public void SetEnemy(string enemyName)
 		{
-			int index = SCommon.IndexOf(EnemyCatalog.GetNames(), enemyName);
+			int index = SCommon.IndexOf(EnemyCatalog.GetNames(), name => name == enemyName);
 
 			if (index == -1)
-				index = 0; // 2bs
+				throw new DDError();
 
-			this.Enemy.SelectedIndex = index;
+			for (int groupIndex = 0; groupIndex < LevelEditor.EnemyGroups.Count; groupIndex++)
+			{
+				for (int memberIndex = 0; memberIndex < LevelEditor.EnemyGroups[groupIndex].Members.Count; memberIndex++)
+				{
+					if (LevelEditor.EnemyGroups[groupIndex].Members[memberIndex].Index == index)
+					{
+						this.EnemyGroup.SelectedIndex = groupIndex;
+						this.EnemyMember.SelectedIndex = memberIndex;
+						return;
+					}
+				}
+			}
+			throw new DDError();
 		}
 
 		public bool IsShowTile()
@@ -229,12 +270,34 @@ namespace Charlotte.LevelEditors
 			// noop
 		}
 
-		private void Tile_L_SelectedIndexChanged(object sender, EventArgs e)
+		private void TileGroup_L_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			this.TileMember_L.Items.Clear();
+
+			foreach (LevelEditor.GroupInfo.MemberInfo member in LevelEditor.TileGroups[this.TileGroup_L.SelectedIndex].Members)
+				this.TileMember_L.Items.Add(member.Name);
+
+			this.TileMember_L.SelectedIndex = 0;
+			//this.TileMember_L.MaxDropDownItems = this.TileMember_L.Items.Count;
+		}
+
+		private void TileMember_L_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// noop
 		}
 
-		private void Tile_R_SelectedIndexChanged(object sender, EventArgs e)
+		private void TileGroup_R_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			this.TileMember_R.Items.Clear();
+
+			foreach (LevelEditor.GroupInfo.MemberInfo member in LevelEditor.TileGroups[this.TileGroup_R.SelectedIndex].Members)
+				this.TileMember_R.Items.Add(member.Name);
+
+			this.TileMember_R.SelectedIndex = 0;
+			//this.TileMember_R.MaxDropDownItems = this.TileMember_R.Items.Count;
+		}
+
+		private void TileMember_R_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// noop
 		}
@@ -244,7 +307,18 @@ namespace Charlotte.LevelEditors
 			// noop
 		}
 
-		private void Enemy_SelectedIndexChanged(object sender, EventArgs e)
+		private void EnemyGroup_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			this.EnemyMember.Items.Clear();
+
+			foreach (LevelEditor.GroupInfo.MemberInfo member in LevelEditor.EnemyGroups[this.EnemyGroup.SelectedIndex].Members)
+				this.EnemyMember.Items.Add(member.Name);
+
+			this.EnemyMember.SelectedIndex = 0;
+			//this.EnemyMember.MaxDropDownItems = this.EnemyMember.Items.Count;
+		}
+
+		private void EnemyMember_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// noop
 		}
