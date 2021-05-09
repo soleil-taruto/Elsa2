@@ -20,7 +20,7 @@
 
 　カーソル
 
-　ENTER  または Z   ...   決定   
+　ENTER  または Z   ...   決定
 　DELETE または X   ...   キャンセル
 　CONTROL           ...   メッセージ・スキップ
 
@@ -63,7 +63,10 @@
 ■このゲームの製作者
 
 　cerulean.charlotte
-　https://github.com/soleil-taruto
 
-　連絡先 -> cerulean.charlottes@gmail.com
+　URL:
+　　http://ornithopter.ccsp.mydns.jp/recollections/TSS
+　　http://ornithopter.ccsp.mydns.jp/anemoscope
+
+　MAIL: cerulean.charlottes@gmail.com
 

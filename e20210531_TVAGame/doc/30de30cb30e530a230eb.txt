@@ -15,7 +15,7 @@
 
 　カーソル
 
-　Z　　方向ロック・低速移動 / 決定   
+　Z　　方向ロック・低速移動 / 決定
 　X　　攻撃 / キャンセル
 　C　　武器切り替え
 　D　　画面スライド / 会話スキップ
@@ -72,7 +72,10 @@
 ■このゲームの製作者
 
 　cerulean.charlotte
-　https://github.com/soleil-taruto
 
-　連絡先 -> cerulean.charlottes@gmail.com
+　URL:
+　　http://ornithopter.ccsp.mydns.jp/recollections/TVAGame
+　　http://ornithopter.ccsp.mydns.jp/anemoscope
+
+　MAIL: cerulean.charlottes@gmail.com
 
