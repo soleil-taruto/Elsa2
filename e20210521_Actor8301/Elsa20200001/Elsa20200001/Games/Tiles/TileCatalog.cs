@@ -14,24 +14,62 @@ namespace Charlotte.Games.Tiles
 	{
 		private class TileInfo
 		{
-			public string Name; // 敵の名前、マップ上の配置とか識別に使用する。(開発中、変更してはならない)
-			public string DisplayName; // 表示名(開発中、変更しても良い)
+			public string Name; // 敵の名前 -- マップ上の配置とか識別に使用する。変更してはならない。
+			public string GroupName; // 表示グループ名
+			public string MemberName; // 表示名
 			public Func<Tile> Creator;
 
+			private const string DEFAULT_GROUP_NAME = "Default";
+
+			/// <summary>
+			/// タイルのカタログ要素を生成する。
+			/// タイルの名前情報_書式：
+			/// -- 名前
+			/// -- 表示グループ名/名前
+			/// -- 名前:表示名
+			/// -- 名前:表示グループ名/表示名
+			/// 省略時：
+			/// -- 表示グループ名 -- DEFAULT_GROUP_NAME を使用する。
+			/// -- 表示名 -- 名前を使用する。
+			/// </summary>
+			/// <param name="name">タイルの名前情報</param>
+			/// <param name="creator">タイル生成ルーチン</param>
 			public TileInfo(string name, Func<Tile> creator)
 			{
-				int colonPos = name.IndexOf(':');
+				{
+					int p = name.IndexOf(':');
 
-				if (colonPos == -1)
-				{
-					this.Name = name;
-					this.DisplayName = name;
+					if (p != -1)
+					{
+						this.Name = name.Substring(0, p);
+						name = name.Substring(p + 1);
+					}
+					else
+					{
+						p = name.IndexOf('/');
+
+						if (p != -1)
+							this.Name = name.Substring(p + 1);
+						else
+							this.Name = name;
+					}
 				}
-				else
+
 				{
-					this.Name = name.Substring(0, colonPos);
-					this.DisplayName = name.Substring(colonPos + 1);
+					int p = name.IndexOf('/');
+
+					if (p != -1)
+					{
+						this.GroupName = name.Substring(0, p);
+						this.MemberName = name.Substring(p + 1);
+					}
+					else
+					{
+						this.GroupName = DEFAULT_GROUP_NAME;
+						this.MemberName = name;
+					}
 				}
+
 				this.Creator = creator;
 			}
 		}
@@ -48,14 +86,34 @@ namespace Charlotte.Games.Tiles
 			// 新しいタイルをここへ追加..
 		};
 
+		private static string[] _names = null;
+
 		public static string[] GetNames()
 		{
-			return Tiles.Select(tile => tile.Name).ToArray();
+			if (_names == null)
+				_names = Tiles.Select(tile => tile.Name).ToArray();
+
+			return _names;
 		}
 
-		public static string[] GetDisplayNames()
+		private static string[] _groupNames = null;
+
+		public static string[] GetGroupNames()
 		{
-			return Tiles.Select(tile => tile.DisplayName).ToArray();
+			if (_groupNames == null)
+				_groupNames = Tiles.Select(tile => tile.GroupName).ToArray();
+
+			return _groupNames;
+		}
+
+		private static string[] _memberNames = null;
+
+		public static string[] GetMemberNames()
+		{
+			if (_memberNames == null)
+				_memberNames = Tiles.Select(tile => tile.MemberName).ToArray();
+
+			return _memberNames;
 		}
 
 		public static Tile Create(string name)
