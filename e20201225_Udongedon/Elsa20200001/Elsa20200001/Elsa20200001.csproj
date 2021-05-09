@@ -198,6 +198,7 @@
     <Compile Include="Games\Scripts\Tests\Script_ルーミアテスト_0004.cs" />
     <Compile Include="Games\Scripts\Script_ステージ_01.cs" />
     <Compile Include="Games\Scripts\Tests\Script_テスト2001.cs" />
+    <Compile Include="Games\Scripts\Script_ステージ_03.cs" />
     <Compile Include="Games\Shots\Shot.cs" />
     <Compile Include="Games\Shots\ShotConsts.cs" />
     <Compile Include="Games\Shots\Shot_Bomb.cs" />
