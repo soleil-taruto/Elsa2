@@ -16,24 +16,62 @@ namespace Charlotte.Games.Enemies
 	{
 		private class EnemyInfo
 		{
-			public string Name; // 敵の名前、マップ上の配置とか識別に使用する。(開発中、変更してはならない)
-			public string DisplayName; // 表示名(開発中、変更しても良い)
+			public string Name; // 敵の名前 -- マップ上の配置とか識別に使用する。変更してはならない。
+			public string GroupName; // 表示グループ名
+			public string MemberName; // 表示名
 			public Func<Enemy> Creator;
 
+			private const string DEFAULT_GROUP_NAME = "Default";
+
+			/// <summary>
+			/// 敵のカタログ要素を生成する。
+			/// 敵の名前情報_書式：
+			/// -- 名前
+			/// -- 表示グループ名/名前
+			/// -- 名前:表示名
+			/// -- 名前:表示グループ名/表示名
+			/// 省略時：
+			/// -- 表示グループ名 -- DEFAULT_GROUP_NAME を使用する。
+			/// -- 表示名 -- 名前を使用する。
+			/// </summary>
+			/// <param name="name">敵の名前情報</param>
+			/// <param name="creator">敵生成ルーチン</param>
 			public EnemyInfo(string name, Func<Enemy> creator)
 			{
-				int colonIndex = name.IndexOf(':');
+				{
+					int p = name.IndexOf(':');
 
-				if (colonIndex == -1)
-				{
-					this.Name = name;
-					this.DisplayName = name;
+					if (p != -1)
+					{
+						this.Name = name.Substring(0, p);
+						name = name.Substring(p + 1);
+					}
+					else
+					{
+						p = name.IndexOf('/');
+
+						if (p != -1)
+							this.Name = name.Substring(p + 1);
+						else
+							this.Name = name;
+					}
 				}
-				else
+
 				{
-					this.Name = name.Substring(0, colonIndex);
-					this.DisplayName = name.Substring(colonIndex + 1);
+					int p = name.IndexOf('/');
+
+					if (p != -1)
+					{
+						this.GroupName = name.Substring(0, p);
+						this.MemberName = name.Substring(p + 1);
+					}
+					else
+					{
+						this.GroupName = DEFAULT_GROUP_NAME;
+						this.MemberName = name;
+					}
 				}
+
 				this.Creator = creator;
 			}
 		}
@@ -43,7 +81,7 @@ namespace Charlotte.Games.Enemies
 		private static double X = 300.0;
 		private static double Y = 300.0;
 
-		private static EnemyInfo[] Tiles = new EnemyInfo[]
+		private static EnemyInfo[] Enemies = new EnemyInfo[]
 		{
 			new EnemyInfo(GameConsts.ENEMY_NONE, () => { throw new DDError("敵「無」を生成しようとしました。"); }),
 			new EnemyInfo("スタート地点", () => new Enemy_スタート地点(X, Y, 5)),
@@ -52,27 +90,47 @@ namespace Charlotte.Games.Enemies
 			new EnemyInfo("左から入場", () => new Enemy_スタート地点(X, Y, 4)),
 			new EnemyInfo("右から入場", () => new Enemy_スタート地点(X, Y, 6)),
 			new EnemyInfo("ロード地点", () => new Enemy_スタート地点(X, Y, 101)),
-			new EnemyInfo("セーブ地点", () => new Enemy_Bセーブ地点(X, Y)),
-			new EnemyInfo("アイテム_0001", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0001)),
-			new EnemyInfo("アイテム_0002", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0002)),
-			new EnemyInfo("アイテム_0003", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0003)),
-			new EnemyInfo("敵01", () => new Enemy_B0001(X, Y)),
-			new EnemyInfo("敵02", () => new Enemy_B0002(X, Y)),
-			new EnemyInfo("敵03", () => new Enemy_B0003(X, Y)),
-			new EnemyInfo("神奈子", () => new Enemy_B神奈子(X, Y)),
-			new EnemyInfo("イベント0001", () => new Enemy_Bイベント0001(X, Y)),
+			new EnemyInfo("テスト用/セーブ地点", () => new Enemy_Bセーブ地点(X, Y)),
+			new EnemyInfo("テスト用/アイテム_0001", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0001)),
+			new EnemyInfo("テスト用/アイテム_0002", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0002)),
+			new EnemyInfo("テスト用/アイテム_0003", () => new Enemy_Bアイテム(X, Y, Enemy_Bアイテム.効用_e.TEST_0003)),
+			new EnemyInfo("テスト用/敵01", () => new Enemy_B0001(X, Y)),
+			new EnemyInfo("テスト用/敵02", () => new Enemy_B0002(X, Y)),
+			new EnemyInfo("テスト用/敵03", () => new Enemy_B0003(X, Y)),
+			new EnemyInfo("テスト用/神奈子", () => new Enemy_B神奈子(X, Y)),
+			new EnemyInfo("テスト用/イベント0001", () => new Enemy_Bイベント0001(X, Y)),
 
 			// 新しい敵をここへ追加..
 		};
 
+		private static string[] _names = null;
+
 		public static string[] GetNames()
 		{
-			return Tiles.Select(enemy => enemy.Name).ToArray();
+			if (_names == null)
+				_names = Enemies.Select(enemy => enemy.Name).ToArray();
+
+			return _names;
 		}
 
-		public static string[] GetDisplayNames()
+		private static string[] _groupNames = null;
+
+		public static string[] GetGroupNames()
 		{
-			return Tiles.Select(enemy => enemy.DisplayName).ToArray();
+			if (_groupNames == null)
+				_groupNames = Enemies.Select(enemy => enemy.GroupName).ToArray();
+
+			return _groupNames;
+		}
+
+		private static string[] _memberNames = null;
+
+		public static string[] GetMemberNames()
+		{
+			if (_memberNames == null)
+				_memberNames = Enemies.Select(enemy => enemy.MemberName).ToArray();
+
+			return _memberNames;
 		}
 
 		public static Enemy Create(string name, double x, double y)
@@ -80,7 +138,7 @@ namespace Charlotte.Games.Enemies
 			X = x;
 			Y = y;
 
-			return SCommon.FirstOrDie(Tiles, enemy => enemy.Name == name, () => new DDError(name)).Creator();
+			return SCommon.FirstOrDie(Enemies, enemy => enemy.Name == name, () => new DDError(name)).Creator();
 		}
 	}
 }

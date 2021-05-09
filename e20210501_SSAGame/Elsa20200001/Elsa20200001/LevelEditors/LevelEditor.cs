@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Charlotte.GameCommons;
 using Charlotte.Commons;
+using Charlotte.GameCommons;
 using Charlotte.Games;
+using Charlotte.Games.Enemies;
+using Charlotte.Games.Tiles;
 
 namespace Charlotte.LevelEditors
 {
@@ -77,5 +79,135 @@ namespace Charlotte.LevelEditors
 				}
 			}
 		}
+
+		public class GroupInfo
+		{
+			public string Name;
+			public List<MemberInfo> Members = new List<MemberInfo>();
+
+			public class MemberInfo
+			{
+				public string Name;
+				public int Index;
+			}
+		}
+
+		#region EnemyGroups
+
+		private static List<GroupInfo> _enemyGroups = null;
+
+		public static List<GroupInfo> EnemyGroups
+		{
+			get
+			{
+				if (_enemyGroups == null)
+					_enemyGroups = CreateEnemyGroups();
+
+				return _enemyGroups;
+			}
+		}
+
+		private static List<GroupInfo> CreateEnemyGroups()
+		{
+			List<GroupInfo> groups = new List<GroupInfo>();
+
+			string[] groupNames = EnemyCatalog.GetGroupNames();
+			string[] memberNames = EnemyCatalog.GetMemberNames();
+			int count = groupNames.Length;
+
+			for (int index = 0; index < count; index++)
+			{
+				string groupName = groupNames[index];
+				string memberName = memberNames[index];
+
+				GroupInfo group;
+
+				{
+					int p = SCommon.IndexOf(groups, v => v.Name == groupName);
+
+					if (p != -1)
+					{
+						group = groups[p];
+					}
+					else
+					{
+						group = new GroupInfo()
+						{
+							Name = groupName,
+						};
+
+						groups.Add(group);
+					}
+				}
+
+				group.Members.Add(new GroupInfo.MemberInfo()
+				{
+					Name = memberName,
+					Index = index,
+				});
+			}
+			return groups;
+		}
+
+		#endregion
+
+		#region TileGroups
+
+		private static List<GroupInfo> _tileGroups = null;
+
+		public static List<GroupInfo> TileGroups
+		{
+			get
+			{
+				if (_tileGroups == null)
+					_tileGroups = CreateTileGroups();
+
+				return _tileGroups;
+			}
+		}
+
+		private static List<GroupInfo> CreateTileGroups()
+		{
+			List<GroupInfo> groups = new List<GroupInfo>();
+
+			string[] groupNames = TileCatalog.GetGroupNames();
+			string[] memberNames = TileCatalog.GetMemberNames();
+			int count = groupNames.Length;
+
+			for (int index = 0; index < count; index++)
+			{
+				string groupName = groupNames[index];
+				string memberName = memberNames[index];
+
+				GroupInfo group;
+
+				{
+					int p = SCommon.IndexOf(groups, v => v.Name == groupName);
+
+					if (p != -1)
+					{
+						group = groups[p];
+					}
+					else
+					{
+						group = new GroupInfo()
+						{
+							Name = groupName,
+						};
+
+						groups.Add(group);
+					}
+				}
+
+				group.Members.Add(new GroupInfo.MemberInfo()
+				{
+					Name = memberName,
+					Index = index,
+				});
+			}
+			return groups;
+		}
+
+		#endregion
 	}
 }
