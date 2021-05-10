@@ -1592,6 +1592,8 @@ namespace Charlotte.Games
 
 			DDEngine.FreezeInput();
 
+			Ground.I.SE.EnterPause.Play();
+
 			// reset
 			this.Pause_ReturnToTitleMenu = false;
 			this.Pause_Respawn = false;
@@ -1629,9 +1631,11 @@ namespace Charlotte.Games
 
 					case 1:
 						this.Pause_ReturnToTitleMenu = true;
+						Ground.I.SE.LeavePause_Title.Play();
 						goto endLoop;
 
 					case 2:
+						Ground.I.SE.LeavePause.Play();
 						goto endLoop;
 
 					default:
