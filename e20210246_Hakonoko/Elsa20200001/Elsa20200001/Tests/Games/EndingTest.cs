@@ -27,7 +27,8 @@ namespace Charlotte.Tests.Games
 				Novel.I.Perform();
 
 				if (Novel.I.会話スキップした)
-					throw new 箱から出る.Cancelled();
+					//throw new 箱から出る.Cancelled();
+					return;
 			}
 			new Ending_復讐().Perform();
 		}

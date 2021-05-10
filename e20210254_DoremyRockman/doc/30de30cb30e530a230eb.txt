@@ -27,30 +27,21 @@
 　★ゲームパッドの使用をおすすめします。
 
 
-■制作協力
+■制作協力（敬称略）
 
-　●グラフィック
-
-　　フランツ カフカ
+　フランツ カフカ
 
 
 ■素材（敬称略）
 
-　●音楽
+　ユーフルカ
+　https://wingless-seraph.net/
 
-　　ユーフルカ
-　　https://wingless-seraph.net/
+　小森平
+　http://taira-komori.jpn.org/
 
-　●効果音
-
-　　小森平
-　　http://taira-komori.jpn.org/
-
-　●フォント
-
-　　(K ゴシック)
-　　ケイ
-　　https://k-gothic-font.hatenablog.com/
+　ケイ
+　https://k-gothic-font.hatenablog.com/
 
 
 ■このゲームの製作者
