@@ -3,7 +3,7 @@ cx **
 
 rem	CALL DebugRelease.bat /B
 	CALL Release.bat /B
-rem	CALL Release.bat /V 007
+rem	CALL Release.bat /V 006
 
 C:\Factory\Petra\UpdatingCopy.exe out C:\be\Web\DocRoot\Elsa2\*
 C:\Factory\Petra\RunOnBatch.exe C:\be\Web Upload.bat
