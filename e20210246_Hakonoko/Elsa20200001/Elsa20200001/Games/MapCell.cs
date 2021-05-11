@@ -31,6 +31,7 @@ namespace Charlotte.Games
 			START,
 			GOAL,
 			WALL,
+			WALL_ENEMY_THROUGH,
 			DEATH,
 			ARKANOID_1,
 			ARKANOID_2,
@@ -88,6 +89,7 @@ namespace Charlotte.Games
 			"スタート地点",
 			"ゴール地点",
 			"壁",
+			"壁_敵通過",
 			"即死する壁",
 			"A1:アルカノイド/アルカノイド_初期進行方向=左下",
 			"A2:アルカノイド/アルカノイド_初期進行方向=下",
@@ -138,6 +140,7 @@ namespace Charlotte.Games
 			new I3Color( 255, 255, 255 ), // スタート地点
 			new I3Color(   0, 162, 232 ), // ゴール地点
 			new I3Color( 255, 242,   0 ), // 壁
+			new I3Color( 255, 242,   1 ), // 壁_敵通過
 			new I3Color( 237,  28,  36 ), // 即死する壁
 			new I3Color(  63,  72, 207 ), // 青い箱 1
 			new I3Color(  63,  72, 206 ), // 青い箱 2
@@ -245,6 +248,7 @@ namespace Charlotte.Games
 		{
 			return
 				this.Kind == Kind_e.WALL ||
+				this.Kind == Kind_e.WALL_ENEMY_THROUGH ||
 				this.IsCookie();
 		}
 
@@ -255,9 +259,10 @@ namespace Charlotte.Games
 		public bool IsEnemyWall()
 		{
 			return
-				this.IsWall() ||
+				this.Kind == Kind_e.WALL ||
 				this.Kind == Kind_e.GOAL ||
-				this.Kind == Kind_e.DEATH;
+				this.Kind == Kind_e.DEATH ||
+				this.IsCookie();
 		}
 
 		/// <summary>

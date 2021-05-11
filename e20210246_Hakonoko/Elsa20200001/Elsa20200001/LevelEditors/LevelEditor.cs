@@ -66,6 +66,11 @@ namespace Charlotte.LevelEditors
 							color = new I3Color(255, 255, 0);
 							break;
 
+						case MapCell.Kind_e.WALL_ENEMY_THROUGH:
+							color = new I3Color(255, 255, 0);
+							name = "E通";
+							break;
+
 						case MapCell.Kind_e.DEATH:
 							color = new I3Color(255, 0, 0);
 							break;

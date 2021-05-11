@@ -93,7 +93,11 @@ namespace Charlotte.Games.Designs
 
 		public override void DrawTile(MapCell cell, int cell_x, int cell_y, double draw_x, double draw_y)
 		{
-			if (cell.Kind == MapCell.Kind_e.WALL || cell.IsCookie())
+			if (
+				cell.Kind == MapCell.Kind_e.WALL ||
+				cell.Kind == MapCell.Kind_e.WALL_ENEMY_THROUGH ||
+				cell.IsCookie()
+				)
 			{
 				// cell.敵接近_Rate 更新
 				{

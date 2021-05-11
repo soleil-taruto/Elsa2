@@ -52,7 +52,11 @@ namespace Charlotte.Games.Designs
 
 		public override void DrawTile(MapCell cell, int cell_x, int cell_y, double draw_x, double draw_y)
 		{
-			if (cell.Kind == MapCell.Kind_e.WALL || cell.IsCookie())
+			if (
+				cell.Kind == MapCell.Kind_e.WALL ||
+				cell.Kind == MapCell.Kind_e.WALL_ENEMY_THROUGH ||
+				cell.IsCookie()
+				)
 			{
 				if ((cell_x + cell_y) % 2 == 0)
 					DDDraw.SetBright(new I3Color(128, 192, 255));
