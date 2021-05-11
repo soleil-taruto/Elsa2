@@ -32,10 +32,10 @@ namespace Charlotte.GameCommons
 
 		public int Perform(string title, string[] items, int selectIndex, bool ポーズボタンでメニュー終了, int x, int y, int yStep)
 		{
-			return this.Perform(() => title, items.Select(item => (Func<string>)(() => item)).ToArray(), selectIndex, ポーズボタンでメニュー終了, x, y, yStep);
+			return this.Perform(() => title, () => items, selectIndex, ポーズボタンでメニュー終了, x, y, yStep);
 		}
 
-		public int Perform(Func<string> a_title, Func<string>[] a_items, int selectIndex, bool ポーズボタンでメニュー終了, int x, int y, int yStep)
+		public int Perform(Func<string> getTitle, Func<string[]> getItems, int selectIndex, bool ポーズボタンでメニュー終了, int x, int y, int yStep)
 		{
 			this.X = x;
 			this.Y = y;
@@ -48,12 +48,15 @@ namespace Charlotte.GameCommons
 			{
 				// ★★★ キー押下は 1 マウス押下は -1 で判定する。
 
+				string title = getTitle();
+				string[] items = getItems();
+
 				if (this.MouseUsable)
 				{
 					int musSelIdxY = DDMouse.Y - (this.Y + this.YStep);
 					int musSelIdx = musSelIdxY / this.YStep;
 
-					DDUtils.ToRange(ref musSelIdx, 0, a_items.Length - 1);
+					DDUtils.ToRange(ref musSelIdx, 0, items.Length - 1);
 
 					selectIndex = musSelIdx;
 
@@ -63,14 +66,14 @@ namespace Charlotte.GameCommons
 					}
 					if (DDMouse.R.GetInput() == -1)
 					{
-						selectIndex = a_items.Length - 1;
+						selectIndex = items.Length - 1;
 						break;
 					}
 				}
 
 				if (ポーズボタンでメニュー終了 && DDInput.PAUSE.GetInput() == 1)
 				{
-					selectIndex = a_items.Length - 1;
+					selectIndex = items.Length - 1;
 					break;
 				}
 
@@ -82,10 +85,10 @@ namespace Charlotte.GameCommons
 				}
 				if (DDInput.B.GetInput() == 1)
 				{
-					if (selectIndex == a_items.Length - 1)
+					if (selectIndex == items.Length - 1)
 						break;
 
-					selectIndex = a_items.Length - 1;
+					selectIndex = items.Length - 1;
 					chgsel = true;
 				}
 				if (DDInput.DIR_8.IsPound())
@@ -99,8 +102,8 @@ namespace Charlotte.GameCommons
 					chgsel = true;
 				}
 
-				selectIndex += a_items.Length;
-				selectIndex %= a_items.Length;
+				selectIndex += items.Length;
+				selectIndex %= items.Length;
 
 				if (this.MouseUsable && chgsel)
 				{
@@ -124,11 +127,11 @@ namespace Charlotte.GameCommons
 
 				DDPrint.SetPrint(this.X, this.Y, this.YStep);
 				//DDPrint.SetPrint(16, 16, 32); // old
-				DDPrint.PrintLine(a_title());
+				DDPrint.PrintLine(title);
 
-				for (int c = 0; c < a_items.Length; c++)
+				for (int c = 0; c < items.Length; c++)
 				{
-					DDPrint.PrintLine(string.Format("[{0}] {1}", selectIndex == c ? ">" : " ", a_items[c]()));
+					DDPrint.PrintLine(string.Format("[{0}] {1}", selectIndex == c ? ">" : " ", items[c]));
 				}
 				DDPrint.Reset();
 

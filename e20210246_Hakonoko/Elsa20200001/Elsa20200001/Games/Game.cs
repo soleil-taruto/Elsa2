@@ -1603,12 +1603,10 @@ namespace Charlotte.Games
 			for (; ; )
 			{
 				selectIndex = simpleMenu.Perform(
-					"ＰＡＵＳＥ",
-					new string[]
+					() => "ＰＡＵＳＥ",
+					() => new string[]
 					{
-						Game.I.FinalZone == null ?
-							"このステージの最初からやり直す" :
-							"－－－－－－－－－－－－－－－",
+						DisturbString("このステージの最初からやり直す", Game.I.FinalZone != null),
 						"タイトルに戻る",
 						"ゲームに戻る",
 					},
@@ -1627,6 +1625,9 @@ namespace Charlotte.Games
 							this.Pause_Respawn = true;
 							goto endLoop;
 						}
+						else
+							Ground.I.SE.拒否.Play();
+
 						break;
 
 					case 1:
@@ -1648,6 +1649,14 @@ namespace Charlotte.Games
 
 			DDInput.A.FreezeInputUntilRelease = true;
 			DDInput.B.FreezeInputUntilRelease = true;
+		}
+
+		private string DisturbString(string str, bool enabled)
+		{
+			if (enabled)
+				str = new string(str.Select(chr => SCommon.CRandom.ChooseOne((chr + "／－｜＼").ToArray())).ToArray());
+
+			return str;
 		}
 
 		private bool 当たり判定表示 = false;
