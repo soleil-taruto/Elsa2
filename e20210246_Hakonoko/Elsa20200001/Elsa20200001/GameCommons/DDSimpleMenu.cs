@@ -32,6 +32,11 @@ namespace Charlotte.GameCommons
 
 		public int Perform(string title, string[] items, int selectIndex, bool ポーズボタンでメニュー終了, int x, int y, int yStep)
 		{
+			return this.Perform(() => title, items.Select(item => (Func<string>)(() => item)).ToArray(), selectIndex, ポーズボタンでメニュー終了, x, y, yStep);
+		}
+
+		public int Perform(Func<string> a_title, Func<string>[] a_items, int selectIndex, bool ポーズボタンでメニュー終了, int x, int y, int yStep)
+		{
 			this.X = x;
 			this.Y = y;
 			this.YStep = yStep;
@@ -48,7 +53,7 @@ namespace Charlotte.GameCommons
 					int musSelIdxY = DDMouse.Y - (this.Y + this.YStep);
 					int musSelIdx = musSelIdxY / this.YStep;
 
-					DDUtils.ToRange(ref musSelIdx, 0, items.Length - 1);
+					DDUtils.ToRange(ref musSelIdx, 0, a_items.Length - 1);
 
 					selectIndex = musSelIdx;
 
@@ -58,14 +63,14 @@ namespace Charlotte.GameCommons
 					}
 					if (DDMouse.R.GetInput() == -1)
 					{
-						selectIndex = items.Length - 1;
+						selectIndex = a_items.Length - 1;
 						break;
 					}
 				}
 
 				if (ポーズボタンでメニュー終了 && DDInput.PAUSE.GetInput() == 1)
 				{
-					selectIndex = items.Length - 1;
+					selectIndex = a_items.Length - 1;
 					break;
 				}
 
@@ -77,10 +82,10 @@ namespace Charlotte.GameCommons
 				}
 				if (DDInput.B.GetInput() == 1)
 				{
-					if (selectIndex == items.Length - 1)
+					if (selectIndex == a_items.Length - 1)
 						break;
 
-					selectIndex = items.Length - 1;
+					selectIndex = a_items.Length - 1;
 					chgsel = true;
 				}
 				if (DDInput.DIR_8.IsPound())
@@ -94,8 +99,8 @@ namespace Charlotte.GameCommons
 					chgsel = true;
 				}
 
-				selectIndex += items.Length;
-				selectIndex %= items.Length;
+				selectIndex += a_items.Length;
+				selectIndex %= a_items.Length;
 
 				if (this.MouseUsable && chgsel)
 				{
@@ -119,11 +124,11 @@ namespace Charlotte.GameCommons
 
 				DDPrint.SetPrint(this.X, this.Y, this.YStep);
 				//DDPrint.SetPrint(16, 16, 32); // old
-				DDPrint.PrintLine(title);
+				DDPrint.PrintLine(a_title());
 
-				for (int c = 0; c < items.Length; c++)
+				for (int c = 0; c < a_items.Length; c++)
 				{
-					DDPrint.PrintLine(string.Format("[{0}] {1}", selectIndex == c ? ">" : " ", items[c]));
+					DDPrint.PrintLine(string.Format("[{0}] {1}", selectIndex == c ? ">" : " ", a_items[c]()));
 				}
 				DDPrint.Reset();
 
