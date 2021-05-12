@@ -33,6 +33,26 @@ namespace Charlotte.Games.Designs
 				DDDraw.DrawSimple(Ground.I.Picture.WallFire, 0, y);
 				DDDraw.Reset();
 
+				if (DDEngine.ProcFrame % 20 == 0)
+				{
+					double yy = map_b - cam_b;
+					yy /= 2000.0;
+					yy = 1.0 - yy;
+					DDUtils.ToRange(ref yy, 0.0, 1.0);
+					yy = 0.3 + yy * 0.7;
+
+					// yy == 0.3 ～ 1.0 == 高い位置 ～ 低い位置
+
+					if (DDConfig.LOG_ENABLED)
+					{
+						DDGround.EL.Keep(10, () =>
+						{
+							DDPrint.SetPrint(0, 16);
+							DDPrint.DebugPrint("yy: " + yy);
+						});
+					}
+					DDMusicUtils.Fade(10, yy);
+				}
 				return false;
 			});
 		}

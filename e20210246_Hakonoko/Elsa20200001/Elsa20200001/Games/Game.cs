@@ -1573,6 +1573,8 @@ namespace Charlotte.Games
 		/// </summary>
 		private void Pause()
 		{
+			波紋効果.抑止 = true;
+
 			DDMain.KeepMainScreen();
 
 			DDSimpleMenu simpleMenu = new DDSimpleMenu()
@@ -1649,6 +1651,8 @@ namespace Charlotte.Games
 
 			DDInput.A.FreezeInputUntilRelease = true;
 			DDInput.B.FreezeInputUntilRelease = true;
+
+			波紋効果.抑止 = false; // restore
 		}
 
 		private string DisturbString(string str, bool enabled)

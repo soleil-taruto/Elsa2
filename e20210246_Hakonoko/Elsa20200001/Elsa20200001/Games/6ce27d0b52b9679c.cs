@@ -173,8 +173,13 @@ namespace Charlotte.Games
 			}
 		}
 
+		public static bool 抑止 = false;
+
 		public static void EachFrame()
 		{
+			if (抑止)
+				return;
+
 			if (波紋s.Count == 0)
 				return;
 

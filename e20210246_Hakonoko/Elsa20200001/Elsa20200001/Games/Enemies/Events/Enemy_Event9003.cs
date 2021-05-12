@@ -44,19 +44,11 @@ namespace Charlotte.Games.Enemies.Events
 
 					Game.I.Map.Design = new Design_0002();
 
-					DDGround.EL.Add(SCommon.Supplier(this.E_フラッシュ()));
+					//DDGround.EL.Add(SCommon.Supplier(Effects.Liteフラッシュ()));
+					DDGround.EL.Add(SCommon.Supplier(Effects.Heavyフラッシュ()));
 
 					DDMusicUtils.Stop();
 				}
-			}
-		}
-
-		private IEnumerable<bool> E_フラッシュ()
-		{
-			foreach (DDScene scene in DDSceneUtils.Create(40))
-			{
-				DDCurtain.DrawCurtain((1.0 - scene.Rate) * 0.5);
-				yield return true;
 			}
 		}
 

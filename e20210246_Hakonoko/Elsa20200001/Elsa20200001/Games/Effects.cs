@@ -65,9 +65,9 @@ namespace Charlotte.Games
 
 		public static IEnumerable<bool> Heavyフラッシュ()
 		{
-			foreach (DDScene scene in DDSceneUtils.Create(120))
+			foreach (DDScene scene in DDSceneUtils.Create(90))
 			{
-				DDCurtain.DrawCurtain(1.0 - scene.Rate);
+				DDCurtain.DrawCurtain((1.0 - scene.Rate) * 0.9);
 				yield return true;
 			}
 		}
