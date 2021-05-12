@@ -83,7 +83,7 @@ namespace Charlotte.LevelEditors
 								name = name.Substring(0, name.IndexOf(':'));
 
 							if (name.Contains('/'))
-								name = name.Substring(0, name.IndexOf('/'));
+								name = name.Substring(name.IndexOf('/') + 1);
 
 							break;
 					}

@@ -1654,7 +1654,7 @@ namespace Charlotte.Games
 		private string DisturbString(string str, bool enabled)
 		{
 			if (enabled)
-				str = new string(str.Select(chr => SCommon.CRandom.ChooseOne((chr + "／－｜＼").ToArray())).ToArray());
+				str = new string(str.Select(chr => SCommon.CRandom.ChooseOne((chr + "／-｜＼").ToArray())).ToArray());
 
 			return str;
 		}
