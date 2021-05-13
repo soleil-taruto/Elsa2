@@ -2,8 +2,8 @@ CALL qq
 cx **
 
 rem	CALL DebugRelease.bat /B
-	CALL Release.bat /B
-rem	CALL Release.bat /V 101
+rem	CALL Release.bat /B
+	CALL Release.bat /V 101
 
 C:\Factory\Petra\UpdatingCopy.exe out C:\be\Web\DocRoot\Elsa2\*
 C:\Factory\Petra\RunOnBatch.exe C:\be\Web Upload.bat
