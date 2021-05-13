@@ -181,7 +181,7 @@ namespace Charlotte.Games
 				}
 				if (DDConfig.LOG_ENABLED && DDKey.GetInput(DX.KEY_INPUT_Q) == 1) // 強制クリア(デバッグ用)
 				{
-					if (Ground.I.CurrStageIndex == GameProgressMaster.FINAL_STAGE_INDEX)
+					if (Ground.I.CurrStageIndex == GameProgressMaster.FINAL_STAGE_INDEX) // ? 最終ステージ -> クリアせずに最終ゾーン手前へワープする。
 					{
 						if (this.Player.Y < 2900)
 						{
