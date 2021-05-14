@@ -992,7 +992,14 @@ namespace Charlotte.Games
 				{
 					if (this.IsRespawnable())
 					{
-						波紋効果.Add(this.Player.X, this.Player.Y); // リスポーン押下時も出す。
+						if (this.FinalZone == null)
+						{
+							波紋効果.Add(this.Player.X, this.Player.Y); // リスポーン押下時も出す。
+						}
+						else
+						{
+							// noop
+						}
 
 						this.Dead_Respawn = true;
 						return;
