@@ -328,9 +328,15 @@ namespace Charlotte.Games
 						shagami = false;
 
 					if (shagami)
+					{
 						this.Player.ShagamiFrame++;
+						this.Player.StandFrame = 0;
+					}
 					else
+					{
 						this.Player.ShagamiFrame = 0;
+						this.Player.StandFrame++;
+					}
 
 					if (attack_弱 == 1)
 					{

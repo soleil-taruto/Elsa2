@@ -18,7 +18,8 @@ namespace Charlotte.Games.Attacks
 
 		protected override IEnumerable<bool> E_Draw()
 		{
-			const int SHOOTING_FRAME_MAX = 10;
+			const int SHOOTING_FRAME_MAX = 15;
+			//const int SHOOTING_FRAME_MAX = 10; // old
 
 			int shootingFrame = 0; // 0 == 無効, 1～ == 射撃モーション (カウントダウン方式)
 

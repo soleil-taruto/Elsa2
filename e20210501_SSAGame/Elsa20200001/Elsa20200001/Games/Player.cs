@@ -43,6 +43,7 @@ namespace Charlotte.Games
 		public int JumpCount;
 		public int AirborneFrame; // 0 == 接地状態, 1～ == 滞空状態
 		public int ShagamiFrame; // 0 == 無効, 1～ == しゃがみ中
+		public int StandFrame = SCommon.IMAX / 2; // 0 == 無効, 1～ == 立っている
 		public int DeadFrame = 0; // 0 == 無効, 1～ == 死亡中
 		public int DamageFrame = 0; // 0 == 無効, 1～ == ダメージ中
 		public int InvincibleFrame = 0; // 0 == 無効, 1～ == 無敵時間中
@@ -129,7 +130,12 @@ namespace Charlotte.Games
 						}
 						else // てゐ_立ち
 						{
-							picture = Ground.I.Picture2.Tewi_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Tewi_立ち.Length];
+							int koma = this.StandFrame / 3;
+
+							if (koma < Ground.I.Picture2.Tewi_しゃがみ解除.Length)
+								picture = Ground.I.Picture2.Tewi_しゃがみ解除[koma];
+							else
+								picture = Ground.I.Picture2.Tewi_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Tewi_立ち.Length];
 						}
 					}
 					break;
@@ -190,7 +196,13 @@ namespace Charlotte.Games
 						}
 						else // チルノ_立ち
 						{
-							picture = Ground.I.Picture2.Cirno_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Cirno_立ち.Length];
+							int koma = this.StandFrame / 3;
+
+							if (koma < Ground.I.Picture2.Cirno_しゃがみ解除.Length)
+								picture = Ground.I.Picture2.Cirno_しゃがみ解除[koma];
+							else
+								picture = Ground.I.Picture2.Cirno_立ち[Game.I.Frame / 10 % Ground.I.Picture2.Cirno_立ち.Length];
+
 							//xa = 0;
 							//ya = 0;
 						}
