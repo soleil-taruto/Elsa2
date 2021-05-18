@@ -1448,7 +1448,7 @@ namespace Charlotte.Games
 					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
 
 					DDDraw.SetAlpha(0.5);
-					DDDraw.SetBright(0, 0, 0);
+					DDDraw.SetBright(0, 100, 0);
 					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 8, DDConsts.Screen_W, DDConsts.Screen_H * 3 / 4);
 					DDDraw.Reset();
 				},
