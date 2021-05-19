@@ -40,8 +40,11 @@ namespace Charlotte.GameCommons
 			this.Columns.Add(new ColumnInfo() { X = x });
 		}
 
-		public void AddItem(bool groupFlag, string title, I3Color color, I3Color borderColor, Action a_desided)
+		public void AddItem(bool groupFlag, string title, I3Color color, I3Color borderColor, Action a_desided = null)
 		{
+			if (a_desided == null)
+				a_desided = () => { };
+
 			this.Columns[this.Columns.Count - 1].Items.Add(new ItemInfo()
 			{
 				GroupFlag = groupFlag,
@@ -54,6 +57,13 @@ namespace Charlotte.GameCommons
 
 		public void Perform()
 		{
+			if (this.Columns.Count == 0) // ? 列が無い。
+				throw new DDError();
+
+			foreach (ColumnInfo column in this.Columns)
+				if (column.Items.Count == 0) // ? 列に項目が無い。
+					throw new DDError();
+
 			int lastItem_X = this.Columns.Count - 1;
 			int lastItem_Y = this.Columns[lastItem_X].Items.Count - 1;
 
@@ -104,21 +114,20 @@ namespace Charlotte.GameCommons
 					this.Selected_X++;
 				}
 
-				for (int trycnt = 1; ; trycnt++)
+				this.Selected_X += this.Columns.Count;
+				this.Selected_X %= this.Columns.Count;
+				this.Selected_Y += this.Columns[this.Selected_X].Items.Count;
+				this.Selected_Y %= this.Columns[this.Selected_X].Items.Count;
+
+				if (this.Columns[this.Selected_X].Items[this.Selected_Y].GroupFlag)
 				{
-					this.Selected_X %= this.Columns.Count;
-					this.Selected_Y %= this.Columns[this.Selected_X].Items.Count;
-
-					if (!this.Columns[this.Selected_X].Items[this.Selected_Y].GroupFlag)
-						break;
-
-					if (30 <= trycnt)
-						throw new DDError();
-
 					if (上へ移動した)
 						this.Selected_Y--;
 					else
 						this.Selected_Y++;
+
+					this.Selected_Y += this.Columns[this.Selected_X].Items.Count;
+					this.Selected_Y %= this.Columns[this.Selected_X].Items.Count;
 				}
 
 				this.WallDrawer();
@@ -132,15 +141,23 @@ namespace Charlotte.GameCommons
 					for (int y = 0; y < column.Items.Count; y++)
 					{
 						ItemInfo item = column.Items[y];
-
+						bool selected = x == this.Selected_X && y == this.Selected_Y;
 						string line;
 
 						if (item.GroupFlag)
-							line = item.Title;
-						else if (x == this.Selected_X && y == this.Selected_Y)
-							line = " [>] " + item.Title;
+						{
+							if (selected)
+								line = item.Title + " *"; // 通常はここに到達しない。
+							else
+								line = item.Title;
+						}
 						else
-							line = " [ ] " + item.Title;
+						{
+							if (selected)
+								line = " [>] " + item.Title;
+							else
+								line = " [ ] " + item.Title;
+						}
 
 						DDPrint.SetColor(item.Color);
 						DDPrint.SetBorder(item.BorderColor);
