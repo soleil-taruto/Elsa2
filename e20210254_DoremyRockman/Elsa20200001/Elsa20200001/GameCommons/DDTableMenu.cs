@@ -9,8 +9,8 @@ namespace Charlotte.GameCommons
 	public class DDTableMenu
 	{
 		public int T; // 描画する Y-座標 Top
-		public int YStep = 50;
-		public int FontSize = 24;
+		public int YStep;
+		public int FontSize;
 		public Action WallDrawer;
 		public int Selected_X = 0;
 		public int Selected_Y = 0;

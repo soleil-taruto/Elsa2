@@ -1437,18 +1437,27 @@ namespace Charlotte.Games
 
 		private void EquipmentMenu()
 		{
+			DDInput.DIR_2.FreezeInputUntilRelease = true;
+			DDInput.DIR_4.FreezeInputUntilRelease = true;
+			DDInput.DIR_6.FreezeInputUntilRelease = true;
+			DDInput.DIR_8.FreezeInputUntilRelease = true;
+			DDInput.A.FreezeInputUntilRelease = true;
+			DDInput.B.FreezeInputUntilRelease = true;
+
 			DDMain.KeepMainScreen();
 			SCommon.Swap(ref DDGround.KeptMainScreen, ref EquipmentMenu_KeptMainScreen);
 
 			DDTableMenu tableMenu = new DDTableMenu()
 			{
 				T = 130,
+				YStep = 50,
+				FontSize = 24,
 				WallDrawer = () =>
 				{
 					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
 
-					DDDraw.SetAlpha(0.5);
-					DDDraw.SetBright(0, 100, 0);
+					DDDraw.SetAlpha(0.7);
+					DDDraw.SetBright(0.0, 0.4, 0.0);
 					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 8, DDConsts.Screen_W, DDConsts.Screen_H * 3 / 4);
 					DDDraw.Reset();
 				},
@@ -1471,8 +1480,8 @@ namespace Charlotte.Games
 				{
 					I3Color color = new I3Color(255, 255, 255);
 					I3Color borderColor = new I3Color(0, 128, 0);
-					I3Color 装備Color = new I3Color(128, 128, 0);
-					I3Color 装備BorderColor = new I3Color(64, 64, 0);
+					I3Color 装備Color = new I3Color(255, 255, 0);
+					I3Color 装備BorderColor = new I3Color(128, 128, 0);
 					I3Color 未取得Color = new I3Color(128, 128, 128);
 					I3Color 未取得BorderColor = new I3Color(0, 64, 0);
 
@@ -1514,6 +1523,10 @@ namespace Charlotte.Games
 				//DDEngine.EachFrame(); // 不要
 			}
 
+			DDInput.DIR_2.FreezeInputUntilRelease = false;
+			DDInput.DIR_4.FreezeInputUntilRelease = false;
+			DDInput.DIR_6.FreezeInputUntilRelease = false;
+			DDInput.DIR_8.FreezeInputUntilRelease = false;
 			DDInput.A.FreezeInputUntilRelease = true;
 			DDInput.B.FreezeInputUntilRelease = true;
 		}

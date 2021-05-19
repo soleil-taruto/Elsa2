@@ -1,7 +1,7 @@
 ﻿===============================================================================
 
 　DoremyRockman / version $version$
-　　　　　　　　　　　　　　　　　　　　　　　　　　(C) 202x cerulean.charlotte
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　(C) 202x soleil.taruto
 
 ===============================================================================
 
@@ -46,11 +46,11 @@
 
 ■このゲームの製作者
 
-　cerulean.charlotte
+　soleil.taruto
 
 　URL:
 　　http://ornithopter.ccsp.mydns.jp/recollections/DoremyRockman
-　　http://ornithopter.ccsp.mydns.jp/anemoscope
 
-　MAIL: cerulean.charlottes@gmail.com
+　MAIL:
+　　soleil.taruto@gmail.com
 
