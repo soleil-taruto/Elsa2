@@ -8,15 +8,14 @@ namespace Charlotte.GameCommons
 {
 	public class DDTableMenu
 	{
-		public int T = 100; // 描画する Y-座標 Top
-		public int YStep = 20;
-		public int FontSize = 16;
+		public int T; // 描画する Y-座標 Top
+		public int YStep = 50;
+		public int FontSize = 24;
 		public Action WallDrawer;
+		public int Selected_X = 0;
+		public int Selected_Y = 0;
 
 		// <---- prm
-
-		private int Selected_X = 0;
-		private int Selected_Y = 0;
 
 		private class ItemInfo
 		{
@@ -95,6 +94,7 @@ namespace Charlotte.GameCommons
 				}
 
 				bool 上へ移動した = false;
+				bool 横へ移動した = false;
 
 				if (DDInput.DIR_8.IsPound())
 				{
@@ -108,14 +108,20 @@ namespace Charlotte.GameCommons
 				if (DDInput.DIR_4.IsPound())
 				{
 					this.Selected_X--;
+					横へ移動した = true;
 				}
 				if (DDInput.DIR_6.IsPound())
 				{
 					this.Selected_X++;
+					横へ移動した = true;
 				}
 
 				this.Selected_X += this.Columns.Count;
 				this.Selected_X %= this.Columns.Count;
+
+				if (横へ移動した)
+					this.Selected_Y = Math.Min(this.Selected_Y, this.Columns[this.Selected_X].Items.Count - 1);
+
 				this.Selected_Y += this.Columns[this.Selected_X].Items.Count;
 				this.Selected_Y %= this.Columns[this.Selected_X].Items.Count;
 
@@ -147,7 +153,7 @@ namespace Charlotte.GameCommons
 						if (item.GroupFlag)
 						{
 							if (selected)
-								line = item.Title + " *"; // 通常はここに到達しない。
+								line = "* " + item.Title; // 通常はここに到達しない。
 							else
 								line = item.Title;
 						}

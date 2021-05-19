@@ -1440,9 +1440,9 @@ namespace Charlotte.Games
 			DDMain.KeepMainScreen();
 			SCommon.Swap(ref DDGround.KeptMainScreen, ref EquipmentMenu_KeptMainScreen);
 
-			DDSimpleMenu simpleMenu = new DDSimpleMenu()
+			DDTableMenu tableMenu = new DDTableMenu()
 			{
-				BorderColor = new I3Color(0, 128, 0),
+				T = 130,
 				WallDrawer = () =>
 				{
 					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
@@ -1454,79 +1454,65 @@ namespace Charlotte.Games
 				},
 			};
 
-			DDEngine.FreezeInput();
-
-			int selectIndex = 0;
-
 			switch (this.Status.Equipment)
 			{
-				case GameStatus.Equipment_e.跳ねる陰陽玉: selectIndex = 1; break;
-				case GameStatus.Equipment_e.ハンマー陰陽玉: selectIndex = 2; break;
-				case GameStatus.Equipment_e.エアーシューター: selectIndex = 3; break;
-				case GameStatus.Equipment_e.マグネットエアー: selectIndex = 4; break;
+				case GameStatus.Equipment_e.Normal: tableMenu.Selected_Y = 1; break;
+				case GameStatus.Equipment_e.跳ねる陰陽玉: tableMenu.Selected_Y = 2; break;
+				case GameStatus.Equipment_e.ハンマー陰陽玉: tableMenu.Selected_Y = 3; break;
+				case GameStatus.Equipment_e.エアーシューター: tableMenu.Selected_Y = 4; break;
+				case GameStatus.Equipment_e.マグネットエアー: tableMenu.Selected_Y = 5; break;
 
 				default:
 					break;
 			}
 
-			for (; ; )
+			for (bool keepMenu = true; keepMenu; )
 			{
-				selectIndex = simpleMenu.Perform(
-					250,
-					80,
-					50,
-					24,
-					"ＥＱＵＩＰＭＥＮＴメニュー(仮)",
-					new string[]
-					{
-						"通常武器",
-						"跳ねる陰陽玉",
-						"ハンマー陰陽玉",
-						"ＡｉｒＳｈｏｏｔｅｒ",
-						"ＭａｇｎｅｔＡｉｒ",
-						"システムメニュー",
-						"戻る",
-					},
-					selectIndex,
-					true
-					);
-
-				switch (selectIndex)
 				{
-					case 0:
-						this.Status.Equipment = GameStatus.Equipment_e.Normal;
-						goto endLoop;
+					I3Color color = new I3Color(255, 255, 255);
+					I3Color borderColor = new I3Color(0, 128, 0);
+					I3Color 装備Color = new I3Color(128, 128, 0);
+					I3Color 装備BorderColor = new I3Color(64, 64, 0);
+					I3Color 未取得Color = new I3Color(128, 128, 128);
+					I3Color 未取得BorderColor = new I3Color(0, 64, 0);
 
-					case 1:
-						this.Status.Equipment = GameStatus.Equipment_e.跳ねる陰陽玉;
-						goto endLoop;
+					tableMenu.AddColumn(130);
+					tableMenu.AddItem(true, "ＥＱＵＩＰＭＥＮＴ", color, borderColor);
 
-					case 2:
-						this.Status.Equipment = GameStatus.Equipment_e.ハンマー陰陽玉;
-						goto endLoop;
+					Action<string, GameStatus.Equipment_e> a_addEquipment = (title, equipment) =>
+					{
+#if false // メニューを閉じない。
+						Action a_desided = () => this.Status.Equipment = equipment;
+#else // メニューを閉じる。
+						Action a_desided = () =>
+						{
+							this.Status.Equipment = equipment;
+							keepMenu = false;
+						};
+#endif
 
-					case 3:
-						this.Status.Equipment = GameStatus.Equipment_e.エアーシューター;
-						goto endLoop;
+						if (this.Status.Equipment == equipment)
+							tableMenu.AddItem(false, title, 装備Color, 装備BorderColor, a_desided);
+						else
+							tableMenu.AddItem(false, title, color, borderColor, a_desided);
+					};
 
-					case 4:
-						this.Status.Equipment = GameStatus.Equipment_e.マグネットエアー;
-						goto endLoop;
+					a_addEquipment("通常武器", GameStatus.Equipment_e.Normal);
+					a_addEquipment("跳ねる陰陽玉", GameStatus.Equipment_e.跳ねる陰陽玉);
+					a_addEquipment("ハンマー陰陽玉", GameStatus.Equipment_e.ハンマー陰陽玉);
+					a_addEquipment("ＡｉｒＳｈｏｏｔｅｒ", GameStatus.Equipment_e.エアーシューター);
+					a_addEquipment("ＭａｇｎｅｔＡｉｒ", GameStatus.Equipment_e.マグネットエアー);
 
-					case 5:
-						this.Pause();
-						goto endLoop;
-
-					case 6:
-						goto endLoop;
-
-					default:
-						throw null; // never
+					tableMenu.AddColumn(540);
+					tableMenu.AddItem(true, "システム", color, borderColor);
+					tableMenu.AddItem(false, "システムメニュー", color, borderColor, () => this.Pause());
+					tableMenu.AddItem(false, "戻る", color, borderColor, () => keepMenu = false);
 				}
+
+				tableMenu.Perform();
+
 				//DDEngine.EachFrame(); // 不要
 			}
-		endLoop:
-			DDEngine.FreezeInput();
 
 			DDInput.A.FreezeInputUntilRelease = true;
 			DDInput.B.FreezeInputUntilRelease = true;
