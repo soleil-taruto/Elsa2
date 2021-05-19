@@ -8,14 +8,26 @@ namespace Charlotte.GameCommons
 {
 	public class DDTableMenu
 	{
-		public int T; // 描画する Y-座標 Top
-		public int YStep;
-		public int FontSize;
-		public Action WallDrawer;
-		public int Selected_X = 0;
-		public int Selected_Y = 0;
+		private int T; // 描画する Y-座標 Top
+		private int YStep;
+		private int FontSize;
+		private Action WallDrawer;
+		private int Selected_X = 0;
+		private int Selected_Y = 0;
 
-		// <---- prm
+		public DDTableMenu(int t, int yStep, int fontSize, Action wallDrawer)
+		{
+			this.T = t;
+			this.YStep = yStep;
+			this.FontSize = fontSize;
+			this.WallDrawer = wallDrawer;
+		}
+
+		public void SetSelectedPosition(int x, int y)
+		{
+			this.Selected_X = x;
+			this.Selected_Y = y;
+		}
 
 		private class ItemInfo
 		{

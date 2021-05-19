@@ -1447,29 +1447,23 @@ namespace Charlotte.Games
 			DDMain.KeepMainScreen();
 			SCommon.Swap(ref DDGround.KeptMainScreen, ref EquipmentMenu_KeptMainScreen);
 
-			DDTableMenu tableMenu = new DDTableMenu()
+			DDTableMenu tableMenu = new DDTableMenu(130, 50, 24, () =>
 			{
-				T = 130,
-				YStep = 50,
-				FontSize = 24,
-				WallDrawer = () =>
-				{
-					DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
+				DDDraw.DrawSimple(Pause_KeptMainScreen.ToPicture(), 0, 0);
 
-					DDDraw.SetAlpha(0.7);
-					DDDraw.SetBright(0.0, 0.4, 0.0);
-					DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 8, DDConsts.Screen_W, DDConsts.Screen_H * 3 / 4);
-					DDDraw.Reset();
-				},
-			};
+				DDDraw.SetAlpha(0.7);
+				DDDraw.SetBright(0.0, 0.4, 0.0);
+				DDDraw.DrawRect(Ground.I.Picture.WhiteBox, 0, DDConsts.Screen_H / 8, DDConsts.Screen_W, DDConsts.Screen_H * 3 / 4);
+				DDDraw.Reset();
+			});
 
 			switch (this.Status.Equipment)
 			{
-				case GameStatus.Equipment_e.Normal: tableMenu.Selected_Y = 1; break;
-				case GameStatus.Equipment_e.跳ねる陰陽玉: tableMenu.Selected_Y = 2; break;
-				case GameStatus.Equipment_e.ハンマー陰陽玉: tableMenu.Selected_Y = 3; break;
-				case GameStatus.Equipment_e.エアーシューター: tableMenu.Selected_Y = 4; break;
-				case GameStatus.Equipment_e.マグネットエアー: tableMenu.Selected_Y = 5; break;
+				case GameStatus.Equipment_e.Normal: tableMenu.SetSelectedPosition(0, 1); break;
+				case GameStatus.Equipment_e.跳ねる陰陽玉: tableMenu.SetSelectedPosition(0, 2); break;
+				case GameStatus.Equipment_e.ハンマー陰陽玉: tableMenu.SetSelectedPosition(0, 3); break;
+				case GameStatus.Equipment_e.エアーシューター: tableMenu.SetSelectedPosition(0, 4); break;
+				case GameStatus.Equipment_e.マグネットエアー: tableMenu.SetSelectedPosition(0, 5); break;
 
 				default:
 					break;
@@ -1480,8 +1474,8 @@ namespace Charlotte.Games
 				{
 					I3Color color = new I3Color(255, 255, 255);
 					I3Color borderColor = new I3Color(0, 128, 0);
-					I3Color 装備Color = new I3Color(255, 255, 0);
-					I3Color 装備BorderColor = new I3Color(128, 128, 0);
+					I3Color 装備中Color = new I3Color(255, 255, 0);
+					I3Color 装備中BorderColor = new I3Color(128, 128, 0);
 					I3Color 未取得Color = new I3Color(128, 128, 128);
 					I3Color 未取得BorderColor = new I3Color(0, 64, 0);
 
@@ -1501,7 +1495,7 @@ namespace Charlotte.Games
 #endif
 
 						if (this.Status.Equipment == equipment)
-							tableMenu.AddItem(false, title, 装備Color, 装備BorderColor, a_desided);
+							tableMenu.AddItem(false, title, 装備中Color, 装備中BorderColor, a_desided);
 						else
 							tableMenu.AddItem(false, title, color, borderColor, a_desided);
 					};
@@ -1514,7 +1508,13 @@ namespace Charlotte.Games
 
 					tableMenu.AddColumn(540);
 					tableMenu.AddItem(true, "システム", color, borderColor);
-					tableMenu.AddItem(false, "システムメニュー", color, borderColor, () => this.Pause());
+					tableMenu.AddItem(false, "システムメニュー", color, borderColor, () =>
+					{
+						this.Pause();
+
+						if (this.Pause_ReturnToTitleMenu)
+							keepMenu = false;
+					});
 					tableMenu.AddItem(false, "戻る", color, borderColor, () => keepMenu = false);
 				}
 
@@ -1619,8 +1619,8 @@ namespace Charlotte.Games
 		endLoop:
 			DDEngine.FreezeInput();
 
-			DDInput.A.FreezeInputUntilRelease = true;
-			DDInput.B.FreezeInputUntilRelease = true;
+			//DDInput.A.FreezeInputUntilRelease = true;
+			//DDInput.B.FreezeInputUntilRelease = true;
 		}
 
 		private bool 当たり判定表示 = false;
