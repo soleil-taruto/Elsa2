@@ -150,7 +150,6 @@
     <Compile Include="GameCommons\DDSubScreen.cs" />
     <Compile Include="GameCommons\DDSubScreenUtils.cs" />
     <Compile Include="GameCommons\DDSystem.cs" />
-    <Compile Include="GameCommons\DDTable.cs" />
     <Compile Include="GameCommons\DDTask.cs" />
     <Compile Include="GameCommons\DDTaskList.cs" />
     <Compile Include="GameCommons\DDUserDatStrings.cs" />
