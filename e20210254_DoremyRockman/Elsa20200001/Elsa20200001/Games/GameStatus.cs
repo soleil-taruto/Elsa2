@@ -76,6 +76,15 @@ namespace Charlotte.Games
 		/// </summary>
 		public Equipment_e Equipment = Equipment_e.Normal;
 
+		// ---- game_進行・インベントリ ----
+
+		public bool 取得済み_跳ねる陰陽玉 = false;
+		public bool 取得済み_ハンマー陰陽玉 = false;
+		public bool 取得済み_エアーシューター = false;
+		public bool 取得済み_マグネットエアー = false;
+
+		// ----
+
 		// <---- prm
 	}
 }

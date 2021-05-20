@@ -87,6 +87,10 @@
     <Compile Include="Games\Enemies\Enemy_地蔵.cs" />
     <Compile Include="Games\Enemies\Enemy_弾.cs" />
     <Compile Include="Games\Enemies\Enemy_即死トラップThe針.cs" />
+    <Compile Include="Games\Enemies\アイテムs\Enemy_Item_跳ねる陰陽玉.cs" />
+    <Compile Include="Games\Enemies\アイテムs\Enemy_Item_ハンマー陰陽玉.cs" />
+    <Compile Include="Games\Enemies\アイテムs\Enemy_Item_エアーシューター.cs" />
+    <Compile Include="Games\Enemies\アイテムs\Enemy_Item_マグネットエアー.cs" />
     <Compile Include="Games\GameCommon.cs" />
     <Compile Include="Commons\ArgsReader.cs" />
     <Compile Include="Commons\CsvFileReader.cs" />

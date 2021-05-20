@@ -1476,13 +1476,13 @@ namespace Charlotte.Games
 					I3Color borderColor = new I3Color(0, 128, 0);
 					I3Color 装備中Color = new I3Color(255, 255, 0);
 					I3Color 装備中BorderColor = new I3Color(128, 128, 0);
-					I3Color 未取得Color = new I3Color(128, 128, 128);
+					I3Color 未取得Color = new I3Color(128, 128, 200);
 					I3Color 未取得BorderColor = new I3Color(0, 64, 0);
 
 					tableMenu.AddColumn(130);
 					tableMenu.AddItem(true, "ＥＱＵＩＰＭＥＮＴ", color, borderColor);
 
-					Action<string, GameStatus.Equipment_e> a_addEquipment = (title, equipment) =>
+					Action<string, GameStatus.Equipment_e, bool> a_addEquipment = (title, equipment, 取得済み) =>
 					{
 #if false // メニューを閉じない。
 						Action a_desided = () => this.Status.Equipment = equipment;
@@ -1494,17 +1494,19 @@ namespace Charlotte.Games
 						};
 #endif
 
-						if (this.Status.Equipment == equipment)
+						if (!取得済み)
+							tableMenu.AddItem(false, title, 未取得Color, 未取得BorderColor, () => { });
+						else if (this.Status.Equipment == equipment)
 							tableMenu.AddItem(false, title, 装備中Color, 装備中BorderColor, a_desided);
 						else
 							tableMenu.AddItem(false, title, color, borderColor, a_desided);
 					};
 
-					a_addEquipment("通常武器", GameStatus.Equipment_e.Normal);
-					a_addEquipment("跳ねる陰陽玉", GameStatus.Equipment_e.跳ねる陰陽玉);
-					a_addEquipment("ハンマー陰陽玉", GameStatus.Equipment_e.ハンマー陰陽玉);
-					a_addEquipment("ＡｉｒＳｈｏｏｔｅｒ", GameStatus.Equipment_e.エアーシューター);
-					a_addEquipment("ＭａｇｎｅｔＡｉｒ", GameStatus.Equipment_e.マグネットエアー);
+					a_addEquipment("通常武器", GameStatus.Equipment_e.Normal, true);
+					a_addEquipment("跳ねる陰陽玉", GameStatus.Equipment_e.跳ねる陰陽玉, this.Status.取得済み_跳ねる陰陽玉);
+					a_addEquipment("ハンマー陰陽玉", GameStatus.Equipment_e.ハンマー陰陽玉, this.Status.取得済み_ハンマー陰陽玉);
+					a_addEquipment("ＡｉｒＳｈｏｏｔｅｒ", GameStatus.Equipment_e.エアーシューター, this.Status.取得済み_エアーシューター);
+					a_addEquipment("ＭａｇｎｅｔＡｉｒ", GameStatus.Equipment_e.マグネットエアー, this.Status.取得済み_エアーシューター);
 
 					tableMenu.AddColumn(540);
 					tableMenu.AddItem(true, "システム", color, borderColor);

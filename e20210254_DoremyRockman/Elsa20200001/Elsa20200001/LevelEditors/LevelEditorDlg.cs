@@ -87,12 +87,12 @@ namespace Charlotte.LevelEditors
 
 		public string GetTile_L()
 		{
-			return TileCatalog.GetNames()[LevelEditor.EnemyGroups[this.TileGroup_L.SelectedIndex].Members[this.TileMember_L.SelectedIndex].Index];
+			return TileCatalog.GetNames()[LevelEditor.TileGroups[this.TileGroup_L.SelectedIndex].Members[this.TileMember_L.SelectedIndex].Index];
 		}
 
 		public string GetTile_R()
 		{
-			return TileCatalog.GetNames()[LevelEditor.EnemyGroups[this.TileGroup_R.SelectedIndex].Members[this.TileMember_R.SelectedIndex].Index];
+			return TileCatalog.GetNames()[LevelEditor.TileGroups[this.TileGroup_R.SelectedIndex].Members[this.TileMember_R.SelectedIndex].Index];
 		}
 
 		public string GetEnemy()
