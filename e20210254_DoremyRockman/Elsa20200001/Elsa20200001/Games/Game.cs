@@ -1541,6 +1541,7 @@ namespace Charlotte.Games
 		/// </summary>
 		private void Pause()
 		{
+			// old
 			//DDMain.KeepMainScreen();
 			//SCommon.Swap(ref DDGround.KeptMainScreen, ref Pause_KeptMainScreen);
 
@@ -1619,6 +1620,7 @@ namespace Charlotte.Games
 		endLoop:
 			DDEngine.FreezeInput();
 
+			// old
 			//DDInput.A.FreezeInputUntilRelease = true;
 			//DDInput.B.FreezeInputUntilRelease = true;
 		}

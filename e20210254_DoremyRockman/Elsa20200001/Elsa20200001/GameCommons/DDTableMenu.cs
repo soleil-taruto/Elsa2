@@ -75,6 +75,8 @@ namespace Charlotte.GameCommons
 				if (column.Items.Count == 0) // ? 列に項目が無い。
 					throw new DDError();
 
+			// 最終項目(一番右の列の一番下の項目)の位置
+			//
 			int lastItem_X = this.Columns.Count - 1;
 			int lastItem_Y = this.Columns[lastItem_X].Items.Count - 1;
 
@@ -83,6 +85,8 @@ namespace Charlotte.GameCommons
 
 			for (; ; )
 			{
+				// 最終項目を「終了」と見なす。
+
 				if (DDInput.PAUSE.GetInput() == 1) // 即_終了
 				{
 					this.Selected_X = lastItem_X;
@@ -93,7 +97,7 @@ namespace Charlotte.GameCommons
 				{
 					break;
 				}
-				if (DDInput.B.GetInput() == 1) // 一旦カーソルを終了に合わせてから、なお押されたら終了
+				if (DDInput.B.GetInput() == 1) // 一旦カーソルを終了に合わせて、尚もボタンが押されたら終了する。
 				{
 					if (
 						this.Selected_X == lastItem_X &&
