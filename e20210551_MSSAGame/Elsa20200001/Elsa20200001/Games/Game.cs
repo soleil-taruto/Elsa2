@@ -237,7 +237,7 @@ namespace Charlotte.Games
 
 					if (this.Player.JumpFrame == 1) // ? ジャンプ開始
 					{
-						Ground.I.SE.EnemyDamaged.Play(); // test test test test test
+						Ground.I.SE.PlayerJump.Play();
 					}
 
 					if (camSlide)
