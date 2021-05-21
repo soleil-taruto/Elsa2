@@ -36,6 +36,15 @@ namespace Charlotte.Games.Enemies
 
 		public Kind_e Kind;
 
+		// 敵：
+		// -- new Enemy(x, y, hp, Kind_e.通常敵)
+		// 敵弾：
+		// -- new Enemy(x, y, 0, Kind_e.通常敵)
+		// アイテム：
+		// -- new Enemy(x, y, 0, Kind_e.アイテム) -- Crash を更新しない。
+		// ボス：
+		// -- new Enemy(x, y, hp, Kind_e.ボス)
+
 		public Enemy(double x, double y, int hp, Kind_e kind = Kind_e.通常敵)
 		{
 			this.X = x;

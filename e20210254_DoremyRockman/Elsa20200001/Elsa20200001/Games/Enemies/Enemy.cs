@@ -45,6 +45,13 @@ namespace Charlotte.Games.Enemies
 		/// </summary>
 		public bool 自機に当たると消滅する;
 
+		// 敵：
+		// -- new Enemy(x, y, hp, attackPoint, false)
+		// 敵弾：
+		// -- new Enemy(x, y, 0, attackPoint, 自機に当たると消滅する)
+		// アイテム(イベント)：
+		// -- new Enemy(x, y, 0, 0, false) -- Crash を更新しない。
+
 		public Enemy(double x, double y, int hp, int attackPoint, bool 自機に当たると消滅する)
 		{
 			this.X = x;
