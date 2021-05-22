@@ -19,7 +19,7 @@ namespace Charlotte.Games.Enemies.アイテムs
 			{
 				if (DDUtils.GetDistance(new D2Point(Game.I.Player.X, Game.I.Player.Y), new D2Point(this.X, this.Y)) < 30.0) // ? 十分に接近 -> 取得する。
 				{
-					Game.I.Status.取得済み_エアーシューター = true;
+					Game.I.Status.InventoryFlags[GameStatus.Inventory_e.取得済み_エアーシューター] = true;
 					break;
 				}
 
