@@ -60,7 +60,27 @@ namespace Charlotte.Games
 
 		// ---- game_進行・インベントリ ----
 
-		public bool 神奈子を倒した = false;
+		public enum Inventory_e
+		{
+			神奈子を倒した,
+
+			// 新しい項目をここへ追加...
+		}
+
+		private List<bool> _inventoryFlags = new List<bool>();
+
+		public bool GetInventoryFlag(Inventory_e inventory)
+		{
+			return (int)inventory < _inventoryFlags.Count ? _inventoryFlags[(int)inventory] : false;
+		}
+
+		public void SetInventoryFlag(Inventory_e inventory, bool flag)
+		{
+			if (_inventoryFlags.Count <= (int)inventory)
+				_inventoryFlags.Add(false);
+
+			_inventoryFlags[(int)inventory] = flag;
+		}
 
 		// ----
 
@@ -80,7 +100,7 @@ namespace Charlotte.Games
 			dest.Add("" + (this.StartFacingLeft ? 1 : 0));
 			dest.Add("" + this.ExitDirection);
 			dest.Add("" + (int)this.Start_武器);
-			dest.Add("" + (this.神奈子を倒した ? 1 : 0));
+			dest.Add(new string(_inventoryFlags.Select(flag => flag ? '1' : '0').ToArray()));
 
 			// ★★★ シリアライズ_ここまで ★★★
 
@@ -100,7 +120,7 @@ namespace Charlotte.Games
 			this.StartFacingLeft = int.Parse(lines[c++]) != 0;
 			this.ExitDirection = int.Parse(lines[c++]);
 			this.Start_武器 = (Player.武器_e)int.Parse(lines[c++]);
-			this.神奈子を倒した = int.Parse(lines[c++]) != 0;
+			_inventoryFlags = lines[c++].Select(chr => chr == '1').ToList();
 
 			// ★★★ デシリアライズ_ここまで ★★★
 		}
