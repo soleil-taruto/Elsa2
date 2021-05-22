@@ -58,8 +58,9 @@ namespace Charlotte.Games
 		/// </summary>
 		public Player.武器_e Start_武器 = Player.武器_e.NORMAL;
 
-		// ---- game_進行・インベントリ ----
-
+		/// <summary>
+		/// game_進行・インベントリ(enum)
+		/// </summary>
 		public enum Inventory_e
 		{
 			神奈子を倒した,
@@ -98,9 +99,10 @@ namespace Charlotte.Games
 			}
 		}
 
+		/// <summary>
+		/// game_進行・インベントリ
+		/// </summary>
 		public S_InventoryFlags InventoryFlags = new S_InventoryFlags();
-
-		// ----
 
 		// <---- prm
 
