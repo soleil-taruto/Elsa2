@@ -60,11 +60,51 @@ namespace Charlotte.Games
 		public Player.武器_e Start選択武器 = Player.武器_e.NORMAL;
 		public ResourcePicture2.Player_e Chara = ResourcePicture2.Player_e.Alice;
 
-		// ---- game_進行・インベントリ ----
+		/// <summary>
+		/// game_進行・インベントリ(enum)
+		/// </summary>
+		public enum Inventory_e
+		{
+			神奈子を倒した,
 
-		public bool 神奈子を倒した = false;
+			// 新しい項目をここへ追加...
+		}
 
-		// ----
+		public class S_InventoryFlags
+		{
+			private List<bool> Flags = new List<bool>();
+
+			public bool this[Inventory_e inventory]
+			{
+				get
+				{
+					return (int)inventory < this.Flags.Count ? this.Flags[(int)inventory] : false;
+				}
+
+				set
+				{
+					while (this.Flags.Count <= (int)inventory)
+						this.Flags.Add(false);
+
+					this.Flags[(int)inventory] = value;
+				}
+			}
+
+			public string Serialize()
+			{
+				return new string(this.Flags.Select(flag => flag ? '1' : '0').ToArray());
+			}
+
+			public void Deserialize(string value)
+			{
+				this.Flags = value.Select(chr => chr == '1').ToList();
+			}
+		}
+
+		/// <summary>
+		/// game_進行・インベントリ
+		/// </summary>
+		public S_InventoryFlags InventoryFlags = new S_InventoryFlags();
 
 		// <---- prm
 
@@ -83,7 +123,7 @@ namespace Charlotte.Games
 			dest.Add("" + this.ExitDirection);
 			dest.Add("" + (int)this.Start選択武器);
 			dest.Add("" + (int)this.Chara);
-			dest.Add("" + (this.神奈子を倒した ? 1 : 0));
+			dest.Add(this.InventoryFlags.Serialize());
 
 			// ★★★ シリアライズ_ここまで ★★★
 
@@ -104,7 +144,7 @@ namespace Charlotte.Games
 			this.ExitDirection = int.Parse(lines[c++]);
 			this.Start選択武器 = (Player.武器_e)int.Parse(lines[c++]);
 			this.Chara = (ResourcePicture2.Player_e)int.Parse(lines[c++]);
-			this.神奈子を倒した = int.Parse(lines[c++]) != 0;
+			this.InventoryFlags.Deserialize(lines[c++]);
 
 			// ★★★ デシリアライズ_ここまで ★★★
 		}
