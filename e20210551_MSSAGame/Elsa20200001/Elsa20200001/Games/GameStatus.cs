@@ -67,20 +67,38 @@ namespace Charlotte.Games
 			// 新しい項目をここへ追加...
 		}
 
-		private List<bool> _inventoryFlags = new List<bool>();
-
-		public bool GetInventoryFlag(Inventory_e inventory)
+		public class S_InventoryFlags
 		{
-			return (int)inventory < _inventoryFlags.Count ? _inventoryFlags[(int)inventory] : false;
+			private List<bool> Flags = new List<bool>();
+
+			public bool this[Inventory_e inventory]
+			{
+				get
+				{
+					return (int)inventory < this.Flags.Count ? this.Flags[(int)inventory] : false;
+				}
+
+				set
+				{
+					while (this.Flags.Count <= (int)inventory)
+						this.Flags.Add(false);
+
+					this.Flags[(int)inventory] = value;
+				}
+			}
+
+			public string Serialize()
+			{
+				return new string(this.Flags.Select(flag => flag ? '1' : '0').ToArray());
+			}
+
+			public void Deserialize(string value)
+			{
+				this.Flags = value.Select(chr => chr == '1').ToList();
+			}
 		}
 
-		public void SetInventoryFlag(Inventory_e inventory, bool flag)
-		{
-			if (_inventoryFlags.Count <= (int)inventory)
-				_inventoryFlags.Add(false);
-
-			_inventoryFlags[(int)inventory] = flag;
-		}
+		public S_InventoryFlags InventoryFlags = new S_InventoryFlags();
 
 		// ----
 
@@ -100,7 +118,7 @@ namespace Charlotte.Games
 			dest.Add("" + (this.StartFacingLeft ? 1 : 0));
 			dest.Add("" + this.ExitDirection);
 			dest.Add("" + (int)this.Start_武器);
-			dest.Add(new string(_inventoryFlags.Select(flag => flag ? '1' : '0').ToArray()));
+			dest.Add(this.InventoryFlags.Serialize());
 
 			// ★★★ シリアライズ_ここまで ★★★
 
@@ -120,7 +138,7 @@ namespace Charlotte.Games
 			this.StartFacingLeft = int.Parse(lines[c++]) != 0;
 			this.ExitDirection = int.Parse(lines[c++]);
 			this.Start_武器 = (Player.武器_e)int.Parse(lines[c++]);
-			_inventoryFlags = lines[c++].Select(chr => chr == '1').ToList();
+			this.InventoryFlags.Deserialize(lines[c++]);
 
 			// ★★★ デシリアライズ_ここまで ★★★
 		}
