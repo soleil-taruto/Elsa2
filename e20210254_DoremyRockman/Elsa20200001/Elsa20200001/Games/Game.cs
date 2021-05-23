@@ -1068,6 +1068,8 @@ namespace Charlotte.Games
 				}
 				else if (1 <= DDKey.GetInput(DX.KEY_INPUT_LSHIFT) && 1 <= DDKey.GetInput(DX.KEY_INPUT_LCONTROL)) // 左シフト・コントロール押下 -> 塗り潰し_L / 塗り潰し_R
 				{
+					this.Map.Save(); // 失敗を想定して、セーブしておく
+
 					if (DDMouse.L.GetInput() == -1) // クリックを検出
 					{
 						switch (LevelEditor.Dlg.GetMode())
@@ -1298,6 +1300,39 @@ namespace Charlotte.Games
 
 							return DDEngine.ProcFrame < endFrame;
 						});
+					}
+				}
+				if (DDKey.GetInput(DX.KEY_INPUT_0) == 1) // 0 キー --> セット_L(10x10)
+				{
+					this.Map.Save(); // 失敗を想定して、セーブしておく
+
+					int firstTileIndex;
+
+					{
+						string tileName = LevelEditor.Dlg.GetTile_L();
+						int index = SCommon.IndexOf(TileCatalog.GetNames(), name => name == tileName);
+
+						if (index == -1)
+							throw new DDError();
+
+						firstTileIndex = index;
+					}
+
+					int offset = 0;
+
+					for (int xc = 0; xc < 10; xc++)
+					{
+						for (int yc = 0; yc < 10; yc++)
+						{
+							string tileName = TileCatalog.GetNames()[(firstTileIndex + offset) % TileCatalog.GetNames().Length];
+							offset++;
+
+							I2Point subCellPos = new I2Point(cellPos.X + xc, cellPos.Y + yc);
+							MapCell subCell = Game.I.Map.GetCell(subCellPos);
+
+							subCell.TileName = tileName;
+							subCell.Tile = TileCatalog.Create(tileName);
+						}
 					}
 				}
 
