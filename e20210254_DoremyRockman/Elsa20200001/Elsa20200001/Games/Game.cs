@@ -1302,7 +1302,7 @@ namespace Charlotte.Games
 						});
 					}
 				}
-				if (DDKey.GetInput(DX.KEY_INPUT_0) == 1) // 0 キー --> セット_L(10x10)
+				if (DDKey.GetInput(DX.KEY_INPUT_H) == 1) // H キー --> セット_L(10x10)
 				{
 					this.Map.Save(); // 失敗を想定して、セーブしておく
 
